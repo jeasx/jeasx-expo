@@ -1,5 +1,5 @@
 [
-  { "type": "headline", "title": "Websites & Apps" },
+  { "type": "headline", "title": "Websites &amp; Apps" },
   { "type": "link", "path": "/blog", "title": "Blog" },
   { "type": "link", "path": "/products", "title": "Products" },
   { "type": "link", "path": "/lottery", "title": "Lottery" },
