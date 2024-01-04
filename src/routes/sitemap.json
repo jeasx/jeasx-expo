@@ -4,6 +4,11 @@
   { "type": "link", "path": "/products", "title": "Products" },
   { "type": "link", "path": "/lottery", "title": "Lottery" },
   { "type": "link", "path": "https://todos.jeasx.dev", "title": "Todos" },
+  {
+    "type": "link",
+    "path": "https://wizard.jeasx.dev",
+    "title": "Form Wizard"
+  },
   { "type": "headline", "title": "With and without frameworks" },
   { "type": "link", "path": "/jokes", "title": "Pure HTML" },
   { "type": "link", "path": "/jokes/alpine", "title": "Alpine.js" },

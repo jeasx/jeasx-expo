@@ -21,7 +21,19 @@ export default function Frontpage({}) {
               case "headline":
                 return <h2>{title}</h2>;
               case "link":
-                return <a href={path}>{title}</a>;
+                return (
+                  <a href={path}>
+                    {title}
+                    {path.startsWith("https://") && (
+                      <img
+                        src="/icons/external.svg"
+                        width="16"
+                        height="16"
+                        alt="External link"
+                      />
+                    )}
+                  </a>
+                );
             }
           })}
         </section>
