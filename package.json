@@ -1,5 +1,5 @@
 {
-  "name": "jeasx-usecases",
+  "name": "jeasx-expo",
   "type": "module",
   "scripts": {
     "start": "jeasx start",

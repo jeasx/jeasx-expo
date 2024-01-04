@@ -1,4 +1,4 @@
-# jeasx-usecases
+# jeasx-expo
 
 ```bash
 npm install
