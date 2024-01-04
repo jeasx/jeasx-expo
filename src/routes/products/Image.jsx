@@ -22,7 +22,7 @@ export function imagePath({
   immutable = false,
 }) {
   const version = !immutable ? `&version=${process.env.BUILD_TIME}` : "";
-  return `/sharp/image?src=${src}&width=${width || ""}&height=${
+  return `/products/image?src=${src}&width=${width || ""}&height=${
     height || ""
   }&position=${position || ""}${version}`;
 }
