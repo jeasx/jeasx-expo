@@ -1,0 +1,64 @@
+@import "../reset.css";
+@import "../globals.css";
+
+:root {
+  --box-shadow: 0 0.275rem 0.75rem -0.0625rem var(--color-shadow),
+    0 0.125rem 0.4rem -0.0625rem var(--color-shadow);
+  --gradient: radial-gradient(circle, var(--color-primary) 0%, white 80%);
+}
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  box-shadow: var(--box-shadow);
+  background-color: var(--color-background);
+  padding: 1rem;
+  min-height: 1rem;
+}
+
+main {
+  margin: 0 auto;
+  max-width: 960px;
+}
+
+section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+h1,
+h2,
+a {
+  text-align: center;
+}
+
+h1 {
+  font-size: 1.5rem;
+}
+
+h2 {
+  margin: 1rem;
+  border-radius: 1rem;
+  background: var(--gradient);
+  padding: 0.5rem;
+  width: 100%;
+  color: var(--color-background);
+  font-size: 1.25rem;
+}
+
+a {
+  transition: 0.3s transform ease-in-out;
+  margin: 1rem;
+  box-shadow: var(--box-shadow);
+  border-radius: 0.5rem;
+  padding: 1rem 2rem;
+  min-width: 10em;
+  color: var(--color-primary);
+  text-decoration: none;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}

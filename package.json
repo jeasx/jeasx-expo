@@ -1,0 +1,13 @@
+{
+  "name": "jeasx-showcases",
+  "type": "module",
+  "scripts": {
+    "start": "jeasx start",
+    "build": "jeasx build",
+    "dev": "jeasx dev"
+  },
+  "dependencies": {
+    "jeasx": "0.0.4",
+    "sharp": "0.33.1"
+  }
+}

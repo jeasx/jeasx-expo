@@ -1,0 +1,14 @@
+[
+  { "type": "headline", "title": "Examples" },
+  { "type": "link", "path": "/blog", "title": "Blog" },
+  { "type": "link", "path": "/products", "title": "Products" },
+  { "type": "link", "path": "/lottery", "title": "Lottery" },
+  { "type": "headline", "title": "Jokes" },
+  { "type": "link", "path": "/jokes", "title": "HTML" },
+  { "type": "link", "path": "/jokes/alpine", "title": "Alpine.js" },
+  { "type": "headline", "title": "Content-Types" },
+  { "type": "link", "path": "/upload", "title": "Image" },
+  { "type": "link", "path": "/svg", "title": "SVG" },
+  { "type": "link", "path": "/api/json", "title": "JSON" },
+  { "type": "link", "path": "/sitemap.xml", "title": "XML" }
+]
