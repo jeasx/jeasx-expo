@@ -13,5 +13,22 @@
   { "type": "link", "path": "/sitemap.xml", "title": "XML" },
   { "type": "headline", "title": "Further showcases" },
   { "type": "link", "path": "https://todos.jeasx.dev", "title": "Todos" },
-  { "type": "link", "path": "https://preact.jeasx.dev", "title": "Preact" }
+  { "type": "link", "path": "https://preact.jeasx.dev", "title": "Preact" },
+  {
+    "type": "link",
+    "path": "https://quickstart.jeasx.dev",
+    "title": "Quickstart"
+  },
+  { "type": "headline", "title": "GitHub repositories" },
+  {
+    "type": "link",
+    "path": "https://github.com/jablonski/jeasx-showcases",
+    "title": "Showcases"
+  },
+  {
+    "type": "link",
+    "path": "https://github.com/jeasx/quickstart",
+    "title": "Quickstart"
+  },
+  { "type": "link", "path": "https://github.com/jeasx/jeasx", "title": "Jeasx" }
 ]
