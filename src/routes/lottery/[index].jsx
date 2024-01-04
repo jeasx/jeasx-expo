@@ -1,13 +1,12 @@
 /**
  * @param {import("../types").RouteProps} props
  */
-export default function Lotto({ request }) {
-  const body = request.body;
+export default function Lottery({ request }) {
+  const body = request.body || {};
 
-  const number = +body?.["number"];
-  const submit = body?.["submit"];
-  const numbers =
-    !submit && body?.["numbers"] ? JSON.parse(body["numbers"]) : [];
+  const number = +body["number"];
+  const submit = body["submit"];
+  const numbers = !submit && body["numbers"] ? JSON.parse(body["numbers"]) : [];
   let delta = 0;
 
   if (number) {
