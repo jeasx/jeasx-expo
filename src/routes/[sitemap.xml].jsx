@@ -16,7 +16,7 @@ export default function Sitemap({ reply }) {
           )
           .map(({ path }) => (
             <url>
-              <loc>https://showcases.jeasx.dev{path}</loc>
+              <loc>https://usecases.jeasx.dev{path}</loc>
             </url>
           ))}
       </urlset>

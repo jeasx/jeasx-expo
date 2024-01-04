@@ -1,4 +1,4 @@
-# jeasx-showcases
+# jeasx-usecases
 
 ```bash
 npm install
