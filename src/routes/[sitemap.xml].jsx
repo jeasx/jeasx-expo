@@ -11,7 +11,8 @@ export default function Sitemap({ reply }) {
       <urlset>
         {sitemap
           .filter(
-            ({ path, type }) => type === "link" && path !== "/sitemap.xml"
+            ({ path, type }) =>
+              type === "link" && path.startsWith("/") && path !== "/sitemap.xml"
           )
           .map(({ path }) => (
             <url>

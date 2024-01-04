@@ -10,5 +10,8 @@
   { "type": "link", "path": "/upload", "title": "Image" },
   { "type": "link", "path": "/svg", "title": "SVG" },
   { "type": "link", "path": "/api/json", "title": "JSON" },
-  { "type": "link", "path": "/sitemap.xml", "title": "XML" }
+  { "type": "link", "path": "/sitemap.xml", "title": "XML" },
+  { "type": "headline", "title": "Further showcases" },
+  { "type": "link", "path": "https://todos.jeasx.dev", "title": "Todos" },
+  { "type": "link", "path": "https://preact.jeasx.dev", "title": "Preact" }
 ]
