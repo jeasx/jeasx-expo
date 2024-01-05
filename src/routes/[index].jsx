@@ -22,7 +22,7 @@ export default function Frontpage({}) {
                 return <h2>{title}</h2>;
               case "link":
                 return (
-                  <a href={path}>
+                  <a href={path} target="_blank">
                     {title}
                     {path.startsWith("https://") && (
                       <img

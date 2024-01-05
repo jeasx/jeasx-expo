@@ -1,7 +1,9 @@
 [
-  { "type": "headline", "title": "Websites &amp; Apps" },
+  { "type": "headline", "title": "Dynamic Web-Sites" },
   { "type": "link", "path": "/blog", "title": "Blog" },
   { "type": "link", "path": "/products", "title": "Products" },
+  { "type": "link", "path": "/repositories", "title": "GitHub Repos" },
+  { "type": "headline", "title": "Web-Applications" },
   { "type": "link", "path": "/lottery", "title": "Lottery" },
   { "type": "link", "path": "https://todos.jeasx.dev", "title": "Todos" },
   {
@@ -9,8 +11,8 @@
     "path": "https://wizard.jeasx.dev",
     "title": "Form Wizard"
   },
-  { "type": "headline", "title": "With and without frameworks" },
-  { "type": "link", "path": "/jokes", "title": "Pure HTML" },
+  { "type": "headline", "title": "Web-Frameworks" },
+  { "type": "link", "path": "/jokes", "title": "Just HTML" },
   { "type": "link", "path": "/jokes/alpine", "title": "Alpine.js" },
   { "type": "link", "path": "https://preact.jeasx.dev", "title": "Preact" },
   { "type": "headline", "title": "Content-Types" },
