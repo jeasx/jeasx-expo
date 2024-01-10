@@ -5,9 +5,9 @@ import Image from "./Image";
  * @param {import("../types").RouteProps} props
  */
 export default async function BlogOverview({ request }) {
-  const products = (
-    await (await fetch("https://dummyjson.com/products")).json()
-  ).products;
+  const { products } = await (
+    await fetch("https://dummyjson.com/products")
+  ).json();
 
   return (
     <Layout
