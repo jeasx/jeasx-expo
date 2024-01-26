@@ -6,11 +6,7 @@
   { "type": "headline", "title": "Web-Applications" },
   { "type": "link", "path": "/lottery", "title": "Lottery" },
   { "type": "link", "path": "/todos", "title": "Todos" },
-  {
-    "type": "link",
-    "path": "https://wizard.jeasx.dev",
-    "title": "Form Wizard"
-  },
+  { "type": "link", "path": "/wizard", "title": "Form Wizard" },
   { "type": "headline", "title": "Web-Frameworks" },
   { "type": "link", "path": "/jokes", "title": "Just HTML" },
   { "type": "link", "path": "/jokes/alpine", "title": "Alpine.js" },
