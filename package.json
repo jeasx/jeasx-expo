@@ -9,5 +9,8 @@
   "dependencies": {
     "jeasx": "0.1.1",
     "sharp": "0.33.2"
+  },
+  "engines": {
+    "node": "20.x"
   }
 }
