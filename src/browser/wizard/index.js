@@ -1,2 +1,7 @@
-import "./js/data-submit.js";
-import "./js/scroll-restore.js";
+addEventListener("load", () => {
+  document.querySelectorAll("[data-submit]").forEach((el) => {
+    el.addEventListener(el.getAttribute("data-submit"), (e) => {
+      e.target["form"].submit();
+    });
+  });
+});
