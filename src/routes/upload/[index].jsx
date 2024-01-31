@@ -24,7 +24,7 @@ export default async function Upload({ request, reply }) {
       <main>
         <form method="post" enctype="multipart/form-data">
           <label>
-            Format
+            Convert to format
             <select name="format">
               <option>avif</option>
               <option>webp</option>

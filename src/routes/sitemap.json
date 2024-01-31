@@ -16,7 +16,7 @@
   { "type": "headline", "title": "Content-Types" },
   { "type": "link", "path": "/upload", "title": "Image" },
   { "type": "link", "path": "/svg", "title": "SVG" },
-  { "type": "link", "path": "/api/json", "title": "JSON" },
+  { "type": "link", "path": "/json/request.json", "title": "JSON" },
   { "type": "link", "path": "/sitemap.xml", "title": "XML" },
   { "type": "headline", "title": "GitHub" },
   {
