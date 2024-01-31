@@ -7,7 +7,7 @@
   { "type": "link", "path": "/lottery", "title": "Lottery" },
   { "type": "link", "path": "/todos", "title": "Todos" },
   { "type": "link", "path": "/jokes", "title": "Jokes" },
-  { "type": "link", "path": "/wizard", "title": "Form Wizard" },
+  { "type": "link", "path": "/wizard", "title": "Wizard" },
   { "type": "headline", "title": "JavaScript-Frameworks" },
   { "type": "link", "path": "/alpine", "title": "Alpine.js" },
   { "type": "link", "path": "/htmx", "title": "HTMX" },
