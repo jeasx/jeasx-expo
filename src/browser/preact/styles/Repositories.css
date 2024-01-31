@@ -1,0 +1,10 @@
+.repositories {
+  ul {
+    list-style: square;
+    text-align: left;
+  }
+
+  li {
+    margin: 1rem;
+  }
+}

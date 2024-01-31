@@ -12,7 +12,7 @@ export default function Htmx({ request, reply }) {
       title="HTMX example"
       description="jeasx integrates easily with HTMX"
       css="/wizard/index.css"
-      script="https://unpkg.com/htmx.org"
+      script="/htmx/index.js"
     >
       <main>
         <section>

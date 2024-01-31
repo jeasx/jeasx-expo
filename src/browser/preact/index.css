@@ -1,0 +1,7 @@
+@import "./styles/Reset.css";
+@import "./styles/Global.css";
+@import "./styles/Clock.css";
+@import "./styles/Jokes.css";
+@import "./styles/Lottery.css";
+@import "./styles/Repositories.css";
+@import "./styles/Todos.css";

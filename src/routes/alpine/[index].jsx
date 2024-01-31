@@ -6,7 +6,7 @@ export default async function Jokes() {
       title="Jokes"
       description="Some funny jokes"
       css="/jokes/index.css"
-      script="//unpkg.com/alpinejs"
+      script="/alpinejs/index.js"
     >
       <main>
         <section>
