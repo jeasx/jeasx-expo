@@ -6,7 +6,7 @@ export default function Layout({ title, description, children = [] }) {
       title={title}
       description={description}
       css="/todos/index.css"
-      script="/todos/index.js"
+      script="/scroll-restore/index.js"
     >
       {children}
     </DefaultLayout>
