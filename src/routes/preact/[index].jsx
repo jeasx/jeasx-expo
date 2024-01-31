@@ -1,23 +1,21 @@
-import Layout from "./Layout";
+import Layout from "../Layout";
+import Preact from "./Preact";
 
-/**
- * @param {import("../types").RouteProps} props
- */
-export default function Preact({}) {
+export default function Jokes() {
   return (
     <Layout
-      title="jeasx-preact"
-      description="Some examples which show how to use preact with jeasx."
+      title="Jokes"
+      description="Tell me some jokes"
+      css="/preact/index.css"
+      script="/preact/index.js"
     >
-      <h1>jeasx-preact</h1>
-      <p>Some examples which show how to use preact with jeasx.</p>
-      <p>
-        <a href="examples/clock">Clock</a>
-        <a href="examples/jokes">Jokes</a>
-        <a href="examples/lottery">Lottery</a>
-        <a href="examples/repositories">Repositories</a>
-        <a href="examples/todos">Todos</a>
-      </p>
+      <main>
+        <section>
+          <h1>Jokes</h1>
+          <Preact component="Clock" />
+          <Preact component="Jokes" api="/jokes/api" initial={3} />
+        </section>
+      </main>
     </Layout>
   );
 }
