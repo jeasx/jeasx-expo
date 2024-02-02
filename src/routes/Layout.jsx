@@ -36,24 +36,43 @@ export default function Layout({
           <title>{title}</title>
         </head>
         <body>
-          {children}
           {path !== "/" && (
-            <a
-              href="/"
-              style={{
-                position: "absolute",
-                top: "1rem",
-                left: "1rem",
-                color: "#999999",
-                "text-align": "left",
-                "text-decoration": "underline",
-                "font-weight": "bold",
-                "font-size": "0.8rem",
-              }}
-            >
-              &laquo; Back
-            </a>
+            <>
+              <a
+                href="/"
+                style={{
+                  position: "absolute",
+                  top: "1rem",
+                  left: "1rem",
+                  color: "#999999",
+                  "text-align": "left",
+                  "text-decoration": "underline",
+                  "font-weight": "bold",
+                  "font-size": "0.8rem",
+                }}
+              >
+                &laquo; Back
+              </a>
+              <a
+                href={`https://github.com/jeasx/jeasx-expo/tree/main/src/routes/${
+                  path.split("/")[1]
+                }`}
+                style={{
+                  position: "absolute",
+                  top: "1rem",
+                  left: "calc(100vw - 6em)",
+                  color: "#999999",
+                  "text-align": "left",
+                  "text-decoration": "underline",
+                  "font-weight": "bold",
+                  "font-size": "0.8rem",
+                }}
+              >
+                Source &raquo;
+              </a>
+            </>
           )}
+          {children}
         </body>
       </html>
     </>
