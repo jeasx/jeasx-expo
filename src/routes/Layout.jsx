@@ -35,7 +35,26 @@ export default function Layout({
           )}
           <title>{title}</title>
         </head>
-        <body>{children}</body>
+        <body>
+          {children}
+          {path !== "/" && (
+            <a
+              href="/"
+              style={{
+                position: "absolute",
+                top: "1rem",
+                left: "1rem",
+                color: "#999999",
+                "text-align": "left",
+                "text-decoration": "underline",
+                "font-weight": "bold",
+                "font-size": "0.8rem",
+              }}
+            >
+              &laquo; Back
+            </a>
+          )}
+        </body>
       </html>
     </>
   );

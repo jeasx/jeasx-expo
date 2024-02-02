@@ -1,27 +1,24 @@
 [
-  { "type": "headline", "title": "Dynamic Web-Sites" },
+  {
+    "type": "headline",
+    "title": "Examples for dynamic websites (e.g. CMS content)"
+  },
   { "type": "link", "path": "/blog", "title": "Blog" },
   { "type": "link", "path": "/products", "title": "Products" },
-  { "type": "link", "path": "/repositories", "title": "GitHub Repos" },
-  { "type": "headline", "title": "Web-Applications" },
+  { "type": "headline", "title": "SSR applications (no JavaScript required)" },
   { "type": "link", "path": "/lottery", "title": "Lottery" },
   { "type": "link", "path": "/todos", "title": "Todos" },
   { "type": "link", "path": "/jokes", "title": "Jokes" },
   { "type": "link", "path": "/wizard", "title": "Wizard" },
-  { "type": "headline", "title": "JavaScript-Frameworks" },
+  { "type": "link", "path": "/repositories", "title": "GitHub Repos" },
+  { "type": "headline", "title": "Integrations with JavaScript-Frameworks" },
   { "type": "link", "path": "/alpine", "title": "Alpine.js" },
   { "type": "link", "path": "/htmx", "title": "HTMX" },
   { "type": "link", "path": "/lit", "title": "Lit" },
   { "type": "link", "path": "/preact", "title": "Preact" },
-  { "type": "headline", "title": "Content-Types" },
+  { "type": "headline", "title": "Generating various Content-Types" },
   { "type": "link", "path": "/upload", "title": "Image" },
   { "type": "link", "path": "/svg", "title": "SVG" },
   { "type": "link", "path": "/json/request.json", "title": "JSON" },
-  { "type": "link", "path": "/sitemap.xml", "title": "XML" },
-  { "type": "headline", "title": "GitHub" },
-  {
-    "type": "link",
-    "path": "https://github.com/jeasx/jeasx-expo",
-    "title": "Repository"
-  }
+  { "type": "link", "path": "/sitemap.xml", "title": "XML" }
 ]
