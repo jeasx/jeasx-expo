@@ -4,7 +4,7 @@
 :root {
   --box-shadow: 0 0.275rem 0.75rem -0.0625rem var(--color-shadow),
     0 0.125rem 0.4rem -0.0625rem var(--color-shadow);
-  --gradient: radial-gradient(circle, var(--color-primary) 0%, white 80%);
+  --gradient: radial-gradient(circle, var(--color-primary) 0%, white 99%);
 }
 
 header {
@@ -41,7 +41,7 @@ h1 {
 h2 {
   margin: 1rem;
   border-radius: 1rem;
-  background: var(--gradient);
+  background-color: var(--color-primary);
   padding: 0.5rem;
   width: 100%;
   color: var(--color-background);

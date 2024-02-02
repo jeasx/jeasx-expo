@@ -10,7 +10,7 @@ export default async function Upload({ request, reply }) {
       <main>
         <form method="post">
           <label>
-            Text
+            Enter some text
             <input
               type="text"
               name="text"

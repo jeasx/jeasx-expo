@@ -1,28 +1,13 @@
-import sharp from "sharp";
 import Layout from "../Layout";
 
 /**
  * @param {import("../types").RouteProps} props
  */
 export default async function Upload({ request, reply }) {
-  if (request.method === "POST") {
-    const file = await request.file();
-    const format = file.fields["format"]["value"];
-    reply.header("Content-Type", `image/${format}`);
-    return await sharp(await file.toBuffer())
-      .resize({
-        width: 640,
-        height: 640,
-        position: "entropy",
-      })
-      .toFormat(format, { quality: 70 })
-      .toBuffer();
-  }
-
   return (
-    <Layout title="Upload demo" css="/upload/index.css">
+    <Layout title="Upload and image scaling" css="/upload/index.css">
       <main>
-        <form method="post" enctype="multipart/form-data">
+        <form action="./image" method="post" enctype="multipart/form-data">
           <label>
             Convert to format
             <select name="format">
@@ -30,6 +15,27 @@ export default async function Upload({ request, reply }) {
               <option>webp</option>
             </select>
           </label>
+          <label>
+            Resize to
+            <select name="size">
+              <option>160</option>
+              <option>320</option>
+              <option>640</option>
+            </select>
+          </label>
+          <label>
+            Rotate
+            <select name="rotate">
+              <option>0</option>
+              <option>30</option>
+              <option>45</option>
+              <option>60</option>
+              <option>75</option>
+              <option>90</option>
+              <option>180</option>
+            </select>
+          </label>
+
           <label>
             Choose a picture (jpg only)
             <input type="file" name="upload" accept="jpg" required />
