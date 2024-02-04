@@ -11,7 +11,10 @@
   { "type": "link", "path": "/jokes", "title": "Jokes" },
   { "type": "link", "path": "/wizard", "title": "Wizard" },
   { "type": "link", "path": "/repositories", "title": "GitHub Repos" },
-  { "type": "headline", "title": "Integrations with JavaScript-Frameworks" },
+  {
+    "type": "headline",
+    "title": "Userland integration of JavaScript-Frameworks"
+  },
   { "type": "link", "path": "/alpine", "title": "Alpine.js" },
   { "type": "link", "path": "/htmx", "title": "HTMX" },
   { "type": "link", "path": "/lit", "title": "Lit" },
