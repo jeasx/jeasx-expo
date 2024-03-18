@@ -23,10 +23,7 @@ export default function Htmx({ request, reply }) {
               HTMX
             </a>
             because it makes it easy to create routes that emit HTML fragments.
-            This example works with and without JavaScript.
-          </p>
-          <p>
-            <i>Generated at: {new Date().toISOString()}</i>
+            This example works even without JavaScript.
           </p>
           {body["action"] === "edit" ? (
             <Edit request={request} reply={reply} />
