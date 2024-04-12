@@ -9,12 +9,12 @@
   "dependencies": {
     "@lit-labs/motion": "1.0.7",
     "@preact/signals": "1.2.3",
-    "alpinejs": "3.13.7",
+    "alpinejs": "3.13.8",
     "htmx.org": "1.9.11",
-    "jeasx": "0.4.7",
+    "jeasx": "0.4.8",
     "lit": "3.1.2",
-    "preact": "10.20.1",
-    "preact-render-to-string": "6.4.1",
+    "preact": "10.20.2",
+    "preact-render-to-string": "6.4.2",
     "sharp": "0.33.3"
   },
   "engines": {
