@@ -1,6 +1,5 @@
 import Alpine from "alpinejs";
 
-// @ts-ignore
-window.Alpine = Alpine;
+globalThis.Alpine = Alpine;
 
 Alpine.start();
