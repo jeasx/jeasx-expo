@@ -18,10 +18,10 @@ export default function Htmx({ request, reply }) {
         <section>
           <h1>HTMX example</h1>
           <p>
-            jeasx is the perfect match for
+            jeasx is the perfect match for{" "}
             <a href="https://htmx.org/" target="_blank">
               HTMX
-            </a>
+            </a>{" "}
             because it makes it easy to create routes that emit HTML fragments.
             This example works even without JavaScript.
           </p>

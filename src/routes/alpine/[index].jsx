@@ -46,7 +46,7 @@ export default async function Jokes() {
                 name="category"
                 x-on:click="load('programming')"
               >
-                Tell me
+                Tell me{" "}
                 <span x-text="counter === 1 ? `a joke` : `${counter} jokes`" />
               </button>
               <button
@@ -55,7 +55,7 @@ export default async function Jokes() {
                 name="category"
                 x-on:click="load('general')"
               >
-                Tell me
+                Tell me{" "}
                 <span x-text="counter === 1 ? `a pun` : `${counter} puns`" />
               </button>
             </div>
