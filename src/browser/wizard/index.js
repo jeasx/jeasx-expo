@@ -1,7 +1,9 @@
 addEventListener("load", () => {
   document.querySelectorAll("[data-submit]").forEach((el) => {
-    el.addEventListener(el.getAttribute("data-submit"), (e) => {
-      e.target["form"].submit();
-    });
+    if (el instanceof HTMLElement) {
+      el.addEventListener(el.dataset.submit, (e) => {
+        e.target["form"].submit();
+      });
+    }
   });
 });
