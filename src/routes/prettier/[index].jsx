@@ -1,5 +1,4 @@
 import { requestContext } from "@fastify/request-context";
-import { escapeEntities } from "jsx-async-runtime";
 import * as prettier from "prettier";
 import Layout from "../Layout";
 
@@ -11,17 +10,13 @@ export default function Prettier({ request, reply }) {
 
   if (request.query["printWidth"] && request.query["tabWidth"]) {
     requestContext.set("response", async (payload) => {
-      return typeof payload === "string" &&
-        String(reply.getHeader("content-type")).startsWith("text/html")
-        ? "<pre>" +
-            escapeEntities(
-              await prettier.format(payload, {
-                parser: "html",
-                printWidth: Number(request.query["printWidth"]),
-                tabWidth: Number(request.query["tabWidth"]),
-              })
-            ) +
-            "</pre>"
+      reply.header("content-type", "text/plain; charset=utf-8");
+      return typeof payload === "string"
+        ? await prettier.format(payload, {
+            parser: "html",
+            printWidth: Number(request.query["printWidth"]),
+            tabWidth: Number(request.query["tabWidth"]),
+          })
         : payload;
     });
   }
