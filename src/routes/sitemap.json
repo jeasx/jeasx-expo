@@ -20,6 +20,7 @@
   { "type": "link", "path": "/lit", "title": "Lit" },
   { "type": "link", "path": "/preact", "title": "Preact" },
   { "type": "headline", "title": "Generating various Content-Types" },
+  { "type": "link", "path": "/prettier", "title": "HTML" },
   { "type": "link", "path": "/upload", "title": "Image" },
   { "type": "link", "path": "/svg", "title": "SVG" },
   { "type": "link", "path": "/json/request.json", "title": "JSON" },
