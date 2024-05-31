@@ -14,10 +14,12 @@ export default function Layout({
       <html lang="en">
         <head>
           <base href={`${path.endsWith("/") ? path : path + "/"}`} />
-          <meta
-            http-equiv="Content-Security-Policy"
-            content="default-src 'none'; script-src 'self' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; object-src 'none'; form-action 'self'; base-uri 'self'; connect-src 'self'; frame-src 'self';"
-          />
+          {process.env.NODE_ENV !== "development" && (
+            <meta
+              http-equiv="Content-Security-Policy"
+              content="default-src 'none'; script-src 'self' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; object-src 'none'; form-action 'self'; base-uri 'self'; connect-src 'self'; frame-src 'self';"
+            />
+          )}
           <meta http-equiv="Referrer-Policy" content="same-origin" />
           <meta charset="utf-8" />
           <meta name="description" content={description} />
