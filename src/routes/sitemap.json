@@ -11,6 +11,7 @@
   { "type": "link", "path": "/jokes", "title": "Jokes" },
   { "type": "link", "path": "/wizard", "title": "Wizard" },
   { "type": "link", "path": "/repositories", "title": "GitHub Repos" },
+  { "type": "link", "path": "/context", "title": "Use this as context" },
   {
     "type": "headline",
     "title": "Userland integration of JavaScript-Frameworks"
