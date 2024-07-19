@@ -1,9 +1,11 @@
-import { requestContext } from "@fastify/request-context";
 import DefaultLayout from "../Layout";
 import Header from "./components/Header";
 
+/**
+ * @this {import("../types").RouteProps}
+ */
 export default function Layout({ title = "", data = {}, children = [] }) {
-  const path = requestContext.get("request").urlData().path;
+  const path = this.request.urlData().path;
 
   return (
     <DefaultLayout

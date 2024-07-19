@@ -7,7 +7,7 @@ import Submit from "./components/Submit";
 import { compress } from "./utils/zip";
 
 /**
- * @param {import("./types").RouteProps & any} props
+ * @param {import("../types").RouteProps & any} props
  */
 export default function Speichern({ reply, data }) {
   const token =

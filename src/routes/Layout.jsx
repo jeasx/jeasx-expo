@@ -1,5 +1,6 @@
-import { requestContext } from "@fastify/request-context";
-
+/**
+ * @this {import("./types").RouteProps}
+ */
 export default function Layout({
   title = "",
   description = "",
@@ -7,7 +8,7 @@ export default function Layout({
   css = undefined,
   script = undefined,
 }) {
-  const path = requestContext.get("request").urlData().path;
+  const path = this.request.urlData().path;
   return (
     <>
       {"<!DOCTYPE html>"}

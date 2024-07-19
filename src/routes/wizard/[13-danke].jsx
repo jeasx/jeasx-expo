@@ -5,7 +5,7 @@ import Submit from "./components/Submit";
 import Layout from "./Layout";
 
 /**
- * @param {import("./types").RouteProps} props
+ * @param {import("../types").RouteProps} props
  */
 export default function Danke({ reply }) {
   reply.clearCookie("data");

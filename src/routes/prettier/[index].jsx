@@ -1,4 +1,3 @@
-import { requestContext } from "@fastify/request-context";
 import * as prettier from "prettier";
 import Layout from "../Layout";
 
@@ -9,7 +8,7 @@ export default function Prettier({ request, reply }) {
   const form = request.body || { printWidth: 80, tabWidth: 2 };
 
   if (request.query["printWidth"] && request.query["tabWidth"]) {
-    requestContext.set("response", async (payload) => {
+    this.response = async (payload) => {
       reply.header("content-type", "text/plain; charset=utf-8");
       return typeof payload === "string"
         ? await prettier.format(payload, {
@@ -18,7 +17,7 @@ export default function Prettier({ request, reply }) {
             tabWidth: Number(request.query["tabWidth"]),
           })
         : payload;
-    });
+    };
   }
 
   return (

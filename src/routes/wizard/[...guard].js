@@ -1,15 +1,14 @@
-import { requestContext } from "@fastify/request-context";
 import { SLUGS } from "./domain/constants";
 import navigate from "./domain/navigate";
 import validator from "./domain/validator";
 import { compress, decompress } from "./utils/zip";
 
 /**
- * @param {import("./types").RouteProps} props
+ * @param {import("../types").RouteProps} props
  */
 export default function Controller({ request, reply }) {
-  requestContext.set("request", request);
-  requestContext.set("reply", reply);
+  this.request = request;
+  this.reply = reply;
 
   try {
     const props = {

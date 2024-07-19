@@ -1,7 +1,7 @@
 import Layout from "./Layout";
 
 /**
- * @param {import("./types").RouteProps} props
+ * @param {import("../types").RouteProps} props
  */
 export default function PageNotFound({}) {
   return (
