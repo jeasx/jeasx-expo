@@ -11,12 +11,12 @@ export default async function HeadGuard() {
   // Overwrite jsxToString with our head collector.
   // The first head is replaced with the HEAD_MARK,
   // all other heads are deleted.
-  this.jsxToString = (jsxElement) => {
+  this.jsxToString = async (jsxElement) => {
     if (jsxElement?.tag === "head") {
       headTags.push(jsxElement.props.children);
       return headTags.length === 1 ? HEAD_MARK : "";
     }
-    return $jsxToString.call(this, jsxElement);
+    return await $jsxToString.call(this, jsxElement);
   };
 
   // Use response handler to replace HEAD_MARK with unified head.
