@@ -11,7 +11,6 @@
   { "type": "link", "path": "/jokes", "title": "Jokes" },
   { "type": "link", "path": "/wizard", "title": "Wizard" },
   { "type": "link", "path": "/repositories", "title": "GitHub Repos" },
-  { "type": "link", "path": "/context", "title": "Use this as context" },
   {
     "type": "headline",
     "title": "Userland integration of JavaScript-Frameworks"
@@ -21,9 +20,12 @@
   { "type": "link", "path": "/lit", "title": "Lit" },
   { "type": "link", "path": "/preact", "title": "Preact" },
   { "type": "headline", "title": "Generating various Content-Types" },
-  { "type": "link", "path": "/prettier", "title": "HTML" },
   { "type": "link", "path": "/upload", "title": "Image" },
   { "type": "link", "path": "/svg", "title": "SVG" },
   { "type": "link", "path": "/json/request.json", "title": "JSON" },
-  { "type": "link", "path": "/sitemap.xml", "title": "XML" }
+  { "type": "link", "path": "/sitemap.xml", "title": "XML" },
+  { "type": "headline", "title": "Advanced features" },
+  { "type": "link", "path": "/prettier", "title": "Postprocess HTML" },
+  { "type": "link", "path": "/context", "title": "Use 'this' as context" },
+  { "type": "link", "path": "/interceptor", "title": "Intercept JSX" }
 ]
