@@ -27,5 +27,6 @@
   { "type": "headline", "title": "Advanced features" },
   { "type": "link", "path": "/prettier", "title": "Postprocess HTML" },
   { "type": "link", "path": "/context", "title": "Use 'this' as context" },
-  { "type": "link", "path": "/interceptor", "title": "Intercept JSX" }
+  { "type": "link", "path": "/interceptor", "title": "Intercept JSX" },
+  { "type": "link", "path": "/head", "title": "Helmet for Head" }
 ]
