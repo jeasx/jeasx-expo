@@ -28,10 +28,10 @@ export default function JSXInterceptor({ request }) {
             you to modify or replace existing markup.
           </p>
           {removeStyles ? (
-            <StyleCleaner>
+            <HouseKeeper>
               <ThirdPartyComponent />
               <a href="?styles=on">Turn inline styles on</a>
-            </StyleCleaner>
+            </HouseKeeper>
           ) : (
             <>
               <ThirdPartyComponent />
@@ -44,8 +44,14 @@ export default function JSXInterceptor({ request }) {
   );
 }
 
-function StyleCleaner({ children = [] }) {
+function HouseKeeper({ children = [] }) {
   this.jsxToString = (jsxElement) => {
+    // Rewrite className to class
+    if (jsxElement?.props?.className) {
+      jsxElement.props.class = jsxElement.props.className;
+      delete jsxElement.props.className;
+    }
+    // Delete all inline styles
     if (jsxElement?.props?.style) {
       delete jsxElement.props.style;
     }
@@ -56,7 +62,10 @@ function StyleCleaner({ children = [] }) {
 
 function ThirdPartyComponent() {
   return (
-    <div style="border: 4px dashed black;">
+    <div
+      className={{ third: true, party: false }}
+      style="border: 4px dashed black;"
+    >
       {["red", "green", "blue", "orange"].map((color) => (
         <>
           <span style={`background-color: ${color}`}>{color}</span>
