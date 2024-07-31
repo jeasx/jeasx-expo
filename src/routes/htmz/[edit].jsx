@@ -7,7 +7,7 @@ export default function Form({ request, reply }) {
   const body = request.body || {};
 
   return (
-    <form id="form" action="./view#form" target="htmz" method="post">
+    <form id="swap" action="./view#swap" target="htmz" method="post">
       <input type="hidden" name="action" value="view" />
       {fields.map(({ label, name, type, value }) => (
         <div>

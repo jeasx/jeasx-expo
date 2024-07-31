@@ -7,7 +7,7 @@ export default function View({ request, reply }) {
   const body = request.body || {};
 
   return (
-    <form id="form" action="./edit#form" target="htmz" method="post">
+    <form id="swap" action="./edit#swap" target="htmz" method="post">
       <input type="hidden" name="action" value="edit" />
       {fields.map(({ label, name }) => (
         <div>
@@ -16,6 +16,9 @@ export default function View({ request, reply }) {
         </div>
       ))}
       <button>Edit</button>
+      <a href="./time#swap" target="htmz">
+        Show time
+      </a>
     </form>
   );
 }

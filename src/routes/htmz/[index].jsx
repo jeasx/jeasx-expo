@@ -12,6 +12,7 @@ export default function Htmz({ request, reply }) {
       title="htmz example"
       description="Jeasx integrates easily with htmz"
       css="/wizard/index.css"
+      script="/htmz/index.js"
     >
       <main>
         <section>
@@ -41,13 +42,7 @@ export default function Htmz({ request, reply }) {
           )}
         </section>
       </main>
-      <iframe
-        hidden
-        name="htmz"
-        onload={
-          /*js*/ `document.querySelector(contentWindow.location.hash||null)?.replaceWith(...contentDocument.body.childNodes)`
-        }
-      ></iframe>
+      <iframe hidden name="htmz"></iframe>
     </Layout>
   );
 }
