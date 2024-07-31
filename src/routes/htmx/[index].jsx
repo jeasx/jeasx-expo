@@ -1,5 +1,6 @@
 import Layout from "../Layout";
 import Edit from "./[edit]";
+import Time from "./[time]";
 import View from "./[view]";
 
 /**
@@ -30,6 +31,13 @@ export default function Htmx({ request, reply }) {
           ) : (
             <View request={request} reply={reply} />
           )}
+          <hr />
+          <div>
+            The current server time is:{" "}
+            <span hx-get="./time" hx-trigger="every 1s">
+              <Time />
+            </span>
+          </div>
         </section>
       </main>
     </Layout>
