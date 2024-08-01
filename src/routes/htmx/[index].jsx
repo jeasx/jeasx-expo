@@ -34,7 +34,7 @@ export default function Htmx({ request, reply }) {
           <hr />
           <div>
             The current server time is:{" "}
-            <span hx-get="./time" hx-trigger="every 1s">
+            <span data-hx-get="./time" data-hx-trigger="every 1s">
               <Time />
             </span>
           </div>
