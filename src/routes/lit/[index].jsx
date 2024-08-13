@@ -15,7 +15,7 @@ export default function Lit({ request, reply }) {
         <section>
           <h1>Lit example</h1>
           <p>
-            jeasx works smoothly with
+            jeasx works smoothly with{" "}
             <a href="https://lit.dev/" target="_blank">
               Lit.
             </a>
