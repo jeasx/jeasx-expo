@@ -14,9 +14,9 @@
     "jeasx": "0.11.1",
     "lit": "3.2.0",
     "preact": "10.23.2",
-    "preact-render-to-string": "6.5.8",
+    "preact-render-to-string": "6.5.9",
     "prettier": "3.3.3",
-    "sharp": "0.33.4"
+    "sharp": "0.33.5"
   },
   "engines": {
     "node": "20.x"
