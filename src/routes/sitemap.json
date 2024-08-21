@@ -17,7 +17,6 @@
   },
   { "type": "link", "path": "/alpine", "title": "Alpine.js" },
   { "type": "link", "path": "/htmx", "title": "HTMX" },
-  { "type": "link", "path": "/htmz", "title": "HTMZ" },
   { "type": "link", "path": "/lit", "title": "Lit" },
   { "type": "link", "path": "/preact", "title": "Preact" },
   { "type": "headline", "title": "Generating various Content-Types" },
