@@ -7,7 +7,7 @@ export default function View({ request, reply }) {
   const body = request.body || {};
 
   return (
-    <form data-hx-post="./edit" method="post">
+    <form hx-post="./edit" method="post">
       <input type="hidden" name="action" value="edit" />
       {fields.map(({ label, name }) => (
         <div>
