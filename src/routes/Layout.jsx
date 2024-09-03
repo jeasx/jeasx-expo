@@ -24,10 +24,6 @@ export default function Layout({
           {css && (
             <link rel="stylesheet" href={`${css}?${process.env.BUILD_TIME}`} />
           )}
-          <script
-            src={`/scroll-restore/index.js?${process.env.BUILD_TIME}`}
-            defer
-          ></script>
           {script && (
             <script src={`${script}?${process.env.BUILD_TIME}`} defer></script>
           )}
