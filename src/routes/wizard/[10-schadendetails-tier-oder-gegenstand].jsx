@@ -30,8 +30,8 @@ export default function SchadendetailsTierOderGegenstand({
           value={form.beschreibung}
           placeholder="z.B. der Poller wurde umgefahren"
         />
-        <Error message={errors} />
         <Actions />
+        <Error message={errors} />
       </Form>
     </Layout>
   );

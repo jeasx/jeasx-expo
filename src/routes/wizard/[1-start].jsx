@@ -1,5 +1,4 @@
 import Form from "./components/Form";
-import Headline from "./components/Headline";
 import Input from "./components/Input";
 import Paragraph from "./components/Paragraph";
 import Submit from "./components/Submit";
@@ -9,10 +8,6 @@ export default function Start() {
   return (
     <Layout title="Start">
       <Form>
-        <Headline>
-          Ein Missgeschick kann immer mal passieren - dafür ist die
-          KFZ-Versicherung da.
-        </Headline>
         <Paragraph>
           Im Folgenden stellen wir Ihnen einige Fragen, damit wir den
           entstandenen Schaden zuordnen und bearbeiten können.

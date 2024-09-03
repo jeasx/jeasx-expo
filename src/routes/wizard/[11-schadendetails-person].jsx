@@ -41,8 +41,8 @@ export default function SchadendetailsPerson({ data, form, errors }) {
           name="noch_weitere_person"
           value={form.noch_weitere_person}
         />
-        <Error message={errors} />
         <Actions />
+        <Error message={errors} />
       </Form>
     </Layout>
   );

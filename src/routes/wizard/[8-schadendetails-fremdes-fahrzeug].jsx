@@ -26,8 +26,8 @@ export default function SchadendetailsFremdesFahrzeug({ data, form, errors }) {
           value={form.beschreibung}
           placeholder="z.B. Stoßstange oder Beifahrertür"
         />
-        <Error message={errors} />
         <Actions />
+        <Error message={errors} />
       </Form>
     </Layout>
   );

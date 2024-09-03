@@ -24,8 +24,8 @@ export default function Schadenmeldung({ data, form, errors }) {
           checked={form.schadenmeldung === "Unfallbeteiligter"}
           label="Unfallbeteiligter, der von einer Person geschädigt werde, welche versichert ist"
         />
-        <Error message={errors} />
         <Actions />
+        <Error message={errors} />
       </Form>
     </Layout>
   );

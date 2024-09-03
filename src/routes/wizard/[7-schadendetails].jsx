@@ -34,8 +34,8 @@ export default function Schadendetails({ data, form, errors }) {
           value={form.beschreibung}
           placeholder="z.B. Landstraße zwischen Ortschaft A und Ortschaft B"
         />
-        <Error message={errors} />
         <Actions />
+        <Error message={errors} />
       </Form>
     </Layout>
   );

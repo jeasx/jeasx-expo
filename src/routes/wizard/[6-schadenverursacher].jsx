@@ -40,8 +40,8 @@ export default function Schadenverursacher({ data, form, errors }) {
           label="Ggf. Nummer des Versicherungsscheins"
           value={form.versicherungsschein}
         />
-        <Error message={errors} />
         <Actions />
+        <Error message={errors} />
       </Form>
     </Layout>
   );

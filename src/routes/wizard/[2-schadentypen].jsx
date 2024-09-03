@@ -30,8 +30,8 @@ export default function Schadentypen({ data, form, errors }) {
             label={schadentyp}
           />
         ))}
-        <Error message={errors} />
         <Actions />
+        <Error message={errors} />
       </Form>
     </Layout>
   );

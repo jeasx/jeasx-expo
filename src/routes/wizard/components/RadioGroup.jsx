@@ -9,19 +9,21 @@ export default function RadioGroup({
   return (
     <div>
       {label}
-      {options.map((item) => (
-        <label>
-          <input
-            type="radio"
-            name={name}
-            value={item}
-            checked={value === item}
-            required={required}
-            data-submit={submitOnChange ? "change" : undefined}
-          />
-          {item}
-        </label>
-      ))}
+      <div role="group">
+        {options.map((item) => (
+          <label>
+            <input
+              type="radio"
+              name={name}
+              value={item}
+              checked={value === item}
+              required={required}
+              data-submit={submitOnChange ? "change" : undefined}
+            />
+            {item}
+          </label>
+        ))}
+      </div>
     </div>
   );
 }

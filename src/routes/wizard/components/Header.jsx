@@ -33,9 +33,13 @@ export default function Header({ path, data }) {
     <header>
       <h1>Ihre Schadenmeldung zur KFZ-Versicherung</h1>
       <nav aria-label="breadcrumb">
-        {groups.slice(0, currentStep + 1).map(({ label, links }) => (
-          <a href={links[0]}>{label}</a>
-        ))}
+        <ul>
+          {groups.slice(0, currentStep + 1).map(({ label, links }) => (
+            <li>
+              <a href={links[0]}>{label}</a>
+            </li>
+          ))}
+        </ul>
       </nav>
       <Progress url={path} data={data} />
     </header>

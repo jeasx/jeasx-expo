@@ -26,8 +26,8 @@ export default function SchadendetailsEigenesFahrzeug({ data, form, errors }) {
           name="leihe_miete_pacht"
           value={form.leihe_miete_pacht}
         />
-        <Error message={errors} />
         <Actions />
+        <Error message={errors} />
       </Form>
     </Layout>
   );

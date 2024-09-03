@@ -1,3 +1,3 @@
 export default function Legend({ children = [] }) {
-  return <legend>{children}</legend>;
+  return <h3>{children}</h3>;
 }

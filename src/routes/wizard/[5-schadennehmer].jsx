@@ -28,8 +28,8 @@ export default function Schadennehmer({ data, form, errors }) {
           label="Amtliches Kennzeichen"
           value={form.kennzeichen}
         />
-        <Error message={errors} />
         <Actions />
+        <Error message={errors} />
       </Form>
     </Layout>
   );

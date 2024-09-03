@@ -50,8 +50,8 @@ export default function Schadenmelder({ form, errors, data }) {
           label="Amtliches Kennzeichen"
           value={form.kennzeichen}
         />
-        <Error message={errors} />
         <Actions />
+        <Error message={errors} />
       </Form>
     </Layout>
   );

@@ -2,10 +2,12 @@ import Submit from "./Submit";
 
 export default function Actions() {
   return (
-    <div class="flex-space-between">
+    <section role="group">
       <Submit label="Zurück" value="Zurück" />
-      <Submit label="Speichern" value="Speichern" />
+      &nbsp;
+      <Submit label="Speichern" value="Speichern" class="secondary" />
+      &nbsp;
       <Submit label="Weiter" value="Weiter" />
-    </div>
+    </section>
   );
 }
