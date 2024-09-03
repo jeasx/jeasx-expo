@@ -8,11 +8,11 @@ export default function Lit({ request, reply }) {
     <Layout
       title="jeasx with Lit"
       description="jeasx integrates easily with Lit"
-      css="/wizard/index.css"
+      css="/css/index.css"
       script="/lit/index.js"
     >
-      <main>
-        <section>
+      <main class="container">
+        <section class="center">
           <h1>Lit example</h1>
           <p>
             jeasx works smoothly with{" "}
@@ -20,6 +20,8 @@ export default function Lit({ request, reply }) {
               Lit.
             </a>
           </p>
+        </section>
+        <section>
           <logo-animation />
           <list-animation />
         </section>

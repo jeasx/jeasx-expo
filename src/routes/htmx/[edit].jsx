@@ -8,14 +8,16 @@ export default function Form({ request, reply }) {
 
   return (
     <form hx-post="./view" hx-swap="outerHTML" method="post">
-      <input type="hidden" name="action" value="view" />
-      {fields.map(({ label, name, type, value }) => (
-        <div>
-          <label>{label}:</label>
-          <input type={type} name={name} value={body[name] ?? value} />
-        </div>
-      ))}
-      <button>Submit</button>
+      <fieldset>
+        <input type="hidden" name="action" value="view" />
+        {fields.map(({ label, name, type, value }) => (
+          <div>
+            <label>{label}:</label>
+            <input type={type} name={name} value={body[name] ?? value} />
+          </div>
+        ))}
+      </fieldset>
+      <input type="submit" value="Submit" />
     </form>
   );
 }

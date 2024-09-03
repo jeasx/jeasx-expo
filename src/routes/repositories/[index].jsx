@@ -1,5 +1,6 @@
 import { escapeEntities } from "jsx-async-runtime";
 import Layout from "../Layout";
+
 /**
  * @param {import("../types").RouteProps} props
  */
@@ -20,14 +21,14 @@ export default async function Repositories({ request }) {
     <Layout
       title="Search GitHub Repositories"
       description="A list of repositiories at GitHub."
-      css="/repositories/index.css"
+      css="/css/index.css"
     >
-      <main>
+      <main class="container">
         <section>
-          <h1>Search GitHub Repositories</h1>
+          <h1 class="center">Search GitHub Repositories</h1>
           <form method="get">
             <input
-              type="text"
+              type="search"
               name="q"
               placeholder="Search..."
               value={escapeEntities(q)}

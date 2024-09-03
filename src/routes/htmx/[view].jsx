@@ -8,14 +8,16 @@ export default function View({ request, reply }) {
 
   return (
     <form hx-post="./edit" hx-swap="outerHTML" method="post">
-      <input type="hidden" name="action" value="edit" />
-      {fields.map(({ label, name }) => (
-        <div>
-          <label>{label}:</label> {body[name]}
-          <input type="hidden" name={name} value={body[name]} />
-        </div>
-      ))}
-      <button>Edit</button>
+      <fieldset>
+        <input type="hidden" name="action" value="edit" />
+        {fields.map(({ label, name }) => (
+          <div role="group">
+            <label>{label}:</label> {body[name]}
+            <input type="hidden" name={name} value={body[name]} />
+          </div>
+        ))}
+      </fieldset>
+      <input type="submit" value="Edit" />
     </form>
   );
 }

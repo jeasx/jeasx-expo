@@ -12,10 +12,10 @@ export default function Htmx({ request, reply }) {
     <Layout
       title="HTMX example"
       description="jeasx integrates easily with HTMX"
-      css="/wizard/index.css"
+      css="/css/index.css"
       script="/htmx/index.js"
     >
-      <main>
+      <main class="container">
         <section>
           <h1>HTMX example</h1>
           <p>
@@ -26,11 +26,13 @@ export default function Htmx({ request, reply }) {
             because it makes it easy to create routes that emit HTML fragments.
             This example works even without JavaScript.
           </p>
-          {body["action"] === "edit" ? (
-            <Edit request={request} reply={reply} />
-          ) : (
-            <View request={request} reply={reply} />
-          )}
+          <section>
+            {body["action"] === "edit" ? (
+              <Edit request={request} reply={reply} />
+            ) : (
+              <View request={request} reply={reply} />
+            )}
+          </section>
           <hr />
           <div>
             The current server time is:{" "}

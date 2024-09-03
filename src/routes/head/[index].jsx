@@ -8,9 +8,9 @@ export default function HeadDemo({}) {
     <Layout
       title="Head demo"
       description="Use head-tags everywhere in your JSX"
-      css="/preact/index.css"
+      css="/css/index.css"
     >
-      <main>
+      <main class="container">
         <section>
           <h1>A Helmet for the HTML-Head</h1>
           <p>
@@ -32,7 +32,7 @@ export default function HeadDemo({}) {
 
 function Subcomponent() {
   return (
-    <div class="container">
+    <section class="highlight">
       <h2>This is a subcomponent</h2>
       <p>If you want to add something to your head, just go ahead...</p>
       <head>
@@ -41,8 +41,8 @@ function Subcomponent() {
           name="description"
           value="If you want to add something to your head, just go ahead..."
         />
-        <style>{/* css */ `.container { background-color: orange;}`}</style>
+        <style>{/* css */ `.highlight { background-color: orange;}`}</style>
       </head>
-    </div>
+    </section>
   );
 }

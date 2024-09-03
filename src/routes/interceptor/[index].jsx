@@ -11,9 +11,9 @@ export default function JSXInterceptor({ request }) {
     <Layout
       title="Interceptor demo"
       description="Overriding #jsxToString allows to modify existing jsx components"
-      css="/preact/index.css"
+      css="/css/index.css"
     >
-      <main>
+      <main class="container">
         <section>
           <h1>JSX interception</h1>
           <p>
@@ -27,10 +27,12 @@ export default function JSXInterceptor({ request }) {
             allows you to intercept the rendering of jsx elements. This allows
             you to modify or replace existing markup.
           </p>
+        </section>
+        <section>
           {removeStyles ? (
             <HouseKeeper>
               <ThirdPartyComponent />
-              <a href="?styles=on">Turn inline styles on</a>
+              <a href="?styles=on"> Turn inline styles on</a>
             </HouseKeeper>
           ) : (
             <>

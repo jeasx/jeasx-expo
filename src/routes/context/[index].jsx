@@ -10,9 +10,9 @@ export default function Context({ request, reply }) {
     <Layout
       title="Context object"
       description="Use 'this' to avoid prop drilling"
-      css="/preact/index.css"
+      css="/css/index.css"
     >
-      <main>
+      <main class="container">
         <section>
           <h1>Avoid prop drilling via 'this'</h1>
           <p>

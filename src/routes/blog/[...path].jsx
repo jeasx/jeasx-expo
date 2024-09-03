@@ -15,8 +15,8 @@ export default function BlogDetail({ request, reply }) {
   }
 
   return (
-    <Layout title={blog.title} css="/blog/detail/index.css">
-      <main>
+    <Layout title={blog.title} css="/css/index.css">
+      <main class="container">
         <section>
           <article>
             <header>

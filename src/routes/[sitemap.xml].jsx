@@ -9,16 +9,15 @@ export default function Sitemap({ reply }) {
     <>
       {`<?xml version="1.0" encoding="UTF-8"?>`}
       <urlset>
-        {sitemap
-          .filter(
-            ({ path, type }) =>
-              type === "link" && path.startsWith("/") && path !== "/sitemap.xml"
-          )
-          .map(({ path }) => (
-            <url>
-              <loc>https://expo.jeasx.dev{path}</loc>
-            </url>
-          ))}
+        {sitemap.map(({ links }) =>
+          links
+            .filter(({ path }) => path !== "/sitemap.xml")
+            .map(({ path }) => (
+              <url>
+                <loc>https://expo.jeasx.dev{path}</loc>
+              </url>
+            ))
+        )}
       </urlset>
     </>
   );

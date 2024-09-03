@@ -21,31 +21,37 @@ export default function Prettier({ request, reply }) {
   }
 
   return (
-    <Layout title="Format resulting HTML with Prettier" css="/upload/index.css">
-      <main>
-        <form action="" method="post" style="width: 70%;">
-          <h1>Post process HTML with Prettier</h1>
-          <p>
-            Jeasx allows you to post-process the resulting HTML output via a
-            response-handler. Have a look at the source how things are wired up.
-            This is an example for how to use prettier to format the resulting
-            HTML.
-          </p>
-          <label>
-            Print width:
-            <input type="number" name="printWidth" value={form["printWidth"]} />
-          </label>
-          <label>
-            Tab width:
-            <input type="number" name="tabWidth" value={form["tabWidth"]} />
-          </label>
-          <button type="submit">Submit</button>
+    <Layout title="Format resulting HTML with Prettier" css="/css/index.css">
+      <main class="container">
+        <h1>Post process HTML with Prettier</h1>
+        <p>
+          Jeasx allows you to post-process the resulting HTML output via a
+          response-handler. Have a look at the source how things are wired up.
+          This is an example for how to use prettier to format the resulting
+          HTML.
+        </p>
+        <form action="" method="post">
+          <fieldset>
+            <label>
+              Print width:
+              <input
+                type="number"
+                name="printWidth"
+                value={form["printWidth"]}
+              />
+            </label>
+            <label>
+              Tab width:
+              <input type="number" name="tabWidth" value={form["tabWidth"]} />
+            </label>
+          </fieldset>
+          <input type="submit" value="Submit" />
         </form>
+        <iframe
+          src={`?printWidth=${form["printWidth"]}&tabWidth=${form["tabWidth"]}`}
+          style="width: 100%; height: 300px; border: 1px solid lightgray;"
+        ></iframe>
       </main>
-      <iframe
-        src={`?printWidth=${form["printWidth"]}&tabWidth=${form["tabWidth"]}`}
-        style="width: 70%; height: 300px; margin: 0 15%;"
-      ></iframe>
     </Layout>
   );
 }

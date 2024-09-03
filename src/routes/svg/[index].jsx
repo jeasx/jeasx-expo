@@ -6,19 +6,21 @@ import Layout from "../Layout";
  */
 export default async function Upload({ request, reply }) {
   return (
-    <Layout title="SVG demo" css="/upload/index.css">
-      <main>
+    <Layout title="SVG demo" css="/css/index.css">
+      <main class="container">
         <form method="post">
-          <label>
-            Enter some text
-            <input
-              type="text"
-              name="text"
-              value={escapeEntities(request.body?.["text"])}
-              autofocus
-            />
-          </label>
-          <button type="submit">Submit</button>
+          <fieldset>
+            <label>
+              Enter some text
+              <input
+                type="text"
+                name="text"
+                value={escapeEntities(request.body?.["text"])}
+                autofocus
+              />
+            </label>
+          </fieldset>
+          <input type="submit" value="Submit" />
           {request.body?.["text"] && (
             <img
               src={`/svg/logo.svg?text=${encodeURIComponent(

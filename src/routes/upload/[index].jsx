@@ -5,41 +5,43 @@ import Layout from "../Layout";
  */
 export default async function Upload({ request, reply }) {
   return (
-    <Layout title="Upload and image scaling" css="/upload/index.css">
-      <main>
+    <Layout title="Upload and image scaling" css="/css/index.css">
+      <main class="container">
         <form action="./image" method="post" enctype="multipart/form-data">
-          <label>
-            Convert to format
-            <select name="format">
-              <option>avif</option>
-              <option>webp</option>
-            </select>
-          </label>
-          <label>
-            Resize to
-            <select name="size">
-              <option>160</option>
-              <option>320</option>
-              <option>640</option>
-            </select>
-          </label>
-          <label>
-            Rotate
-            <select name="rotate">
-              <option>0</option>
-              <option>30</option>
-              <option>45</option>
-              <option>60</option>
-              <option>75</option>
-              <option>90</option>
-              <option>180</option>
-            </select>
-          </label>
+          <fieldset>
+            <label>
+              Convert to format
+              <select name="format">
+                <option>avif</option>
+                <option>webp</option>
+              </select>
+            </label>
+            <label>
+              Resize to
+              <select name="size">
+                <option>160</option>
+                <option>320</option>
+                <option>640</option>
+              </select>
+            </label>
+            <label>
+              Rotate
+              <select name="rotate">
+                <option>0</option>
+                <option>30</option>
+                <option>45</option>
+                <option>60</option>
+                <option>75</option>
+                <option>90</option>
+                <option>180</option>
+              </select>
+            </label>
 
-          <label>
-            Choose a picture (jpg only)
-            <input type="file" name="upload" accept="jpg" required />
-          </label>
+            <label>
+              Choose a picture (jpg only)
+              <input type="file" name="upload" accept="jpg" required />
+            </label>
+          </fieldset>
           <button type="submit">Submit</button>
         </form>
       </main>

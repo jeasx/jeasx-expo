@@ -9,37 +9,24 @@ export default function Frontpage({}) {
     <Layout
       title="jeasx expo"
       description="Welcome to jeasx - JSX with Ease"
-      css="/frontpage/index.css"
+      css="/css/index.css"
     >
-      <header>
+      <main class="container center">
         <h1>jeasx - expo</h1>
-      </header>
-      <main>
-        <section>
-          {sitemap.map(({ type, path, title }) => {
-            switch (type) {
-              case "headline":
-                return <h2>{title}</h2>;
-              case "link":
-                return (
-                  <a
-                    href={path}
-                    target={path.startsWith("https://") ? "_blank" : undefined}
-                  >
-                    {title}
-                    {path.startsWith("https://") && (
-                      <img
-                        src="/icons/external.svg"
-                        width="16"
-                        height="16"
-                        alt="External link"
-                      />
-                    )}
-                  </a>
-                );
-            }
-          })}
-        </section>
+        <hr />
+        {sitemap.map(({ title, links }) => (
+          <section>
+            <h2>{title}</h2>
+            <div class="grid">
+              {links.map(({ title, path }) => (
+                <a href={path}>
+                  <article>{title}</article>
+                </a>
+              ))}
+            </div>
+            <hr />
+          </section>
+        ))}
       </main>
     </Layout>
   );

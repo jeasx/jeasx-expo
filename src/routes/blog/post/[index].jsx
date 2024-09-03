@@ -12,31 +12,33 @@ export default function BlogPost({ request, reply }) {
   }
 
   return (
-    <Layout title="New blog post" css="/blog/post/index.css">
-      <main>
+    <Layout title="New blog post" css="/css/index.css">
+      <main class="container">
         <section>
           <h1>New blog post</h1>
           <form method="post" novalidate>
-            <label>
-              Slug
-              <input type="text" name="slug" required />
-            </label>
-            <label>
-              Title
-              <input type="text" name="title" required />
-            </label>
-            <label>
-              Author
-              <input type="text" name="author" required />
-            </label>
-            <label>
-              Description
-              <input type="text" name="description" required />
-            </label>
-            <label>
-              Body
-              <textarea name="body" rows={6} required></textarea>
-            </label>
+            <fieldset>
+              <label>
+                Slug
+                <input type="text" name="slug" required />
+              </label>
+              <label>
+                Title
+                <input type="text" name="title" required />
+              </label>
+              <label>
+                Author
+                <input type="text" name="author" required />
+              </label>
+              <label>
+                Description
+                <input type="text" name="description" required />
+              </label>
+              <label>
+                Body
+                <textarea name="body" rows={6} required></textarea>
+              </label>
+            </fieldset>
             <button type="submit">Submit Post</button>
           </form>
         </section>

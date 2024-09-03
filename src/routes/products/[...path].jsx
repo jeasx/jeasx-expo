@@ -24,9 +24,9 @@ export default async function BlogDetail({ request, reply }) {
     <Layout
       title={product.title}
       description={product.description}
-      css="/products/detail/index.css"
+      css="/css/index.css"
     >
-      <main>
+      <main class="container center">
         <section>
           <article>
             <h1>{product.title}</h1>

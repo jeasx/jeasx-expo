@@ -5,8 +5,8 @@ import Layout from "./Layout";
  */
 export default function PageNotFound({}) {
   return (
-    <Layout title="404 - Resource Not Found" css="/404/index.css">
-      <main>
+    <Layout title="404 - Resource Not Found" css="/css/index.css">
+      <main class="container center">
         <section>
           <h1>Error 404</h1>
           <p>

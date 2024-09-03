@@ -12,15 +12,17 @@ export default function BlogIndex({ request, reply }) {
   reply.setCookie("posts", JSON.stringify(posts));
 
   return (
-    <Layout title="Blog" css="/blog/overview/index.css">
-      <main>
-        <section>
+    <Layout title="Blog" css="/css/index.css">
+      <main class="container">
+        <section class="center">
           <h1>Blog posts</h1>
-          <a href="/blog/post">
-            Submit New Post
-            <br />
-            (Login: demo/demo)
-          </a>
+        </section>
+        <section class="center">
+          <a href="/blog/post">Submit New Post</a>
+          <br />
+          (Login: demo/demo)
+        </section>
+        <section>
           {posts.map(({ slug, date, author, title }) => (
             <article>
               <header>
@@ -37,9 +39,7 @@ export default function BlogIndex({ request, reply }) {
                   <a href={slug}>{escapeEntities(title)}</a>
                 </h2>
               </main>
-              <footer>
-                <span>{author}</span>
-              </footer>
+              <footer>{author}</footer>
             </article>
           ))}
         </section>
