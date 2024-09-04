@@ -12,36 +12,27 @@ export default function Htmx({ request, reply }) {
     <Layout
       title="HTMX example"
       description="jeasx integrates easily with HTMX"
-      css="/css/index.css"
       script="/htmx/index.js"
     >
-      <main class="container">
-        <section>
-          <h1>HTMX example</h1>
-          <p>
-            jeasx is the perfect match for{" "}
-            <a href="https://htmx.org/" target="_blank">
-              HTMX
-            </a>{" "}
-            because it makes it easy to create routes that emit HTML fragments.
-            This example works even without JavaScript.
-          </p>
-          <section>
-            {body["action"] === "edit" ? (
-              <Edit request={request} reply={reply} />
-            ) : (
-              <View request={request} reply={reply} />
-            )}
-          </section>
-          <hr />
-          <div>
-            The current server time is:{" "}
-            <span hx-get="./time" hx-trigger="every 1s">
-              <Time />
-            </span>
-          </div>
-        </section>
-      </main>
+      <h1 class="center">HTMX example</h1>
+      <p>
+        jeasx is the perfect match for{" "}
+        <a href="https://htmx.org/" target="_blank">
+          HTMX
+        </a>{" "}
+        because it makes it easy to create routes that emit HTML fragments. This
+        example works even without JavaScript.
+      </p>
+      {body["action"] === "edit" ? (
+        <Edit request={request} reply={reply} />
+      ) : (
+        <View request={request} reply={reply} />
+      )}
+      <hr />
+      The current server time is:{" "}
+      <span hx-get="./time" hx-trigger="every 1s">
+        <Time />
+      </span>
     </Layout>
   );
 }

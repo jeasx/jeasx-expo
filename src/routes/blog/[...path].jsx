@@ -15,28 +15,24 @@ export default function BlogDetail({ request, reply }) {
   }
 
   return (
-    <Layout title={blog.title} css="/css/index.css">
-      <main class="container">
-        <section>
-          <article>
-            <header>
-              <time>
-                {new Date(blog.date).toLocaleDateString("en-EN", {
-                  day: "numeric",
-                  month: "long",
-                  year: "numeric",
-                })}
-              </time>
-            </header>
-            <main>
-              <h1>{escapeEntities(blog.title)}</h1>
-              <p>{escapeEntities(blog.description)}</p>
-              <p>{escapeEntities(blog.body)}</p>
-            </main>
-          </article>
-          <a href="..">Back to overview</a>
-        </section>
-      </main>
+    <Layout title={blog.title}>
+      <article>
+        <header>
+          <time>
+            {new Date(blog.date).toLocaleDateString("en-EN", {
+              day: "numeric",
+              month: "long",
+              year: "numeric",
+            })}
+          </time>
+        </header>
+        <main>
+          <h1>{escapeEntities(blog.title)}</h1>
+          <p>{escapeEntities(blog.description)}</p>
+          <p>{escapeEntities(blog.body)}</p>
+        </main>
+      </article>
+      <a href="..">Back to overview</a>
     </Layout>
   );
 }

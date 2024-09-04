@@ -10,24 +10,21 @@ export default function Context({ request, reply }) {
     <Layout
       title="Context object"
       description="Use 'this' to avoid prop drilling"
-      css="/css/index.css"
     >
-      <main class="container">
-        <section>
-          <h1>Avoid prop drilling via 'this'</h1>
-          <p>
-            In Jeasx you can use 'this' to provide data to subcomponents without
-            prop drilling.
-          </p>
-          <p>
-            You should use this with care, but it is a handy feature for global
-            state like themes.
-          </p>
-          <p>Have a look at the source to see how it works.</p>
-          <hr />
-          <Subcomponent />
-        </section>
-      </main>
+      <section class="center">
+        <h1>Avoid prop drilling via 'this'</h1>
+        <p>
+          In Jeasx you can use 'this' to provide data to subcomponents without
+          prop drilling.
+        </p>
+        <p>
+          You should use this with care, but it is a handy feature for global
+          state like themes.
+        </p>
+        <p>Have a look at the source to see how it works.</p>
+      </section>
+      <hr />
+      <Subcomponent />
     </Layout>
   );
 }
@@ -51,7 +48,7 @@ function Subcomponent() {
       </div>
       <div
         style={{
-          "background-color": this.theme === "dark" ? "black" : "white",
+          "background-color": this.theme === "dark" ? "black" : "lightgray",
         }}
       >
         <Subsubcomponent />

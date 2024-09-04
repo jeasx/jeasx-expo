@@ -11,11 +11,11 @@ export default function Authorization({ request, reply }) {
     reply.header("WWW-Authenticate", 'Basic realm="Restricted Area');
     reply.status(401);
     return (
-      <Layout title="Error 401" css="/css/index.css">
-        <main class="container center">
+      <Layout title="Error 401">
+        <section class="center">
           <h1>Error 401</h1>
           <p>You are not allowed to view this page!</p>
-        </main>
+        </section>
       </Layout>
     );
   }

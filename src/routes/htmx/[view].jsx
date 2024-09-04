@@ -11,7 +11,7 @@ export default function View({ request, reply }) {
       <fieldset>
         <input type="hidden" name="action" value="edit" />
         {fields.map(({ label, name }) => (
-          <div role="group">
+          <div class="grid">
             <label>{label}:</label> {body[name]}
             <input type="hidden" name={name} value={body[name]} />
           </div>

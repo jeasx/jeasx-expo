@@ -21,30 +21,24 @@ export default async function BlogDetail({ request, reply }) {
   }
 
   return (
-    <Layout
-      title={product.title}
-      description={product.description}
-      css="/css/index.css"
-    >
-      <main class="container center">
-        <section>
-          <article>
-            <h1>{product.title}</h1>
-            <p>{product.description}</p>
-            {product.images.map((image) => (
-              <Image
-                src={image}
-                alt={product.title}
-                position="entropy"
-                immutable
-                width="200"
-                height="200"
-              />
-            ))}
-          </article>
-          <a href="..">Back to overview</a>
-        </section>
-      </main>
+    <Layout title={product.title} description={product.description}>
+      <article class="center">
+        <h1>{product.title}</h1>
+        <p>{product.description}</p>
+        {product.images.map((image) => (
+          <Image
+            src={image}
+            alt={product.title}
+            position="entropy"
+            immutable
+            width="200"
+            height="200"
+          />
+        ))}
+      </article>
+      <section class="center">
+        <a href="..">Back to overview</a>
+      </section>
     </Layout>
   );
 }

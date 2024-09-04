@@ -8,13 +8,9 @@ export default function Layout({ title = "", data = {}, children = [] }) {
   const path = this.request.urlData().path;
 
   return (
-    <DefaultLayout title={title} css="/css/index.css" script="/wizard/index.js">
-      <main class="container">
-        <section>
-          <Header path={path} data={data} />
-          {children}
-        </section>
-      </main>
+    <DefaultLayout title={title} script="/wizard/index.js">
+      <Header path={path} data={data} />
+      {children}
     </DefaultLayout>
   );
 }

@@ -5,75 +5,64 @@ export default async function Jokes() {
     <Layout
       title="Jokes"
       description="Some funny jokes"
-      css="/css/index.css"
       script="/alpinejs/index.js"
       cspScriptUnsafeEval
     >
-      <main class="container">
-        <section>
-          <h1 class="center">Jokes</h1>
-        </section>
-        <section>
-          <form
-            method="post"
-            x-data="{
+      <h1 class="center">Jokes</h1>
+      <form
+        method="post"
+        x-data="{
               jokes:[],
               counter: +(sessionStorage.getItem('counter') || 3),
               async load(category) {
                 this.jokes = await (await fetch(`/jokes/api/${category}?amount=${this.counter}`)).json()
               },
             }"
-            x-effect={`sessionStorage.setItem('counter', counter)`}
+        x-effect={`sessionStorage.setItem('counter', counter)`}
+      >
+        <div class="grid">
+          <button
+            type="button"
+            class="secondary"
+            x-on:click="counter--"
+            x-bind:disabled="counter === 1"
           >
-            <fieldset class="grid">
-              <button
-                type="button"
-                class="secondary"
-                x-on:click="counter--"
-                x-bind:disabled="counter === 1"
-              >
-                -
-              </button>
-              <button
-                type="button"
-                class="secondary"
-                name="counter"
-                x-on:click="counter++"
-                x-bind:disabled="counter === 5"
-              >
-                +
-              </button>
-            </fieldset>
-            <fieldset class="grid">
-              <button
-                type="button"
-                name="category"
-                x-on:click="load('programming')"
-              >
-                Tell me{" "}
-                <span x-text="counter === 1 ? `a joke` : `${counter} jokes`" />
-              </button>
-            </fieldset>
-            <fieldset class="grid">
-              <button
-                type="button"
-                name="category"
-                x-on:click="load('general')"
-              >
-                Tell me{" "}
-                <span x-text="counter === 1 ? `a pun` : `${counter} puns`" />
-              </button>
-            </fieldset>
-            <template x-if="jokes.length">
-              <ul>
-                <template x-for="joke in jokes">
-                  <li x-text="joke" />
-                </template>
-              </ul>
+            -
+          </button>
+          <button
+            type="button"
+            class="secondary"
+            name="counter"
+            x-on:click="counter++"
+            x-bind:disabled="counter === 5"
+          >
+            +
+          </button>
+        </div>
+        <div class="grid">
+          <button
+            type="button"
+            name="category"
+            x-on:click="load('programming')"
+          >
+            Tell me{" "}
+            <span x-text="counter === 1 ? `a joke` : `${counter} jokes`" />
+          </button>
+        </div>
+        <div class="grid">
+          <button type="button" name="category" x-on:click="load('general')">
+            Tell me{" "}
+            <span x-text="counter === 1 ? `a pun` : `${counter} puns`" />
+          </button>
+        </div>
+        <template x-if="jokes.length">
+          <ul>
+            <template x-for="joke in jokes">
+              <li x-text="joke" />
             </template>
-          </form>
-        </section>
-      </main>
+          </ul>
+        </template>
+      </form>
     </Layout>
   );
 }

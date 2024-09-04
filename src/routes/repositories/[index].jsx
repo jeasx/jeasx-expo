@@ -21,31 +21,26 @@ export default async function Repositories({ request }) {
     <Layout
       title="Search GitHub Repositories"
       description="A list of repositiories at GitHub."
-      css="/css/index.css"
     >
-      <main class="container">
-        <section>
-          <h1 class="center">Search GitHub Repositories</h1>
-          <form method="get">
-            <input
-              type="search"
-              name="q"
-              placeholder="Search..."
-              value={escapeEntities(q)}
-            />
-          </form>
-          <ul>
-            {repositories.map(({ html_url, full_name, description }) => (
-              <li>
-                <a href={html_url} target="_blank" rel="noopener noreferrer">
-                  {full_name}
-                </a>
-                <p>{description}</p>
-              </li>
-            ))}
-          </ul>
-        </section>
-      </main>
+      <h1 class="center">Search GitHub Repositories</h1>
+      <form method="get">
+        <input
+          type="search"
+          name="q"
+          placeholder="Search..."
+          value={escapeEntities(q)}
+        />
+      </form>
+      <ul>
+        {repositories.map(({ html_url, full_name, description }) => (
+          <li>
+            <a href={html_url} target="_blank" rel="noopener noreferrer">
+              {full_name}
+            </a>
+            <p>{description}</p>
+          </li>
+        ))}
+      </ul>
     </Layout>
   );
 }
