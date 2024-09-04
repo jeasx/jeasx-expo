@@ -8,7 +8,7 @@ setInterval(() => {
 
 export default function Clock() {
   return (
-    <div class="clock">
+    <div class="center">
       <time>{time.value.toLocaleTimeString()}</time>
     </div>
   );

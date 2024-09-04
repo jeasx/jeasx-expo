@@ -9,19 +9,33 @@ export default function Jokes({ initial, api }) {
   }
 
   return (
-    <div class="jokes">
-      <button onClick={() => setCounter(counter - 1)} disabled={counter === 1}>
-        -
-      </button>
-      <button onClick={() => setCounter(counter + 1)} disabled={counter === 5}>
-        +
-      </button>
-      <button onClick={() => submit("programming")}>
-        Tell me {counter} nerd {counter === 1 ? "joke" : "jokes"}
-      </button>
-      <button onClick={() => submit("general")}>
-        Tell me {counter} {counter === 1 ? "pun" : "puns"}
-      </button>
+    <>
+      <fieldset class="grid">
+        <button
+          class="secondary"
+          onClick={() => setCounter(counter - 1)}
+          disabled={counter === 1}
+        >
+          -
+        </button>
+        <button
+          class="secondary"
+          onClick={() => setCounter(counter + 1)}
+          disabled={counter === 5}
+        >
+          +
+        </button>
+      </fieldset>
+      <fieldset class="grid">
+        <button onClick={() => submit("programming")}>
+          Tell me {counter} nerd {counter === 1 ? "joke" : "jokes"}
+        </button>
+      </fieldset>
+      <fieldset class="grid">
+        <button onClick={() => submit("general")}>
+          Tell me {counter} {counter === 1 ? "pun" : "puns"}
+        </button>
+      </fieldset>
       {data.length > 0 && (
         <ul>
           {data.map((joke) => (
@@ -29,6 +43,6 @@ export default function Jokes({ initial, api }) {
           ))}
         </ul>
       )}
-    </div>
+    </>
   );
 }
