@@ -5,7 +5,7 @@ export default function Layout({
   title = "",
   description = "",
   children = [],
-  css = "/css/index.css",
+  css = "/index.css",
   script = undefined,
   cspScriptUnsafeEval = false,
 }) {

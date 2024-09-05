@@ -1,2 +1,2 @@
-import "./list-animation/$index";
-import "./logo-animation/$index";
+import "./list-animation";
+import "./logo-animation";

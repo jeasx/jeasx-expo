@@ -32,7 +32,9 @@ export default function BlogDetail({ request, reply }) {
           <p>{escapeEntities(blog.body)}</p>
         </main>
       </article>
-      <a href="..">Back to overview</a>
+      <section class="center">
+        <a href="..">Back to overview</a>
+      </section>
     </Layout>
   );
 }
