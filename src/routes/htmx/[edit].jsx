@@ -12,7 +12,11 @@ export default function Form({ request, reply }) {
       {fields.map(({ label, name, type, value }) => (
         <label>
           {label}:
-          <input type={type} name={name} value={body[name] ?? value} />
+          <input
+            type={type}
+            name={name}
+            value={this.escape(body[name] ?? value)}
+          />
         </label>
       ))}
       <input type="submit" value="Submit" />

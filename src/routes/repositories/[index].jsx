@@ -1,4 +1,3 @@
-import { escapeEntities } from "jsx-async-runtime";
 import Layout from "../Layout";
 
 /**
@@ -28,7 +27,7 @@ export default async function Repositories({ request }) {
           type="search"
           name="q"
           placeholder="Search..."
-          value={escapeEntities(q)}
+          value={this.escape(q)}
         />
       </form>
       <ul>

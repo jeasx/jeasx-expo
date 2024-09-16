@@ -32,20 +32,15 @@ export default function Context({ request, reply }) {
 function Subcomponent() {
   return (
     <>
-      <div style="display: flex; justify-content: space-evenly">
-        <a
-          href="?theme=light"
-          style={{ "font-weight": this.theme === "light" ? "bold" : "normal" }}
-        >
+      <div style="display: flex; justify-content: space-evenly; align-items: center;">
+        <a href="?theme=light" role="button" disabled={this.theme === "light"}>
           Light
         </a>
-        <a
-          href="?theme=dark"
-          style={{ "font-weight": this.theme === "dark" ? "bold" : "normal" }}
-        >
+        <a href="?theme=dark" role="button" disabled={this.theme === "dark"}>
           Dark
         </a>
       </div>
+      <hr />
       <div
         style={{
           "background-color": this.theme === "dark" ? "black" : "lightgray",

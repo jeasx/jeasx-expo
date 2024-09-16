@@ -1,5 +1,3 @@
-import { escapeEntities } from "jsx-async-runtime";
-
 export default function TodoList({ todos, status }) {
   return (
     <form method="post">
@@ -19,7 +17,7 @@ export default function TodoList({ todos, status }) {
                 >
                   [{todo.status}]
                 </button>
-                <label>{escapeEntities(todo.label)}</label>
+                <label>{this.escape(todo.label)}</label>
                 <button
                   class="destroy"
                   name="removeTodo"

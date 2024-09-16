@@ -1,4 +1,3 @@
-import { escapeEntities } from "jsx-async-runtime";
 import Layout from "../Layout";
 import data from "./data.json";
 
@@ -32,7 +31,7 @@ export default function BlogIndex({ request, reply }) {
           </header>
           <main>
             <h2>
-              <a href={slug}>{escapeEntities(title)}</a>
+              <a href={slug}>{this.escape(title)}</a>
             </h2>
           </main>
           <footer>{author}</footer>

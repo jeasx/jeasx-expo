@@ -1,5 +1,3 @@
-import { escapeEntities } from "jsx-async-runtime";
-
 /**
  * @param {import("../types").RouteProps} props
  */
@@ -15,7 +13,7 @@ export default function Logo({ request, reply }) {
             y={40 + (index % 2)}
             style={`font: italic 40px serif; fill: ${color};`}
           >
-            {escapeEntities(text)}
+            {this.escape(text)}
           </text>
         )
       )}

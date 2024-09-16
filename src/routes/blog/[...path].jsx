@@ -1,4 +1,3 @@
-import { escapeEntities } from "jsx-async-runtime";
 import Layout from "../Layout";
 
 /**
@@ -27,9 +26,9 @@ export default function BlogDetail({ request, reply }) {
           </time>
         </header>
         <main>
-          <h1>{escapeEntities(blog.title)}</h1>
-          <p>{escapeEntities(blog.description)}</p>
-          <p>{escapeEntities(blog.body)}</p>
+          <h1>{this.escape(blog.title)}</h1>
+          <p>{this.escape(blog.description)}</p>
+          <p>{this.escape(blog.body)}</p>
         </main>
       </article>
       <section class="center">

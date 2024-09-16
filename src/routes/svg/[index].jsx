@@ -1,4 +1,3 @@
-import { escapeEntities } from "jsx-async-runtime";
 import Layout from "../Layout";
 
 /**
@@ -14,7 +13,7 @@ export default async function Upload({ request, reply }) {
           <input
             type="text"
             name="text"
-            value={escapeEntities(request.body?.["text"])}
+            value={this.escape(request.body?.["text"])}
             autofocus
           />
         </label>
