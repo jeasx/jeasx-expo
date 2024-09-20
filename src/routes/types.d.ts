@@ -13,5 +13,5 @@ type RouteContext = {
   request?: FastifyRequest;
   reply?: FastifyReply;
   escape: (str) => string;
-  pathname: string;
+  path: string;
 };
