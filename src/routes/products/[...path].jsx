@@ -2,10 +2,10 @@ import Layout from "../Layout";
 import Image from "./Image";
 
 /**
- * @this {import("../types").RouteContext}
+ * @this {import("../types").ThisContext}
  * @param {import("../types").RouteProps} props
  */
-export default async function BlogDetail({ request, reply }) {
+export default async function BlogDetail({ reply }) {
   const segments = this.path.split("/");
   if (segments.length !== 3) {
     reply.status(404);

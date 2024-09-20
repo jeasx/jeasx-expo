@@ -4,7 +4,7 @@ import validator from "./domain/validator";
 import { compress, decompress } from "./utils/zip";
 
 /**
- * @this {import("../types").RouteContext}
+ * @this {import("../types").ThisContext}
  * @param {import("../types").RouteProps} props
  */
 export default function Controller({ request, reply }) {

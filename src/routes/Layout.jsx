@@ -1,5 +1,5 @@
 /**
- * @this {import("./types").RouteContext}
+ * @this {import("./types").ThisContext}
  */
 export default function Layout({
   title = "",

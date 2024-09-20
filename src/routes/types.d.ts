@@ -9,9 +9,7 @@ type RouteProps = {
   reply?: FastifyReply;
 };
 
-type RouteContext = {
-  request: FastifyRequest;
-  reply: FastifyReply;
+type ThisContext = RouteProps & {
   escape: (str: string) => string;
   path: string;
 };

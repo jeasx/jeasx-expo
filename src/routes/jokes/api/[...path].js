@@ -1,7 +1,7 @@
 import jokes from "../jokes.js";
 
 /**
- * @this {import("../../types.js").RouteContext}
+ * @this {import("../../types.js").ThisContext}
  * @param {import("../../types.js").RouteProps} props
  */
 export default function Jokes({ request, reply }) {

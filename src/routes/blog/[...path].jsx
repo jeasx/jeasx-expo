@@ -1,7 +1,7 @@
 import Layout from "../Layout";
 
 /**
- * @this {import("../types").RouteContext}
+ * @this {import("../types").ThisContext}
  * @param {import("../types").RouteProps} props
  */
 export default function BlogDetail({ request, reply }) {
