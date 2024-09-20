@@ -1,5 +1,5 @@
 /**
- * @this {import("./types").RouteProps}
+ * @this {import("./types").RouteContext}
  */
 export default function Layout({
   title = "",
@@ -9,7 +9,7 @@ export default function Layout({
   script = undefined,
   cspScriptUnsafeEval = false,
 }) {
-  const path = this.request.urlData().path;
+  const path = this.pathname;
   return (
     <>
       {"<!DOCTYPE html>"}

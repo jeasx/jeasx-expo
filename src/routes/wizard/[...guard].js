@@ -4,6 +4,7 @@ import validator from "./domain/validator";
 import { compress, decompress } from "./utils/zip";
 
 /**
+ * @this {import("../types").RouteContext}
  * @param {import("../types").RouteProps} props
  */
 export default function Controller({ request, reply }) {
@@ -19,8 +20,8 @@ export default function Controller({ request, reply }) {
       form: {},
     };
 
-    const pathname = request.urlData().path;
-    const { previous, next } = navigate(pathname, props.data);
+    const path = this.pathname;
+    const { previous, next } = navigate(path, props.data);
 
     props.previous = previous;
     props.next = next;
@@ -32,12 +33,12 @@ export default function Controller({ request, reply }) {
 
       const data = convertBodyToData(request.body);
       if (Object.keys(data).length > 0) {
-        props.data[pathname] = data;
+        props.data[path] = data;
       } else {
-        delete props.data[pathname];
+        delete props.data[path];
       }
 
-      reply.setCookie("data", compress({ ...props.data, pathname }), {
+      reply.setCookie("data", compress({ ...props.data, pathname: path }), {
         path: "/",
         httpOnly: true,
         sameSite: "strict",
@@ -51,14 +52,14 @@ export default function Controller({ request, reply }) {
         case "Zurück":
           return reply.redirect(props.previous);
         default:
-          props.errors = validator(pathname, props.data[pathname]);
+          props.errors = validator(path, props.data[path]);
           if (Object.keys(props.errors).length === 0) {
             return reply.redirect(props.next);
           }
       }
     }
 
-    props.form = props.data[pathname] || {};
+    props.form = props.data[path] || {};
     return props;
   } catch (error) {
     console.error(error);
