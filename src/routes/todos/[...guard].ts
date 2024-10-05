@@ -32,7 +32,11 @@ export default function Props({
     todos.splice(+body["removeTodo"], 1);
   }
 
-  reply.setCookie("todos", JSON.stringify(todos));
+  reply.setCookie("todos", JSON.stringify(todos), {
+    path: "/",
+    httpOnly: true,
+    sameSite: "strict",
+  });
 
   return {
     todos,
