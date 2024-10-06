@@ -1,13 +1,7 @@
-import { FastifyReply } from "fastify/types/reply";
-import { FastifyRequest } from "fastify/types/request";
-
-export default function Props({
-  request,
-  reply,
-}: {
-  request: FastifyRequest;
-  reply: FastifyReply;
-}) {
+/**
+ * @param {import("../types").RouteProps} props
+ */
+export default function Props({ request, reply }) {
   const query = request.query || {};
   const body = request.body || {};
 
