@@ -13,8 +13,8 @@
     "alpinejs": "3.14.1",
     "htmx.org": "2.0.3",
     "jeasx": "1.0.0",
-    "lit": "3.2.0",
-    "preact": "10.24.2",
+    "lit": "3.2.1",
+    "preact": "10.24.3",
     "preact-render-to-string": "6.5.11",
     "prettier": "3.3.3",
     "sharp": "0.33.5"
