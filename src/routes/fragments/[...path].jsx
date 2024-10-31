@@ -59,22 +59,24 @@ export default function FragmentsExample({ request }) {
  * @this {import("../types").ThisContext}
  */
 function Fragments({ container, children = [] }) {
-  const Container = container;
-  return this.request.path.includes("~") ? (
-    <>{children}</>
-  ) : (
-    <Container>{children}</Container>
-  );
+  if (this.request.path.includes("~")) {
+    return <>{children}</>;
+  } else {
+    const Container = container;
+    return <Container>{children}</Container>;
+  }
 }
 
 /**
  * @this {import("../types").ThisContext}
  */
-function Fragment({ name = "", children = [] }) {
-  return (
-    (!this.request.path.includes("~") ||
-      (name && this.request.path.endsWith(name))) && <>{children}</>
-  );
+function Fragment({ name = undefined, children = [] }) {
+  if (
+    !this.request.path.includes("~") ||
+    (name && this.request.path.endsWith(name))
+  ) {
+    return <>{children}</>;
+  }
 }
 
 async function Product({ id }) {
