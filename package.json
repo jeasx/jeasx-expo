@@ -18,8 +18,5 @@
     "preact-render-to-string": "6.5.11",
     "prettier": "3.3.3",
     "sharp": "0.33.5"
-  },
-  "engines": {
-    "node": "20.x"
   }
 }
