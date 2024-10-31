@@ -18,8 +18,8 @@ export default async function Fragments({ request }) {
           <a href="https://htmx.org/essays/template-fragments/" target="_blank">
             template fragments
           </a>{" "}
-          is a nice idea and can be easily implemented in Jeasx using just one
-          line of custom code.
+          is a nice idea and can be easily implemented in Jeasx using just a few
+          lines of custom code.
         </p>
       </Fragment>
       <Fragment name="product">
