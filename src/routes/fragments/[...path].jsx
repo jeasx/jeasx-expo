@@ -1,10 +1,14 @@
 import Layout from "../Layout";
 
-export default async function Fragments({ request }) {
+export default async function FragmentsExample({ request }) {
   const id = request.query["id"] || 1;
 
   return (
-    <FragmentLayout>
+    <Fragments
+      container={({ children }) => (
+        <Layout script="/htmx/index.js">{children}</Layout>
+      )}
+    >
       <Fragment>
         <h1>Template Fragments</h1>
         <p>
@@ -29,8 +33,9 @@ export default async function Fragments({ request }) {
             name="id"
             type="range"
             value={id}
+            autofocus
             min={1}
-            max={20}
+            max={50}
             hx-get="./~product"
             hx-swap="outerHTML"
             hx-target="closest form"
@@ -43,23 +48,24 @@ export default async function Fragments({ request }) {
           {new Date().toTimeString()}
         </p>
       </Fragment>
-    </FragmentLayout>
+    </Fragments>
   );
 }
 
-function FragmentLayout({ children = [] }) {
+function Fragments({ container, children = [] }) {
+  const Container = container;
   return this.request.path.includes("~") ? (
     <>{children}</>
   ) : (
-    <Layout script="/htmx/index.js">{children}</Layout>
+    <Container>{children}</Container>
   );
 }
 
 function Fragment({ name = "", children = [] }) {
-  return !this.request.path.includes("~") ||
-    (name && this.request.path.endsWith(`~${name}`)) ? (
-    <>{children}</>
-  ) : null;
+  return (
+    (!this.request.path.includes("~") ||
+      (name && this.request.path.endsWith(name))) && <>{children}</>
+  );
 }
 
 async function Product({ id }) {
