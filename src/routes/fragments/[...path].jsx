@@ -2,19 +2,9 @@ import Layout from "../Layout";
 
 export default async function Fragments({ request }) {
   const id = request.query["id"] || 1;
-  const product = await (
-    await fetch(`https://dummyjson.com/products/${id}`)
-  ).json();
-
-  const OptionalLayout = ({ children = [] }) =>
-    request.path.includes("~") ? (
-      <>{children}</>
-    ) : (
-      <Layout script="/htmx/index.js">{children}</Layout>
-    );
 
   return (
-    <OptionalLayout>
+    <FragmentLayout>
       <Fragment>
         <h1>Template Fragments</h1>
         <p>
@@ -45,19 +35,7 @@ export default async function Fragments({ request }) {
             hx-swap="outerHTML"
             hx-target="closest form"
           />
-          <article>
-            <header>
-              <h3>{product.title}</h3>
-              <b>{product.price} €</b>
-            </header>
-            <img
-              src={product.thumbnail}
-              alt={product.title}
-              width="300"
-              height="300"
-            />
-            <p>{product.description}</p>
-          </article>
+          <Product id={id} />
         </form>
       </Fragment>
       <Fragment name="time">
@@ -65,13 +43,43 @@ export default async function Fragments({ request }) {
           {new Date().toTimeString()}
         </p>
       </Fragment>
-    </OptionalLayout>
+    </FragmentLayout>
+  );
+}
+
+function FragmentLayout({ children = [] }) {
+  return this.request.path.includes("~") ? (
+    <>{children}</>
+  ) : (
+    <Layout script="/htmx/index.js">{children}</Layout>
   );
 }
 
 function Fragment({ name = "", children = [] }) {
+  return !this.request.path.includes("~") ||
+    (name && this.request.path.endsWith(`~${name}`)) ? (
+    <>{children}</>
+  ) : null;
+}
+
+async function Product({ id }) {
+  const product = await (
+    await fetch(`https://dummyjson.com/products/${id}`)
+  ).json();
+
   return (
-    (!this.request.path.includes("~") ||
-      (name && this.request.path.endsWith(`~${name}`))) && <>{children}</>
+    <article>
+      <header>
+        <h3>{product.title}</h3>
+        <b>{product.price} €</b>
+      </header>
+      <img
+        src={product.thumbnail}
+        alt={product.title}
+        width="300"
+        height="300"
+      />
+      <p>{product.description}</p>
+    </article>
   );
 }
