@@ -1,6 +1,9 @@
 import Layout from "../Layout";
 
-export default async function FragmentsExample({ request }) {
+/**
+ * @param {import("../types").RouteProps} props
+ */
+export default function FragmentsExample({ request }) {
   const id = request.query["id"] || 1;
 
   return (
@@ -52,6 +55,9 @@ export default async function FragmentsExample({ request }) {
   );
 }
 
+/**
+ * @this {import("../types").ThisContext}
+ */
 function Fragments({ container, children = [] }) {
   const Container = container;
   return this.request.path.includes("~") ? (
@@ -61,6 +67,9 @@ function Fragments({ container, children = [] }) {
   );
 }
 
+/**
+ * @this {import("../types").ThisContext}
+ */
 function Fragment({ name = "", children = [] }) {
   return (
     (!this.request.path.includes("~") ||
