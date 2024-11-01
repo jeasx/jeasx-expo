@@ -1,10 +1,18 @@
 import sharp from "sharp";
 
+const ALLOWED_IMAGE_SRC = ["/images", "https://cdn.dummyjson.com"];
+
 /**
  * @param {import("../types").RouteProps} props
  */
 export default async function ImageSharp({ request, reply }) {
   const src = request.query["src"];
+
+  if (!ALLOWED_IMAGE_SRC.find((url) => src.startsWith(url))) {
+    reply.status(404);
+    return;
+  }
+
   const width = Number(request.query["width"] || 0);
   const height = Number(request.query["height"] || 0);
   const position = request.query["position"] || undefined;

@@ -8,6 +8,8 @@ export default function Image({
 }) {
   return (
     <img
+      width={width}
+      height={height}
       src={imagePath({ src, width, height, position, immutable })}
       {...rest}
     />
@@ -22,7 +24,7 @@ export function imagePath({
   immutable = false,
 }) {
   const version = !immutable ? `&version=${process.env.BUILD_TIME}` : "";
-  return `/products/image?src=${src}&width=${width || ""}&height=${
+  return `/sharp/image?src=${src}&width=${width || ""}&height=${
     height || ""
   }&position=${position || ""}${version}`;
 }
