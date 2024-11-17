@@ -37,7 +37,7 @@ export default function FragmentsExample({ request }) {
           simple components.
         </p>
       </Fragment>
-      <Fragment name="product">
+      <Fragment name="product.html">
         <form>
           <h2>Product-Browser</h2>
           <input
@@ -47,15 +47,15 @@ export default function FragmentsExample({ request }) {
             autofocus
             min={1}
             max={50}
-            hx-get="./~product"
+            hx-get="./~product.html"
             hx-swap="outerHTML"
             hx-target="closest form"
           />
           <Product id={id} />
         </form>
       </Fragment>
-      <Fragment name="time">
-        <p hx-get="./~time" hx-trigger="every 1s" hx-swap="outerHTML">
+      <Fragment name="time.html">
+        <p hx-get="./~time.html" hx-trigger="every 1s" hx-swap="outerHTML">
           {new Date().toTimeString()}
         </p>
       </Fragment>
