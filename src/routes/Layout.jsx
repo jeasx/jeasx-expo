@@ -28,8 +28,8 @@ export default function Layout({
           <link rel="stylesheet" href={`${css}?${process.env.BUILD_TIME}`} />
           {script && (
             <script
-              src={`${script}?${process.env.BUILD_TIME}`}
               type="module"
+              src={`${script}?${process.env.BUILD_TIME}`}
               defer
             ></script>
           )}
