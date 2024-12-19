@@ -14,7 +14,7 @@
     "htmx.org": "2.0.4",
     "jeasx": "1.2.1",
     "lit": "3.2.1",
-    "preact": "10.25.2",
+    "preact": "10.25.3",
     "preact-render-to-string": "6.5.12",
     "prettier": "3.4.2",
     "sharp": "0.33.5"
