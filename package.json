@@ -10,11 +10,11 @@
     "@lit-labs/motion": "1.0.7",
     "@picocss/pico": "2.0.6",
     "@preact/signals": "2.0.0",
-    "alpinejs": "3.14.7",
+    "alpinejs": "3.14.8",
     "htmx.org": "2.0.4",
     "jeasx": "1.2.1",
     "lit": "3.2.1",
-    "preact": "10.25.3",
+    "preact": "10.25.4",
     "preact-render-to-string": "6.5.12",
     "prettier": "3.4.2",
     "sharp": "0.33.5"
