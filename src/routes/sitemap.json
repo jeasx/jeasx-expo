@@ -17,10 +17,17 @@
     ]
   },
   {
+    "title": "HTMX examples",
+    "links": [
+      { "path": "/htmx", "title": "Simple form" },
+      { "path": "/nominatim", "title": "Active search" },
+      { "path": "/fragments", "title": "Template Fragments" }
+    ]
+  },
+  {
     "title": "Userland integration of JavaScript-Frameworks",
     "links": [
       { "path": "/alpine", "title": "Alpine.js" },
-      { "path": "/htmx", "title": "HTMX" },
       { "path": "/lit", "title": "Lit" },
       { "path": "/preact", "title": "Preact" }
     ]
@@ -38,7 +45,6 @@
   {
     "title": "Advanced features",
     "links": [
-      { "path": "/fragments", "title": "Template Fragments" },
       { "path": "/prettier", "title": "Postprocess HTML" },
       { "path": "/context", "title": "Use 'this' as context" },
       { "path": "/interceptor", "title": "Intercept JSX" },
