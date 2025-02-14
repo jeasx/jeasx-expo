@@ -57,7 +57,7 @@ export default function Layout({
                   width="20"
                   height="20"
                   alt="GitHub Logo"
-                  title="Server source code"
+                  title="Server source"
                 />
               </a>
               {script && (
@@ -77,7 +77,7 @@ export default function Layout({
                     width="20"
                     height="20"
                     alt="JavaScript Logo"
-                    title="Frontend source code"
+                    title="Browser source"
                   />
                 </a>
               )}
