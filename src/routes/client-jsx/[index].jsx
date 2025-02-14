@@ -15,31 +15,33 @@ export default function () {
         also in the browser for lightweight rendering of client-side markup.
       </p>
       <form
-        action={
-          /* js */ `javascript:
+        onsubmit={
+          /* js */ `
+          event.preventDefault();
+          const form = new FormData(event.target);
           renderJSX(
-            "root", 
-            document.getElementById('component').value,
+            document.getElementById("jokes"), 
+            form.get("component"),
             {
-                category: document.getElementById('category').value,
-                amount: document.getElementById('number').value
+                category: form.get("category"),
+                amount: form.get("amount")
             }
             );`
         }
       >
-        <input id="number" type="number" min="1" max="5" value="3" />
-        <select id="category">
+        <input name="amount" type="number" min="1" max="5" value="3" />
+        <select name="category">
           <option>general</option>
           <option>knock-knock</option>
           <option>programming</option>
         </select>
-        <select id="component">
+        <select name="component">
           <option value="JokesHTML">HTML</option>
           <option value="JokesJSON">JSON</option>
         </select>
         <button type="submit">Tell me jokes</button>
       </form>
-      <div id="root"></div>
+      <div id="jokes"></div>
     </Layout>
   );
 }
