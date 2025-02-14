@@ -24,7 +24,7 @@ export default function () {
             );`
         }
       >
-        <input type="number" id="number" min="1" max="5" value="3" />
+        <input id="number" type="number" min="1" max="5" value="3" />
         <select id="category">
           <option>general</option>
           <option>knock-knock</option>
