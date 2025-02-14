@@ -2,8 +2,11 @@ import Layout from "../Layout";
 
 export default function () {
   return (
-    <Layout script="/client-jsx/index.js">
-      <h1 class="center">JSX components in the browser</h1>
+    <Layout
+      title="Asynchronous JSX components in the browser"
+      script="/client-jsx/index.js"
+    >
+      <h1 class="center">(Asynchronous) JSX components in the browser</h1>
       <p class="center">
         You can use JSX components built with{" "}
         <a href="https://github.com/jeasx/jsx-async-runtime" target="_blank">
