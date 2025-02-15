@@ -7,7 +7,7 @@
     "dev": "jeasx dev"
   },
   "dependencies": {
-    "@lit-labs/motion": "1.0.7",
+    "@lit-labs/motion": "1.0.8",
     "@picocss/pico": "2.0.6",
     "@preact/signals": "2.0.1",
     "alpinejs": "3.14.8",
@@ -17,7 +17,7 @@
     "path-to-regexp": "8.2.0",
     "preact": "10.25.4",
     "preact-render-to-string": "6.5.13",
-    "prettier": "3.5.0",
+    "prettier": "3.5.1",
     "sharp": "0.33.5"
   }
 }
