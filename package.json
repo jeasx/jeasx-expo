@@ -17,7 +17,7 @@
     "path-to-regexp": "8.2.0",
     "preact": "10.26.2",
     "preact-render-to-string": "6.5.13",
-    "prettier": "3.5.1",
+    "prettier": "3.5.2",
     "sharp": "0.33.5"
   }
 }
