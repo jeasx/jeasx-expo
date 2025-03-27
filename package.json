@@ -9,10 +9,10 @@
   "dependencies": {
     "@lit-labs/motion": "1.0.8",
     "@picocss/pico": "2.1.1",
-    "@preact/signals": "2.0.1",
+    "@preact/signals": "2.0.2",
     "alpinejs": "3.14.9",
     "htmx.org": "2.0.4",
-    "jeasx": "1.6.3",
+    "jeasx": "1.7.0",
     "lit": "3.2.1",
     "path-to-regexp": "8.2.0",
     "preact": "10.26.4",
