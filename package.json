@@ -12,7 +12,7 @@
     "@preact/signals": "2.0.2",
     "alpinejs": "3.14.9",
     "htmx.org": "2.0.4",
-    "jeasx": "1.7.0",
+    "jeasx": "1.7.1",
     "lit": "3.2.1",
     "path-to-regexp": "8.2.0",
     "preact": "10.26.4",
