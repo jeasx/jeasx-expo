@@ -1,4 +1,4 @@
-FROM imbios/bun-node:22-alpine
+FROM node:lts-alpine
 
 USER node
 WORKDIR /home/node

@@ -1,0 +1,8 @@
+FROM oven/bun:slim
+
+COPY package.json ./
+RUN bun install
+COPY . ./
+
+RUN bun -b run build
+CMD ["bun","-b","start"]
