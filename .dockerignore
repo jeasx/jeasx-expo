@@ -3,6 +3,7 @@
 !/src/
 !.env
 !.npmrc
+!entrypoint.sh
 !package-lock.json
 !package.json
 !tsconfig.json
