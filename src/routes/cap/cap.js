@@ -2,11 +2,7 @@ import Cap from "@cap.js/server";
 
 if (!globalThis.cap) {
   globalThis.cap = new Cap({
-    noFSState: false,
-    state: {
-      challengesList: {},
-      tokensList: {},
-    },
+    tokens_store_path: ".tokens.json",
   });
 }
 
