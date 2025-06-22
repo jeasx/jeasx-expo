@@ -14,7 +14,7 @@
     "@picocss/pico": "2.1.1",
     "@preact/signals": "2.2.0",
     "alpinejs": "3.14.9",
-    "htmx.org": "2.0.4",
+    "htmx.org": "2.0.5",
     "jeasx": "1.8.2",
     "lit": "3.3.0",
     "path-to-regexp": "8.2.0",
