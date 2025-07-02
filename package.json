@@ -8,8 +8,8 @@
     "clean": "jeasx clean"
   },
   "dependencies": {
-    "@cap.js/server": "1.0.16",
-    "@cap.js/widget": "0.1.23",
+    "@cap.js/server": "2.0.0",
+    "@cap.js/widget": "0.1.25",
     "@lit-labs/motion": "1.0.8",
     "@picocss/pico": "2.1.1",
     "@preact/signals": "2.2.1",
