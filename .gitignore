@@ -15,6 +15,3 @@ pnpm-debug.log*
 
 # Vercel-specific files
 .vercel
-
-# Cap tokens
-.tokens.json
