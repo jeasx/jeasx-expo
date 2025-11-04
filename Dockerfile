@@ -1,4 +1,4 @@
-FROM node:24-alpine
+FROM node:lts-alpine
 
 RUN apk add --no-cache curl bash 
 
