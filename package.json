@@ -8,19 +8,19 @@
     "clean": "jeasx clean"
   },
   "dependencies": {
-    "@cap.js/server": "4.0.3",
-    "@cap.js/widget": "0.1.31",
+    "@cap.js/server": "4.0.4",
+    "@cap.js/widget": "0.1.32",
     "@lit-labs/motion": "1.0.9",
     "@picocss/pico": "2.1.1",
     "@preact/signals": "2.5.1",
     "alpinejs": "3.15.2",
     "cheerio": "1.1.2",
     "htmx.org": "2.0.8",
-    "jeasx": "2.1.1",
+    "jeasx": "2.2.0",
     "lit": "3.3.1",
     "preact": "10.27.2",
     "preact-render-to-string": "6.6.3",
-    "prettier": "3.6.2",
+    "prettier": "3.7.3",
     "react": "19.2.0",
     "react-dom": "19.2.0",
     "sharp": "0.34.5"
