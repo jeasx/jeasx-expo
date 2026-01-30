@@ -1,0 +1,68 @@
+import Layout from "../Layout";
+import Hello from "./Hello.mdx";
+
+{
+/**
+  @typedef Props
+  @type {import("../types").RouteProps}
+  */
+}
+
+export async function Recipes() {
+  return (await (await fetch(`https://dummyjson.com/recipes`)).json()).recipes;
+}
+
+<Layout title="MDX - Markdown for the component era" css="/mdx/index.css">
+<section>
+# MDX - Markdown for the component era
+
+[MDX](https://mdxjs.com) allows you to use JSX directly within your markdown content. This means you can import JSX components and seamlessly embed them in your text. This makes writing long-form content with dynamic components much more enjoyable and efficient. Markdown often feels more natural to write than HTML or JSX, especially for common elements like emphasis or headings.
+
+---
+
+### Accessing props in MDX
+
+The current url is **{props.request.url}**. In MDX all props can be accessed via `props`.
+
+---
+
+<Hello name={props.request.query["name"] || "Jeasx"} />
+
+---
+
+### Dynamic content in MDX
+
+<ul>
+{(await Recipes()).slice(0, 5).map(({name}) => <li>{name}</li>)}
+</ul>
+
+---
+
+### GitHub-Markdown
+
+> Jeasx supports plain MDX by default, but you can enable GitHub-Markdown via plugins.
+
+* [ ] to do
+* [x] done
+
+| a | b  |  c |  d  |
+| - | :- | -: | :-: |
+
+~one~ or ~~two~~ tildes.
+
+www.example.com
+
+### How to enable MDX plugins via `.env.js`?
+
+```js
+import remarkGFM from "remark-gfm";
+
+export default {
+  /** @type import("@mdx-js/esbuild").Options */
+  ESBUILD_MDX_OPTIONS: {
+    remarkPlugins: [[remarkGFM, { singleTilde: false }]],
+  }
+};
+```
+</section>
+</Layout>
