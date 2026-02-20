@@ -1,4 +1,5 @@
 import mdx from "@mdx-js/esbuild";
+import remarkGFM from "remark-gfm";
 
 const NODE_ENV_IS_DEVELOPMENT = process.env.NODE_ENV === "development";
 
@@ -7,10 +8,11 @@ export default {
   ESBUILD_SERVER_OPTIONS: () => ({
     plugins: [
       mdx({
-        development: process.env.NODE_ENV === "development",
+        development: NODE_ENV_IS_DEVELOPMENT,
         jsxImportSource: "jsx-async-runtime",
         elementAttributeNameCase: "html",
         stylePropertyNameCase: "css",
+        remarkPlugins: [[remarkGFM, { singleTilde: false }]],
       }),
     ],
   }),
