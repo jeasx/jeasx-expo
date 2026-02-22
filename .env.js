@@ -8,6 +8,7 @@ export default {
   /** @type {() => import("esbuild").BuildOptions} */
   ESBUILD_SERVER_OPTIONS: () => ({
     plugins: [
+      sveltePlugin({ compilerOptions: { generate: "server", css: "injected" } }),
       mdx({
         development: NODE_ENV_IS_DEVELOPMENT,
         jsxImportSource: "jsx-async-runtime",
@@ -20,7 +21,7 @@ export default {
 
   /** @type {() => import("esbuild").BuildOptions} */
   ESBUILD_BROWSER_OPTIONS: () => ({
-    plugins: [sveltePlugin({ compilerOptions: { css: "injected" } })],
+    plugins: [sveltePlugin({ compilerOptions: { generate: "client", css: "injected" } })],
   }),
 
   /** @type {() => import("fastify").FastifyServerOptions} */
