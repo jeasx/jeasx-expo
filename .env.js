@@ -1,4 +1,5 @@
 import mdx from "@mdx-js/esbuild";
+import sveltePlugin from "esbuild-svelte";
 import remarkGFM from "remark-gfm";
 
 const NODE_ENV_IS_DEVELOPMENT = process.env.NODE_ENV === "development";
@@ -15,6 +16,11 @@ export default {
         remarkPlugins: [[remarkGFM, { singleTilde: false }]],
       }),
     ],
+  }),
+
+  /** @type {() => import("esbuild").BuildOptions} */
+  ESBUILD_BROWSER_OPTIONS: () => ({
+    plugins: [sveltePlugin()],
   }),
 
   /** @type {() => import("fastify").FastifyServerOptions} */
