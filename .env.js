@@ -20,7 +20,7 @@ export default {
 
   /** @type {() => import("esbuild").BuildOptions} */
   ESBUILD_BROWSER_OPTIONS: () => ({
-    plugins: [sveltePlugin()],
+    plugins: [sveltePlugin({ compilerOptions: { css: "injected" } })],
   }),
 
   /** @type {() => import("fastify").FastifyServerOptions} */
