@@ -1,9 +1,7 @@
 <script>
-	let people = $state([
-		{ first: "Hans", last: "Emil" },
-		{ first: "Max", last: "Mustermann" },
-		{ first: "Roman", last: "Tisch" },
-	]);
+	let { data } = $props();
+
+	let people = $state((() => data)());
 
 	let prefix = $state("");
 	let first = $state("");
