@@ -30,16 +30,18 @@ export default function Layout({
         </head>
         <body>
           <header>
-            <a
-              href="/"
-              style={{
-                position: "absolute",
-                top: "1rem",
-                left: "1rem",
-              }}
-            >
-              &laquo; Back
-            </a>
+            {path !== "/" && (
+              <a
+                href="/"
+                style={{
+                  position: "absolute",
+                  top: "1rem",
+                  left: "1rem",
+                }}
+              >
+                &laquo; Back
+              </a>
+            )}
             <a
               href={
                 `https://github.com/jeasx/jeasx-expo` +
