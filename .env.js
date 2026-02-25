@@ -1,6 +1,6 @@
 import mdx from "@mdx-js/esbuild";
 import sveltePlugin from "esbuild-svelte";
-import remarkGFM from "remark-gfm";
+import rehypePrismPlus from "rehype-prism-plus";
 
 const NODE_ENV_IS_DEVELOPMENT = process.env.NODE_ENV === "development";
 
@@ -14,7 +14,7 @@ export default {
         jsxImportSource: "jsx-async-runtime",
         elementAttributeNameCase: "html",
         stylePropertyNameCase: "css",
-        remarkPlugins: [[remarkGFM, { singleTilde: false }]],
+        rehypePlugins: [rehypePrismPlus],
       }),
     ],
   }),
