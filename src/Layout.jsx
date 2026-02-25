@@ -29,37 +29,38 @@ export default function Layout({
           <title>{title} &raquo; Jeasx - JSX with Ease</title>
         </head>
         <body>
-          {path !== "/" && (
-            <header>
-              <a
-                href="/"
-                style={{
-                  position: "absolute",
-                  top: "1rem",
-                  left: "1rem",
-                }}
-              >
-                &laquo; Back
-              </a>
-              <a
-                href={`https://github.com/jeasx/jeasx-expo/tree/main/src/${path.split("/")[1]}`}
-                target="_blank"
-                style={{
-                  position: "absolute",
-                  top: "1rem",
-                  left: "calc(100vw - 4em)",
-                }}
-              >
-                <img
-                  src="/icons/github.svg"
-                  width="20"
-                  height="20"
-                  alt="GitHub Logo"
-                  title="Server source"
-                />
-              </a>
-            </header>
-          )}
+          <header>
+            <a
+              href="/"
+              style={{
+                position: "absolute",
+                top: "1rem",
+                left: "1rem",
+              }}
+            >
+              &laquo; Back
+            </a>
+            <a
+              href={
+                `https://github.com/jeasx/jeasx-expo` +
+                (path !== "/" ? `/tree/main/src/${path.split("/")[1]}` : "")
+              }
+              target="_blank"
+              style={{
+                position: "absolute",
+                top: "1rem",
+                left: "calc(100vw - 4em)",
+              }}
+            >
+              <img
+                src="/icons/github.svg"
+                width="20"
+                height="20"
+                alt="GitHub Logo"
+                title="Server source"
+              />
+            </a>
+          </header>
           <main class="container">{children}</main>
         </body>
       </html>
