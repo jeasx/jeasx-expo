@@ -19,6 +19,13 @@ export default function () {
           for readability: no unnecessary abstractions, no fancy stuff, just simple and clean code
           to get you started quickly.
         </p>
+        <p>
+          You can find the complete repository on{" "}
+          <a href="https://github.com/jeasx/jeasx-expo" target="_blank">
+            GitHub
+          </a>{" "}
+          to start experimenting with Jeasx right on your computer.
+        </p>
       </section>
       {sitemap.map(({ title, description, links }) => (
         <section class="center">
