@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@cap.js/server": "4.0.5",
-    "@cap.js/widget": "0.1.40",
+    "@cap.js/widget": "0.1.41",
     "@lit-labs/motion": "1.1.0",
     "@mdx-js/esbuild": "3.1.1",
     "@picocss/pico": "2.1.1",
@@ -18,7 +18,7 @@
     "cheerio": "1.2.0",
     "esbuild-svelte": "0.9.4",
     "htmx.org": "2.0.8",
-    "jeasx": "2.4.0",
+    "jeasx": "2.4.1",
     "lit": "3.3.2",
     "preact": "10.28.4",
     "preact-render-to-string": "6.6.6",
