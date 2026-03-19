@@ -9,7 +9,7 @@ export default function () {
       css="./assets/index.css"
       script="./assets/index.js"
     >
-      <div class="App">
+      <section class="center">
         <h1>Enhance your application with React</h1>
         <p>
           Jeasx allows you to integrate React as frontend library in userland. This is useful to
@@ -17,7 +17,7 @@ export default function () {
           whole application in the browser.
         </p>
         <React component="Lottery" title="Lottery 6 from 49" />
-      </div>
+      </section>
     </Layout>
   );
 }
