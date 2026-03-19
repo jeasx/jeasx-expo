@@ -16,8 +16,8 @@ export default function () {
           build islands of interactivity for a better user experience without having to render the
           whole application in the browser.
         </p>
-        <React component="Lottery" title="Lottery 6 from 49" />
       </section>
+      <React component="Lottery" title="Lottery 6 from 49" />
     </Layout>
   );
 }

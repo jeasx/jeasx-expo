@@ -5,7 +5,8 @@
   border: 1px solid var(--mu-accent-inverse);
   border-radius: 0.5rem;
   padding: 1rem;
-  max-width: 350px;
+  max-width: 450px;
+  text-align: center;
 }
 
 .number-grid {
