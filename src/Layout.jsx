@@ -13,7 +13,7 @@ export default function Layout({
   return (
     <>
       {{ html: "<!DOCTYPE html>" }}
-      <html lang="en">
+      <html lang="en" data-theme="dark">
         <head>
           <base href={`${path.endsWith("/") ? path : path + "/"}`} />
           <meta charset="utf-8" />
