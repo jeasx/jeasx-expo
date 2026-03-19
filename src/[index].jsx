@@ -7,7 +7,11 @@ export default function () {
       <section class="hero hero-primary">
         <div class="container">
           <h1>Explore Jeasx</h1>
-          <p class="hero-tagline">JSX as templating technology for the server-side rendered web.</p>
+          <p class="hero-tagline">
+            Asynchronous JSX as self-evident templating technology
+            <br />
+            for the server-side rendered web.
+          </p>
           <p>
             Visit <a href="https://www.jeasx.dev">jeasx.dev</a> to learn more about the framework...
           </p>
