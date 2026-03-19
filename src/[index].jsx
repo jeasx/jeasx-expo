@@ -9,7 +9,7 @@ export default function () {
           <h1>Explore Jeasx</h1>
           <p class="hero-tagline">JSX as templating technology for the server-side rendered web.</p>
           <p>
-            Visit <a href="https://www.jeasx.dev">jeasx.dev</a> to learn more...
+            Visit <a href="https://www.jeasx.dev">jeasx.dev</a> to learn more about the framework...
           </p>
         </div>
       </section>

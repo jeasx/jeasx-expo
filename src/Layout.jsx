@@ -67,7 +67,8 @@ export default function Layout({
           <footer class="container">
             <hr />
             <p class="center">
-              Visit <a href="https://www.jeasx.dev">Jeasx</a> to learn more...
+              &copy; {new Date().getFullYear()} - powered by{" "}
+              <a href="https://www.jeasx.dev">Jeasx</a>
             </p>
           </footer>
         </body>
