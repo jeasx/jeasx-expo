@@ -30,7 +30,7 @@ export default function Layout({
           <title>{title} &raquo; Jeasx - JSX with Ease</title>
         </head>
         <body>
-          <header>
+          <header class="container">
             {path !== "/" && (
               <a
                 href="/"
@@ -64,6 +64,12 @@ export default function Layout({
             </a>
           </header>
           <main class="container">{children}</main>
+          <footer class="container">
+            <hr />
+            <p class="center">
+              Visit <a href="https://www.jeasx.dev">Jeasx</a> to learn more...
+            </p>
+          </footer>
         </body>
       </html>
     </>
