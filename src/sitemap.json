@@ -21,7 +21,7 @@
   },
   {
     "title": "HTMX - Taking HTML Seriously",
-    "description": "Jeasx seamlessly integrates with HTMX, enabling UI updates with HTML fragments.",
+    "description": "Jeasx seamlessly integrates with HTMX, enabling UI updates with server-rendered HTML fragments.",
     "links": [
       { "path": "/htmx", "title": "Simple form" },
       { "path": "/nominatim", "title": "Active search" },
