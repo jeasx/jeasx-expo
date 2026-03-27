@@ -1,4 +1,6 @@
-FROM imbios/bun-node:latest-current-alpine
+FROM node:current-slim
+
+RUN npm -g i deno bun
 
 USER node
 WORKDIR /home/node
