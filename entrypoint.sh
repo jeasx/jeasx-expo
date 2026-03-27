@@ -1,7 +1,7 @@
 #!/bin/sh
 
 if [ -n "$RUN_WITH_BUN" ]; then
-  bun -b start
+  bun -b jeasx start
 elif [ -n "$RUN_WITH_DENO" ]; then
   deno x jeasx start
 else
