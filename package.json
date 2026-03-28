@@ -23,7 +23,7 @@
     "jeasx": "2.4.5",
     "lit": "3.3.2",
     "preact": "10.29.0",
-    "preact-render-to-string": "6.6.6",
+    "preact-render-to-string": "6.6.7",
     "prettier": "3.8.1",
     "prismjs": "1.30.0",
     "react": "19.2.4",
