@@ -1,9 +1,9 @@
 #!/bin/sh
 
 if [ -n "$RUN_WITH_BUN" ]; then
-  bun -b jeasx start
+  bun -b run start
 elif [ -n "$RUN_WITH_DENO" ]; then
-  deno x jeasx start
+  deno task start
 else
   node --run start
 fi
