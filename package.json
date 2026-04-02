@@ -8,14 +8,14 @@
     "clean": "jeasx clean"
   },
   "dependencies": {
-    "@arrow-js/core": "1.0.5",
+    "@arrow-js/core": "1.0.6",
     "@cap.js/server": "4.0.5",
     "@cap.js/widget": "0.1.43",
     "@digicreon/mucss": "1.4.4",
     "@lit-labs/motion": "1.1.0",
     "@mdx-js/esbuild": "3.1.1",
     "@preact/signals": "2.9.0",
-    "alpinejs": "3.15.9",
+    "alpinejs": "3.15.11",
     "cheerio": "1.2.0",
     "esbuild-svelte": "0.9.4",
     "fixi-js": "0.9.3",
