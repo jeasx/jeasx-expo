@@ -52,9 +52,8 @@ export default {
   /** @type {() => import("@fastify/formbody").FastifyFormbodyOptions} */
   // FASTIFY_FORMBODY_OPTIONS: () => ({}),
 
-  /** @type {() => import("@fastify/multipart").FastifyMultipartOptions} */
+  /** @type {() => import("@fastify/multipart").FastifyMultipartAttachFieldsToBodyOptions} */
   FASTIFY_MULTIPART_OPTIONS: () => ({
-    // @ts-ignore
     attachFieldsToBody: "keyValues",
   }),
 };
