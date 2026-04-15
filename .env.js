@@ -29,8 +29,8 @@ export default {
 
   /** @type {() => import("fastify").FastifyServerOptions} */
   FASTIFY_SERVER_OPTIONS: () => ({
+    logger: { level: NODE_ENV_IS_DEVELOPMENT ? "error" : "info" },
     bodyLimit: 4 * 1024 * 1024,
-    disableRequestLogging: NODE_ENV_IS_DEVELOPMENT,
   }),
 
   /** @type {() => import("@fastify/static").FastifyStaticOptions} */
@@ -53,5 +53,8 @@ export default {
   // FASTIFY_FORMBODY_OPTIONS: () => ({}),
 
   /** @type {() => import("@fastify/multipart").FastifyMultipartOptions} */
-  // FASTIFY_MULTIPART_OPTIONS: () => ({}),
+  FASTIFY_MULTIPART_OPTIONS: () => ({
+    // @ts-ignore
+    attachFieldsToBody: "keyValues",
+  }),
 };
