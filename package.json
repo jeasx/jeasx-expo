@@ -10,7 +10,7 @@
   "dependencies": {
     "@arrow-js/core": "1.0.6",
     "@cap.js/server": "4.0.5",
-    "@cap.js/widget": "0.1.43",
+    "@cap.js/widget": "0.1.44",
     "@digicreon/mucss": "1.4.5",
     "@lit-labs/motion": "1.1.0",
     "@mdx-js/esbuild": "3.1.1",
