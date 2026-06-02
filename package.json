@@ -10,7 +10,7 @@
   "dependencies": {
     "@arrow-js/core": "1.0.6",
     "@cap.js/server": "4.0.5",
-    "@cap.js/widget": "0.1.53",
+    "@cap.js/widget": "0.1.54",
     "@digicreon/mucss": "1.4.8",
     "@lit-labs/motion": "1.1.0",
     "@mdx-js/esbuild": "3.1.1",
@@ -20,7 +20,7 @@
     "esbuild-svelte": "0.9.5",
     "fixi-js": "0.9.4",
     "htmx.org": "4.0.0-beta4",
-    "jeasx": "2.6.2",
+    "jeasx": "2.7.0",
     "lit": "3.3.3",
     "preact": "10.29.2",
     "preact-render-to-string": "6.7.0",
@@ -30,7 +30,7 @@
     "react-dom": "19.2.7",
     "rehype-prism-plus": "2.0.2",
     "sharp": "0.34.5",
-    "svelte": "5.56.0"
+    "svelte": "5.56.1"
   },
   "devDependencies": {
     "@types/react": "19.2.16",
