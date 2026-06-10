@@ -1,6 +1,4 @@
-FROM node:current-slim
-
-RUN npm -g i deno bun
+FROM node:current-alpine
 
 USER node
 WORKDIR /home/node
@@ -10,5 +8,4 @@ RUN npm ci --omit=dev && npm cache clean --force
 COPY --chown=node:node . ./
 
 RUN node --run build
-
-ENTRYPOINT ["/home/node/entrypoint.sh"]
+CMD ["node","--run","start"]
