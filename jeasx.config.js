@@ -30,7 +30,7 @@ export default {
 
   /** @type {() => import("fastify").FastifyServerOptions} */
   FASTIFY_SERVER_OPTIONS: () => ({
-    // logger: { level: NODE_ENV_IS_DEVELOPMENT ? "error" : "info" },
+    logger: { level: NODE_ENV_IS_DEVELOPMENT ? "error" : "info" },
     bodyLimit: 2 * 1024 * 1024,
   }),
 
