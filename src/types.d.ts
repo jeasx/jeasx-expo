@@ -1,3 +1,5 @@
+import "@fastify/cookie";
+import "@fastify/multipart";
 import { FastifyReply } from "fastify/types/reply";
 import { FastifyRequest } from "fastify/types/request";
 import serverless from "jeasx/serverless";

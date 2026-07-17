@@ -26,7 +26,20 @@ export default {
   }),
 
   /** @type {(fastify: import("fastify").FastifyInstance) => import("fastify").FastifyInstance} */
-  // FASTIFY_SERVER: (fastify) => fastify,
+  FASTIFY_SERVER: (fastify) =>
+    fastify
+      .register(import("@fastify/formbody"))
+      .register(import("@fastify/multipart"), {
+        attachFieldsToBody: "keyValues",
+      })
+      .register(import("@fastify/cookie"), {
+        parseOptions: {
+          path: "/",
+          httpOnly: true,
+          secure: "auto",
+          sameSite: "strict",
+        },
+      }),
 
   /** @type {() => import("fastify").FastifyServerOptions} */
   FASTIFY_SERVER_OPTIONS: () => ({
@@ -38,23 +51,5 @@ export default {
   FASTIFY_SEND_OPTIONS: () => ({
     immutable: !NODE_ENV_IS_DEVELOPMENT,
     maxAge: NODE_ENV_IS_DEVELOPMENT ? 0 : "365d",
-  }),
-
-  /** @type {() => import("@fastify/cookie").FastifyCookieOptions} */
-  FASTIFY_COOKIE_OPTIONS: () => ({
-    parseOptions: {
-      path: "/",
-      httpOnly: true,
-      secure: "auto",
-      sameSite: "strict",
-    },
-  }),
-
-  /** @type {() => import("@fastify/formbody").FastifyFormbodyOptions} */
-  // FASTIFY_FORMBODY_OPTIONS: () => ({}),
-
-  /** @type {() => import("@fastify/multipart").FastifyMultipartAttachFieldsToBodyOptions} */
-  FASTIFY_MULTIPART_OPTIONS: () => ({
-    attachFieldsToBody: "keyValues",
   }),
 };
