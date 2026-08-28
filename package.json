@@ -22,7 +22,7 @@
     "cheerio": "1.2.0",
     "esbuild-svelte": "0.9.5",
     "fixi-js": "0.9.4",
-    "htmx.org": "4.0.0-beta6",
+    "htmx.org": "4.0.0",
     "jeasx": "2.10.2",
     "lit": "3.3.3",
     "preact": "10.29.8",
