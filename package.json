@@ -14,7 +14,7 @@
     "@digicreon/mucss": "1.4.9",
     "@fastify/cookie": "11.1.3",
     "@fastify/formbody": "9.0.1",
-    "@fastify/multipart": "10.1.5",
+    "@fastify/multipart": "10.1.6",
     "@lit-labs/motion": "1.1.0",
     "@mdx-js/esbuild": "3.1.1",
     "@preact/signals": "2.11.3",
