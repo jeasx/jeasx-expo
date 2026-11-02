@@ -1,7 +1,7 @@
 import "@fastify/cookie";
 import "@fastify/multipart";
 import type { FastifyReply, FastifyRequest } from "fastify";
-import "../serverless";
+import "jeasx/serverless";
 
 type RouteProps = {
   request: FastifyRequest;
