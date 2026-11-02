@@ -1,35 +1,43 @@
 import Layout from "../Layout";
 import Svelte from "./Svelte";
 
-<Layout title="Svelte" description="Svelte integration in Jeasx" script="./index.js">
+<Layout title="Use Svelte with Jeasx" description="Render Svelte components on the server and hydrate them in the browser." css="/svelte/index.css" script="/svelte/index.js">
 
-# Svelte and Jeasx
+# Use Svelte with Jeasx
 
-[Svelte](https://svelte.dev) is a UI framework that employs a compiler, enabling you to create impressively compact components that perform minimal processing in the browser, all while using familiar languages like HTML, CSS, and JavaScript.
+[Svelte](https://svelte.dev) is a UI framework with a compiler: you write components in HTML, CSS and JavaScript, and Svelte turns them into small bundles that do little work in the browser. Jeasx renders them on the server and hydrates them in the browser.
 
 <details>
-<summary>How to integrate Svelte with Jeasx?</summary>
-To integrate Svelte into Jeasx, you must install two additional packages:
+<summary>How do I integrate Svelte with Jeasx?</summary>
+Install Svelte and its esbuild plugin:
 
 ```bash
 npm install svelte esbuild-svelte
 ```
 
-Now you have to register Svelte as esbuild plugin by adding the following configurations to `.env.js`:
+Then register the plugin for the server and the browser build in `jeasx.config.js`:
 
 ```js
-import sveltePlugin from "esbuild-svelte";
-
 export default {
-  ESBUILD_SERVER_OPTIONS: () => ({
-    plugins: [sveltePlugin({ compilerOptions: { generate: "server", css: "injected" } })],
-  }),
+  // The server imports this config at startup too, so import build-only plugins lazily:
+  // loading the Svelte compiler would slow down every server start.
+  ESBUILD_SERVER_OPTIONS: async () => {
+    const { default: sveltePlugin } = await import("esbuild-svelte");
+    return {
+      plugins: [sveltePlugin({ compilerOptions: { generate: "server", css: "external" } })],
+    };
+  },
 
-  ESBUILD_BROWSER_OPTIONS: () => ({
-    plugins: [sveltePlugin({ compilerOptions: { generate: "client", css: "injected" } })],
-  }),
+  ESBUILD_BROWSER_OPTIONS: async () => {
+    const { default: sveltePlugin } = await import("esbuild-svelte");
+    return {
+      plugins: [sveltePlugin({ compilerOptions: { generate: "client", css: "external" } })],
+    };
+  },
 };
 ```
+
+With `css: "external"`, the styles of all components imported by a browser bundle end up in a CSS file next to it (e.g. `index.css` next to `index.js`). Link it in your page, so the components are styled right away, even before hydration and without JavaScript.
 
 View the [source code of this page](https://github.com/jeasx/jeasx-expo/tree/main/src/svelte) for an implementation of a Svelte integration with hydration support. Feel free to improve it as you like.
 
@@ -43,7 +51,7 @@ View the [source code of this page](https://github.com/jeasx/jeasx-expo/tree/mai
 
 ---
 
-## Crud example
+## CRUD example
 
 <Svelte
   component="Crud"

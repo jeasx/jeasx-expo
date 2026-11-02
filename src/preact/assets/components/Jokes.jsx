@@ -1,3 +1,4 @@
+/** @jsxImportSource preact */
 import { useState } from "preact/hooks";
 
 export default function Jokes({ initial, api }) {
@@ -5,7 +6,7 @@ export default function Jokes({ initial, api }) {
   const [data, setData] = useState([]);
 
   async function submit(category) {
-    setData(await (await fetch(`${api}/${category}?amount=${counter}`)).json());
+    setData(await (await fetch(`${api}/${encodeURIComponent(category)}?amount=${counter}`)).json());
   }
 
   return (
@@ -15,6 +16,7 @@ export default function Jokes({ initial, api }) {
           class="btn btn-secondary"
           onClick={() => setCounter(counter - 1)}
           disabled={counter === 1}
+          aria-label="Fewer jokes"
         >
           -
         </button>
@@ -22,18 +24,19 @@ export default function Jokes({ initial, api }) {
           class="btn btn-secondary"
           onClick={() => setCounter(counter + 1)}
           disabled={counter === 5}
+          aria-label="More jokes"
         >
           +
         </button>
       </fieldset>
       <fieldset class="grid">
         <button class="btn btn-primary" onClick={() => submit("programming")}>
-          Tell me {counter} nerd {counter === 1 ? "joke" : "jokes"}
+          {counter === 1 ? "Tell me a nerd joke" : `Tell me ${counter} nerd jokes`}
         </button>
       </fieldset>
       <fieldset class="grid">
         <button class="btn btn-primary" onClick={() => submit("general")}>
-          Tell me {counter} {counter === 1 ? "pun" : "puns"}
+          {counter === 1 ? "Tell me a pun" : `Tell me ${counter} puns`}
         </button>
       </fieldset>
       {data.length > 0 && (

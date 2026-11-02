@@ -1,4 +1,7 @@
-FROM node:current-alpine
+FROM node:lts-alpine
+
+# Libraries like React check NODE_ENV at runtime and otherwise load their slower development builds.
+ENV NODE_ENV=production
 
 USER node
 WORKDIR /home/node
@@ -8,4 +11,8 @@ RUN npm ci --omit=dev && npm cache clean --force
 COPY --chown=node:node . ./
 
 RUN node --run build
-CMD ["node","--run","start"]
+
+# Uses the health route of the examples ("src/[health].json"): keep that route or remove this check. wget is part of Alpine.
+HEALTHCHECK --interval=30s --timeout=5s CMD wget -qO- "http://localhost:${PORT:-3000}/health" > /dev/null || exit 1
+
+CMD ["node","node_modules/jeasx/cli.js","start"]

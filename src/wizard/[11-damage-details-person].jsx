@@ -1,5 +1,5 @@
 import Actions from "./components/Actions";
-import Error from "./components/Error";
+import ErrorMessage from "./components/ErrorMessage";
 import Form from "./components/Form";
 import Input from "./components/Input";
 import Legend from "./components/Legend";
@@ -9,16 +9,16 @@ import Layout from "./Layout";
 
 export default function ({ data, form, errors }) {
   return (
-    <Layout title="Damage Details for Person" data={data}>
+    <Layout title="Damage details for person" data={data}>
       <Form>
         <Legend>
-          You have indicated that a person was damaged. Do you have any additional details?
+          You have indicated that a person was injured. Do you have any additional details?
         </Legend>
         <RadioGroup
-          label="Is the person who was damaged the same as the person you already entered?"
+          label="Is the injured person someone you already entered?"
           options={["Yes", "No"]}
-          name="additional_person"
-          value={form.additional_person}
+          name="same_person"
+          value={form.same_person}
         />
         <RadioGroup
           name="salutation"
@@ -26,22 +26,22 @@ export default function ({ data, form, errors }) {
           options={["Ms.", "Mr."]}
           value={form.salutation}
         />
-        <Input name="firstname" label="First Name" value={form.firstname} />
-        <Input name="lastname" label="Last Name" value={form.lastname} />
+        <Input name="firstname" label="First name" value={form.firstname} />
+        <Input name="lastname" label="Last name" value={form.lastname} />
         <Textarea
           name="description"
-          label="Can you provide further details about the person's injuries?"
+          label="What injuries does the person have?"
           value={form.description}
           placeholder="e.g. broken arm, broken leg"
         />
         <RadioGroup
-          label="Have any other persons been damaged?"
+          label="Has anyone else been injured?"
           options={["Yes", "No"]}
           name="any_other_persons_hurt"
           value={form.any_other_persons_hurt}
         />
         <Actions />
-        <Error message={errors} />
+        <ErrorMessage message={errors} />
       </Form>
     </Layout>
   );

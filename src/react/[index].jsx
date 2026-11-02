@@ -4,17 +4,17 @@ import React from "./assets/React";
 export default function () {
   return (
     <Layout
-      title="Integrate React with Jeasx"
-      description="Supporting React in Jeasx"
-      css="./assets/index.css"
-      script="./assets/index.js"
+      title="Use React with Jeasx"
+      description="Render React components on the server and hydrate them as interactive islands."
+      css="/react/assets/index.css"
+      script="/react/assets/index.js"
     >
       <section class="center">
-        <h1>Enhance your application with React</h1>
+        <h1>Use React with Jeasx</h1>
         <p>
-          Jeasx allows you to integrate React as frontend library in userland. This is useful to
-          build islands of interactivity for a better user experience without having to render the
-          whole application in the browser.
+          Jeasx lets you add React in userland: components are rendered on the server and hydrated
+          in the browser. This gives you islands of interactivity without rendering the whole
+          application in the browser.
         </p>
       </section>
       <hr />
@@ -24,7 +24,7 @@ export default function () {
       </section>
       <hr />
       <section>
-        <h2>Analog Clock</h2>
+        <h2>Analog clock</h2>
         <React component="Clock" />
       </section>
     </Layout>

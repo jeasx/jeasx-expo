@@ -1,37 +1,40 @@
+import isAuthorized from "../isAuthorized";
 import Layout from "../../Layout";
-
-const BASIC_AUTH = `Basic ${Buffer.from("demo:demo").toString("base64")}`;
 
 /**
  * @param {import("../../types").RouteProps} props
  */
 export default function ({ request, reply }) {
-  // If a static file is requested (e.g., a CSS file),
-  // the 'reply.file' property is pre-populated with a file stream.
-  // We use this to bypass authentication for static assets.
-  if (reply.file) {
+  // If a static file is requested, the 'reply.file' property is pre-populated with a file stream.
+  // Only stylesheets bypass authentication, so the error page is styled.
+  // Every other file (e.g. a PDF placed next to them) is only served after signing in.
+  if (reply.file && request.path.endsWith(".css")) {
     return;
   }
 
   // Check and send authorization headers.
-  const authorization = request.headers["authorization"];
-  if (authorization !== BASIC_AUTH) {
-    reply.header("WWW-Authenticate", 'Basic realm="Restricted Area');
+  if (!isAuthorized(request.headers["authorization"])) {
+    reply.header("WWW-Authenticate", 'Basic realm="Restricted Area"');
     reply.status(401);
     return (
-      <Layout title="Error 401" css="./index.css">
+      // An absolute path, as this guard answers deeper paths like "/basic-auth/protected/a/b" too,
+      // where "./index.css" would point to a file that doesn't exist.
+      <Layout title="Error 401" css="/basic-auth/protected/index.css">
         <section class="center">
           <h1 class="access-denied">Error 401</h1>
           <p>You are not allowed to view the protected content.</p>
           <p>
-            Please <a href="">reload page</a> and enter correct credentials (demo / demo).
+            Please <a href="">reload the page</a> and enter the correct credentials (demo / demo).
           </p>
         </section>
       </Layout>
     );
+  } else if (reply.file) {
+    // Signed in: serve the requested file.
+    return;
   } else {
     return (
-      <Layout title="Access granted" css="./index.css">
+      <Layout title="Access granted" css="/basic-auth/protected/index.css">
         <section class="center">
           <h1 class="access-granted">Access granted</h1>
           <p>You are allowed to view the protected content.</p>

@@ -1,5 +1,5 @@
 import Actions from "./components/Actions";
-import Error from "./components/Error";
+import ErrorMessage from "./components/ErrorMessage";
 import Form from "./components/Form";
 import Input from "./components/Input";
 import Legend from "./components/Legend";
@@ -8,9 +8,9 @@ import Layout from "./Layout";
 
 export default function ({ data, form, errors }) {
   return (
-    <Layout title="Claimant" data={data}>
+    <Layout title="Injured party" data={data}>
       <Form>
-        <Legend>Who was harmed by you?</Legend>
+        <Legend>Who suffered the damage?</Legend>
         <RadioGroup
           name="salutation"
           label="Salutation"
@@ -21,11 +21,11 @@ export default function ({ data, form, errors }) {
         {["Company", undefined].includes(form.salutation) && (
           <Input name="company" label="Company" value={form.company} />
         )}
-        <Input name="firstname" label="First Name" value={form.firstname} />
-        <Input name="lastname" label="Last Name" value={form.lastname} />
-        <Input name="license_plate" label="Official License Plate" value={form.license_plate} />
+        <Input name="firstname" label="First name" value={form.firstname} />
+        <Input name="lastname" label="Last name" value={form.lastname} />
+        <Input name="license_plate" label="License plate number" value={form.license_plate} />
         <Actions />
-        <Error message={errors} />
+        <ErrorMessage message={errors} />
       </Form>
     </Layout>
   );

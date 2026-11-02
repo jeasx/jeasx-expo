@@ -1,32 +1,46 @@
-import mdxPlugin from "@mdx-js/esbuild";
-import sveltePlugin from "esbuild-svelte";
+import { randomBytes } from "node:crypto";
 import querystring from "node:querystring";
-import rehypePrismPlus from "rehype-prism-plus";
 
 const NODE_ENV_IS_DEVELOPMENT = process.env.NODE_ENV === "development";
 
-export default {
-  /** @type {() => import("esbuild").BuildOptions} */
-  ESBUILD_SERVER_OPTIONS: () => ({
-    define: { "process.env.BUILD_ID": `"${Date.now().toString(36)}"` },
-    sourcemap: NODE_ENV_IS_DEVELOPMENT && "inline",
-    loader: { ".svg": "file" },
-    plugins: [
-      sveltePlugin({ compilerOptions: { generate: "server", css: "injected" } }),
-      mdxPlugin({
-        development: NODE_ENV_IS_DEVELOPMENT,
-        jsxImportSource: "jsx-async-runtime",
-        elementAttributeNameCase: "html",
-        stylePropertyNameCase: "css",
-        rehypePlugins: [rehypePrismPlus],
-      }),
-    ],
-  }),
+// The server imports this config at startup, so build-only plugins are imported lazily:
+// loading them (e.g. the Svelte compiler) would add about 200 ms to every server start.
 
-  /** @type {() => import("esbuild").BuildOptions} */
-  ESBUILD_BROWSER_OPTIONS: () => ({
-    plugins: [sveltePlugin({ compilerOptions: { generate: "client", css: "injected" } })],
-  }),
+export default {
+  /** @type {() => Promise<import("esbuild").BuildOptions>} */
+  ESBUILD_SERVER_OPTIONS: async () => {
+    const [{ default: sveltePlugin }, { default: mdxPlugin }, { default: rehypePrismPlus }] =
+      await Promise.all([
+        import("esbuild-svelte"),
+        import("@mdx-js/esbuild"),
+        import("rehype-prism-plus"),
+      ]);
+    return {
+      define: { "process.env.BUILD_ID": `"${Date.now().toString(36)}"` },
+      sourcemap: NODE_ENV_IS_DEVELOPMENT && "inline",
+      loader: { ".svg": "file" },
+      plugins: [
+        // Component styles end up in a CSS file (e.g. "/svelte/index.css" from the browser build),
+        // so they apply before hydration and without JavaScript. The server build's copy is unused.
+        sveltePlugin({ compilerOptions: { generate: "server", css: "external" } }),
+        mdxPlugin({
+          development: NODE_ENV_IS_DEVELOPMENT,
+          jsxImportSource: "jsx-async-runtime",
+          elementAttributeNameCase: "html",
+          stylePropertyNameCase: "css",
+          rehypePlugins: [rehypePrismPlus],
+        }),
+      ],
+    };
+  },
+
+  /** @type {() => Promise<import("esbuild").BuildOptions>} */
+  ESBUILD_BROWSER_OPTIONS: async () => {
+    const { default: sveltePlugin } = await import("esbuild-svelte");
+    return {
+      plugins: [sveltePlugin({ compilerOptions: { generate: "client", css: "external" } })],
+    };
+  },
 
   /** @type {() => import("@fastify/send").SendOptions} */
   FASTIFY_SEND_OPTIONS: () => ({
@@ -38,7 +52,15 @@ export default {
   FASTIFY_SERVER_OPTIONS: () => ({
     logger: { level: NODE_ENV_IS_DEVELOPMENT ? "error" : "info" },
     bodyLimit: 2 * 1024 * 1024,
-    rewriteUrl: (req) => req.url.replace(/~[a-z0-9]*\./, "."),
+    // Behind a proxy which terminates TLS (e.g. Vercel or a load balancer in front of Docker),
+    // only the X-Forwarded-Proto header tells that the request used https. Trust it there,
+    // so secure: "auto" (see cookies below) sets the Secure flag. Vercel sets VERCEL=1;
+    // set TRUST_PROXY=true for other proxies. Don't trust it without a proxy, as clients
+    // could then fake their IP address via X-Forwarded-For.
+    trustProxy: process.env.VERCEL === "1" || process.env.TRUST_PROXY === "true",
+    // Close open connections on shutdown, otherwise long-lived responses
+    // like Server-Sent Events keep the server from stopping.
+    forceCloseConnections: true,
   }),
 
   /** @type {(fastify: import("fastify").FastifyInstance) => import("fastify").FastifyInstance} */
@@ -46,8 +68,15 @@ export default {
     fastify
       .register(import("@fastify/multipart"), {
         attachFieldsToBody: "keyValues",
+        // All parts are buffered in memory and bodyLimit only applies to each file,
+        // so limit the number and size of parts per request (up to about 8 MB).
+        limits: { files: 1, fields: 100, fieldSize: 64 * 1024 },
       })
       .register(import("@fastify/cookie"), {
+        // Signed cookies are only valid as long as the secret stays the same, so set
+        // COOKIE_SECRET for every instance (e.g. on Vercel) and keep it across restarts.
+        // The random fallback invalidates all signed cookies on each start.
+        secret: process.env.COOKIE_SECRET || randomBytes(32).toString("hex"),
         parseOptions: {
           path: "/",
           httpOnly: true,

@@ -14,6 +14,10 @@ export const PomodoroTimer = component(() => {
   });
 
   let timer = 0;
+  // Time when the current period ends. Browsers slow down timers in background tabs
+  // (down to once per minute), so the remaining time is computed from the clock
+  // instead of counting ticks.
+  let endsAt = 0;
 
   const total = () => (state.mode === "work" ? WORK_SECONDS : BREAK_SECONDS);
   const progress = () => 1 - state.remaining / total();
@@ -22,6 +26,7 @@ export const PomodoroTimer = component(() => {
 
   const tick = () => {
     if (!state.running) return;
+    state.remaining = Math.max(0, Math.ceil((endsAt - Date.now()) / 1000));
     if (state.remaining <= 0) {
       state.running = false;
       if (state.mode === "work") {
@@ -34,14 +39,14 @@ export const PomodoroTimer = component(() => {
       }
       return;
     }
-    state.remaining--;
-    timer = window.setTimeout(tick, 1000);
+    timer = window.setTimeout(tick, 250);
   };
 
   const start = () => {
     if (state.running) return;
     state.running = true;
-    tick();
+    endsAt = Date.now() + state.remaining * 1000;
+    timer = window.setTimeout(tick, 250);
   };
 
   const pause = () => {
@@ -60,7 +65,7 @@ export const PomodoroTimer = component(() => {
     state.remaining = mode === "work" ? WORK_SECONDS : BREAK_SECONDS;
   };
 
-  return html /*html*/ `<main class="timer" data-mode="${() => state.mode}">
+  return html /*html*/ `<div class="timer" data-mode="${() => state.mode}">
     <nav class="timer-tabs">
       <button
         class="${() => `timer-tab${state.mode === "work" ? " timer-tab--on" : ""}`}"
@@ -111,5 +116,5 @@ export const PomodoroTimer = component(() => {
     <p class="timer-sessions">
       ${() => state.sessions} ${() => (state.sessions === 1 ? "session" : "sessions")} completed
     </p>
-  </main>`;
+  </div>`;
 });

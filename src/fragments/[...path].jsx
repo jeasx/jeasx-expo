@@ -2,29 +2,39 @@ import Layout from "../Layout";
 import { Product } from "./Product";
 
 /**
+ * @this {import("../types").ThisContext & { fragment?: string }}
  * @param {import("../types").RouteProps} props
  */
 export default function ({ request }) {
-  const id = request.query["id"] || 1;
+  // Answer "/fragments" and its fragments "/fragments/~product" and "/fragments/~time" only.
+  const match = /^\/fragments(?:\/~(product|time))?\/?$/.exec(request.path);
+  if (!match) {
+    return;
+  }
+  // Name of the requested fragment; undefined renders the whole page.
+  this.fragment = match[1];
+
+  // Keep the product id between 1 and 10, even for tampered query parameters.
+  const id = Math.min(Math.max(Math.trunc(Number(request.query["id"])) || 1, 1), 10);
 
   return (
     <Fragments
       container={({ children }) => (
         <Layout
           title="Template fragments with HTMX and Jeasx"
-          description="Template fragments allow you to render a fragment or partial bit of the content within a template, rather than the entire template."
-          script="./index.js"
+          description="Render only a part of a page template as a fragment for HTMX, without a route for each part."
+          script="/fragments/index.js"
         >
           {children}
         </Layout>
       )}
     >
       <Fragment>
-        <h1>Template Fragments</h1>
+        <h1>Template fragments</h1>
         <p>
-          Creating routes that emit HTML fragments is straightforward in Jeasx which makes it a
-          perfect match for <a href="https://htmx.org">HTMX</a>. Sometimes, however, creating many
-          routes by hand can be tedious.
+          Creating routes that emit HTML fragments is straightforward in Jeasx, which makes it a
+          perfect match for <a href="https://four.htmx.org">HTMX</a>. Sometimes, however, creating
+          many routes by hand can be tedious.
         </p>
         <p>
           <a href="https://htmx.org/essays/template-fragments">Template fragments</a> allow you to
@@ -35,14 +45,14 @@ export default function ({ request }) {
       </Fragment>
       <Fragment name="product">
         <form hx-get="./~product" hx-swap="outerHTML" hx-target="closest form">
-          <h2>Product-Browser</h2>
+          <h2>Product browser</h2>
           <fieldset role="group">
             <button
               class="btn btn-primary"
               name="id"
               type="submit"
-              value={Number(id) - 1}
-              disabled={Number(id) === 1}
+              value={id - 1}
+              disabled={id === 1}
             >
               &laquo;
             </button>
@@ -50,8 +60,8 @@ export default function ({ request }) {
               class="btn btn-primary"
               name="id"
               type="submit"
-              value={Number(id) + 1}
-              disabled={Number(id) === 10}
+              value={id + 1}
+              disabled={id === 10}
             >
               &raquo;
             </button>
@@ -71,10 +81,10 @@ export default function ({ request }) {
 }
 
 /**
- * @this {import("../types").ThisContext}
+ * @this {import("../types").ThisContext & { fragment?: string }}
  */
 function Fragments({ container, children }) {
-  if (this.request.path.includes("~")) {
+  if (this.fragment) {
     return <>{children}</>;
   } else {
     const Container = container;
@@ -83,10 +93,10 @@ function Fragments({ container, children }) {
 }
 
 /**
- * @this {import("../types").ThisContext}
+ * @this {import("../types").ThisContext & { fragment?: string }}
  */
 function Fragment({ name = undefined, children }) {
-  if (!this.request.path.includes("~") || (name && this.request.path.endsWith(name))) {
+  if (!this.fragment || name === this.fragment) {
     return <>{children}</>;
   }
 }

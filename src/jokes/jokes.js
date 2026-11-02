@@ -1,5 +1,8 @@
 import data from "./jokes.json";
 
+/** Categories with at least one joke, e.g. "general". */
+export const CATEGORIES = new Set(data.map(({ type }) => type));
+
 /**
  * @param {string} category
  * @param {number} amount
@@ -16,7 +19,7 @@ export default function jokes(category, amount) {
  */
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * i);
+    const j = Math.floor(Math.random() * (i + 1));
     const temp = array[i];
     array[i] = array[j];
     array[j] = temp;

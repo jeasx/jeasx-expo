@@ -3,11 +3,14 @@ import sitemap from "./sitemap.json";
 
 export default function () {
   return (
-    <Layout title="The power of Jeasx in examples" description="Welcome to Jeasx - JSX with Ease">
+    <Layout
+      title="The power of Jeasx in examples"
+      description="Welcome to Jeasx - JSX with Ease. Explore the framework in examples."
+    >
       <section class="container hero hero-primary">
         <h1>Explore Jeasx</h1>
         <p class="hero-tagline">
-          Use asynchronous JSX as self-evident templating technology
+          Use asynchronous JSX as an intuitive templating language
           <br />
           for the server-side rendered web.
         </p>
@@ -17,13 +20,14 @@ export default function () {
       </section>
       <section class="container center">
         <p>
-          You can find the complete repository on{" "}
-          <a href="https://github.com/jeasx/jeasx-expo">GitHub</a> to start experimenting with Jeasx
-          right on your computer.
+          The source code of all examples is on{" "}
+          <a href="https://github.com/jeasx/jeasx-expo">GitHub</a>: clone it to run them on your own
+          computer and start experimenting. Every example links to its source in the top right
+          corner.
         </p>
         <p>
-          The examples are styled with <a href="https://mucss.org/">µCSS</a> (a lightweight, mostly
-          classless CSS framework), so they are easier to read in source code.
+          The examples are styled with <a href="https://mucss.org/">µCSS</a>, a lightweight and
+          mostly classless CSS framework, so their markup stays short and easy to read.
         </p>
       </section>
       <section class="container center">

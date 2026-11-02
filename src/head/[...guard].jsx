@@ -1,8 +1,19 @@
-import { jsxToString } from "jsx-async-runtime";
+import { isJsxNode, jsxToString } from "jsx-async-runtime";
+import toText from "../@helpers/toText";
 
 const HEAD_MARK = "[[HEAD]]";
 
-export default async function () {
+/**
+ * @this {import("../types").ThisContext}
+ * @param {import("../types").RouteProps} props
+ */
+export default async function ({ reply }) {
+  // Static files have no head, and the response handler below would read them as text,
+  // which breaks binary files like images.
+  if (reply.file) {
+    return;
+  }
+
   const headTags = [];
 
   // Useful pattern to retain existing overrides
@@ -12,7 +23,7 @@ export default async function () {
   // The first head is replaced with the HEAD_MARK,
   // all other heads are deleted.
   this.jsxToString = async (jsxElement) => {
-    if (jsxElement?.tag === "head") {
+    if (isJsxNode(jsxElement) && jsxElement.tag === "head") {
       headTags.push(jsxElement.props.children);
       return headTags.length === 1 ? HEAD_MARK : "";
     }
@@ -21,8 +32,14 @@ export default async function () {
 
   // Use response handler to replace HEAD_MARK with unified head.
   this.responseHandler = async (payload) => {
+    // The mark can only be replaced in the complete markup, so a streamed payload is collected first.
+    const html = await toText(this, payload);
+    if (html === undefined) {
+      return payload;
+    }
     const htmlHead = await $jsxToString.call(this, <head>{unifyHead(headTags.flat())}</head>);
-    return payload.replace(HEAD_MARK, htmlHead);
+    // Use a function, so "$&" or "$'" in the head isn't treated as a replacement pattern.
+    return html.replace(HEAD_MARK, () => htmlHead);
   };
 }
 
@@ -33,7 +50,7 @@ function unifyHead(jsxElements) {
     const jsxElement = jsxElements[i];
     switch (jsxElement?.["tag"]) {
       case "title":
-        if (lastIndex["title"]) {
+        if (lastIndex["title"] !== undefined) {
           delete jsxElements[lastIndex["title"]];
         }
         lastIndex["title"] = i;
@@ -44,7 +61,7 @@ function unifyHead(jsxElements) {
           case "keywords":
           case "description":
             const name = jsxElement["props"]["name"];
-            if (lastIndex[name]) {
+            if (lastIndex[name] !== undefined) {
               delete jsxElements[lastIndex[name]];
             }
             lastIndex[name] = i;

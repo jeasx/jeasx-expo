@@ -1,5 +1,5 @@
 import Actions from "./components/Actions";
-import Error from "./components/Error";
+import ErrorMessage from "./components/ErrorMessage";
 import Form from "./components/Form";
 import Input from "./components/Input";
 import Legend from "./components/Legend";
@@ -8,25 +8,26 @@ import Layout from "./Layout";
 
 export default function ({ data, form, errors }) {
   return (
-    <Layout title="Damage Details for Animal or Object" data={data}>
+    <Layout title="Damage details for animal or object" data={data}>
       <Form>
         <Legend>
-          You have indicated that an object was damaged. Do you have any additional details?
+          You have indicated that an object or an animal was damaged. Do you have any additional
+          details?
         </Legend>
         <Input
           name="label"
-          label="Label of the object or animal?"
+          label="Which object or animal was damaged?"
           value={form.label}
           placeholder="e.g. glasses, bike, dog"
         />
         <Textarea
           name="description"
-          label="What was exactly damaged on the object or animal?"
+          label="What exactly happened to it?"
           value={form.description}
           placeholder="e.g. the pole was knocked over"
         />
         <Actions />
-        <Error message={errors} />
+        <ErrorMessage message={errors} />
       </Form>
     </Layout>
   );

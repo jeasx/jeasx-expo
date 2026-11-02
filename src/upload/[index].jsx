@@ -3,15 +3,14 @@ import Layout from "../Layout";
 export default async function () {
   return (
     <Layout
-      title="How to upload and transform images in Jeasx with Sharp"
-      description="Handling binary assets and image transformations with upload forms."
+      title="Upload and transform images with sharp"
+      description="Upload a JPEG image and convert, resize and rotate it with sharp."
     >
       <h1>Upload and transform images in Jeasx</h1>
       <p>
-        This example demonstrates how to handle binary uploads and image transformations in Jeasx.
-        As Jeasx is focused on the core technologies, image transformation is implemented in
-        userland with the help of the <a href="https://sharp.pixelplumbing.com">Sharp</a> image
-        processor.
+        Choose a JPEG image and the server converts, resizes and rotates it, then sends the result
+        back to your browser. Jeasx doesn't ship an image processor, so the conversion is done in
+        userland with <a href="https://sharp.pixelplumbing.com">sharp</a>. Your image isn't stored.
       </p>
       <form action="./image" method="post" enctype="multipart/form-data">
         <label>
@@ -22,7 +21,7 @@ export default async function () {
           </select>
         </label>
         <label>
-          Resize to
+          Resize to (pixels)
           <select name="size">
             <option>160</option>
             <option>320</option>
@@ -30,7 +29,7 @@ export default async function () {
           </select>
         </label>
         <label>
-          Rotate
+          Rotate by (degrees)
           <select name="rotate">
             <option>0</option>
             <option>30</option>
@@ -42,11 +41,11 @@ export default async function () {
           </select>
         </label>
         <label>
-          Choose a picture (jpg only)
-          <input type="file" name="upload" accept="jpg" required />
+          Choose a JPEG image
+          <input type="file" name="upload" accept=".jpg,.jpeg,image/jpeg" required />
         </label>
         <button class="btn btn-primary" type="submit">
-          Submit
+          Convert image
         </button>
       </form>
     </Layout>

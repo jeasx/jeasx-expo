@@ -1,30 +1,32 @@
-import { createHash } from "node:crypto";
 import Layout from "./Layout";
 import Form from "./components/Form";
 import Headline from "./components/Headline";
 import Input from "./components/Input";
 import Submit from "./components/Submit";
-import { compress } from "./utils/zip";
+import { SLUGS, TOKEN_PATTERN } from "./domain/constants";
 
 /**
- * @param {import("../types").RouteProps & any} props
+ * Shows the token of a claim saved by the "Save" button (see [...guard].js).
+ *
+ * @param {import("../types").RouteProps} props
  */
-export default function ({ reply, data }) {
-  const token =
-    "ID-" + createHash("sha1").update(JSON.stringify(data)).digest("hex").slice(0, 8).toUpperCase();
-  reply.setCookie(token, compress(data));
-  reply.clearCookie("data");
+export default function ({ request, reply }) {
+  const token = String(request.query["token"] ?? "");
+  // Nothing was saved without a valid token, e.g. when the page is opened directly.
+  if (!TOKEN_PATTERN.test(token)) {
+    return reply.redirect(SLUGS.START);
+  }
 
   return (
     <Layout title="Save">
       <Form>
-        <Headline>Your data has been saved</Headline>
+        <Headline>Your claim has been saved</Headline>
         <Input
-          label="To reload your data, please use the following token:"
+          label="Enter this token on the start page to continue your claim:"
           readonly
           value={token}
         />
-        <Submit label="Start new claim report" />
+        <Submit label="Start new claim" />
       </Form>
     </Layout>
   );

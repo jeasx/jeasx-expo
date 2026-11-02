@@ -3,8 +3,17 @@ import TrashIcon from "./trash.svg";
 
 export default function ({ todos, status, autofocus }) {
   return (
-    <Layout title="Todo app with Jeasx" description="A simple todo app in Jeasx." css="./index.css">
+    <Layout
+      title="Todo app with Jeasx"
+      description="A todo app built with plain HTML forms that stores its state in a cookie."
+      css="/todos/index.css"
+    >
       <h1>Todos</h1>
+      <p>
+        A classic todo app without client-side JavaScript: adding, completing and deleting a todo
+        submits a plain HTML form, and the server renders the updated list. Your todos are stored in
+        a cookie in your browser.
+      </p>
       <form method="post">
         <input name="newTodo" placeholder="What needs to be done?" autofocus={autofocus} />
       </form>
@@ -15,18 +24,15 @@ export default function ({ todos, status, autofocus }) {
             .map((todo) => (
               <li class={todo.status}>
                 <button
-                  class={{
-                    toggle: true,
-                    checked: todo.status === "completed",
-                  }}
-                  name="toogleTodo"
+                  class={`toggle${todo.status === "completed" ? " checked" : ""}`}
+                  name="toggleTodo"
                   value={todos.indexOf(todo)}
                 >
                   [{todo.status}]
                 </button>
                 <label>{todo.label}</label>
                 <button class="destroy" name="removeTodo" value={todos.indexOf(todo)}>
-                  <img src={TrashIcon} alt="Delete" />
+                  <img src={TrashIcon} alt={`Delete "${todo.label}"`} />
                 </button>
               </li>
             ))}
@@ -34,13 +40,13 @@ export default function ({ todos, status, autofocus }) {
       </form>
       <ul class="filters">
         <li>
-          <a href="" class={{ selected: !status }}>
+          <a href="" class={!status ? "selected" : ""}>
             all
           </a>
         </li>
         {["active", "completed"].map((value) => (
           <li>
-            <a href={`?status=${value}`} class={{ selected: status === value }}>
+            <a href={`?status=${value}`} class={status === value ? "selected" : ""}>
               {value}
             </a>
           </li>

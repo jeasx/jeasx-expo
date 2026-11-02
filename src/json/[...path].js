@@ -1,8 +1,25 @@
+// Only echo harmless headers. Hosting platforms and proxies add their own headers,
+// some carrying credentials (e.g. tokens), and page scripts could read them here.
+const SAFE_HEADERS = new Set([
+  "accept",
+  "accept-encoding",
+  "accept-language",
+  "cache-control",
+  "content-length",
+  "content-type",
+  "host",
+  "referer",
+  "user-agent",
+]);
+
 /**
  * @param {import("../types").RouteProps} props
  */
 export default function ({ request, reply }) {
-  const { url, path, route, query, method, headers, body } = request;
+  const { url, path, route, query, method, body } = request;
+  const headers = Object.fromEntries(
+    Object.entries(request.headers).filter(([name]) => SAFE_HEADERS.has(name)),
+  );
   return {
     url,
     path,
@@ -11,6 +28,8 @@ export default function ({ request, reply }) {
     method,
     headers,
     body,
-    runtime: process.versions,
+    // Only the runtime version (as in the footer): process.versions would also reveal
+    // the exact versions of OpenSSL, V8 and other libraries, which helps attackers.
+    runtime: process.versions.bun ? `Bun@${process.versions.bun}` : `Node@${process.versions.node}`,
   };
 }

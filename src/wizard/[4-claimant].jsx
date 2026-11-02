@@ -1,9 +1,10 @@
 import Actions from "./components/Actions";
-import Error from "./components/Error";
+import ErrorMessage from "./components/ErrorMessage";
 import Form from "./components/Form";
 import Input from "./components/Input";
 import Legend from "./components/Legend";
 import RadioGroup from "./components/RadioGroup";
+import { SLUGS } from "./domain/constants";
 import Layout from "./Layout";
 
 export default function ({ form, errors, data }) {
@@ -26,18 +27,18 @@ export default function ({ form, errors, data }) {
         <Input name="birthday" label="Date of birth" value={form.birthday} type="date" />
         <Legend>Address</Legend>
         <Input name="street" label="Street" value={form.street} />
-        <Input name="zip" label="Postal code" value={form.zip} />
+        <Input name="zip" label="Postal code (5 digits)" value={form.zip} />
         <Input name="city" label="City" value={form.city} />
-        <Legend>Contact details for inquiries and notifications</Legend>
-        <Input name="email" label="E-Mail" value={form.email} type="email" />
+        <Legend>How can we reach you?</Legend>
+        <Input name="email" label="Email" value={form.email} type="email" />
         <Input name="phone" label="Phone" value={form.phone} type="tel" />
         <Legend>Other details</Legend>
-        {data["/3-claim-report"]?.["claim_report"] === "Insured" && (
+        {data[SLUGS.CLAIM_REPORT]?.["claim_report"] === "Insured" && (
           <Input name="policy_number" label="Insurance policy number" value={form.policy_number} />
         )}
-        <Input name="license_plate" label="Official license plate" value={form.license_plate} />
+        <Input name="license_plate" label="License plate number" value={form.license_plate} />
         <Actions />
-        <Error message={errors} />
+        <ErrorMessage message={errors} />
       </Form>
     </Layout>
   );

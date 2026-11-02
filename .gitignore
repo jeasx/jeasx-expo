@@ -1,5 +1,9 @@
 # build output
 dist
+dist-test
+
+# local environment files, which may hold secrets like COOKIE_SECRET (see env.js)
+.env*.local
 
 # dependencies
 node_modules
@@ -9,6 +13,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+
+# IntelliJ
+.idea
 
 # macOS-specific files
 .DS_Store

@@ -1,13 +1,19 @@
+import { loadProduct } from "../products/products";
 import Image from "../sharp/Image";
 
 export async function Product({ id }) {
-  const product = await (await fetch(`https://dummyjson.com/products/${id}`)).json();
+  // A fragment replaces part of the page, so every failure (missing product, error response,
+  // network error or timeout) ends up in the same message instead of an error status.
+  const product = await loadProduct(id).catch(() => undefined);
+  if (!product) {
+    return <p>The product couldn't be loaded right now. Please try again later.</p>;
+  }
 
   return (
     <article>
       <header>
         <h3>{product.title}</h3>
-        <b>{product.price} €</b>
+        <b>${product.price}</b>
       </header>
       <Image
         src={product.thumbnail}

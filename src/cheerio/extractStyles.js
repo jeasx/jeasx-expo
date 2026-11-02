@@ -18,14 +18,17 @@ export default function extractStyles(html) {
     for (const declaration of $(element)
       .attr("style")
       .split(";")
-      .map((item) =>
-        item
-          .trim()
-          .split(":", 2)
-          .map((item) => item.trim())
-          .join(":"),
-      )) {
-      if (!declaration) {
+      .map((item) => {
+        // Split at the first colon only, so values like url(https://…) stay intact.
+        const colon = item.indexOf(":");
+        return colon === -1
+          ? item.trim()
+          : `${item.slice(0, colon).trim()}:${item.slice(colon + 1).trim()}`;
+      })) {
+      // Cheerio decodes attributes, so "&lt;/style&gt;" in a style attribute comes back
+      // as "</style>" and would close the <style> tag below, letting markup (e.g. a script)
+      // escape into the page. CSS declarations never need "<", so skip those.
+      if (!declaration || declaration.includes("<")) {
         continue;
       }
       if (!declarations.has(declaration)) {

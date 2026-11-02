@@ -21,15 +21,14 @@ export default function validator(path, form) {
       break;
   }
 
-  if (
-    form?.["phone"] &&
-    !/^(\(?([\d \-)–+(]+\/?){6,}\)?([ .\-–/]?)([\d]+))$/im.test(form?.["phone"])
-  ) {
+  // 6 to 30 characters ending with a digit. A single character class keeps the check fast:
+  // nested quantifiers like ([\d ]+){6,} take exponential time for inputs like "1111…x".
+  if (form?.["phone"] && !/^[\d ()+\/.\-–]{5,29}\d$/.test(form?.["phone"])) {
     errors["phone"] = "Please enter a valid phone number.";
   }
 
-  if (form?.["zip"] && !/^\d{5}$/im.test(form?.["zip"])) {
-    errors["zip"] = "Please enter a valid zip code.";
+  if (form?.["zip"] && !/^\d{5}$/.test(form?.["zip"])) {
+    errors["zip"] = "Please enter a postal code with 5 digits.";
   }
 
   return errors;

@@ -4,14 +4,14 @@ import Image from "./Image";
 export default function () {
   return (
     <Layout
-      title="Image transformation with Sharp in Jeasx"
-      description="Using sharp to transform images with Jeasx."
+      title="Image transformation with sharp in Jeasx"
+      description="Crop, resize and convert images on the fly with sharp."
     >
-      <h1>Image transformation with Sharp</h1>
+      <h1>Image transformation with sharp</h1>
       <p>
-        Jeasx allows to easily create a image component and converter in userland based on the
-        fantastic <a href="https://sharp.pixelplumbing.com">sharp</a> library. Here you see a simple
-        example with static images. The image converter is also used in the{" "}
+        With the <a href="https://sharp.pixelplumbing.com">sharp</a> library, you can build an image
+        component and converter in userland. The images below are cropped, resized and converted to
+        AVIF or WebP on the fly. The image converter is also used in the{" "}
         <a href="/products">products</a> example.
       </p>
       <section class="container center">
@@ -22,6 +22,7 @@ export default function () {
               width={(idx + 2) * 200}
               height={idx * 200}
               position="entropy"
+              alt={`Sample image ${idx}, cropped to ${(idx + 2) * 200} × ${idx * 200} pixels`}
               loading="lazy"
             />
             <figcaption>Image {idx}</figcaption>

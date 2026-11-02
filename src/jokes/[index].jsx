@@ -1,3 +1,4 @@
+import { readSignedCookie } from "../@helpers/cookies";
 import Layout from "../Layout";
 import jokes from "./jokes";
 
@@ -7,16 +8,25 @@ import jokes from "./jokes";
 export default function ({ request, reply }) {
   const body = request.body || {};
   const category = body["category"];
-  const counter = Number(body["counter"] || request.cookies["counter"] || "3");
+  // Keep the counter between 1 and 5, even for tampered form data
+  // or a signed value of another cookie (see "../@helpers/cookies.js").
+  const counter = Math.min(
+    Math.max(Math.trunc(Number(body["counter"] || readSignedCookie(request, "counter"))) || 3, 1),
+    5,
+  );
   const data = category ? jokes(category, counter) : [];
-  reply.setCookie("counter", String(counter));
+  reply.setCookie("counter", String(counter), { path: "/jokes", signed: true });
 
   return (
-    <Layout title="Building forms with Jeasx" description="Some funny jokes with Jeasx">
+    <Layout
+      title="Building forms with Jeasx"
+      description="Server-rendered forms that work without client-side JavaScript."
+    >
       <h1>Building a simple form</h1>
       <p>
-        Jeasx allows you to build and evaluate server rendered forms easily, so you don't have to
-        rely on JavaScript in the frontend to make form submission work.
+        Every button below submits a plain HTML form. The server reads the form, picks the jokes and
+        renders the page, so it works without any JavaScript in the browser. The number of jokes is
+        remembered in a cookie.
       </p>
       <form method="post">
         <fieldset class="grid">
@@ -25,6 +35,7 @@ export default function ({ request, reply }) {
             name="counter"
             value={counter - 1}
             disabled={counter === 1}
+            aria-label="Fewer jokes"
           >
             -
           </button>
@@ -33,18 +44,19 @@ export default function ({ request, reply }) {
             name="counter"
             value={counter + 1}
             disabled={counter === 5}
+            aria-label="More jokes"
           >
             +
           </button>
         </fieldset>
         <fieldset class="grid">
           <button class="btn btn-primary" name="category" value="programming">
-            Tell me {counter} nerd {counter === 1 ? "joke" : "jokes"}
+            {counter === 1 ? "Tell me a nerd joke" : `Tell me ${counter} nerd jokes`}
           </button>
         </fieldset>
         <fieldset class="grid">
           <button class="btn btn-primary" name="category" value="general">
-            Tell me {counter} {counter === 1 ? "pun" : "puns"}
+            {counter === 1 ? "Tell me a pun" : `Tell me ${counter} puns`}
           </button>
         </fieldset>
       </form>

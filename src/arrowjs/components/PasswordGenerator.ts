@@ -22,11 +22,12 @@ function generate(
   if (upper) pool += CHARS.upper;
   if (digits) pool += CHARS.digits;
   if (symbols) pool += CHARS.symbols;
-  if (!pool) pool = CHARS.lower;
 
+  // Use a cryptographically secure source, Math.random() is predictable.
+  const random = crypto.getRandomValues(new Uint32Array(length));
   let result = "";
   for (let i = 0; i < length; i++) {
-    result += pool[Math.floor(Math.random() * pool.length)];
+    result += pool[random[i] % pool.length];
   }
   return result;
 }
@@ -61,12 +62,15 @@ export const PasswordGenerator = component(() => {
     digits: true,
     symbols: true,
     password: "",
-    copied: false,
+    copyLabel: "Copy",
   });
+
+  let copyTimer = 0;
 
   const regenerate = () => {
     state.password = generate(state.length, state.lower, state.upper, state.digits, state.symbols);
-    state.copied = false;
+    window.clearTimeout(copyTimer);
+    state.copyLabel = "Copy";
   };
 
   regenerate();
@@ -74,12 +78,32 @@ export const PasswordGenerator = component(() => {
   const strength = () =>
     scoreStrength(state.length, state.lower, state.upper, state.digits, state.symbols);
 
-  const copy = () => {
-    navigator.clipboard.writeText(state.password);
-    state.copied = true;
-    setTimeout(() => {
-      state.copied = false;
+  const copy = async () => {
+    try {
+      // Fails e.g. without permission or outside of a secure context (https).
+      await navigator.clipboard.writeText(state.password);
+      state.copyLabel = "Copied!";
+    } catch {
+      state.copyLabel = "Copy failed";
+    }
+    window.clearTimeout(copyTimer);
+    copyTimer = window.setTimeout(() => {
+      state.copyLabel = "Copy";
     }, 1500);
+  };
+
+  type CharSet = "lower" | "upper" | "digits" | "symbols";
+
+  // At least one character set stays selected, so the options always match the password.
+  const toggle = (key: CharSet) => (e: Event) => {
+    const input = e.target as HTMLInputElement;
+    const others = (["lower", "upper", "digits", "symbols"] as CharSet[]).filter((k) => k !== key);
+    if (state[key] && !others.some((k) => state[k])) {
+      input.checked = true;
+      return;
+    }
+    state[key] = !state[key];
+    regenerate();
   };
 
   const handleLengthChange = (e: Event) => {
@@ -87,7 +111,7 @@ export const PasswordGenerator = component(() => {
     regenerate();
   };
 
-  return html /*html*/ `<main class="gen">
+  return html /*html*/ `<div class="gen">
     <section class="gen-display">
       <code class="gen-password"
         >${() =>
@@ -96,9 +120,7 @@ export const PasswordGenerator = component(() => {
             .map((ch) => html /*html*/ `<span class="${charClass(ch)}">${ch}</span>`)}</code
       >
       <div class="gen-actions">
-        <button class="gen-copy" @click="${copy}">
-          ${() => (state.copied ? "Copied!" : "Copy")}
-        </button>
+        <button class="gen-copy" @click="${copy}">${() => state.copyLabel}</button>
         <button class="gen-new" @click="${regenerate}">Regenerate</button>
       </div>
     </section>
@@ -117,58 +139,37 @@ export const PasswordGenerator = component(() => {
     <section class="gen-options">
       <label class="gen-length">
         <span>Length: <strong>${() => state.length}</strong></span>
-        <input type="range" min="4" max="64" class="gen-range" @input="${handleLengthChange}" />
+        <input
+          type="range"
+          min="4"
+          max="64"
+          value="${() => state.length}"
+          class="gen-range"
+          @input="${handleLengthChange}"
+        />
       </label>
       <div class="gen-toggles">
         <label class="gen-sw">
-          <input
-            type="checkbox"
-            checked="${() => state.lower}"
-            @change="${() => {
-              state.lower = !state.lower;
-              regenerate();
-            }}"
-          />
+          <input type="checkbox" checked="${() => state.lower}" @change="${toggle("lower")}" />
           <span class="gen-sw-track"></span>
           <span>Lowercase</span>
         </label>
         <label class="gen-sw">
-          <input
-            type="checkbox"
-            checked="${() => state.upper}"
-            @change="${() => {
-              state.upper = !state.upper;
-              regenerate();
-            }}"
-          />
+          <input type="checkbox" checked="${() => state.upper}" @change="${toggle("upper")}" />
           <span class="gen-sw-track"></span>
           <span>Uppercase</span>
         </label>
         <label class="gen-sw">
-          <input
-            type="checkbox"
-            checked="${() => state.digits}"
-            @change="${() => {
-              state.digits = !state.digits;
-              regenerate();
-            }}"
-          />
+          <input type="checkbox" checked="${() => state.digits}" @change="${toggle("digits")}" />
           <span class="gen-sw-track"></span>
           <span>Numbers</span>
         </label>
         <label class="gen-sw">
-          <input
-            type="checkbox"
-            checked="${() => state.symbols}"
-            @change="${() => {
-              state.symbols = !state.symbols;
-              regenerate();
-            }}"
-          />
+          <input type="checkbox" checked="${() => state.symbols}" @change="${toggle("symbols")}" />
           <span class="gen-sw-track"></span>
           <span>Symbols</span>
         </label>
       </div>
     </section>
-  </main>`;
+  </div>`;
 });

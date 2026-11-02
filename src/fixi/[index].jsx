@@ -1,50 +1,122 @@
+import { fitsCookie, readListCookie } from "../@helpers/cookies";
 import Layout from "../Layout";
+import { loadRecipes } from "../mdx/recipes";
 
 /**
  * @param {import("../types").RouteProps} props
  */
-export default function ({ request }) {
+export default function ({ request, reply }) {
   if (request.headers["fx-request"] === "true") {
-    return <Fragment request={request} />;
+    return <Fragment request={request} reply={reply} />;
   }
 
   return (
     <Layout
       title="Fixi.js and Jeasx - lightweight hypermedia controls"
-      description="Jeasx integrates easily with fixi.js"
-      script="./index.js"
+      description="Edit a list in place with Fixi.js, with a full page reload as fallback."
+      script="/fixi/index.js"
     >
       <h1>Fixi.js and Jeasx - lightweight hypermedia controls</h1>
       <p>
         <a href="https://github.com/bigskysoftware/fixi">Fixi.js</a> is a minimalist alternative to
-        HTMX, developed by the creators of HTMX. Enhancing a Jeasx server rendered application with
-        Fixi.js works without problems. The example illustrates progressive enhancement: it provides
-        an improved user experience with JavaScript while remaining fully functional as a fallback
-        without it.
+        HTMX, developed by the creators of HTMX. This example shows progressive enhancement: with
+        JavaScript, Fixi.js swaps only the edited list; without it, the same forms reload the whole
+        page and still work.
       </p>
       <h2>Recipe editor</h2>
-      <Fragment request={request} />
+      <Fragment request={request} reply={reply} />
     </Layout>
   );
 }
 
-const entries = (await (await fetch(`https://dummyjson.com/recipes`)).json()).recipes.slice(0, 5);
+const MAX_ENTRIES = 10;
+const MAX_LENGTH = 50;
 
-function Fragment({ request }) {
-  const body = request?.body || {};
+// Start loading right away, so the first visitor doesn't have to wait as long.
+loadRecipes();
 
-  if (["save", "create"].includes(body["action"])) {
-    entries[body["id"]] = {
-      name: body["name"],
-      cuisine: body["cuisine"],
-      difficulty: body["difficulty"],
-    };
+/**
+ * Reads the visitor's recipes from the cookie; falls back to the recipes from the API
+ * (or an empty list if it is unavailable) if the cookie is missing, edited or malformed.
+ *
+ * @param {import("fastify").FastifyRequest} request
+ */
+async function readEntries(request) {
+  return (readListCookie(request, "recipes") ?? (await loadRecipes()))
+    .slice(0, MAX_ENTRIES)
+    .map(toEntry);
+}
+
+/** @param {Record<string, unknown>} value */
+function toEntry({ name, cuisine, difficulty }) {
+  return { name: toText(name), cuisine: toText(cuisine), difficulty: toText(difficulty) };
+}
+
+/** @param {unknown} value */
+function toText(value) {
+  return String(value ?? "").slice(0, MAX_LENGTH);
+}
+
+/**
+ * @param {import("../types").RouteProps} props
+ */
+async function Fragment({ request, reply }) {
+  const body = /** @type {Record<string, unknown>} */ (request.body || {});
+  let entries = await readEntries(request);
+
+  // Only allow existing entries or appending a new one.
+  // Only digits count as id, as Number("") would be 0 and overwrite the first entry.
+  const id = /^\d+$/.test(String(body["id"] ?? "")) ? Number(body["id"]) : NaN;
+  const isValidId =
+    Number.isInteger(id) &&
+    id >= 0 &&
+    (id < entries.length || (id === entries.length && entries.length < MAX_ENTRIES));
+
+  const action = String(body["action"]);
+  const isNew = id === entries.length;
+  let error = "";
+  /**
+   * Values of the row shown in edit mode (at index `id`), if any.
+   * @type {ReturnType<typeof toEntry> | undefined}
+   */
+  let editing;
+
+  if (action === "save" && isValidId) {
+    const entry = toEntry(body);
+    // A new recipe without any text isn't stored, so no empty rows pile up.
+    if (!isNew || entry.name || entry.cuisine || entry.difficulty) {
+      const changed = [...entries];
+      changed[id] = entry;
+      const cookie = JSON.stringify(changed);
+      if (fitsCookie(reply, cookie)) {
+        entries = changed;
+        reply.setCookie("recipes", cookie, { path: "/fixi", signed: true });
+      } else {
+        // Changes which don't fit into the cookie (e.g. lots of emojis) aren't stored.
+        // Keep the row open with the entered values, so they can be shortened.
+        error = "Your changes are too long to be stored in a cookie. Please shorten them.";
+        editing = entry;
+      }
+    }
+  } else if (action === "edit" && isValidId && !isNew) {
+    editing = entries[id];
+  } else if (action === "create" && isValidId && isNew) {
+    // A new recipe is only stored on "save", so leaving the empty row stores nothing.
+    editing = toEntry({});
   }
+
+  const rows = [...entries];
+  if (editing) {
+    rows[id] = editing;
+  }
+  // Hide "Add" while a new recipe is being entered.
+  const isAdding = rows.length > entries.length;
 
   return (
     <article id="entries" class="card-secondary">
-      {Object.entries(entries).map(([id, { name, cuisine, difficulty }]) => {
-        const isEditMode = body["id"] === id && ["edit", "create"].includes(body["action"]);
+      {error && <p role="alert">{error}</p>}
+      {rows.map(({ name, cuisine, difficulty }, index) => {
+        const isEditMode = editing !== undefined && index === id;
         return (
           <form
             class="row"
@@ -54,7 +126,7 @@ function Fragment({ request }) {
             fx-method="post"
             fx-target="#entries"
           >
-            <input type="hidden" name="id" value={id} />
+            <input type="hidden" name="id" value={index} />
             <div class="col-md-3 col-sm-12">
               {isEditMode ? (
                 <input type="text" name="name" value={name} placeholder="Name..." />
@@ -95,21 +167,27 @@ function Fragment({ request }) {
           </form>
         );
       })}
-      <form
-        class="row"
-        action="."
-        method="post"
-        fx-action="."
-        fx-method="post"
-        fx-target="#entries"
-      >
-        <div class="offset-md-9 col-md-3 col-sm-12">
-          <input type="hidden" name="id" value={entries.length} />
-          <button class="btn btn-primary" type="submit" name="action" value="create">
-            Add
-          </button>
-        </div>
-      </form>
+      {isAdding ? null : entries.length < MAX_ENTRIES ? (
+        <form
+          class="row"
+          action="."
+          method="post"
+          fx-action="."
+          fx-method="post"
+          fx-target="#entries"
+        >
+          <div class="offset-md-9 col-md-3 col-sm-12">
+            <input type="hidden" name="id" value={entries.length} />
+            <button class="btn btn-primary" type="submit" name="action" value="create">
+              Add
+            </button>
+          </div>
+        </form>
+      ) : (
+        <p class="center">
+          <small>The list is full: at most {MAX_ENTRIES} recipes can be stored.</small>
+        </p>
+      )}
     </article>
   );
 }

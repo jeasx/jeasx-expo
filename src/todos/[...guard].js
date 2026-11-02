@@ -1,36 +1,71 @@
+import { readListCookie, writeListCookie } from "../@helpers/cookies";
+
+const MAX_LABEL_LENGTH = 200;
+const STATUSES = ["active", "completed"];
+
+const DEFAULT_TODOS = [
+  { label: "Buy some apples", status: "active" },
+  { label: "Learn to code", status: "completed" },
+  { label: "Talk to a friend", status: "active" },
+];
+
 /**
  * @param {import("../types").RouteProps} props
  */
 export default function ({ request, reply }) {
-  const query = request.query || {};
-  const body = request.body || {};
+  // A JSON body can also be a number or string, which the "in" check below can't handle.
+  const body = /** @type {Record<string, unknown>} */ (
+    request.body && typeof request.body === "object" ? request.body : {}
+  );
 
-  const todos = request.cookies["todos"]
-    ? JSON.parse(request.cookies["todos"])
-    : [
-        { label: "Buy some apples", status: "active" },
-        { label: "Learn to code", status: "completed" },
-        { label: "Talk to a friend", status: "active" },
-      ];
+  let todos = readListCookie(request, "todos")?.map(toTodo) ?? structuredClone(DEFAULT_TODOS);
 
-  if (body["newTodo"]) {
-    todos.unshift({ label: body["newTodo"], status: "active" });
+  // Ignore todos without any text, e.g. only spaces.
+  const newTodo = String(body["newTodo"] ?? "")
+    .trim()
+    .slice(0, MAX_LABEL_LENGTH);
+  if (newTodo) {
+    todos.unshift({ label: newTodo, status: "active" });
   }
 
-  if (body["toogleTodo"]) {
-    const todo = todos[+body["toogleTodo"]];
-    todo.status = todo.status === "active" ? "completed" : "active";
+  if (body["toggleTodo"]) {
+    const todo = todos[Number(body["toggleTodo"])];
+    if (todo) {
+      todo.status = todo.status === "active" ? "completed" : "active";
+    }
   }
 
   if (body["removeTodo"]) {
-    todos.splice(+body["removeTodo"], 1);
+    const index = Number(body["removeTodo"]);
+    if (Number.isInteger(index) && index >= 0) {
+      todos.splice(index, 1);
+    }
   }
 
-  reply.setCookie("todos", JSON.stringify(todos));
+  // Only form submissions change todos. The guard also runs for static files
+  // like index.css, which shouldn't carry a cookie.
+  if (request.method === "POST") {
+    // Drop the oldest todos until the cookie fits.
+    todos = writeListCookie(reply, "todos", todos, "/todos");
+  }
 
   return {
     todos,
-    status: query["status"],
-    autofocus: request.method === "GET" || body["newTodo"],
+    // Unknown filters show all todos instead of an empty list.
+    status: STATUSES.includes(request.query["status"]) ? request.query["status"] : undefined,
+    autofocus: request.method === "GET" || "newTodo" in body,
+  };
+}
+
+/**
+ * The cookie is signed, but could hold a signed value of another cookie (see "../@helpers/cookies.js"),
+ * so turn the label into a string of limited length and only allow known states.
+ *
+ * @param {Record<string, unknown>} item
+ */
+function toTodo({ label, status }) {
+  return {
+    label: String(label ?? "").slice(0, MAX_LABEL_LENGTH),
+    status: status === "completed" ? "completed" : "active",
   };
 }

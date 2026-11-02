@@ -4,7 +4,7 @@ const SLUGS = {
   DAMAGE_TYPES: "/wizard/2-damage-types",
   CLAIM_REPORT: "/wizard/3-claim-report",
   CLAIMANT: "/wizard/4-claimant",
-  INSURED: "/wizard/5-insured",
+  INJURED_PARTY: "/wizard/5-injured-party",
   PERPETRATOR: "/wizard/6-perpetrator",
   DAMAGE_DETAILS: "/wizard/7-damage-details",
   DAMAGE_DETAILS_FOREIGN_VEHICLE: "/wizard/8-damage-details-foreign-vehicle",
@@ -15,4 +15,7 @@ const SLUGS = {
   THANK_YOU: "/wizard/13-thank-you",
 };
 
-export { SLUGS };
+/** Token of a saved claim, e.g. "ID-1A2B3C4D". It is also the name of its cookie. */
+const TOKEN_PATTERN = /^ID-[0-9A-F]{8}$/;
+
+export { SLUGS, TOKEN_PATTERN };

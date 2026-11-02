@@ -1,3 +1,4 @@
+/** @jsxImportSource react */
 import { useState } from "react";
 
 export default function Lottery({ title }) {
@@ -17,21 +18,24 @@ export default function Lottery({ title }) {
 
   return (
     <div className="lottery">
-      <h1>{title}</h1>
+      {/* The page already has an h1 and an h2 for this section. */}
+      <h3>{title}</h3>
       <div className="number-grid">
         {Array.from({ length: 49 }, (_, index) => index + 1).map((number) => (
-          <div
+          <button
+            type="button"
             key={number}
-            className={`number ${selectedNumbers.includes(number) ? "selected" : ""}`}
+            className={`number${selectedNumbers.includes(number) ? " selected" : ""}`}
+            aria-pressed={selectedNumbers.includes(number)}
             onClick={() => handleNumberClick(number)}
           >
             {number}
-          </div>
+          </button>
         ))}
       </div>
       {selectedNumbers.length > 0 && (
         <div className="selected-numbers">
-          <h3>Selected Numbers:</h3>
+          <h4>Selected numbers:</h4>
           <ul>
             {selectedNumbers.map((number) => (
               <li key={number}>{number}</li>

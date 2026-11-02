@@ -1,7 +1,8 @@
 <script>
 	let { data } = $props();
 
-	let people = $state((() => data)());
+	// svelte-ignore state_referenced_locally
+	let people = $state(data);
 
 	let prefix = $state("");
 	let first = $state("");
@@ -24,23 +25,24 @@
 
 	function create() {
 		people = people.concat({ first, last });
-		i = people.length - 1;
+		// i is an index into the filtered list (-1 if the filter hides the new person).
+		i = filteredPeople.indexOf(people[people.length - 1]);
 		first = last = "";
 	}
 
 	function update() {
 		selected.first = first;
 		selected.last = last;
-		people = people;
 	}
 
 	function remove() {
-		// Remove selected person from the source array (people), not the filtered array
+		// Remove selected person from the source array (people), not the filtered array.
+		// filteredPeople is derived, so it already reflects the removal below.
 		const index = people.indexOf(selected);
 		people = [...people.slice(0, index), ...people.slice(index + 1)];
 
 		first = last = "";
-		i = Math.min(i, filteredPeople.length - 2);
+		i = Math.min(i, filteredPeople.length - 1);
 	}
 
 	function reset_inputs(person) {
@@ -49,7 +51,7 @@
 	}
 </script>
 
-<input placeholder="filter prefix" bind:value={prefix} />
+<input placeholder="Filter by last name..." bind:value={prefix} />
 
 <select bind:value={i} size={5}>
 	{#each filteredPeople as person, i}
@@ -57,15 +59,15 @@
 	{/each}
 </select>
 
-<label><input bind:value={first} placeholder="first" /></label>
-<label><input bind:value={last} placeholder="last" /></label>
+<label><input bind:value={first} placeholder="First name" /></label>
+<label><input bind:value={last} placeholder="Last name" /></label>
 
 <div class="buttons">
-	<button onclick={create} disabled={!first || !last}>create</button>
+	<button onclick={create} disabled={!first || !last}>Create</button>
 	<button onclick={update} disabled={!first || !last || !selected}
-		>update</button
+		>Update</button
 	>
-	<button onclick={remove} disabled={!selected}>delete</button>
+	<button onclick={remove} disabled={!selected}>Delete</button>
 </div>
 
 <style>
