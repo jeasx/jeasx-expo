@@ -1,5 +1,5 @@
-import isCrossSite, { crossSiteResponse } from "../@helpers/crossSite";
 import { readListCookie, writeListCookie } from "../@helpers/cookies";
+import isCrossSite, { crossSiteResponse } from "../@helpers/crossSite";
 
 const MAX_LABEL_LENGTH = 200;
 const STATUSES = ["active", "completed"];
@@ -59,7 +59,6 @@ export default function ({ request, reply }) {
     todos,
     // Unknown filters show all todos instead of an empty list.
     status: STATUSES.includes(request.query["status"]) ? request.query["status"] : undefined,
-    autofocus: request.method === "GET" || "newTodo" in body,
   };
 }
 
