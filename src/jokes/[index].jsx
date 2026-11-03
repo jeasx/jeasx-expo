@@ -7,7 +7,9 @@ import jokes from "./jokes";
 export default function ({ request }) {
   const body = request.body || {};
   const category = body["category"];
-  const requested = parseInt(body["counter"]) || 3;
+  // The -/+ buttons send "change", so "counter" only comes from the hidden field.
+  const change = body["change"] === "-1" ? -1 : body["change"] === "1" ? 1 : 0;
+  const requested = (parseInt(body["counter"]) || 3) + change;
   const counter = Math.min(Math.max(requested, 1), 5);
   const data = category ? jokes(category, counter) : [];
 
@@ -23,11 +25,12 @@ export default function ({ request }) {
         passed along in a hidden form field.
       </p>
       <form method="post">
+        <input type="hidden" name="counter" value={counter} />
         <fieldset class="grid">
           <button
             class="btn btn-secondary"
-            name="counter"
-            value={counter - 1}
+            name="change"
+            value="-1"
             disabled={counter === 1}
             aria-label="Fewer jokes"
           >
@@ -35,15 +38,14 @@ export default function ({ request }) {
           </button>
           <button
             class="btn btn-secondary"
-            name="counter"
-            value={counter + 1}
+            name="change"
+            value="1"
             disabled={counter === 5}
             aria-label="More jokes"
           >
             +
           </button>
         </fieldset>
-        <input type="hidden" name="counter" value={counter} />
         <fieldset class="grid">
           <button class="btn btn-primary" name="category" value="programming">
             {counter === 1 ? "Tell me a nerd joke" : `Tell me ${counter} nerd jokes`}
