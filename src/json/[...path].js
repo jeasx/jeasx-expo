@@ -16,7 +16,12 @@ const SAFE_HEADERS = new Set([
  * @param {import("../types").RouteProps} props
  */
 export default function ({ request, reply }) {
-  const { url, path, route, query, method, body } = request;
+  // The answer contains the visitor's own headers (e.g. a referer with private URLs),
+  // so caches must not hand it to others.
+  reply.header("cache-control", "private, no-store");
+  // The query is echoed as it is (e.g. "<script>"): never let browsers guess HTML from it.
+  reply.header("x-content-type-options", "nosniff");
+  const { url, path, route, query, method } = request;
   const headers = Object.fromEntries(
     Object.entries(request.headers).filter(([name]) => SAFE_HEADERS.has(name)),
   );
@@ -27,7 +32,6 @@ export default function ({ request, reply }) {
     query,
     method,
     headers,
-    body,
     // Only the runtime version (as in the footer): process.versions would also reveal
     // the exact versions of OpenSSL, V8 and other libraries, which helps attackers.
     runtime: process.versions.bun ? `Bun@${process.versions.bun}` : `Node@${process.versions.node}`,
