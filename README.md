@@ -32,7 +32,7 @@ Each example lives in its own folder below [`src/`](src) and is served at the ma
 - **Dynamic websites**: planet gallery with view transitions, blog, products, MDX
 - **Web applications without client-side JavaScript**: lottery, todos, jokes, GitHub repos, multi-step wizard, A/B testing
 - **Hypermedia with HTMX**: HTMX (click to edit, active search, template fragments, infinite scroll, reactive scripting) and Fixi.js
-- **Islands of client-side JavaScript**: Alpine.js, ArrowJS, Lit, Preact, React, Svelte
+- **Islands of client-side JavaScript**: Alpine.js, ArrowJS, Lit, Preact, React, Svelte, Vue
 - **Streaming and Server-Sent Events**: streaming HTML, parallel and out-of-order loading, async iterables, ReadableStreams, SSE, chat
 - **Images, JSON and other content types**: image upload, image scaling with sharp, SVG charts, Open Graph images, JSON, `Response` objects, content negotiation, XML sitemap
 - **Rendering with JSX**: render props, what JSX renders, `this` as context, intercepting JSX, head management, i18n, client-side JSX, unit tests
