@@ -38,8 +38,11 @@ html {
 .home-hero {
   text-align: center;
   padding: 4rem 1rem 3rem;
-  background:
-    radial-gradient(ellipse at top, color-mix(in srgb, var(--mu-primary) 25%, transparent), transparent 70%);
+  background: radial-gradient(
+    ellipse at top,
+    color-mix(in srgb, var(--mu-primary) 25%, transparent),
+    transparent 70%
+  );
   border-radius: 1rem;
 }
 
@@ -187,7 +190,10 @@ html {
   border-radius: 0.6rem;
   font-size: 0.95rem;
   text-decoration: none;
-  transition: transform 0.15s, border-color 0.15s, box-shadow 0.15s;
+  transition:
+    transform 0.15s,
+    border-color 0.15s,
+    box-shadow 0.15s;
 }
 
 .home-tile:hover {
