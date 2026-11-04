@@ -1,0 +1,120 @@
+:root {
+  --as-accent: #10b981;
+  --as-accent-2: #3b82f6;
+  --as-line: rgba(127, 127, 127, 0.2);
+  --as-soft: rgba(127, 127, 127, 0.07);
+  --as-muted: rgba(127, 127, 127, 0.9);
+}
+
+.as {
+  margin: 0 auto;
+  max-width: 48rem;
+
+  & > h1 {
+    background: linear-gradient(120deg, var(--as-accent), var(--as-accent-2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-align: center;
+  }
+}
+
+/* Search field with an inline progress indicator */
+.as-search {
+  position: relative;
+  margin: 1.5rem 0 0.5rem;
+
+  & input {
+    margin: 0;
+    border-radius: 999px;
+    padding-right: 7rem;
+    width: 100%;
+  }
+
+  & input:focus {
+    border-color: var(--as-accent);
+  }
+
+  & .htmx-indicator {
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+    transform: translateY(-50%);
+    color: var(--as-muted);
+    font-size: 0.85rem;
+  }
+}
+
+.as-hint {
+  margin: 0 0 1.5rem;
+  color: var(--as-muted);
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+/* Results, faded in after each swap */
+#results {
+  transition: opacity 0.3s;
+
+  &.htmx-swapping,
+  &.htmx-settling {
+    opacity: 0.4;
+  }
+}
+
+.as-message {
+  border: 1px dashed var(--as-line);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  color: var(--as-muted);
+  text-align: center;
+}
+
+.as-count {
+  margin: 0 0 0.75rem;
+  color: var(--as-muted);
+  font-size: 0.85rem;
+}
+
+.as-list {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  & li {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    border: 1px solid var(--as-line);
+    border-radius: 0.75rem;
+    background: var(--as-soft);
+    padding: 0.85rem 1.1rem;
+  }
+
+  & li:hover {
+    border-color: color-mix(in srgb, var(--as-accent) 60%, transparent);
+  }
+
+  & strong {
+    display: block;
+    overflow-wrap: anywhere;
+  }
+
+  & small {
+    color: var(--as-muted);
+    overflow-wrap: anywhere;
+  }
+}
+
+.as-type {
+  flex-shrink: 0;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--as-accent) 15%, transparent);
+  padding: 0.15rem 0.6rem;
+  color: var(--as-accent);
+  font-size: 0.75rem;
+  text-transform: capitalize;
+}

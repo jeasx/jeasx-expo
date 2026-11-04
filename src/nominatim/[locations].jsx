@@ -19,12 +19,18 @@ export default async function ({ request }) {
     return "";
   }
   if (search.length < MIN_LENGTH) {
-    return <p>Please enter at least {MIN_LENGTH} characters.</p>;
+    return (
+      <p class="as-message">Please enter at least {MIN_LENGTH} characters.</p>
+    );
   }
 
   const wait = reserveSlot();
   if (wait === -1) {
-    return <p>There are too many searches right now. Please try again in a moment.</p>;
+    return (
+      <p class="as-message">
+        There are too many searches right now. Please try again in a moment.
+      </p>
+    );
   }
   await new Promise((resolve) => setTimeout(resolve, wait));
 
@@ -44,37 +50,48 @@ export default async function ({ request }) {
     // Network errors and timeouts end up in the message below.
   }
   if (!Array.isArray(json)) {
-    return <p>Nominatim couldn't be reached right now. Please try again later.</p>;
+    return (
+      <p class="as-message">
+        Nominatim couldn't be reached right now. Please try again later.
+      </p>
+    );
   }
   if (json.length === 0) {
-    return <p>No addresses found. Try another search.</p>;
+    return <p class="as-message">No addresses found. Try another search.</p>;
   }
 
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>Country</th>
-          <th>Postcode</th>
-          <th>City</th>
-          <th>Road</th>
-          <th>Type</th>
-        </tr>
-      </thead>
-      <tbody>
-        {json.map(({ addresstype, address = {} }) => (
-          <tr>
-            <td>{address.country}</td>
-            <td>{address.postcode}</td>
-            <td>{address.city ?? address.town ?? address.village}</td>
-            <td>
-              {address.road} {address.house_number}
-            </td>
-            <td>{addresstype}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <>
+      <p class="as-count">
+        {json.length} {json.length === 1 ? "result" : "results"}
+      </p>
+      <ul class="as-list">
+        {json.map(({ name, display_name, addresstype, address = {} }) => {
+          const street = [address.road, address.house_number]
+            .filter(Boolean)
+            .join(" ");
+          const city = address.city ?? address.town ?? address.village;
+          const place = [
+            street,
+            [address.postcode, city].filter(Boolean).join(" "),
+            address.country,
+          ]
+            .filter(Boolean)
+            .join(", ");
+          return (
+            <li>
+              <div>
+                <strong>{name || street || display_name}</strong>
+                <small>{place || display_name}</small>
+              </div>
+              {addresstype && (
+                <span class="as-type">{addresstype.replaceAll("_", " ")}</span>
+              )}
+            </li>
+          );
+        })}
+      </ul>
+    </>
   );
 }
 
