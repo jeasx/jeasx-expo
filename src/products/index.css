@@ -3,6 +3,17 @@
   display: inline-block;
 }
 
+/*
+ * A view-transition-name paints the title as its own layer, so the h1's
+ * text-clipped gradient no longer reaches it and the transparent text vanishes.
+ * The title carries the gradient itself instead.
+ */
+h1 .product-title {
+  background: inherit;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
 /* Image beside the facts on wide screens, above them on narrow ones. */
 .product-intro {
   display: grid;
