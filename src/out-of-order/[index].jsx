@@ -1,4 +1,4 @@
-import Layout from "../Layout";
+import Layout, { addCacheBuster } from "../Layout";
 
 /** Time span of the bars in ms, a bit longer than the slowest possible delay. */
 const SCALE = 2100;
@@ -58,8 +58,8 @@ export default function () {
         <div>
           <template shadowrootmode="open">
             {/* Page styles don't reach into a shadow root, so it links them itself. */}
-            <link rel="stylesheet" href={`/index.css?v=${process.env.BUILD_ID}`} />
-            <link rel="stylesheet" href={`/out-of-order/index.css?v=${process.env.BUILD_ID}`} />
+            <link rel="stylesheet" href={addCacheBuster("/index.css")} />
+            <link rel="stylesheet" href={addCacheBuster("/out-of-order/index.css")} />
             <div class="oo-grid">
               {SOURCES.map(({ id, name }) => (
                 <slot name={id}>

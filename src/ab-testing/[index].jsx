@@ -60,9 +60,14 @@ export default function ({ request, visitor, variant, flags }) {
         <h2>Your assignment</h2>
         <p>
           Visitor id <code>{visitor}</code> sees variant <strong>{variant}</strong>.{" "}
-          <a href={`${PATH}?reset`}>Start as new visitor</a> to get a new id, and maybe another
-          variant.
+          <button type="submit" form="reset" class="ab-reset">
+            Start as new visitor
+          </button>{" "}
+          to get a new id, and maybe another variant.
         </p>
+        {/* A form, not a link: starting over changes state, which a GET (e.g. a prefetch) must not.
+            It can't sit inside the paragraph, so the button above points to it by its id. */}
+        <form id="reset" method="post" action={`${PATH}?reset`} hidden></form>
         <div class="ab-table">
           <table>
             <thead>

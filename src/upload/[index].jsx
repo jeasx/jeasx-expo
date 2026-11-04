@@ -50,7 +50,8 @@ export default async function ({ request, reply }) {
   }
 
   // Keep the chosen options after a POST, so trying another one is quick.
-  const chosen = (name, fallback) => (posted ? String(body[name]) : String(fallback));
+  // A missing field (e.g. a request without the form) falls back to the default.
+  const chosen = (name, fallback) => String((posted ? body[name] : undefined) ?? fallback);
 
   return (
     <Layout

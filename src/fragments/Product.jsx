@@ -24,7 +24,7 @@ export async function Product({ id }) {
       />
       <div>
         <h3>{product.title}</h3>
-        <b class="tf-price">${product.price}</b>
+        {typeof product.price === "number" && <b class="tf-price">${product.price.toFixed(2)}</b>}
         <p>{product.description}</p>
       </div>
     </article>

@@ -102,7 +102,11 @@ export default function Layout({
   );
 }
 
-/** @param {string} path  */
-function addCacheBuster(path) {
+/**
+ * Appends the build id, so browsers load a changed file instead of a cached copy.
+ *
+ * @param {string} path
+ */
+export function addCacheBuster(path) {
   return `${path}?v=${process.env.BUILD_ID}`;
 }

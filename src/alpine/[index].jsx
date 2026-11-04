@@ -5,7 +5,7 @@ const CATEGORIES = [
   { key: "general", icon: "🥁", one: "a pun", many: "puns" },
 ];
 
-export default async function () {
+export default function () {
   return (
     <Layout
       title="Use Alpine.js with Jeasx"
@@ -38,7 +38,7 @@ export default async function () {
                 this.error = '';
               } catch {
                 this.jokes = [];
-                this.error = 'The jokes could not be loaded. Please try again.';
+                this.error = `The jokes couldn't be loaded. Please try again.`;
               } finally {
                 this.loading = '';
               }

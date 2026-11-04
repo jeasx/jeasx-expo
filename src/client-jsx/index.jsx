@@ -16,7 +16,7 @@ globalThis.renderPlanets = async (container, names) => {
       try {
         slot.outerHTML = await jsxToString(<Planet planet={fetchPlanet(slot.dataset.planet)} />);
       } catch (error) {
-        slot.textContent = `${slot.dataset.planet} could not be loaded.`;
+        slot.textContent = `${slot.dataset.planet} couldn't be loaded.`;
         throw error;
       }
     }),

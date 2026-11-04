@@ -142,3 +142,23 @@
 tr.ab-mine {
   background: var(--ab-soft);
 }
+
+/* "Start as new visitor" posts a form, but reads like a link within the sentence.
+   "button" in the selector outweighs the global "button[type=submit]" rule (its full width). */
+button.ab-reset {
+  all: unset;
+  cursor: pointer;
+  color: var(--primary);
+  text-decoration: underline;
+  text-decoration-color: rgb(237 42 172 / 0.5);
+  text-underline-offset: 0.1rem;
+
+  &:hover {
+    color: var(--primary-hover);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+  }
+}

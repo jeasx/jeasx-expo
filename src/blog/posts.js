@@ -153,6 +153,9 @@ export function formatDate(date) {
         day: "numeric",
         month: "long",
         year: "numeric",
+        // The server doesn't know the visitor's time zone; without one, the date would
+        // depend on the time zone of the server.
+        timeZone: "UTC",
       });
 }
 

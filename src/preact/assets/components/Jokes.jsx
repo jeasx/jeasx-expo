@@ -23,7 +23,7 @@ export default function Jokes({ initial, api }) {
       setError("");
     } catch {
       setJokes([]);
-      setError("The jokes could not be loaded. Please try again.");
+      setError("The jokes couldn't be loaded. Please try again.");
     } finally {
       setLoading("");
     }
