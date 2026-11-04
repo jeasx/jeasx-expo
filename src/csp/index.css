@@ -13,19 +13,17 @@
   grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
   gap: 1rem;
 }
-.check {
-  display: flex;
-  flex-direction: column;
-  margin: 0;
-}
-.check > p {
-  flex: 1;
-}
 /* Green if a wanted script ran or an unwanted one was blocked, red otherwise. */
 .check {
   --check-color: var(--success);
   --check-icon: "\2713";
+  display: flex;
+  flex-direction: column;
+  margin: 0;
   border-top: 4px solid var(--check-color);
+}
+.check > p {
+  flex: 1;
 }
 .check:not(.check-wanted):has([data-state="ran"]),
 .check-wanted:not(:has([data-state="ran"])) {

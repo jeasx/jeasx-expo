@@ -40,6 +40,7 @@
   line-height: inherit;
   cursor: pointer;
   outline: none;
+  perspective: 800px;
 }
 .globe {
   transform-box: fill-box;
@@ -59,9 +60,6 @@
 }
 
 /* Click: the card flips over and shows more facts on its back. */
-.planet:not(.placeholder) {
-  perspective: 800px;
-}
 .front,
 .back {
   position: absolute;
@@ -79,6 +77,7 @@
 }
 .planet.flipped .back {
   visibility: visible;
+  transform: rotateY(0);
 }
 .back {
   box-sizing: border-box;
@@ -98,9 +97,6 @@
 }
 .planet.flipped .front {
   transform: rotateY(-180deg);
-}
-.planet.flipped .back {
-  transform: rotateY(0);
 }
 @media (prefers-reduced-motion: reduce) {
   .globe,

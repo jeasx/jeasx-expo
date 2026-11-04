@@ -86,6 +86,7 @@ html {
   -webkit-tap-highlight-color: transparent;
   overflow-wrap: break-word;
   tab-size: 4;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -209,50 +210,37 @@ h6 {
   line-height: 1.2;
 }
 h1 {
+  --heading-space: 3rem;
   font-size: 2rem;
   line-height: 1.125;
 }
 h2 {
+  --heading-space: 2.625rem;
   font-size: 1.75rem;
   line-height: 1.15;
 }
 h3 {
+  --heading-space: 2.25rem;
   font-size: 1.5rem;
   line-height: 1.175;
 }
 h4 {
+  --heading-space: 1.875rem;
   font-size: 1.25rem;
-  line-height: 1.2;
 }
 h5 {
+  --heading-space: 1.6875rem;
   font-size: 1.125rem;
   line-height: 1.225;
 }
 h6 {
+  --heading-space: 1.5rem;
   font-size: 1rem;
   line-height: 1.25;
 }
 /* Headings after content get more space above them, larger ones more. */
 :where(article, blockquote, dl, figure, form, ol, p, pre, table, ul) ~ :is(h1, h2, h3, h4, h5, h6) {
   margin-top: var(--heading-space);
-}
-h1 {
-  --heading-space: 3rem;
-}
-h2 {
-  --heading-space: 2.625rem;
-}
-h3 {
-  --heading-space: 2.25rem;
-}
-h4 {
-  --heading-space: 1.875rem;
-}
-h5 {
-  --heading-space: 1.6875rem;
-}
-h6 {
-  --heading-space: 1.5rem;
 }
 
 /* Lists keep the browser's indent, nested ones sit close to their parent item. */
@@ -515,17 +503,19 @@ article[class*="card-"] > :is(header, footer) {
   line-height: 1;
   white-space: nowrap;
 }
+.badge-secondary,
+.badge-success,
+.badge-error {
+  color: #fff;
+}
 .badge-secondary {
   background: var(--secondary);
-  color: #fff;
 }
 .badge-success {
   background: var(--success);
-  color: #fff;
 }
 .badge-error {
   background: var(--error);
-  color: #fff;
 }
 
 /* Buttons */
@@ -598,42 +588,39 @@ button[type="submit"] {
   --btn-hover: var(--secondary);
   --btn-text: #fff;
 }
+.btn-secondary,
+.btn-warning,
+.btn-error {
+  --btn-text: #fff;
+}
 .btn-secondary {
   --btn: var(--secondary);
   --btn-hover: var(--secondary-hover);
-  --btn-text: #fff;
 }
 .btn-warning {
   --btn: var(--warning);
   --btn-hover: var(--warning-hover);
-  --btn-text: #fff;
 }
 .btn-error {
   --btn: var(--error);
   --btn-hover: var(--error-hover);
-  --btn-text: #fff;
 }
 /* Outline buttons: transparent, only text and border are colored. */
 .outline {
   --btn: var(--primary);
   --btn-hover: var(--primary-hover);
+  --btn-text: var(--btn);
 }
 .outline.secondary {
   --btn: var(--secondary);
   --btn-hover: var(--secondary-hover);
 }
-.outline {
-  --btn-text: var(--btn);
-}
 .outline:hover {
   --btn-text: var(--btn-hover);
 }
-.outline,
-.outline:hover {
-  background: transparent;
-  color: var(--btn-text);
-}
 /* .btn-outline keeps the text color of its button and only colors the border. */
+.outline,
+.outline:hover,
 .btn-outline,
 .btn-outline:hover {
   background: transparent;
@@ -1057,10 +1044,6 @@ h2 {
 }
 
 /* Overview page */
-html {
-  scroll-behavior: smooth;
-}
-
 .home-hero {
   border-radius: 1rem;
   background: radial-gradient(
@@ -1086,7 +1069,8 @@ html {
   line-height: 1.1;
 }
 
-.home-gradient {
+.home-gradient,
+.shell-gradient {
   background: linear-gradient(90deg, var(--primary), var(--secondary));
   -webkit-background-clip: text;
   background-clip: text;
@@ -1257,13 +1241,6 @@ html {
   text-decoration: none;
 }
 
-.shell-gradient {
-  background: linear-gradient(90deg, var(--primary), var(--secondary));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
 .shell-back {
   opacity: 0.75;
   font-size: 0.9rem;
@@ -1311,9 +1288,7 @@ html {
   .shell-source span {
     display: none;
   }
-}
 
-@media (max-width: 576px) {
   .home-hero {
     padding: 2.5rem 0.5rem 2rem;
   }
