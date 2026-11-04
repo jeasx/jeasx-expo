@@ -19,6 +19,7 @@ export default function () {
     <Layout
       title="Unit tests for JSX components"
       description="Test JSX components and whole routes with node:test and jsxToString, without a browser."
+      css="/testing/index.css"
     >
       <h1>Unit tests for JSX components</h1>
       <p>
@@ -46,13 +47,26 @@ export default function () {
       </ul>
 
       <h2>The components</h2>
-      <article>
-        <Greeting name="<script>alert('Escaped!')</script>" />
-        <p>
-          Price: <Price amount={1234.5} />
-        </p>
-        <UserCard id={1} />
-      </article>
+      <div class="showcase">
+        <article>
+          <header>
+            <code>&lt;Greeting&gt;</code>
+          </header>
+          <Greeting name="<script>alert('Escaped!')</script>" />
+        </article>
+        <article>
+          <header>
+            <code>&lt;Price&gt;</code>
+          </header>
+          <Price amount={1234.5} />
+        </article>
+        <article>
+          <header>
+            <code>&lt;UserCard&gt;</code>
+          </header>
+          <UserCard id={1} />
+        </article>
+      </div>
 
       <h2>The tests</h2>
       <p>

@@ -4,6 +4,10 @@ import Planet from "./components/Planet";
 import Planets from "./components/Planets";
 
 globalThis.renderPlanets = async (container, names) => {
+  if (names.length === 0) {
+    container.innerHTML = await jsxToString(<p>Pick at least one planet.</p>);
+    return;
+  }
   const start = performance.now();
   container.innerHTML = await jsxToString(<Planets names={names} />);
   // Render every planet on its own, so each shows up as soon as its data arrives.

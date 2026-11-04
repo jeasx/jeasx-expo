@@ -17,6 +17,7 @@
 }
 /* Placeholders and loaded planets share one size, so nothing moves while loading. */
 .planet {
+  position: relative;
   box-sizing: border-box;
   flex: none;
   width: 200px;
@@ -29,8 +30,6 @@
   display: block;
   max-width: 100%;
   height: auto;
-}
-.planet svg {
   overflow: visible;
 }
 
@@ -86,9 +85,6 @@
 }
 .planet.flipped .back {
   visibility: visible;
-}
-.planet {
-  position: relative;
 }
 .back {
   box-sizing: border-box;

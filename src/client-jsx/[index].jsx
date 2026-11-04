@@ -24,10 +24,16 @@ export default function () {
         onsubmit={
           /* js */ `
           event.preventDefault();
+          const button = event.target.querySelector("button");
+          button.setAttribute("aria-busy", "true");
+          button.disabled = true;
           renderPlanets(
             document.getElementById("planets"),
             new FormData(event.target).getAll("planet")
-          );`
+          ).finally(() => {
+            button.removeAttribute("aria-busy");
+            button.disabled = false;
+          });`
         }
       >
         <fieldset class="planet-picker">
@@ -43,7 +49,7 @@ export default function () {
           Launch
         </button>
       </form>
-      <div id="planets"></div>
+      <div id="planets" aria-live="polite"></div>
     </Layout>
   );
 }
