@@ -4,13 +4,7 @@
   padding: 1.5rem;
   overflow-x: auto;
   border-radius: 1rem;
-  background: radial-gradient(
-    circle at 0 50%,
-    #fbbf24 0,
-    #7c2d12 4rem,
-    #0f172a 9rem,
-    #020617
-  );
+  background: radial-gradient(circle at 0 50%, #fbbf24 0, #7c2d12 4rem, #0f172a 9rem, #020617);
   /* The sun scrolls along with the planets. */
   background-attachment: local;
   color: #e2e8f0;
