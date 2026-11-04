@@ -26,10 +26,6 @@
     justify-content: center;
     align-items: center;
     gap: 0.5rem 0.75rem;
-    background: linear-gradient(120deg, var(--lottery-accent), var(--lottery-accent-2));
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
     margin-bottom: 0.5rem;
     font-size: clamp(1.75rem, 5vw, 2.5rem);
   }

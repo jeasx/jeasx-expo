@@ -10,15 +10,6 @@
 .ab {
   margin: 0 auto;
   max-width: 48rem;
-
-  & > h1 {
-    background: linear-gradient(120deg, var(--ab-accent), var(--ab-accent-2));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    text-align: center;
-  }
-
   & > h2 {
     margin-top: 2.5rem;
   }

@@ -9,14 +9,6 @@
 .as {
   margin: 0 auto;
   max-width: 48rem;
-
-  & > h1 {
-    background: linear-gradient(120deg, var(--as-accent), var(--as-accent-2));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    text-align: center;
-  }
 }
 
 /* Search field with an inline progress indicator */

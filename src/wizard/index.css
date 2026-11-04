@@ -15,14 +15,6 @@
 /* Header with title, step indicator and progress */
 .wizard-header {
   margin-bottom: 1.5rem;
-
-  & h1 {
-    background: linear-gradient(120deg, var(--wiz-accent), var(--wiz-accent-2));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    text-align: center;
-  }
 }
 
 /* The base styles lay out a nav as a compact flex row; the steps span the full width instead. */

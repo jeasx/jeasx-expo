@@ -8,7 +8,7 @@ export default function () {
       css="/hx-live/index.css"
       script="/hx-live/index.js"
     >
-      <h1 class="hl-title">Reactive scripting</h1>
+      <h1>Reactive scripting</h1>
       <p>
         <a href="https://four.htmx.org/extensions/hx-live">hx-live</a> is an HTMX extension to ease
         reactive scripting for the web. It is inspired by Alpine, jQuery and hyperscript. State

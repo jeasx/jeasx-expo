@@ -203,6 +203,10 @@ h1 {
   font-size: 2rem;
   line-height: 1.125;
   text-align: center;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 h2 {
   --heading-space: 2.625rem;
@@ -1054,7 +1058,6 @@ dialog::backdrop {
   line-height: 1.1;
 }
 
-.home-gradient,
 .shell-gradient {
   background: linear-gradient(90deg, var(--primary), var(--secondary));
   -webkit-background-clip: text;
