@@ -22,7 +22,7 @@
 }
 .languages a[aria-current] {
   background: var(--primary);
-  color: var(--primary-inverse, #fff);
+  color: var(--primary-inverse);
   pointer-events: none;
 }
 

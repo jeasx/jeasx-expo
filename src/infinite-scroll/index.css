@@ -20,7 +20,6 @@
 }
 
 .is-table {
-  width: 100%;
   border-collapse: separate;
   border-spacing: 0;
   border: 1px solid var(--is-line);
@@ -111,13 +110,7 @@
   border: 2px solid var(--is-line);
   border-top-color: var(--is-accent);
   border-radius: 50%;
-  animation: is-spin 0.8s linear infinite;
-}
-
-@keyframes is-spin {
-  to {
-    transform: rotate(360deg);
-  }
+  animation: spin 0.8s linear infinite;
 }
 
 .is-end td {

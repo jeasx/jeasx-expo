@@ -321,11 +321,7 @@
 
 .blog-field input,
 .blog-field textarea {
-  width: 100%;
   margin: 0;
-  transition:
-    border-color 0.15s,
-    box-shadow 0.15s;
 }
 
 .blog-field input:focus,
@@ -336,11 +332,11 @@
 }
 
 .blog-field [aria-invalid="true"] {
-  border-color: var(--error, #e5484d);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--error, #e5484d) 25%, transparent);
+  border-color: var(--error);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--error) 25%, transparent);
 }
 
-/* mu.css pulls a <small> after a field up with a negative margin; the flex gap spaces it here. */
+/* The base styles pull a <small> after a field up with a negative margin; the flex gap spaces it here. */
 .blog-field small {
   margin: 0;
   opacity: 0.6;
@@ -362,18 +358,18 @@
   opacity: 0.7;
 }
 
-/* The title looks like the headline it will become. */
-.blog-title-input {
+/* The title looks like the headline it will become. Two classes beat the base input rule,
+   and the field grows with its text instead of keeping the base height. */
+.blog-field .blog-title-input {
+  height: auto;
   font-size: clamp(1.25rem, 3vw, 1.75rem);
   font-weight: bold;
-  padding: 0.75rem 1rem;
 }
 
 .blog-body-input {
   font-size: 1.05rem;
   line-height: 1.7;
   min-height: 14rem;
-  resize: vertical;
 }
 
 .blog-field-row {
@@ -408,9 +404,9 @@
 .blog-error {
   margin: 0;
   padding: 0.75rem 1rem;
-  border: var(--border-width) solid var(--error, #e5484d);
+  border: var(--border-width) solid var(--error);
   border-radius: var(--radius);
-  background: color-mix(in srgb, var(--error, #e5484d) 15%, transparent);
+  background: color-mix(in srgb, var(--error) 15%, transparent);
 }
 
 .blog-form-actions {
@@ -442,7 +438,7 @@
   text-align: left;
 }
 
-/* mu.css styles lists in an aside as navigation (block items with padding), so undo that. */
+/* The flex gap spaces the tips, not the margins of the items. */
 .blog-tips ul {
   display: flex;
   flex-direction: column;
@@ -452,9 +448,7 @@
 }
 
 .blog-tips li {
-  display: list-item;
   margin: 0;
-  padding: 0;
 }
 
 /* Explains the cookie storage below the posts. */
