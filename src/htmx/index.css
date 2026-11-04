@@ -21,9 +21,7 @@
 
 /* Card that holds either the view or the edit form */
 .cte-card {
-  transition:
-    opacity 0.3s,
-    border-color 0.2s;
+  transition: border-color 0.2s;
   margin: 1.5rem 0;
   border: 1px solid var(--cte-line);
   border-radius: 0.75rem;
@@ -33,10 +31,19 @@
   &.editing {
     border-color: color-mix(in srgb, var(--cte-accent) 60%, transparent);
   }
+}
 
-  /* Fade the swapped-in fragment in, so the change is noticeable. */
-  &.htmx-added {
+/* Fade each newly inserted card in, so the swap is noticeable. */
+@keyframes cte-fade-in {
+  from {
+    transform: translateY(0.25rem);
     opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .cte-card {
+    animation: cte-fade-in 0.3s ease-out;
   }
 }
 
