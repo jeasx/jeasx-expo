@@ -4,9 +4,9 @@ export default function () {
   return (
     <Layout
       title="Active search with HTMX and Jeasx"
-      description="Search addresses as you type with HTMX, Jeasx and Nominatim."
-      css="/nominatim/index.css"
-      script="/nominatim/index.js"
+      description="Search addresses as you type with HTMX, Jeasx and Photon."
+      css="/active-search/index.css"
+      script="/active-search/index.js"
     >
       <div class="as">
         <h1>Active search with HTMX and Jeasx</h1>
@@ -16,11 +16,17 @@ export default function () {
             active search
           </a>{" "}
           with HTMX and Jeasx is straightforward. This example uses{" "}
-          <a href="https://nominatim.org/release-docs/latest/api/Search">
-            Nominatim
-          </a>{" "}
-          from OpenStreetMap to find addresses: the results update while you
-          type, without reloading the page.
+          <a href="https://photon.komoot.io">Photon</a>, a geocoder for
+          OpenStreetMap data built for search-as-you-type, to find addresses:
+          the results update while you type, without reloading the page.
+        </p>
+        <p>
+          <small>
+            Pick the service with care: Nominatim, the official geocoder of
+            OpenStreetMap, doesn't allow search-as-you-type. The server caches
+            the results and limits its requests, as the public Photon instance
+            asks for fair use.
+          </small>
         </p>
         <div class="as-search">
           <input

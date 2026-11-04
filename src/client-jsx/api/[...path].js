@@ -1,4 +1,4 @@
-import planets from "../planets.json";
+import planets from "../planets";
 
 const PATTERN = new URLPattern({ pathname: "/client-jsx/api/:name{/}?" });
 

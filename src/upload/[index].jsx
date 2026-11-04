@@ -1,5 +1,12 @@
 import Layout from "../Layout";
-import { convert, ConvertError, FORMATS, ROTATIONS, SIZES } from "./convert";
+import {
+  convert,
+  ConvertError,
+  FORMATS,
+  MAX_UPLOAD_MB,
+  ROTATIONS,
+  SIZES,
+} from "./convert";
 
 const percent = new Intl.NumberFormat("en-US", {
   style: "percent",
@@ -81,7 +88,7 @@ export default async function ({ request, reply }) {
           />
         </div>
         <label>
-          JPEG image
+          JPEG image (up to {MAX_UPLOAD_MB} MB)
           <input
             type="file"
             name="upload"

@@ -2,7 +2,7 @@
 dist
 dist-test
 
-# local environment files, which may hold secrets like COOKIE_SECRET (see env.js)
+# local environment files, which may hold secrets like COOKIE_SECRET (loaded by Jeasx, see node_modules/jeasx/env.js)
 .env*.local
 
 # dependencies

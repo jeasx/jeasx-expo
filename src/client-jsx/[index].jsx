@@ -1,5 +1,5 @@
 import Layout from "../Layout";
-import planets from "./planets.json";
+import planets from "./planets";
 
 export default function () {
   return (

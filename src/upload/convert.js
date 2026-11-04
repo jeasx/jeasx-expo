@@ -4,10 +4,12 @@ import limiter, { QueueFullError } from "../sharp/limiter";
 export const FORMATS = ["avif", "webp"];
 export const SIZES = [160, 320, 640];
 export const ROTATIONS = [0, 30, 45, 60, 75, 90, 180];
+// Must match limits.fileSize in jeasx.config.js, which drops larger files.
+export const MAX_UPLOAD_MB = 8;
 // A small file can still decode to a huge image (a "decompression bomb"),
 // so limit the pixels (sharp's default is 268 megapixels) and the parallel work.
 const MAX_INPUT_PIXELS = 25_000_000;
-// Waiting uploads keep their file in memory (up to about 8 MB each), so limit the line too.
+// Waiting uploads keep their file in memory (up to MAX_UPLOAD_MB each), so limit the line too.
 const limit = limiter(2, 8);
 
 /** An error with a message meant for the visitor and the HTTP status to answer with. */
@@ -33,6 +35,14 @@ export async function convert(body) {
   const format = String(body["format"]);
   const size = Number(body["size"]);
   const rotate = Number(body["rotate"]);
+
+  // jeasx.config.js replaces a file larger than its limit with null.
+  if (upload === null) {
+    throw new ConvertError(
+      413,
+      `The image is larger than ${MAX_UPLOAD_MB} MB. Please choose a smaller one.`,
+    );
+  }
 
   // Only accept the values the form offers.
   if (

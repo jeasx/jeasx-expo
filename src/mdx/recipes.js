@@ -43,7 +43,7 @@ export async function loadRecipes() {
   return (await cached("recipes", fetchRecipes)) ?? [];
 }
 
-/** A dish emoji for each cuisine, as the page can't load the API's images (see /csp). */
+/** A dish emoji for each cuisine, so the recipe cards need no images from the API. */
 export function emojiFor(/** @type {Recipe} */ { cuisine, tags }) {
   const emojis = {
     Italian: "🍝",

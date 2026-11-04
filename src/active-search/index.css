@@ -27,7 +27,6 @@
   & input {
     margin: 0;
     border-radius: 999px;
-    padding-right: 7rem;
     width: 100%;
   }
 
@@ -35,13 +34,31 @@
     border-color: var(--as-accent);
   }
 
+  /* While searching, the indicator takes the place of the browser's clear button.
+     Its background covers long text below it, so the field needs no extra padding. */
   & .htmx-indicator {
     position: absolute;
     top: 50%;
-    right: 1rem;
+    right: var(--mu-form-element-spacing-horizontal);
     transform: translateY(-50%);
+    border-radius: 999px;
+    background: var(--mu-form-element-background-color);
+    padding-left: 0.5rem;
     color: var(--as-muted);
     font-size: 0.85rem;
+  }
+
+  /* The browser's clear button can't be resized, so draw it with the close icon of µCSS. */
+  & input::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    background: var(--mu-icon-close) center / contain no-repeat;
+    width: 1.25rem;
+    height: 1.25rem;
+    cursor: pointer;
+  }
+
+  &:has(.htmx-request) input::-webkit-search-cancel-button {
+    visibility: hidden;
   }
 }
 

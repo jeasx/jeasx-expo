@@ -1,4 +1,4 @@
-/** Replaces Markdown blockquotes ("> ...") in MDX content, see the components prop in [index].mdx. */
+/** Replaces Markdown blockquotes ("> ...") in MDX content, see the components prop in Cookbook.jsx. */
 export default function Tip({ children }) {
   return (
     <aside class="tip">
