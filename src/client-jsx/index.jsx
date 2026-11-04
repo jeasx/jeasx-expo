@@ -14,9 +14,7 @@ globalThis.renderPlanets = async (container, names) => {
   const results = await Promise.allSettled(
     [...container.querySelectorAll("[data-planet]")].map(async (slot) => {
       try {
-        slot.outerHTML = await jsxToString(
-          <Planet planet={fetchPlanet(slot.dataset.planet)} />,
-        );
+        slot.outerHTML = await jsxToString(<Planet planet={fetchPlanet(slot.dataset.planet)} />);
       } catch (error) {
         slot.textContent = `${slot.dataset.planet} could not be loaded.`;
         throw error;

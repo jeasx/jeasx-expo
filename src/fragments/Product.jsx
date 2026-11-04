@@ -7,9 +7,7 @@ export async function Product({ id }) {
   const product = await loadProduct(id).catch(() => undefined);
   if (!product) {
     return (
-      <p class="tf-empty">
-        The product couldn't be loaded right now. Please try again later.
-      </p>
+      <p class="tf-empty">The product couldn't be loaded right now. Please try again later.</p>
     );
   }
 

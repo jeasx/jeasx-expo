@@ -2,12 +2,8 @@ const byId = (id) => /** @type {HTMLElement} */ (document.getElementById(id));
 
 const list = byId("messages");
 const chatForm = /** @type {HTMLFormElement} */ (byId("chat-form"));
-const textInput = /** @type {HTMLInputElement} */ (
-  chatForm.elements.namedItem("text")
-);
-const nameInput = /** @type {HTMLInputElement} */ (
-  chatForm.elements.namedItem("name")
-);
+const textInput = /** @type {HTMLInputElement} */ (chatForm.elements.namedItem("text"));
+const nameInput = /** @type {HTMLInputElement} */ (chatForm.elements.namedItem("name"));
 const MAX_MESSAGES = 50;
 
 /**
@@ -93,16 +89,11 @@ function append({ id, name, text, time }) {
 
 const chatEvents = new EventSource(`/chat/events?after=${list.dataset.lastId}`);
 chatEvents.addEventListener("open", () => setStatus("open", "Connected"));
-chatEvents.addEventListener("error", () =>
-  setStatus("connecting", "Reconnecting..."),
-);
-chatEvents.addEventListener("message", (event) =>
-  append(JSON.parse(event.data)),
-);
+chatEvents.addEventListener("error", () => setStatus("connecting", "Reconnecting..."));
+chatEvents.addEventListener("message", (event) => append(JSON.parse(event.data)));
 chatEvents.addEventListener("presence", (event) => {
   const { count } = JSON.parse(event.data);
-  byId("presence").textContent =
-    `${count} ${count === 1 ? "person" : "people"} online`;
+  byId("presence").textContent = `${count} ${count === 1 ? "person" : "people"} online`;
 });
 chatEvents.addEventListener("full", () => {
   chatEvents.close();

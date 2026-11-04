@@ -15,9 +15,7 @@ export default function Jokes({ initial, api }) {
   async function load(category) {
     setLoading(category);
     try {
-      const response = await fetch(
-        `${api}/${encodeURIComponent(category)}?amount=${counter}`,
-      );
+      const response = await fetch(`${api}/${encodeURIComponent(category)}?amount=${counter}`);
       if (!response.ok) {
         throw new Error(response.statusText);
       }

@@ -17,13 +17,13 @@ Then open [http://localhost:3000](http://localhost:3000). The start page links t
 
 ## Scripts
 
-| Command         | Description                                      |
-| --------------- | ------------------------------------------------ |
-| `npm run dev`   | Start the development server with live rebuilds  |
-| `npm run build` | Build server and browser bundles for production  |
-| `npm start`     | Start the production server (after `build`)      |
-| `npm test`      | Run the unit tests (`src/**/*.test.js[x]`)       |
-| `npm run clean` | Remove build output                              |
+| Command         | Description                                     |
+| --------------- | ----------------------------------------------- |
+| `npm run dev`   | Start the development server with live rebuilds |
+| `npm run build` | Build server and browser bundles for production |
+| `npm start`     | Start the production server (after `build`)     |
+| `npm test`      | Run the unit tests (`src/**/*.test.js[x]`)      |
+| `npm run clean` | Remove build output                             |
 
 ## What's inside
 
@@ -56,9 +56,9 @@ Server and browser build options, as well as Fastify plugins (multipart, cookies
 
 ## Configuration
 
-| Variable        | Description                                                                                                                   |
-| --------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| `PORT`          | Server port (default `3000`)                                                                                                  |
+| Variable        | Description                                                                                                                    |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `PORT`          | Server port (default `3000`)                                                                                                   |
 | `COOKIE_SECRET` | Secret for signed cookies. Set it in production and keep it across restarts; otherwise a random one is created on every start. |
 | `TRUST_PROXY`   | Set to `true` behind a proxy that terminates TLS (set automatically on Vercel)                                                 |
 

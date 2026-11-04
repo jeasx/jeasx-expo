@@ -185,7 +185,12 @@
     display: block;
     animation: progressbar 400ms forwards;
     border-radius: inherit;
-    background: linear-gradient(90deg, var(--lottery-accent), var(--lottery-accent-2), var(--lottery-gold));
+    background: linear-gradient(
+      90deg,
+      var(--lottery-accent),
+      var(--lottery-accent-2),
+      var(--lottery-gold)
+    );
     height: 100%;
     content: "";
   }

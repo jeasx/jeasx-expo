@@ -4,15 +4,7 @@ import limiter, { QueueFullError } from "../sharp/limiter";
 export const FORMATS = ["avif", "webp"];
 export const SIZES = [160, 320, 640];
 // How sharp picks the part to keep when cropping to a square.
-export const STRATEGIES = [
-  "entropy",
-  "attention",
-  "centre",
-  "north",
-  "south",
-  "east",
-  "west",
-];
+export const STRATEGIES = ["entropy", "attention", "centre", "north", "south", "east", "west"];
 export const ROTATIONS = [0, 30, 45, 60, 75, 90, 180];
 // Must match limits.fileSize in jeasx.config.js, which drops larger files.
 export const MAX_UPLOAD_MB = 8;
@@ -118,10 +110,5 @@ export async function convert(body) {
  * @param {Buffer} buffer
  */
 function isJpeg(buffer) {
-  return (
-    buffer.length >= 3 &&
-    buffer[0] === 0xff &&
-    buffer[1] === 0xd8 &&
-    buffer[2] === 0xff
-  );
+  return buffer.length >= 3 && buffer[0] === 0xff && buffer[1] === 0xd8 && buffer[2] === 0xff;
 }

@@ -41,8 +41,7 @@ function drawMemory() {
   const range = Math.max(...memoryHistory) - min || 1;
   const offset = HISTORY - memoryHistory.length;
   const points = memoryHistory.map(
-    (value, index) =>
-      `${offset + index},${(1 - (value - min) / range).toFixed(3)}`,
+    (value, index) => `${offset + index},${(1 - (value - min) / range).toFixed(3)}`,
   );
   $("memory-history").setAttribute("points", points.join(" "));
 }
@@ -51,9 +50,7 @@ function connect() {
   setStatus("connecting", "Connecting...");
   events = new EventSource("/sse/events");
   events.addEventListener("open", () => setStatus("open", "Connected"));
-  events.addEventListener("error", () =>
-    setStatus("connecting", "Reconnecting..."),
-  );
+  events.addEventListener("error", () => setStatus("connecting", "Reconnecting..."));
   events.addEventListener("stats", (event) => {
     const { time, uptime, memory, clients } = JSON.parse(event.data);
     show("time", time);
@@ -68,8 +65,7 @@ function connect() {
     drawMemory();
 
     received++;
-    $("received").textContent =
-      `${received} ${received === 1 ? "event" : "events"} received`;
+    $("received").textContent = `${received} ${received === 1 ? "event" : "events"} received`;
   });
   $("toggle").textContent = "Disconnect";
 }
@@ -81,8 +77,6 @@ function disconnect() {
   $("toggle").textContent = "Connect";
 }
 
-$("toggle").addEventListener("click", () =>
-  events ? disconnect() : connect(),
-);
+$("toggle").addEventListener("click", () => (events ? disconnect() : connect()));
 
 connect();
