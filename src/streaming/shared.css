@@ -136,7 +136,7 @@
   font-variant-numeric: tabular-nums;
 }
 
-/* Connection status with a coloured dot: set data-state to "open", "connecting" or "closed". */
+/* Connection status with a colored dot: set data-state to "open", "connecting" or "closed". */
 .sx-status {
   display: inline-flex;
   align-items: center;

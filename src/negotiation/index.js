@@ -17,7 +17,7 @@ playground.addEventListener("submit", async (event) => {
     const pressed = /** @type {HTMLElement} */ (button).dataset.accept === input.value.trim();
     button.setAttribute("aria-pressed", String(pressed));
   }
-  statusLine.textContent = "Loading...";
+  statusLine.textContent = "Loading…";
   try {
     const response = await fetch(playground.action, {
       headers: { accept: input.value },

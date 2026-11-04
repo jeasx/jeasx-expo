@@ -44,7 +44,10 @@ export default function Layout({
           {robots && <meta name="robots" content={robots} />}
           <link rel="stylesheet" href={addCacheBuster("/index.css")} />
           {css && <link rel="stylesheet" href={addCacheBuster(css)} />}
-          <link rel="canonical" href={`${ORIGIN}${url.endsWith("/") ? url.slice(0, -1) : url}`} />
+          <link
+            rel="canonical"
+            href={`${ORIGIN}${url.length > 1 && url.endsWith("/") ? url.slice(0, -1) : url}`}
+          />
           {/* The nonce is only set by pages with a Content Security Policy (see "/csp"). */}
           <script type="module" src={addCacheBuster("/index.js")} nonce={this.nonce}></script>
           {script && (

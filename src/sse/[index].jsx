@@ -28,7 +28,7 @@ export default function () {
           <header>
             <h2>Server stats</h2>
             <span id="status" class="sx-status" data-state="connecting" role="status">
-              Connecting...
+              Connecting…
             </span>
           </header>
           <dl class="se-tiles">

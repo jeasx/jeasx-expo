@@ -1,3 +1,5 @@
+import { hue, initial } from "../@helpers/avatar";
+
 const byId = (id) => /** @type {HTMLElement} */ (document.getElementById(id));
 
 const list = byId("messages");
@@ -5,19 +7,6 @@ const chatForm = /** @type {HTMLFormElement} */ (byId("chat-form"));
 const textInput = /** @type {HTMLInputElement} */ (chatForm.elements.namedItem("text"));
 const nameInput = /** @type {HTMLInputElement} */ (chatForm.elements.namedItem("name"));
 const MAX_MESSAGES = 50;
-
-/**
- * Same formula as on the server, so a name keeps its colour.
- *
- * @param {string} name
- */
-function hue(name) {
-  let hash = 0;
-  for (const char of name) {
-    hash = (hash * 31 + /** @type {number} */ (char.codePointAt(0))) % 360;
-  }
-  return hash;
-}
 
 /**
  * @param {string} state "connecting", "open" or "closed"
@@ -63,7 +52,7 @@ function append({ id, name, text, time }) {
   avatar.className = "avatar";
   avatar.setAttribute("aria-hidden", "true");
   avatar.style.setProperty("--hue", String(hue(name)));
-  avatar.textContent = name.charAt(0).toUpperCase();
+  avatar.textContent = initial(name);
   const bubble = document.createElement("div");
   bubble.className = "bubble";
   const author = document.createElement("strong");
@@ -89,7 +78,7 @@ function append({ id, name, text, time }) {
 
 const chatEvents = new EventSource(`/chat/events?after=${list.dataset.lastId}`);
 chatEvents.addEventListener("open", () => setStatus("open", "Connected"));
-chatEvents.addEventListener("error", () => setStatus("connecting", "Reconnecting..."));
+chatEvents.addEventListener("error", () => setStatus("connecting", "Reconnecting…"));
 chatEvents.addEventListener("message", (event) => append(JSON.parse(event.data)));
 chatEvents.addEventListener("presence", (event) => {
   const { count } = JSON.parse(event.data);

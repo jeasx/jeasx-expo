@@ -33,7 +33,7 @@ export default async function ({ request }) {
           <input
             type="search"
             name="search"
-            placeholder="Search repositories by name..."
+            placeholder="Search repositories by name…"
             aria-label="Search repositories"
             maxlength={100}
             value={search}
@@ -43,7 +43,7 @@ export default async function ({ request }) {
         {search ? (
           <div class="loader">
             {/* Flushed immediately; hidden via CSS as soon as the results are streamed in after it. */}
-            <div aria-busy="true" class="skeletons" aria-label="Loading repositories...">
+            <div aria-busy="true" class="skeletons" aria-label="Loading repositories…">
               {[1, 2, 3].map(() => (
                 <div class="skeleton">
                   <span />

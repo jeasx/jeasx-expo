@@ -47,10 +47,10 @@ function drawMemory() {
 }
 
 function connect() {
-  setStatus("connecting", "Connecting...");
+  setStatus("connecting", "Connecting…");
   events = new EventSource("/sse/events");
   events.addEventListener("open", () => setStatus("open", "Connected"));
-  events.addEventListener("error", () => setStatus("connecting", "Reconnecting..."));
+  events.addEventListener("error", () => setStatus("connecting", "Reconnecting…"));
   events.addEventListener("stats", (event) => {
     const { time, uptime, memory, clients } = JSON.parse(event.data);
     show("time", time);

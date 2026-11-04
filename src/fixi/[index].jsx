@@ -155,13 +155,7 @@ async function Fragment({ request, reply }) {
             <input type="hidden" name="id" value={index} />
             <div data-label="Name">
               {isEditMode ? (
-                <input
-                  aria-label="Name"
-                  type="text"
-                  name="name"
-                  value={name}
-                  placeholder="Name..."
-                />
+                <input aria-label="Name" type="text" name="name" value={name} placeholder="Name…" />
               ) : (
                 name
               )}
@@ -173,7 +167,7 @@ async function Fragment({ request, reply }) {
                   type="text"
                   name="cuisine"
                   value={cuisine}
-                  placeholder="Cuisine..."
+                  placeholder="Cuisine…"
                 />
               ) : (
                 cuisine
@@ -186,7 +180,7 @@ async function Fragment({ request, reply }) {
                   type="text"
                   name="difficulty"
                   value={difficulty}
-                  placeholder="Difficulty..."
+                  placeholder="Difficulty…"
                 />
               ) : (
                 difficulty

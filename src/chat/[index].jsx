@@ -1,3 +1,4 @@
+import { hue, initial } from "../@helpers/avatar";
 import Layout from "../Layout";
 import { ERRORS, MAX_NAME_LENGTH, MAX_TEXT_LENGTH, recentMessages } from "./room";
 
@@ -42,7 +43,7 @@ export default function ({ request, reply }) {
           <header>
             <h2 id="presence">Chat</h2>
             <span id="status" class="sx-status" data-state="connecting" role="status">
-              Connecting...
+              Connecting…
             </span>
           </header>
           <ol id="messages" data-last-id={lastId} aria-live="polite">
@@ -50,7 +51,7 @@ export default function ({ request, reply }) {
             {messages.map((message) => (
               <li data-id={message.id} class={message.name === name ? "own" : undefined}>
                 <span class="avatar" style={`--hue: ${hue(message.name)}`} aria-hidden="true">
-                  {message.name.charAt(0).toUpperCase()}
+                  {initial(message.name)}
                 </span>
                 <div class="bubble">
                   <strong>{message.name}</strong>{" "}
@@ -101,17 +102,4 @@ export default function ({ request, reply }) {
  */
 function formatTime(time) {
   return `${new Date(time).toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit", timeZone: "UTC" })} UTC`;
-}
-
-/**
- * A colour per name for the avatars. The script of the page uses the same formula.
- *
- * @param {string} name
- */
-function hue(name) {
-  let hash = 0;
-  for (const char of name) {
-    hash = (hash * 31 + char.codePointAt(0)) % 360;
-  }
-  return hash;
 }
