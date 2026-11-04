@@ -14,9 +14,7 @@ export default function () {
     >
       <section class="home-hero">
         <p class="home-eyebrow">JSX with Ease</p>
-        <h1>
-          Explore Jeasx
-        </h1>
+        <h1>Explore Jeasx</h1>
         <p class="home-tagline">
           Use asynchronous JSX as an intuitive templating language for the server-side rendered web.
         </p>
