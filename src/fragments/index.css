@@ -48,12 +48,17 @@
   }
 
   & button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
     margin: 0;
     padding: 0.25rem 0.9rem;
+    line-height: 1;
   }
 
   & output {
     min-width: 4rem;
+    line-height: 1;
     color: var(--tf-muted);
     font-variant-numeric: tabular-nums;
     text-align: center;
