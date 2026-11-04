@@ -6,6 +6,7 @@ import {
   MAX_UPLOAD_MB,
   ROTATIONS,
   SIZES,
+  STRATEGIES,
 } from "./convert";
 
 const percent = new Intl.NumberFormat("en-US", {
@@ -59,12 +60,13 @@ export default async function ({ request, reply }) {
     >
       <h1>Upload and transform images with sharp</h1>
       <p>
-        Choose a JPEG image and the server converts, resizes and rotates it. The
-        form is sent as <code>multipart/form-data</code>, so the route gets the
-        file as a <code>Buffer</code> in <code>request.body</code>. Jeasx
-        doesn't ship an image processor, so the conversion is done in userland
-        with <a href="https://sharp.pixelplumbing.com">sharp</a>. The result is
-        embedded as a <code>data:</code> URI, so your image is never stored.
+        Choose a JPEG image and the server converts, crops, resizes and rotates
+        it. The form is sent as <code>multipart/form-data</code>, so the route
+        gets the file as a <code>Buffer</code> in <code>request.body</code>.
+        Jeasx doesn't ship an image processor, so the conversion is done in
+        userland with <a href="https://sharp.pixelplumbing.com">sharp</a>. The
+        result is embedded as a <code>data:</code> URI, so your image is never
+        stored.
       </p>
       <form method="post" enctype="multipart/form-data">
         <div class="row">
@@ -79,6 +81,12 @@ export default async function ({ request, reply }) {
             label="Size (pixels)"
             options={SIZES}
             value={chosen("size", 320)}
+          />
+          <Select
+            name="strategy"
+            label="Crop strategy"
+            options={STRATEGIES}
+            value={chosen("strategy", "entropy")}
           />
           <Select
             name="rotate"
@@ -166,7 +174,7 @@ export default async function ({ request, reply }) {
  */
 function Select({ name, label, options, value }) {
   return (
-    <label class="col-12 col-md-4">
+    <label class="col-12 col-md-3">
       {label}
       <select name={name}>
         {options.map((option) => (

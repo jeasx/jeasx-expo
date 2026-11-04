@@ -3,6 +3,16 @@ import limiter, { QueueFullError } from "../sharp/limiter";
 
 export const FORMATS = ["avif", "webp"];
 export const SIZES = [160, 320, 640];
+// How sharp picks the part to keep when cropping to a square.
+export const STRATEGIES = [
+  "entropy",
+  "attention",
+  "centre",
+  "north",
+  "south",
+  "east",
+  "west",
+];
 export const ROTATIONS = [0, 30, 45, 60, 75, 90, 180];
 // Must match limits.fileSize in jeasx.config.js, which drops larger files.
 export const MAX_UPLOAD_MB = 8;
@@ -35,6 +45,7 @@ export async function convert(body) {
   const format = String(body["format"]);
   const size = Number(body["size"]);
   const rotate = Number(body["rotate"]);
+  const strategy = String(body["strategy"]);
 
   // jeasx.config.js replaces a file larger than its limit with null.
   if (upload === null) {
@@ -50,11 +61,12 @@ export async function convert(body) {
     upload.length === 0 ||
     !FORMATS.includes(format) ||
     !SIZES.includes(size) ||
-    !ROTATIONS.includes(rotate)
+    !ROTATIONS.includes(rotate) ||
+    !STRATEGIES.includes(strategy)
   ) {
     throw new ConvertError(
       400,
-      "Please choose an image, a format, a size and a rotation.",
+      "Please choose an image, a format, a size, a strategy and a rotation.",
     );
   }
 
@@ -69,7 +81,7 @@ export async function convert(body) {
       const input = sharp(upload, { limitInputPixels: MAX_INPUT_PIXELS });
       const original = await input.metadata();
       const { data, info } = await input
-        .resize({ width: size, height: size, position: "entropy" })
+        .resize({ width: size, height: size, position: strategy })
         .rotate(rotate)
         .toFormat(/** @type {"avif" | "webp"} */ (format), { quality: 70 })
         .toBuffer({ resolveWithObject: true });
