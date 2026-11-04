@@ -68,8 +68,8 @@
   display: grid;
   grid-template-columns: max-content 1fr;
   margin: 0;
-  border: var(--mu-border-width) solid var(--mu-border-color);
-  border-radius: var(--mu-border-radius);
+  border: var(--border-width) solid var(--border);
+  border-radius: var(--radius);
   overflow: hidden;
 }
 
@@ -77,18 +77,18 @@
 .product-specs dd {
   margin: 0;
   padding: 0.5rem 1rem;
-  border-bottom: var(--mu-border-width) solid var(--mu-border-color);
+  border-bottom: var(--border-width) solid var(--border);
 }
 
 .product-specs dt {
   font-weight: bold;
-  color: var(--mu-primary);
-  background: color-mix(in srgb, var(--mu-primary) 12%, transparent);
-  border-right: var(--mu-border-width) solid var(--mu-border-color);
+  color: var(--primary);
+  background: color-mix(in srgb, var(--primary) 12%, transparent);
+  border-right: var(--border-width) solid var(--border);
 }
 
 .product-specs dd:nth-of-type(even) {
-  background: color-mix(in srgb, var(--mu-color) 5%, transparent);
+  background: color-mix(in srgb, var(--color) 5%, transparent);
 }
 
 .product-specs dt:last-of-type,

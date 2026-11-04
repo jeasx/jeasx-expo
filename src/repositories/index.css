@@ -75,7 +75,7 @@
   display: grid;
   gap: 0.75rem;
 
-  /* Hide µCSS's busy spinner, the skeletons show the loading state. */
+  /* Hide the busy spinner, the skeletons show the loading state. */
   &::before {
     display: none;
   }

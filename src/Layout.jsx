@@ -35,7 +35,7 @@ export default function Layout({
   return (
     <>
       {html("<!DOCTYPE html>")}
-      <html lang={lang} data-theme="dark">
+      <html lang={lang}>
         <head>
           <base href={url.endsWith("/") ? url : `${url}/`} />
           <meta charset="utf-8" />

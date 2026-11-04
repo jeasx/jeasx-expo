@@ -55,8 +55,7 @@ export default function () {
             Reload with new delays
           </a>
         </p>
-        {/* µCSS styles a shadow host without data-theme as light, so repeat the theme of the page. */}
-        <div data-theme="dark">
+        <div>
           <template shadowrootmode="open">
             {/* Page styles don't reach into a shadow root, so it links them itself. */}
             <link rel="stylesheet" href={`/index.css?v=${process.env.BUILD_ID}`} />

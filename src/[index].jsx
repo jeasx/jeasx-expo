@@ -59,8 +59,8 @@ export default function () {
         <article>
           <h3>Minimal markup</h3>
           <p>
-            Styled with <a href="https://mucss.org/">µCSS</a>, a lightweight and mostly classless
-            CSS framework, so the markup stays short and easy to read.
+            Styled with a small hand-written stylesheet that targets plain HTML elements, so the
+            markup stays short and easy to read.
           </p>
         </article>
       </section>
