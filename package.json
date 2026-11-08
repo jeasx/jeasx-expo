@@ -43,6 +43,7 @@
   },
   "allowScripts": {
     "esbuild": true,
+    "fsevents": true,
     "sharp": true
   }
 }
