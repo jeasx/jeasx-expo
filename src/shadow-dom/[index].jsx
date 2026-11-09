@@ -7,9 +7,6 @@ const PLANETS = [
   { name: "Jupiter", moons: 95, color: "#f59e0b" },
 ];
 
-/**
- * @param {import("../types").RouteProps} props
- */
 export default function () {
   return (
     <Layout
