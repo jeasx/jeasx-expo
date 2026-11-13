@@ -101,3 +101,38 @@
   font-weight: 700;
   text-align: center;
 }
+
+/*
+ * On narrow screens the filter sits above the feed, so it becomes a single row
+ * of pills that scrolls sideways instead of pushing the posts down.
+ */
+@media (max-width: 700px) {
+  .social .feeds {
+    display: flex;
+    gap: 0.4rem;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+  }
+  .social .feeds::-webkit-scrollbar {
+    display: none;
+  }
+  .social .feeds button {
+    flex: none;
+    gap: 0.45rem;
+    padding: 0.35rem 0.75rem 0.35rem 0.35rem;
+    border-radius: 999px;
+    white-space: nowrap;
+    scroll-snap-align: start;
+  }
+  .social .feeds button > span:first-child {
+    width: 1.6rem;
+    height: 1.6rem;
+    border-radius: 50%;
+    font-size: 0.85rem;
+  }
+  .social .badge {
+    margin-left: 0.15rem;
+  }
+}
