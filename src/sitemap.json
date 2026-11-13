@@ -98,7 +98,8 @@
       { "path": "/game-of-life", "title": "Game of Life" },
       { "path": "/maze-chase", "title": "Maze chase" },
       { "path": "/racer", "title": "Racer" },
-      { "path": "/sky-fortress", "title": "Sky fortress" }
+      { "path": "/sky-fortress", "title": "Sky fortress" },
+      { "path": "/jungle-run", "title": "Jungle run" }
     ]
   },
   {
