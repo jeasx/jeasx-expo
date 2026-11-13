@@ -190,11 +190,43 @@ async function* Strips({ view }) {
  * Restores the scroll position saved by the zoom script before the page was reloaded.
  * It runs inline right after the preview, so the page jumps back while the strips are
  * still streaming instead of after the whole image is loaded.
+ *
+ * Safari ignores or resets a scroll position set before its first layout, and while
+ * streaming the document may still be too short for it. So the script reserves enough
+ * height and applies the position again on every frame until the page is loaded,
+ * unless the user starts scrolling on their own.
  */
 function RestoreScroll() {
-  return html(
-    `<script>try{const y=sessionStorage.getItem("${SCROLL_KEY}");if(y!==null){sessionStorage.removeItem("${SCROLL_KEY}");scrollTo(0,Number(y))}}catch{}</script>`,
+  return html(`<script>
+(() => {
+  let y;
+  try {
+    y = sessionStorage.getItem("${SCROLL_KEY}");
+    sessionStorage.removeItem("${SCROLL_KEY}");
+  } catch {}
+  if (y === null || y === undefined) return;
+  y = Number(y);
+  const root = document.documentElement;
+  root.style.minHeight = y + innerHeight + "px";
+  let active = true;
+  const stop = () => {
+    active = false;
+    root.style.minHeight = "";
+    ["wheel", "touchstart", "keydown"].forEach((type) => removeEventListener(type, stop));
+  };
+  ["wheel", "touchstart", "keydown"].forEach((type) =>
+    addEventListener(type, stop, { passive: true }),
   );
+  const apply = () => {
+    if (!active) return;
+    if (Math.abs(scrollY - y) > 1) scrollTo(0, y);
+    requestAnimationFrame(apply);
+  };
+  apply();
+  // Keep it a moment after loading, Safari may reset the position once more.
+  addEventListener("load", () => setTimeout(() => active && stop(), 100));
+})();
+</script>`);
 }
 
 /**
