@@ -131,8 +131,12 @@
   animation: glow 1.4s var(--clock) ease-in-out infinite alternate;
 }
 @keyframes glow {
-  from { filter: drop-shadow(0 0 2px #e879f9); }
-  to { filter: drop-shadow(0 0 7px #e879f9) drop-shadow(0 0 2px #fdf4ff); }
+  from {
+    filter: drop-shadow(0 0 2px #e879f9);
+  }
+  to {
+    filter: drop-shadow(0 0 7px #e879f9) drop-shadow(0 0 2px #fdf4ff);
+  }
 }
 .crystal::before,
 .crystal::after {
@@ -158,16 +162,36 @@
     glint 1.8s var(--clock) ease-in-out infinite;
 }
 @keyframes float {
-  0%, 100% { translate: 0 8%; scale: 1 1; }
-  25% { translate: 0 -8%; }
-  45% { scale: 1 1; }
-  50% { translate: 0 8%; scale: 0.2 1; }
-  55% { scale: 1 1; }
-  75% { translate: 0 -8%; }
+  0%,
+  100% {
+    translate: 0 8%;
+    scale: 1 1;
+  }
+  25% {
+    translate: 0 -8%;
+  }
+  45% {
+    scale: 1 1;
+  }
+  50% {
+    translate: 0 8%;
+    scale: 0.2 1;
+  }
+  55% {
+    scale: 1 1;
+  }
+  75% {
+    translate: 0 -8%;
+  }
 }
 @keyframes glint {
-  0% { background-position: 100% 0; }
-  60%, 100% { background-position: 0 0; }
+  0% {
+    background-position: 100% 0;
+  }
+  60%,
+  100% {
+    background-position: 0 0;
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   .sprite,
