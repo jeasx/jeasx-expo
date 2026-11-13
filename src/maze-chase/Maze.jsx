@@ -164,7 +164,7 @@ function Sparkles({ y, elapsed }) {
  * (in ms) offsets looping animations, so they continue seamlessly across renders
  * instead of restarting with every new element.
  *
- * @param {{ state: ReturnType<typeof import("./game").initialState>, previous?: ReturnType<typeof import("./game").initialState> }} props
+ * @param {{ state: ReturnType<typeof import("./game").initialState>, previous?: ReturnType<typeof import("./game").initialState>, clock?: number }} props
  */
 export default function Maze({ state, previous = state, clock = 0 }) {
   const { player, ghosts, dots, frightened, tick } = state;
