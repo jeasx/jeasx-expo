@@ -98,7 +98,7 @@ const BIRD_FLIGHT = 6;
 
 /**
  * Now and then a bird flies across the sky, alternately from either side,
- * hopping through the air and flapping its stubby wing frantically. Like everything else, it is
+ * gliding through the air and flapping its long wing. Like everything else, it is
  * derived from the race clock alone.
  */
 function Bird({ clock }) {

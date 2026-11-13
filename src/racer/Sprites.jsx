@@ -75,68 +75,26 @@ export default function Sprites() {
         </g>
       </symbol>
       {/*
-       * A chubby little bird with a googly eye, a tuft, a big beak and dangling
-       * feet, flying to the right, with its stubby wing up and down.
+       * A seagull with a white body, grey wings with black tips and a yellow
+       * beak with a red spot, gliding to the right, its long wing up and down.
        */}
       <symbol id="bird-up" viewBox="-2 -2 42 36">
-        <path
-          d="M10 25 l-2 4 M10 25 l1 4"
-          stroke="#f97316"
-          stroke-width="1.5"
-          stroke-linecap="round"
-        />
-        <path
-          d="M16 26 l-1 4 M16 26 l2 4"
-          stroke="#f97316"
-          stroke-width="1.5"
-          stroke-linecap="round"
-        />
-        <path d="M4 16 L-1 12 L1 19 Z" fill="#0ea5e9" />
-        <ellipse cx="15" cy="17" rx="13" ry="11" fill="#38bdf8" />
-        <ellipse cx="16" cy="21" rx="8" ry="6" fill="#e0f2fe" />
-        <path
-          d="M14 6 Q15 1 18 3 M17 6 Q20 2 22 5"
-          fill="none"
-          stroke="#0ea5e9"
-          stroke-width="2"
-          stroke-linecap="round"
-        />
-        <path d="M27 14 L37 17 L27 20 Z" fill="#fb923c" />
-        <path d="M27 17 L35 17" stroke="#c2410c" stroke-width="1" />
-        <circle cx="22" cy="12" r="5.5" fill="#fff" stroke="#0f172a" stroke-width="1" />
-        <circle cx="23.5" cy="13" r="2.6" fill="#0f172a" />
-        <circle cx="24.3" cy="12.2" r="0.9" fill="#fff" />
-        <path d="M9 15 Q6 2 16 0 Q16 10 15 16 Z" fill="#0284c7" />
+        <path d="M8 16 L1 14 L2 18 L8 19 Z" fill="#cbd5e1" />
+        <path d="M7 17 Q14 12 25 13 Q31 11 34 14 Q33 18 27 19.5 Q16 22 7 17 Z" fill="#f8fafc" stroke="#94a3b8" stroke-width="0.6" />
+        <path d="M33.5 13.6 L39 15 L33.5 16.4 Z" fill="#facc15" />
+        <circle cx="37.2" cy="15.4" r="0.6" fill="#dc2626" />
+        <circle cx="30.8" cy="13.8" r="0.8" fill="#0f172a" />
+        <path d="M13 15 Q15 7 19 6 L8 -1 Q18 -1 24 6 Q24 11 23 15 Z" fill="#94a3b8" stroke="#64748b" stroke-width="0.6" stroke-linejoin="round" />
+        <path d="M8 -1 Q14 -1.5 18 1 L14 3 Z" fill="#0f172a" />
       </symbol>
       <symbol id="bird-down" viewBox="-2 -2 42 36">
-        <path
-          d="M10 25 l-2 4 M10 25 l1 4"
-          stroke="#f97316"
-          stroke-width="1.5"
-          stroke-linecap="round"
-        />
-        <path
-          d="M16 26 l-1 4 M16 26 l2 4"
-          stroke="#f97316"
-          stroke-width="1.5"
-          stroke-linecap="round"
-        />
-        <path d="M4 16 L-1 12 L1 19 Z" fill="#0ea5e9" />
-        <ellipse cx="15" cy="17" rx="13" ry="11" fill="#38bdf8" />
-        <ellipse cx="16" cy="21" rx="8" ry="6" fill="#e0f2fe" />
-        <path
-          d="M14 6 Q15 1 18 3 M17 6 Q20 2 22 5"
-          fill="none"
-          stroke="#0ea5e9"
-          stroke-width="2"
-          stroke-linecap="round"
-        />
-        <path d="M27 14 L37 17 L27 20 Z" fill="#fb923c" />
-        <path d="M27 17 L35 17" stroke="#c2410c" stroke-width="1" />
-        <circle cx="22" cy="12" r="5.5" fill="#fff" stroke="#0f172a" stroke-width="1" />
-        <circle cx="23.5" cy="13" r="2.6" fill="#0f172a" />
-        <circle cx="24.3" cy="12.2" r="0.9" fill="#fff" />
-        <path d="M9 17 Q5 30 15 32 Q17 24 15 18 Z" fill="#0284c7" />
+        <path d="M8 16 L1 14 L2 18 L8 19 Z" fill="#cbd5e1" />
+        <path d="M7 17 Q14 12 25 13 Q31 11 34 14 Q33 18 27 19.5 Q16 22 7 17 Z" fill="#f8fafc" stroke="#94a3b8" stroke-width="0.6" />
+        <path d="M33.5 13.6 L39 15 L33.5 16.4 Z" fill="#facc15" />
+        <circle cx="37.2" cy="15.4" r="0.6" fill="#dc2626" />
+        <circle cx="30.8" cy="13.8" r="0.8" fill="#0f172a" />
+        <path d="M13 17 Q15 23 19 25 L9 33 Q19 33 24 25 Q24 21 23 17 Z" fill="#94a3b8" stroke="#64748b" stroke-width="0.6" stroke-linejoin="round" />
+        <path d="M9 33 Q14 33.5 18 31 L14 29.5 Z" fill="#0f172a" />
       </symbol>
       {/* A happy cow walking to the right, with its legs in two steps. */}
       <symbol id="cow-a" viewBox="0 0 96 60">
