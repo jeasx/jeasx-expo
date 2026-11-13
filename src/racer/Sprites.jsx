@@ -80,20 +80,42 @@ export default function Sprites() {
        */}
       <symbol id="bird-up" viewBox="-2 -2 42 36">
         <path d="M8 16 L1 14 L2 18 L8 19 Z" fill="#cbd5e1" />
-        <path d="M7 17 Q14 12 25 13 Q31 11 34 14 Q33 18 27 19.5 Q16 22 7 17 Z" fill="#f8fafc" stroke="#94a3b8" stroke-width="0.6" />
+        <path
+          d="M7 17 Q14 12 25 13 Q31 11 34 14 Q33 18 27 19.5 Q16 22 7 17 Z"
+          fill="#f8fafc"
+          stroke="#94a3b8"
+          stroke-width="0.6"
+        />
         <path d="M33.5 13.6 L39 15 L33.5 16.4 Z" fill="#facc15" />
         <circle cx="37.2" cy="15.4" r="0.6" fill="#dc2626" />
         <circle cx="30.8" cy="13.8" r="0.8" fill="#0f172a" />
-        <path d="M13 15 Q15 7 19 6 L8 -1 Q18 -1 24 6 Q24 11 23 15 Z" fill="#94a3b8" stroke="#64748b" stroke-width="0.6" stroke-linejoin="round" />
+        <path
+          d="M13 15 Q15 7 19 6 L8 -1 Q18 -1 24 6 Q24 11 23 15 Z"
+          fill="#94a3b8"
+          stroke="#64748b"
+          stroke-width="0.6"
+          stroke-linejoin="round"
+        />
         <path d="M8 -1 Q14 -1.5 18 1 L14 3 Z" fill="#0f172a" />
       </symbol>
       <symbol id="bird-down" viewBox="-2 -2 42 36">
         <path d="M8 16 L1 14 L2 18 L8 19 Z" fill="#cbd5e1" />
-        <path d="M7 17 Q14 12 25 13 Q31 11 34 14 Q33 18 27 19.5 Q16 22 7 17 Z" fill="#f8fafc" stroke="#94a3b8" stroke-width="0.6" />
+        <path
+          d="M7 17 Q14 12 25 13 Q31 11 34 14 Q33 18 27 19.5 Q16 22 7 17 Z"
+          fill="#f8fafc"
+          stroke="#94a3b8"
+          stroke-width="0.6"
+        />
         <path d="M33.5 13.6 L39 15 L33.5 16.4 Z" fill="#facc15" />
         <circle cx="37.2" cy="15.4" r="0.6" fill="#dc2626" />
         <circle cx="30.8" cy="13.8" r="0.8" fill="#0f172a" />
-        <path d="M13 17 Q15 23 19 25 L9 33 Q19 33 24 25 Q24 21 23 17 Z" fill="#94a3b8" stroke="#64748b" stroke-width="0.6" stroke-linejoin="round" />
+        <path
+          d="M13 17 Q15 23 19 25 L9 33 Q19 33 24 25 Q24 21 23 17 Z"
+          fill="#94a3b8"
+          stroke="#64748b"
+          stroke-width="0.6"
+          stroke-linejoin="round"
+        />
         <path d="M9 33 Q14 33.5 18 31 L14 29.5 Z" fill="#0f172a" />
       </symbol>
       {/* A happy cow walking to the right, with its legs in two steps. */}

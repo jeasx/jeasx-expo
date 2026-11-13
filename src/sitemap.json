@@ -93,11 +93,12 @@
     "description": "Render the same JSX components on the server and in the browser with jsx-async-runtime, without React, a virtual DOM or hydration: from simple widgets to games and streamed async trees.",
     "links": [
       { "path": "/client-jsx", "title": "Client-side JSX" },
+      { "path": "/social-feed", "title": "Social feed" },
+      { "path": "/dependency-tree", "title": "Dependency tree" },
       { "path": "/game-of-life", "title": "Game of Life" },
       { "path": "/maze-chase", "title": "Maze chase" },
       { "path": "/racer", "title": "Racer" },
-      { "path": "/social-feed", "title": "Social feed" },
-      { "path": "/dependency-tree", "title": "Dependency tree" }
+      { "path": "/sky-fortress", "title": "Sky fortress" }
     ]
   },
   {
