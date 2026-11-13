@@ -50,10 +50,22 @@ export async function renderList() {
   );
 }
 
+/**
+ * Renders the feed filter again. On narrow screens it is a row that scrolls
+ * sideways, so the new element takes over the scroll position, and the focus
+ * of keyboard users stays on the same button.
+ */
 export async function renderFeeds() {
-  document
-    .getElementById("feeds")
-    .replaceWith(await toElement(<Feeds active={state.filter} counts={state.unread} />));
+  const old = document.getElementById("feeds");
+  const focused = /** @type {HTMLElement} */ (old.querySelector(":focus"))?.dataset.feed;
+  const element = await toElement(<Feeds active={state.filter} counts={state.unread} />);
+  // Read it before the swap: a detached element has no scroll position.
+  const scroll = old.scrollLeft;
+  old.replaceWith(element);
+  element.scrollLeft = scroll;
+  if (focused) {
+    /** @type {HTMLElement} */ (element.querySelector(`[data-feed="${focused}"]`)).focus();
+  }
 }
 
 export async function renderContacts() {
