@@ -1,6 +1,8 @@
 /* Center column: composer, "new posts" button and the post frame. */
 .social .center {
   display: grid;
+  /* One column that never grows wider than the space it gets, e.g. for a long link. */
+  grid-template-columns: minmax(0, 1fr);
   gap: 1.25rem;
   min-width: 0;
 }
