@@ -33,7 +33,7 @@ Each example lives in its own folder below [`src/`](src) and is served at the ma
 - **Web applications without client-side JavaScript**: lottery, todos, jokes, GitHub repos, multi-step wizard, A/B testing
 - **Hypermedia with HTMX**: HTMX (click to edit, active search, template fragments, infinite scroll, reactive scripting) and Fixi.js
 - **Islands of client-side JavaScript**: Alpine.js, ArrowJS, Lit, Preact, React, Svelte, Vue
-- **Streaming and Server-Sent Events**: streaming HTML, parallel and out-of-order loading, async iterables, ReadableStreams, SSE, chat
+- **Streaming and Server-Sent Events**: streaming HTML, parallel and out-of-order loading, async iterables, ReadableStreams, Mandelbrot explorer, SSE, chat
 - **Images, JSON and other content types**: image upload, image scaling with sharp, SVG charts, Open Graph images, JSON, `Response` objects, content negotiation, XML sitemap
 - **Server-side JSX with jsx-async-runtime**: what JSX renders, render props, `this` as context, intercepting JSX, head management, i18n, Declarative Shadow DOM, unit tests
 - **Client-side JSX with jsx-async-runtime**: client-side JSX, Game of Life, maze chase game, racing game, social feed, async dependency tree

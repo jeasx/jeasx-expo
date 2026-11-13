@@ -55,6 +55,7 @@
       { "path": "/out-of-order", "title": "Out-of-order streaming" },
       { "path": "/async-iterable", "title": "Async iterables" },
       { "path": "/readable-stream", "title": "ReadableStreams" },
+      { "path": "/mandelbrot", "title": "Mandelbrot explorer" },
       { "path": "/sse", "title": "Server-Sent Events" },
       { "path": "/chat", "title": "Chat with SSE" }
     ]
