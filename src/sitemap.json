@@ -86,6 +86,7 @@
       { "path": "/shadow-dom", "title": "Declarative Shadow DOM" },
       { "path": "/client-jsx", "title": "Client-side JSX" },
       { "path": "/game-of-life", "title": "Game of Life" },
+      { "path": "/dependency-tree", "title": "Dependency tree" },
       { "path": "/testing", "title": "Unit tests" }
     ]
   },
