@@ -98,8 +98,16 @@ window.addEventListener("blur", () => Object.keys(input).forEach((key) => (input
 
 // The touch pad: pedals and steering work while a finger holds them down.
 const pad = document.getElementById("pad");
+// Start acts on release instead of on "click": while the road renders every
+// frame, Safari on iOS would swallow the click, treating the changing page like
+// content revealed by hovering. Keyboard activation fires a click without a
+// pointer (detail 0), so that still counts.
+const isStart = (event) => /** @type {Element} */ (event.target).closest("[data-action=start]");
+pad.addEventListener("pointerup", (event) => {
+  if (event.button === 0 && isStart(event)) toggle();
+});
 pad.addEventListener("click", (event) => {
-  if (/** @type {Element} */ (event.target).closest("[data-action=start]")) toggle();
+  if (event.detail === 0 && isStart(event)) toggle();
 });
 for (const button of pad.querySelectorAll("[data-key]")) {
   const key = /** @type {HTMLElement} */ (button).dataset.key;
@@ -118,7 +126,9 @@ for (const button of pad.querySelectorAll("[data-key]")) {
 }
 
 // A tap on the road starts or pauses the race.
-game.addEventListener("click", toggle);
+game.addEventListener("pointerup", (event) => {
+  if (event.button === 0) toggle();
+});
 
 // Pause when the tab is hidden.
 document.addEventListener("visibilitychange", () => {

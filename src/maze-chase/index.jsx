@@ -93,11 +93,24 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
-document.getElementById("pad").addEventListener("click", (event) => {
+/** @param {Event} event */
+function press(event) {
   const key = /** @type {Element} */ (event.target).closest("button");
   if (!key) return;
   if (key.dataset.action === "start") toggle();
   else if (key.dataset.dir) turn(key.dataset.dir);
+}
+
+// The pad acts on release instead of on "click": while the maze renders every
+// tick, Safari on iOS would swallow the click, treating the changing page like
+// content revealed by hovering. Keyboard activation fires a click without a
+// pointer (detail 0), so that still counts.
+const pad = document.getElementById("pad");
+pad.addEventListener("pointerup", (event) => {
+  if (event.button === 0) press(event);
+});
+pad.addEventListener("click", (event) => {
+  if (event.detail === 0) press(event);
 });
 
 // Swipes on the maze steer, too.

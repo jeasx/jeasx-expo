@@ -53,7 +53,12 @@ function pause() {
   playButton.textContent = "▶ Play";
 }
 
-controls.addEventListener("click", async (event) => {
+/**
+ * Runs the action of a control button.
+ *
+ * @param {Event} event
+ */
+async function control(event) {
   const button = /** @type {Element} */ (event.target).closest("[data-action]");
   if (!(button instanceof HTMLElement)) return;
   switch (button.dataset.action) {
@@ -77,6 +82,17 @@ controls.addEventListener("click", async (event) => {
       await render();
       break;
   }
+}
+
+// Taps and clicks act on release instead of on "click": while the board renders
+// several times per second, Safari on iOS would swallow the click, treating the
+// changing page like content revealed by hovering. Keyboard activation of a
+// button fires a click without a pointer (detail 0), so that still counts.
+controls.addEventListener("pointerup", (event) => {
+  if (event.button === 0) control(event);
+});
+controls.addEventListener("click", (event) => {
+  if (event.detail === 0) control(event);
 });
 
 // Painting: pressing the mouse button on a cell toggles it, and moving over other cells
