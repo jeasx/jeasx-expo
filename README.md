@@ -35,7 +35,8 @@ Each example lives in its own folder below [`src/`](src) and is served at the ma
 - **Islands of client-side JavaScript**: Alpine.js, ArrowJS, Lit, Preact, React, Svelte, Vue
 - **Streaming and Server-Sent Events**: streaming HTML, parallel and out-of-order loading, async iterables, ReadableStreams, SSE, chat
 - **Images, JSON and other content types**: image upload, image scaling with sharp, SVG charts, Open Graph images, JSON, `Response` objects, content negotiation, XML sitemap
-- **Rendering with JSX**: render props, what JSX renders, `this` as context, intercepting JSX, head management, i18n, Declarative Shadow DOM, client-side JSX, Game of Life, async dependency tree, unit tests
+- **Server-side JSX with jsx-async-runtime**: what JSX renders, render props, `this` as context, intercepting JSX, head management, i18n, Declarative Shadow DOM, unit tests
+- **Client-side JSX with jsx-async-runtime**: client-side JSX, Game of Life, maze chase game, async dependency tree
 - **Authentication and security**: basic auth, login and sessions, signed cookies, Content Security Policy, Cap.js captcha
 - **Error handling and post-processing**: error handlers, prettifying HTML, extracting styles with Cheerio
 

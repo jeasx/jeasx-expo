@@ -23,7 +23,8 @@ export default function createLoader({ load, children, signal }) {
   const cache = new Map();
   const stats = { requests: 0, loaded: 0 };
   const events = new EventTarget();
-  const progress = () => events.dispatchEvent(new CustomEvent("progress", { detail: { ...stats } }));
+  const progress = () =>
+    events.dispatchEvent(new CustomEvent("progress", { detail: { ...stats } }));
 
   /**
    * Returns the node for a key, loading it on first use.

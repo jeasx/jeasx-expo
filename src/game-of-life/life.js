@@ -44,10 +44,7 @@ export function step(cells) {
     let neighbors = 0;
     for (let dy = -1; dy <= 1; dy++) {
       for (let dx = -1; dx <= 1; dx++) {
-        if (
-          (dx || dy) &&
-          cells[((y + dy + ROWS) % ROWS) * COLS + ((x + dx + COLS) % COLS)]
-        ) {
+        if ((dx || dy) && cells[((y + dy + ROWS) % ROWS) * COLS + ((x + dx + COLS) % COLS)]) {
           neighbors++;
         }
       }

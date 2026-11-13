@@ -19,7 +19,11 @@ import { jsxToStream } from "jsx-async-runtime";
  * @param {JSX.Element} jsx
  * @param {{ signal?: AbortSignal, placeholder?: string, count?: number }} [options]
  */
-export default async function streamInto(element, jsx, { signal, placeholder = "", count = 0 } = {}) {
+export default async function streamInto(
+  element,
+  jsx,
+  { signal, placeholder = "", count = 0 } = {},
+) {
   const reader = jsxToStream(jsx).getReader();
   const cancel = () => reader.cancel().catch(() => {});
   if (signal?.aborted) {

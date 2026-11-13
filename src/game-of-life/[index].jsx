@@ -15,12 +15,10 @@ export default function () {
       <h1>Game of Life with client-side JSX</h1>
       <p>
         Conway's Game of Life, built from plain JSX components with{" "}
-        <a href="https://github.com/jeasx/jsx-async-runtime">
-          jsx-async-runtime
-        </a>
-        . The server renders the first generation, then the very same components
-        render every following generation in your browser, without React, a
-        virtual DOM or hydration. Hold the mouse button and drag to paint cells.
+        <a href="https://github.com/jeasx/jsx-async-runtime">jsx-async-runtime</a>. The server
+        renders the first generation, then the very same components render every following
+        generation in your browser, without React, a virtual DOM or hydration. Hold the mouse button
+        and drag to paint cells.
       </p>
       <div class="playground">
         <section class="lab">
@@ -49,16 +47,13 @@ export default function () {
         </section>
         <ul class="rules">
           <li>
-            <strong>Birth</strong> A dead cell with exactly three live neighbors
-            comes to life.
+            <strong>Birth</strong> A dead cell with exactly three live neighbors comes to life.
           </li>
           <li>
-            <strong>Survival</strong> A live cell with two or three live
-            neighbors stays alive.
+            <strong>Survival</strong> A live cell with two or three live neighbors stays alive.
           </li>
           <li>
-            <strong>Death</strong> Every other cell dies of loneliness or
-            overcrowding.
+            <strong>Death</strong> Every other cell dies of loneliness or overcrowding.
           </li>
         </ul>
       </div>

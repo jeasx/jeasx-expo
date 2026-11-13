@@ -14,16 +14,13 @@ let timer = null;
 const container = document.getElementById("life");
 const controls = document.getElementById("controls");
 const playButton = controls.querySelector('[data-action="play"]');
-const speed = /** @type {HTMLInputElement} */ (
-  controls.querySelector('[name="speed"]')
-);
+const speed = /** @type {HTMLInputElement} */ (controls.querySelector('[name="speed"]'));
 
 /** Renders the whole board with the JSX components and swaps it in. */
 async function render(previous = cells) {
   const population = cells.filter(Boolean).length;
   // A new generation adds a point; painting only corrects the latest one.
-  const kept =
-    generation === 0 ? [] : previous === cells ? history.slice(0, -1) : history;
+  const kept = generation === 0 ? [] : previous === cells ? history.slice(0, -1) : history;
   history = [...kept, population].slice(-HISTORY_LENGTH);
   container.innerHTML = await jsxToString(
     <>
@@ -132,7 +129,5 @@ container.addEventListener("click", async (event) => {
   cells = cells.with(index, !cells[index]);
   await render();
   // The board was replaced, so move the focus to the new button for keyboard users.
-  /** @type {HTMLElement} */ (
-    container.querySelector(`[data-index="${index}"]`)
-  ).focus();
+  /** @type {HTMLElement} */ (container.querySelector(`[data-index="${index}"]`)).focus();
 });

@@ -74,20 +74,27 @@
     ]
   },
   {
-    "title": "Rendering with JSX",
-    "description": "Compose components, share request context, manage the head, control what JSX renders on the server and in the browser, and test components with unit tests.",
+    "title": "Server-side JSX with jsx-async-runtime",
+    "description": "Everything jsx-async-runtime renders on the server: promises, iterables and other values as children, render props, request context via 'this', overriding how JSX turns into HTML, head management, i18n, Declarative Shadow DOM and unit tests for components.",
     "links": [
-      { "path": "/render-props", "title": "Render props" },
       { "path": "/values", "title": "What JSX renders" },
+      { "path": "/render-props", "title": "Render props" },
       { "path": "/context", "title": "'this' as context" },
       { "path": "/interceptor", "title": "Intercept JSX" },
       { "path": "/head", "title": "Manage the head" },
       { "path": "/i18n", "title": "Internationalization" },
       { "path": "/shadow-dom", "title": "Declarative Shadow DOM" },
+      { "path": "/testing", "title": "Unit tests" }
+    ]
+  },
+  {
+    "title": "Client-side JSX with jsx-async-runtime",
+    "description": "Render the same JSX components on the server and in the browser with jsx-async-runtime, without React, a virtual DOM or hydration: from simple widgets to games and streamed async trees.",
+    "links": [
       { "path": "/client-jsx", "title": "Client-side JSX" },
       { "path": "/game-of-life", "title": "Game of Life" },
-      { "path": "/dependency-tree", "title": "Dependency tree" },
-      { "path": "/testing", "title": "Unit tests" }
+      { "path": "/maze-chase", "title": "Maze chase" },
+      { "path": "/dependency-tree", "title": "Dependency tree" }
     ]
   },
   {

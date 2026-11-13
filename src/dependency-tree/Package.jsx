@@ -84,7 +84,12 @@ export function PackageRow({ manifest, dependencies, depth, registry, ancestors 
       >
         <summary>{info}</summary>
         {expand ? (
-          <Dependencies names={dependencies} depth={depth - 1} registry={registry} ancestors={path} />
+          <Dependencies
+            names={dependencies}
+            depth={depth - 1}
+            registry={registry}
+            ancestors={path}
+          />
         ) : (
           <ul class="more" aria-label={`Loading ${dependencies.join(", ")}`}>
             {dependencies.map(() => (

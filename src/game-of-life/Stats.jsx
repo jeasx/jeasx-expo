@@ -27,16 +27,11 @@ export default function Stats({ generation, history }) {
         preserveAspectRatio="none"
         aria-hidden="true"
       >
-        <polygon
-          points={`0,${HEIGHT} ${points} ${WIDTH},${HEIGHT}`}
-          class="area"
-        />
+        <polygon points={`0,${HEIGHT} ${points} ${WIDTH},${HEIGHT}`} class="area" />
         <polyline points={points} class="line" />
       </svg>
       {population === 0 && (
-        <p class="hint">
-          Everything died out. Paint some cells or press Random.
-        </p>
+        <p class="hint">Everything died out. Paint some cells or press Random.</p>
       )}
     </div>
   );
