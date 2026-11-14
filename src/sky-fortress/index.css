@@ -497,8 +497,14 @@
   font-size: 0.85rem;
   background: #9f1239;
 }
+/* The explanation in a quiet frame, in the colors of the buttons above it. */
 .pad .help {
   grid-area: help;
   margin: 0.5rem 0 0;
-  font-size: 0.85rem;
+  padding: 0.6rem 0.7rem;
+  border: 1px solid #334155;
+  border-radius: 0.6rem;
+  background: #0f172a;
+  font-size: 0.78rem;
+  line-height: 1.45;
 }
