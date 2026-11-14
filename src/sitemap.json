@@ -1,14 +1,12 @@
 [
   {
     "title": "Server-side JSX with jsx-async-runtime",
-    "description": "Everything jsx-async-runtime renders on the server: promises, iterables and other values as children, render props, request context via 'this', overriding how JSX turns into HTML, head management, i18n, Declarative Shadow DOM and unit tests for components.",
+    "description": "Everything jsx-async-runtime renders on the server: promises, iterables and other values as children, render props, request context via 'this', overriding how JSX turns into HTML, Declarative Shadow DOM and unit tests for components.",
     "links": [
       { "path": "/values", "title": "What JSX renders" },
       { "path": "/context", "title": "'this' as context" },
       { "path": "/render-props", "title": "Render props" },
       { "path": "/interceptor", "title": "Intercept JSX" },
-      { "path": "/head", "title": "Manage the head" },
-      { "path": "/i18n", "title": "Internationalization" },
       { "path": "/shadow-dom", "title": "Declarative Shadow DOM" },
       { "path": "/testing", "title": "Unit tests" }
     ]
@@ -61,7 +59,8 @@
       { "path": "/lottery", "title": "Lottery" },
       { "path": "/jokes", "title": "Jokes" },
       { "path": "/repositories", "title": "GitHub repos" },
-      { "path": "/ab-testing", "title": "A/B testing" }
+      { "path": "/ab-testing", "title": "A/B testing" },
+      { "path": "/i18n", "title": "Internationalization" }
     ]
   },
   {
@@ -82,7 +81,7 @@
   },
   {
     "title": "Security, errors and post-processing",
-    "description": "Protect routes with basic auth or sessions, sign cookies, block injected scripts and stop bots with a proof-of-work captcha. Catch errors and transform the final HTML before it is sent to the browser.",
+    "description": "Protect routes with basic auth or sessions, sign cookies, block injected scripts and stop bots with a proof-of-work captcha. Catch errors, manage the head and transform the final HTML before it is sent to the browser.",
     "links": [
       { "path": "/login", "title": "Login and sessions" },
       { "path": "/basic-auth", "title": "Basic auth" },
@@ -91,7 +90,8 @@
       { "path": "/cap", "title": "Cap.js" },
       { "path": "/error-handler", "title": "Catch errors" },
       { "path": "/prettier", "title": "Prettify HTML" },
-      { "path": "/cheerio", "title": "Extract styles" }
+      { "path": "/cheerio", "title": "Extract styles" },
+      { "path": "/head", "title": "Manage the head" }
     ]
   },
   {
