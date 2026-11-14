@@ -46,13 +46,13 @@ export default function () {
           </div>
         </section>
         <ul class="rules">
-          <li>
+          <li class="birth">
             <strong>Birth</strong> A dead cell with exactly three live neighbors comes to life.
           </li>
-          <li>
+          <li class="survival">
             <strong>Survival</strong> A live cell with two or three live neighbors stays alive.
           </li>
-          <li>
+          <li class="death">
             <strong>Death</strong> Every other cell dies of loneliness or overcrowding.
           </li>
         </ul>
