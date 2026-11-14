@@ -99,7 +99,8 @@
       { "path": "/maze-chase", "title": "Maze chase" },
       { "path": "/racer", "title": "Racer" },
       { "path": "/sky-fortress", "title": "Sky fortress" },
-      { "path": "/jungle-run", "title": "Jungle run" }
+      { "path": "/jungle-run", "title": "Jungle run" },
+      { "path": "/air-mail", "title": "Air mail" }
     ]
   },
   {
