@@ -66,7 +66,7 @@
   },
   {
     "title": "Images, JSON and other content types",
-    "description": "Routes aren't limited to HTML: they can return images, SVG, JSON, XML, a live stream of Server-Sent Events or any other content type.",
+    "description": "Routes aren't limited to HTML: they can return images, SVG, JSON, XML, PDF, a live stream of Server-Sent Events, a WebSocket or any other content type.",
     "links": [
       { "path": "/og", "title": "Open Graph images" },
       { "path": "/email", "title": "JSX for emails" },
@@ -76,6 +76,8 @@
       { "path": "/json/request.json?foo=bar", "title": "JSON response" },
       { "path": "/sse", "title": "Server-Sent Events" },
       { "path": "/chat", "title": "Chat with SSE" },
+      { "path": "/websocket", "title": "WebSocket cursors" },
+      { "path": "/pdf", "title": "PDF with JSX" },
       { "path": "/negotiation", "title": "Content negotiation" },
       { "path": "/response", "title": "Response objects" },
       { "path": "/sitemap.xml", "title": "XML sitemap" }
@@ -83,13 +85,14 @@
   },
   {
     "title": "Security, errors and post-processing",
-    "description": "Protect routes with basic auth or sessions, sign cookies, block injected scripts and stop bots with a proof-of-work captcha. Catch errors, manage the head and transform the final HTML before it is sent to the browser.",
+    "description": "Protect routes with basic auth or sessions, sign cookies, block injected scripts stop bots with a proof-of-work captcha and rate-limit APIs. Catch errors, manage the head and transform the final HTML before it is sent to the browser.",
     "links": [
       { "path": "/login", "title": "Login and sessions" },
       { "path": "/basic-auth", "title": "Basic auth" },
       { "path": "/signed-cookies", "title": "Signed cookies" },
       { "path": "/csp", "title": "Content Security Policy" },
       { "path": "/cap", "title": "Cap.js" },
+      { "path": "/rate-limit", "title": "Rate limiting" },
       { "path": "/error-handler", "title": "Catch errors" },
       { "path": "/prettier", "title": "Prettify HTML" },
       { "path": "/cheerio", "title": "Extract styles" },
