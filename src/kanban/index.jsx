@@ -26,13 +26,8 @@ async function send(data) {
 
 /** @param {string} status */
 async function render(status) {
-  const column = document.querySelector(
-    `.kanban-column[data-status="${status}"]`,
-  );
-  column.outerHTML = await jsxToString.call(
-    context,
-    <Column status={status} />,
-  );
+  const column = document.querySelector(`.kanban-column[data-status="${status}"]`);
+  column.outerHTML = await jsxToString.call(context, <Column status={status} />);
 }
 
 document.addEventListener("submit", (event) => {
@@ -85,9 +80,7 @@ document.addEventListener("drop", (event) => {
   }
   event.preventDefault();
   column.classList.remove("drop-target");
-  send(new URLSearchParams({ id, to: column.dataset.status })).catch(
-    console.error,
-  );
+  send(new URLSearchParams({ id, to: column.dataset.status })).catch(console.error);
 });
 
 /**

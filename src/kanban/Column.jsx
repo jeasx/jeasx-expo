@@ -12,10 +12,7 @@ export default async function Column({ status }) {
   const { title } = COLUMNS.find((column) => column.status === status);
   const tasks = await this.store.tasks(status);
   return (
-    <section
-      class={`kanban-column ${this.store.renderer}`}
-      data-status={status}
-    >
+    <section class={`kanban-column ${this.store.renderer}`} data-status={status}>
       <header>
         <h2>{title}</h2>
         <span class="count">{tasks.length}</span>
@@ -31,19 +28,12 @@ export default async function Column({ status }) {
       )}
       {status === "todo" && (
         <form method="post" action="/kanban/api" class="add">
-          <input
-            name="title"
-            placeholder="New task"
-            maxlength="80"
-            required
-            autocomplete="off"
-          />
+          <input name="title" placeholder="New task" maxlength="80" required autocomplete="off" />
           <button type="submit">Add</button>
         </form>
       )}
       <small class="rendered">
-        rendered in the {this.store.renderer} at{" "}
-        {new Date().toLocaleTimeString("en-GB")}
+        rendered in the {this.store.renderer} at {new Date().toLocaleTimeString("en-GB")}
       </small>
     </section>
   );

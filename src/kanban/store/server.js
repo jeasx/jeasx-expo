@@ -24,9 +24,7 @@ const DEFAULT_TASKS = [
  * @param {import("fastify").FastifyReply} reply
  */
 export function createServerStore(request, reply) {
-  let tasks =
-    readListCookie(request, "kanban")?.map(toTask) ??
-    structuredClone(DEFAULT_TASKS);
+  let tasks = readListCookie(request, "kanban")?.map(toTask) ?? structuredClone(DEFAULT_TASKS);
 
   return {
     renderer: "server",

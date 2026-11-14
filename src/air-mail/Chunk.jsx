@@ -134,7 +134,8 @@ function Window({ x, y, shutter }) {
 
 /** A church: a nave with tall arched windows and a tower with belfry, clock, spire and cross. */
 function Church({ x, y }) {
-  const arch = (wx, top, w, h) => `M${wx},${y - top + h}v${-h + w / 2}a${w / 2},${w / 2} 0 0 1 ${w},0v${h - w / 2}Z`;
+  const arch = (wx, top, w, h) =>
+    `M${wx},${y - top + h}v${-h + w / 2}a${w / 2},${w / 2} 0 0 1 ${w},0v${h - w / 2}Z`;
   return (
     <g class="church">
       <rect class="wall" x={x - 8} y={y - 12} width="16" height="12" fill={WALLS[3]} />
@@ -189,7 +190,10 @@ function House({ x, y, kind, color }) {
       <path class="tiles" d={`M${x - 5.6},${y - 9.5}h11.2M${x - 3.1},${y - 11.5}h6.2`} />
       <Window x={x - 4.6} y={y - 6} shutter={shutter} />
       <Window x={x + 2.2} y={y - 6} shutter={shutter} />
-      <path class="flowers" d={`M${x - 4.2},${y - 3.5}h0.01M${x - 3.4},${y - 3.6}h0.01M${x + 2.8},${y - 3.6}h0.01M${x + 3.8},${y - 3.5}h0.01`} />
+      <path
+        class="flowers"
+        d={`M${x - 4.2},${y - 3.5}h0.01M${x - 3.4},${y - 3.6}h0.01M${x + 2.8},${y - 3.6}h0.01M${x + 3.8},${y - 3.5}h0.01`}
+      />
       <rect class="door" x={x - 1.2} y={y - 4} width="2.4" height="4" rx="0.3" />
       <circle class="knob" cx={x + 0.6} cy={y - 2} r="0.25" />
       <rect class="step" x={x - 1.7} y={y - 0.5} width="3.4" height="0.5" />
@@ -264,7 +268,10 @@ function FuelTank({ x, y }) {
       </text>
       <rect class="pump" x={x + 15.5} y={y - 6} width="2.6" height="6" rx="0.4" />
       <rect class="pump-face" x={x + 16} y={y - 5.3} width="1.6" height="1.4" />
-      <path class="hose" d={`M${x + 14},${y - 4.5}q1,0 1.5,0.5M${x + 18.1},${y - 4.8}q1.5,0 1.5,1.8v1.2`} />
+      <path
+        class="hose"
+        d={`M${x + 14},${y - 4.5}q1,0 1.5,0.5M${x + 18.1},${y - 4.8}q1.5,0 1.5,1.8v1.2`}
+      />
       <rect class="nozzle" x={x + 19} y={y - 1.9} width="1" height="1.4" rx="0.3" />
     </g>
   );

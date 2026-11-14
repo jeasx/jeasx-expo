@@ -10,12 +10,7 @@ import Seat from "./Seat";
 export default async function SeatRow({ row }) {
   const seats = await this.store.seats(row);
   return (
-    <form
-      method="post"
-      action="/cinema/api"
-      class="seat-row"
-      data-part={`row:${row}`}
-    >
+    <form method="post" action="/cinema/api" class="seat-row" data-part={`row:${row}`}>
       <span class="row-label">{row}</span>
       {seats.map((seat) => (
         <Seat seat={seat} />

@@ -26,9 +26,7 @@ function componentOf(part) {
 /** @param {string[]} parts */
 async function render(parts) {
   // A new map already contains all rows.
-  const todo = parts.includes("map")
-    ? parts.filter((part) => !part.startsWith("row:"))
-    : parts;
+  const todo = parts.includes("map") ? parts.filter((part) => !part.startsWith("row:")) : parts;
   const focused = document.activeElement?.getAttribute("value");
   await Promise.all(
     todo.map(async (part) => {
@@ -56,9 +54,7 @@ async function send(form, submitter) {
   const response = await fetch("/cinema/api", {
     method: "POST",
     headers: { accept: "application/json" },
-    body: new URLSearchParams(
-      /** @type {any} */ (new FormData(form, submitter)),
-    ),
+    body: new URLSearchParams(/** @type {any} */ (new FormData(form, submitter))),
   });
   if (!response.ok) {
     throw new Error(`Saving failed: ${response.status}`);
@@ -91,10 +87,7 @@ document.addEventListener("change", (event) => {
 // Arrow keys move between the seats of the map.
 document.addEventListener("keydown", (event) => {
   const seat = event.target;
-  if (
-    !(seat instanceof HTMLButtonElement) ||
-    !seat.classList.contains("seat")
-  ) {
+  if (!(seat instanceof HTMLButtonElement) || !seat.classList.contains("seat")) {
     return;
   }
   const moves = {
@@ -118,8 +111,6 @@ document.addEventListener("keydown", (event) => {
 // Other guests keep booking: refresh the seats and the summary every 20 seconds.
 setInterval(() => {
   if (document.visibilityState === "visible") {
-    render([...ROWS.map((row) => `row:${row}`), "summary"]).catch(
-      console.error,
-    );
+    render([...ROWS.map((row) => `row:${row}`), "summary"]).catch(console.error);
   }
 }, 20_000);

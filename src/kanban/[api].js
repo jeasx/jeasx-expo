@@ -8,11 +8,8 @@
  */
 export default async function ({ request, reply }) {
   if (request.method === "POST") {
-    const body =
-      request.body && typeof request.body === "object" ? request.body : {};
-    const changed = this.store.apply(
-      /** @type {Record<string, unknown>} */ (body),
-    );
+    const body = request.body && typeof request.body === "object" ? request.body : {};
+    const changed = this.store.apply(/** @type {Record<string, unknown>} */ (body));
     if (request.headers.accept?.includes("application/json")) {
       return { changed };
     }

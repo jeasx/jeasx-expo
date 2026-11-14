@@ -5,14 +5,9 @@ import { MAX_SEATS, TIERS, formatPrice } from "./screenings";
  * @this {import("./screenings").StoreContext}
  */
 export default async function Summary() {
-  const { screening, seats, total, booked, message } =
-    await this.store.selection();
+  const { screening, seats, total, booked, message } = await this.store.selection();
   return (
-    <aside
-      class={`summary ${this.store.renderer}`}
-      data-part="summary"
-      aria-live="polite"
-    >
+    <aside class={`summary ${this.store.renderer}`} data-part="summary" aria-live="polite">
       <h2>
         {screening.poster} {screening.title}
       </h2>
@@ -41,21 +36,13 @@ export default async function Summary() {
         <button name="book" value="1" disabled={!seats.length}>
           Book
         </button>
-        <button
-          name="clear"
-          value="1"
-          class="secondary"
-          disabled={!seats.length}
-        >
+        <button name="clear" value="1" class="secondary" disabled={!seats.length}>
           Clear
         </button>
       </form>
-      {booked.length > 0 && (
-        <p class="booked">Your booked seats: {booked.join(", ")}</p>
-      )}
+      {booked.length > 0 && <p class="booked">Your booked seats: {booked.join(", ")}</p>}
       <small class="rendered">
-        rendered in the {this.store.renderer} at{" "}
-        {new Date().toLocaleTimeString("en-GB")}
+        rendered in the {this.store.renderer} at {new Date().toLocaleTimeString("en-GB")}
       </small>
     </aside>
   );

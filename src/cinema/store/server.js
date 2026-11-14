@@ -70,9 +70,7 @@ export function createServerStore(request, reply) {
       const lost = selected().filter((id) => statusOf(id) === "taken");
       const messages = [state.message];
       if (lost.length) {
-        state.selected[state.screening] = selected().filter(
-          (id) => !lost.includes(id),
-        );
+        state.selected[state.screening] = selected().filter((id) => !lost.includes(id));
         messages.push(`Sorry, someone else just booked ${lost.join(", ")}.`);
       }
       const message = messages.filter(Boolean).join(" ");
@@ -101,10 +99,7 @@ export function createServerStore(request, reply) {
     apply(body) {
       const changed = new Set();
       const screening = String(body["screening"] ?? "");
-      if (
-        SCREENINGS.some(({ id }) => id === screening) &&
-        screening !== state.screening
-      ) {
+      if (SCREENINGS.some(({ id }) => id === screening) && screening !== state.screening) {
         state.screening = screening;
         changed.add("map").add("summary");
       }
@@ -112,9 +107,7 @@ export function createServerStore(request, reply) {
       if (isSeat(seat)) {
         const status = statusOf(seat);
         if (status === "selected") {
-          state.selected[state.screening] = selected().filter(
-            (id) => id !== seat,
-          );
+          state.selected[state.screening] = selected().filter((id) => id !== seat);
         } else if (status !== "free") {
           state.message = `${seat} isn't available any more.`;
         } else if (selected().length >= MAX_SEATS) {
@@ -146,12 +139,7 @@ export function createServerStore(request, reply) {
 /** @param {string} id */
 function isSeat(id) {
   const number = Number(id.slice(1));
-  return (
-    ROWS.includes(id[0]) &&
-    Number.isInteger(number) &&
-    number >= 1 &&
-    number <= SEATS_PER_ROW
-  );
+  return ROWS.includes(id[0]) && Number.isInteger(number) && number >= 1 && number <= SEATS_PER_ROW;
 }
 
 /**
@@ -193,15 +181,11 @@ function readState(request) {
     Object.fromEntries(
       SCREENINGS.map(({ id }) => [
         id,
-        Array.isArray(lists?.[id])
-          ? lists[id].map(String).filter(isSeat).slice(0, 48)
-          : [],
+        Array.isArray(lists?.[id]) ? lists[id].map(String).filter(isSeat).slice(0, 48) : [],
       ]),
     );
   return {
-    screening: SCREENINGS.some(({ id }) => id === raw.screening)
-      ? raw.screening
-      : SCREENINGS[0].id,
+    screening: SCREENINGS.some(({ id }) => id === raw.screening) ? raw.screening : SCREENINGS[0].id,
     selected: seatLists(raw.selected),
     booked: seatLists(raw.booked),
     message: typeof raw.message === "string" ? raw.message.slice(0, 200) : "",

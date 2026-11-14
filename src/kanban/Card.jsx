@@ -32,12 +32,7 @@ export default function Card({ task }) {
         >
           →
         </button>
-        <button
-          name="remove"
-          value="1"
-          class="remove"
-          aria-label={`Delete "${task.title}"`}
-        >
+        <button name="remove" value="1" class="remove" aria-label={`Delete "${task.title}"`}>
           ×
         </button>
       </form>

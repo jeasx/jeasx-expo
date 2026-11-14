@@ -8,9 +8,7 @@ export const browserStore = {
 
   /** @param {string} status */
   async tasks(status) {
-    const response = await fetch(
-      `/kanban/api?status=${encodeURIComponent(status)}`,
-    );
+    const response = await fetch(`/kanban/api?status=${encodeURIComponent(status)}`);
     if (!response.ok) {
       throw new Error(`Loading "${status}" failed: ${response.status}`);
     }
