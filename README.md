@@ -37,7 +37,7 @@ Each example lives in its own folder below [`src/`](src) and is served at the ma
 - **Images, JSON and other content types**: Open Graph images, HTML emails with plain-text alternative, SVG charts, image scaling with sharp, image upload, JSON, Server-Sent Events, chat with SSE, content negotiation, `Response` objects, XML sitemap
 - **Security, errors and post-processing**: login and sessions, basic auth, signed cookies, Content Security Policy, Cap.js captcha, error handlers, prettifying HTML, extracting styles with Cheerio, head management
 - **Hypermedia with HTMX**: HTMX (click to edit, active search, template fragments, infinite scroll, reactive scripting) and Fixi.js
-- **JavaScript libraries and frameworks**: React, Preact, Vue, Svelte, Lit, Alpine.js, ArrowJS
+- **JavaScript libraries and frameworks**: React, Preact, Vue, Svelte, Lit, Alpine.js, ArrowJS, islands mixing four frameworks with lazy hydration
 
 The full list with descriptions is in [`src/sitemap.json`](src/sitemap.json).
 

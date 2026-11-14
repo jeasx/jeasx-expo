@@ -118,7 +118,8 @@
       { "path": "/svelte", "title": "Svelte" },
       { "path": "/lit", "title": "Lit" },
       { "path": "/alpine", "title": "Alpine.js" },
-      { "path": "/arrowjs", "title": "ArrowJS" }
+      { "path": "/arrowjs", "title": "ArrowJS" },
+      { "path": "/islands", "title": "Islands" }
     ]
   }
 ]

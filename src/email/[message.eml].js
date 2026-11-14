@@ -40,9 +40,7 @@ export default async function ({ request }) {
 
 function part(boundary, type, content) {
   // Base64 keeps any character safe; lines must not exceed 76 characters.
-  const body = Buffer.from(content)
-    .toString("base64")
-    .replace(/.{76}/g, "$&\r\n");
+  const body = Buffer.from(content).toString("base64").replace(/.{76}/g, "$&\r\n");
   return [
     `--${boundary}`,
     `Content-Type: ${type}; charset=utf-8`,

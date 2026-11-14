@@ -296,7 +296,12 @@ export function Button({ href, children }) {
     return `${plain(children)}: ${href}\n\n`;
   }
   return (
-    <table role="presentation" cellpadding="0" cellspacing="0" style={css({ margin: "8px 0 24px" })}>
+    <table
+      role="presentation"
+      cellpadding="0"
+      cellspacing="0"
+      style={css({ margin: "8px 0 24px" })}
+    >
       <tr>
         <td
           style={css({

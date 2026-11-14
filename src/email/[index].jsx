@@ -26,11 +26,10 @@ export default async function ({ request }) {
         <span class="em-kicker">Server-side JSX</span>
         <h1>JSX for emails</h1>
         <p>
-          HTML emails are stuck in the past: mail clients ignore most CSS, so
-          layouts are built from tables with inline styles. JSX components hide
-          this mess behind tidy building blocks like{" "}
-          <code>&lt;Heading&gt;</code>, <code>&lt;Button&gt;</code> or{" "}
-          <code>&lt;Table&gt;</code>, and templates read like any other page.
+          HTML emails are stuck in the past: mail clients ignore most CSS, so layouts are built from
+          tables with inline styles. JSX components hide this mess behind tidy building blocks like{" "}
+          <code>&lt;Heading&gt;</code>, <code>&lt;Button&gt;</code> or <code>&lt;Table&gt;</code>,
+          and templates read like any other page.
         </p>
       </header>
 
@@ -38,42 +37,33 @@ export default async function ({ request }) {
         <li>
           <span aria-hidden="true">📐</span>
           <strong>Bulletproof markup</strong>
-          <small>
-            Tables and inline styles that survive Gmail, Outlook and Apple Mail.
-          </small>
+          <small>Tables and inline styles that survive Gmail, Outlook and Apple Mail.</small>
         </li>
         <li>
           <span aria-hidden="true">📝</span>
           <strong>Plain text for free</strong>
           <small>
-            Components read <code>this.format</code> and render{" "}
-            <code>"html"</code> or <code>"text"</code> from the same template.
+            Components read <code>this.format</code> and render <code>"html"</code> or{" "}
+            <code>"text"</code> from the same template.
           </small>
         </li>
         <li>
           <span aria-hidden="true">⚡</span>
           <strong>Async components</strong>
-          <small>
-            The receipt loads its order while rendering, like any other page.
-          </small>
+          <small>The receipt loads its order while rendering, like any other page.</small>
         </li>
       </ul>
 
       <nav class="em-picker" aria-label="Template">
-        {Object.entries(TEMPLATES).map(
-          ([key, { title, icon, description }]) => (
-            <a
-              href={`?template=${key}`}
-              aria-current={key === name ? "page" : undefined}
-            >
-              <span class="em-picker-icon" aria-hidden="true">
-                {icon}
-              </span>
-              <strong>{title}</strong>
-              <small>{description}</small>
-            </a>
-          ),
-        )}
+        {Object.entries(TEMPLATES).map(([key, { title, icon, description }]) => (
+          <a href={`?template=${key}`} aria-current={key === name ? "page" : undefined}>
+            <span class="em-picker-icon" aria-hidden="true">
+              {icon}
+            </span>
+            <strong>{title}</strong>
+            <small>{description}</small>
+          </a>
+        ))}
       </nav>
 
       <section class="em-window" aria-label="Email preview">
@@ -90,8 +80,7 @@ export default async function ({ request }) {
           <div>
             <strong>{TEMPLATES[name].subject}</strong>
             <small>
-              Jeasx Expo &lt;noreply@example.com&gt;{" "}
-              <span aria-hidden="true">→</span> Ada Lovelace
+              Jeasx Expo &lt;noreply@example.com&gt; <span aria-hidden="true">→</span> Ada Lovelace
               &lt;ada@example.com&gt;
             </small>
             <span class="em-chips">
@@ -107,8 +96,7 @@ export default async function ({ request }) {
         <div class="em-panes">
           <figure>
             <figcaption>
-              <span class="em-dot" data-kind="html"></span> HTML{" "}
-              <small>{size(html)}</small>
+              <span class="em-dot" data-kind="html"></span> HTML <small>{size(html)}</small>
             </figcaption>
             <iframe
               title="HTML version"
@@ -118,8 +106,7 @@ export default async function ({ request }) {
           </figure>
           <figure>
             <figcaption>
-              <span class="em-dot" data-kind="text"></span> Plain text{" "}
-              <small>{size(text)}</small>
+              <span class="em-dot" data-kind="text"></span> Plain text <small>{size(text)}</small>
             </figcaption>
             <iframe
               class="em-plain"
@@ -134,8 +121,8 @@ export default async function ({ request }) {
       <section class="em-source">
         <h2>Generated HTML</h2>
         <p>
-          What the components above turn into: nested tables and inline styles,
-          formatted with Prettier and highlighted with Prism on the server.
+          What the components above turn into: nested tables and inline styles, formatted with
+          Prettier and highlighted with Prism on the server.
         </p>
         <figure class="em-editor">
           <figcaption>
