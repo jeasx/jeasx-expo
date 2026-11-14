@@ -29,16 +29,15 @@ Then open [http://localhost:3000](http://localhost:3000). The start page links t
 
 Each example lives in its own folder below [`src/`](src) and is served at the matching path (e.g. `src/todos` → `/todos`).
 
-- **Dynamic websites**: planet gallery with view transitions, blog, products, MDX
-- **Web applications without client-side JavaScript**: lottery, todos, jokes, GitHub repos, multi-step wizard, A/B testing
+- **Server-side JSX with jsx-async-runtime**: what JSX renders, `this` as context, render props, intercepting JSX, head management, i18n, Declarative Shadow DOM, unit tests
+- **Streaming with jsx-async-runtime**: out-of-order and parallel loading, streaming HTML, async iterables, ReadableStreams, Mandelbrot explorer
+- **Client-side apps with jsx-async-runtime**: client-side JSX, Kanban board and cinema seat booking (with and without JavaScript), social feed, async dependency tree
+- **Client-side games with jsx-async-runtime**: Game of Life, maze chase game, racing game, isometric shooter, jungle platformer, flight game with a streamed landscape
+- **Server-rendered websites and apps**: blog, products, planet gallery with view transitions, MDX, todos, multi-step wizard, lottery, jokes, GitHub repos, A/B testing
+- **Images, JSON and other content types**: Open Graph images, SVG charts, image scaling with sharp, image upload, JSON, Server-Sent Events, chat with SSE, content negotiation, `Response` objects, XML sitemap
+- **Security, errors and post-processing**: login and sessions, basic auth, signed cookies, Content Security Policy, Cap.js captcha, error handlers, prettifying HTML, extracting styles with Cheerio
 - **Hypermedia with HTMX**: HTMX (click to edit, active search, template fragments, infinite scroll, reactive scripting) and Fixi.js
-- **Islands of client-side JavaScript**: Alpine.js, ArrowJS, Lit, Preact, React, Svelte, Vue
-- **Streaming and Server-Sent Events**: streaming HTML, parallel and out-of-order loading, async iterables, ReadableStreams, Mandelbrot explorer, SSE, chat
-- **Images, JSON and other content types**: image upload, image scaling with sharp, SVG charts, Open Graph images, JSON, `Response` objects, content negotiation, XML sitemap
-- **Server-side JSX with jsx-async-runtime**: what JSX renders, render props, `this` as context, intercepting JSX, head management, i18n, Declarative Shadow DOM, unit tests
-- **Client-side JSX with jsx-async-runtime**: client-side JSX, Game of Life, maze chase game, racing game, isometric shooter, jungle platformer, flight game with a streamed landscape, social feed, async dependency tree
-- **Authentication and security**: basic auth, login and sessions, signed cookies, Content Security Policy, Cap.js captcha
-- **Error handling and post-processing**: error handlers, prettifying HTML, extracting styles with Cheerio
+- **JavaScript libraries and frameworks**: React, Preact, Vue, Svelte, Lit, Alpine.js, ArrowJS
 
 The full list with descriptions is in [`src/sitemap.json`](src/sitemap.json).
 
