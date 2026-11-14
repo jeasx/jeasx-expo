@@ -116,33 +116,83 @@ function Oak({ x, y, h, wind }) {
 
 const WALLS = ["#fde68a", "#fecaca", "#e0f2fe", "#f5f5f4"];
 
+const ROOFS = ["#b91c1c", "#9a3412", "#475569", "#7c2d12"];
+const SHUTTERS = ["#15803d", "#1d4ed8", "#7c2d12", "#0f766e"];
+
+/** A window with a cross of mullions and a shutter on each side. */
+function Window({ x, y, shutter }) {
+  return (
+    <>
+      <rect class="shutter" x={x - 0.7} y={y} width="0.7" height="2.2" fill={shutter} />
+      <rect class="shutter" x={x + 2.4} y={y} width="0.7" height="2.2" fill={shutter} />
+      <rect class="window" x={x} y={y} width="2.4" height="2.2" />
+      <path class="mullion" d={`M${x + 1.2},${y}v2.2M${x},${y + 1.1}h2.4`} />
+      <rect class="sill" x={x - 0.3} y={y + 2.2} width="3" height="0.5" />
+    </>
+  );
+}
+
+/** A church: a nave with tall arched windows and a tower with belfry, clock, spire and cross. */
+function Church({ x, y }) {
+  const arch = (wx, top, w, h) => `M${wx},${y - top + h}v${-h + w / 2}a${w / 2},${w / 2} 0 0 1 ${w},0v${h - w / 2}Z`;
+  return (
+    <g class="church">
+      <rect class="wall" x={x - 8} y={y - 12} width="16" height="12" fill={WALLS[3]} />
+      <rect class="eave-shade" x={x - 8} y={y - 12} width="16" height="1" />
+      <polygon
+        class="roof"
+        points={`${x - 9},${y - 12} ${x + 9},${y - 12} ${x + 5},${y - 17} ${x - 5},${y - 17}`}
+      />
+      <path class="tiles" d={`M${x - 7.4},${y - 14}h14.8M${x - 6},${y - 15.7}h12`} />
+      <path class="window" d={arch(x - 6.6, 9.5, 2.2, 6.5)} />
+      <path class="window" d={arch(x - 2.6, 9.5, 2.2, 6.5)} />
+      <path class="mullion" d={`M${x - 5.5},${y - 8}v5M${x - 1.5},${y - 8}v5`} />
+      {/* The tower stands in front of the nave. */}
+      <rect class="wall" x={x + 2} y={y - 22} width="5" height="22" fill={WALLS[3]} />
+      <path class="belfry" d={arch(x + 3.5, 21.2, 2, 3)} />
+      <path class="bell" d={`M${x + 4},${y - 18.6}q0.5,-1.6 1,0Z`} />
+      <circle class="clock" cx={x + 4.5} cy={y - 15} r="1.3" />
+      <path class="hands" d={`M${x + 4.5},${y - 15}v-0.9M${x + 4.5},${y - 15}h0.7`} />
+      <path class="door" d={arch(x + 3.3, 4.6, 2.4, 4.6)} />
+      <rect class="step" x={x + 2.6} y={y - 0.5} width="3.8" height="0.5" />
+      <rect class="cornice" x={x + 1.5} y={y - 22.6} width="6" height="0.8" />
+      <polygon
+        class="spire"
+        points={`${x + 1.8},${y - 22.6} ${x + 7.2},${y - 22.6} ${x + 4.5},${y - 30}`}
+      />
+      <path class="cross" d={`M${x + 4.5},${y - 30}v-2.6M${x + 3.7},${y - 31.6}h1.6`} />
+    </g>
+  );
+}
+
+/** A cottage with a tiled roof, a smoking chimney, shuttered windows and flowers. */
 function House({ x, y, kind, color }) {
   if (kind === "church") {
-    return (
-      <g class="church">
-        <rect class="wall" x={x - 8} y={y - 12} width="16" height="12" fill={WALLS[3]} />
-        <polygon
-          class="roof"
-          points={`${x - 9},${y - 12} ${x + 9},${y - 12} ${x + 5},${y - 17} ${x - 5},${y - 17}`}
-        />
-        <rect class="wall" x={x + 2} y={y - 22} width="5" height="10" fill={WALLS[3]} />
-        <polygon
-          class="spire"
-          points={`${x + 1.5},${y - 22} ${x + 7.5},${y - 22} ${x + 4.5},${y - 30}`}
-        />
-        <path class="window" d={`M${x - 5},${y - 4}v-4a1.5,1.5 0 0 1 3,0v4Z`} />
-        <circle class="clock" cx={x + 4.5} cy={y - 18} r="1.3" />
-      </g>
-    );
+    return <Church x={x} y={y} />;
   }
+  const shutter = SHUTTERS[(color + Math.round(x)) % SHUTTERS.length];
   return (
     <g class="house">
+      <g class="smoke" style={`--delay: -${(x % 7) / 2}s`}>
+        <circle cx={x + 4} cy={y - 17} r="1" />
+        <circle cx={x + 4.6} cy={y - 19.5} r="1.4" />
+      </g>
       <rect class="chimney" x={x + 3} y={y - 15} width="2" height="4" />
+      <rect class="chimney-cap" x={x + 2.6} y={y - 15.6} width="2.8" height="0.8" />
       <rect class="wall" x={x - 6} y={y - 8} width="12" height="8" fill={WALLS[color]} />
-      <polygon class="roof" points={`${x - 7.5},${y - 8} ${x + 7.5},${y - 8} ${x},${y - 14}`} />
-      <rect class="door" x={x - 1.2} y={y - 4} width="2.4" height="4" />
-      <rect class="window" x={x - 4.6} y={y - 6} width="2.4" height="2.2" />
-      <rect class="window" x={x + 2.2} y={y - 6} width="2.4" height="2.2" />
+      <rect class="eave-shade" x={x - 6} y={y - 8} width="12" height="0.9" />
+      <polygon
+        class="roof"
+        points={`${x - 7.5},${y - 8} ${x + 7.5},${y - 8} ${x},${y - 14}`}
+        style={`fill: ${ROOFS[color]}`}
+      />
+      <path class="tiles" d={`M${x - 5.6},${y - 9.5}h11.2M${x - 3.1},${y - 11.5}h6.2`} />
+      <Window x={x - 4.6} y={y - 6} shutter={shutter} />
+      <Window x={x + 2.2} y={y - 6} shutter={shutter} />
+      <path class="flowers" d={`M${x - 4.2},${y - 3.5}h0.01M${x - 3.4},${y - 3.6}h0.01M${x + 2.8},${y - 3.6}h0.01M${x + 3.8},${y - 3.5}h0.01`} />
+      <rect class="door" x={x - 1.2} y={y - 4} width="2.4" height="4" rx="0.3" />
+      <circle class="knob" cx={x + 0.6} cy={y - 2} r="0.25" />
+      <rect class="step" x={x - 1.7} y={y - 0.5} width="3.4" height="0.5" />
     </g>
   );
 }
@@ -157,7 +207,65 @@ function DropZone({ x0, x1, y }) {
       <ellipse class="ring outer" cx={cx} cy={y + 0.6} rx={(x1 - x0) / 6} ry="0.8" />
       <rect class="post" x={cx - 0.6} y={y - 8} width="1.2" height="8" />
       <rect class="mailbox" x={cx - 3} y={y - 11} width="6" height="3.6" rx="1.4" />
-      <path class="flag" d={`M${cx + 2.4},${y - 11}v-4h3v1.8h-3`} />
+      <path class="flag" d={`M${cx + 2.4},${y - 11}v-5.5h4.5v2.6h-4.5`} />
+    </g>
+  );
+}
+
+/**
+ * A hangar with an arched roof, its sliding doors half open on a plane inside,
+ * and a lamp above the sign.
+ */
+function Hangar({ x, y }) {
+  return (
+    <g class="hangar-group">
+      <path class="hangar" d={`M${x},${y}v-12q12,-9 24,0v12Z`} />
+      <path
+        class="siding"
+        d={`M${x},${y - 3}h5M${x},${y - 6}h5M${x},${y - 9}h5M${x + 19},${y - 3}h5M${x + 19},${y - 6}h5M${x + 19},${y - 9}h5`}
+      />
+      <path class="roof-trim" d={`M${x - 0.6},${y - 11.6}q12.6,-9.6 25.2,0`} />
+      <rect class="hangar-door" x={x + 5} y={y - 9} width="14" height="9" />
+      {/* A plane waiting inside, seen from the front: wings, cowling and propeller. */}
+      <path class="parked-wheels" d={`M${x + 11},${y - 2}l-1,2M${x + 13},${y - 2}l1,2`} />
+      <rect class="parked" x={x + 9.6} y={y - 4.4} width="4.8" height="0.9" rx="0.4" />
+      <circle class="parked" cx={x + 12} cy={y - 3.2} r="1.5" />
+      <circle class="parked-hub" cx={x + 12} cy={y - 3.2} r="0.45" />
+      <path class="parked-prop" d={`M${x + 12},${y - 5.6}v4.8`} />
+      <path class="door-track" d={`M${x + 4.5},${y - 9.3}h15`} />
+      <rect class="door-panel" x={x + 5} y={y - 9} width="4.5" height="9" />
+      <rect class="door-panel" x={x + 14.5} y={y - 9} width="4.5" height="9" />
+      <path
+        class="brace"
+        d={`M${x + 5},${y - 9}l4.5,9M${x + 9.5},${y - 9}l-4.5,9M${x + 14.5},${y - 9}l4.5,9M${x + 19},${y - 9}l-4.5,9`}
+      />
+      {/* A sign above the door, centered on the hangar and below its arched roof. */}
+      <rect class="sign" x={x + 6} y={y - 12.6} width="12" height="3.2" rx="0.5" />
+      <text class="sign-label" x={x + 12} y={y - 10.05}>
+        MAIL
+      </text>
+      <path class="lamp" d={`M${x + 10.8},${y - 13.4}h2.4l-0.5,-1h-1.4Z`} />
+      <circle class="lamp-light" cx={x + 12} cy={y - 13.2} r="0.5" />
+    </g>
+  );
+}
+
+/** A fuel tank: a cylinder on legs with a hatch on top and a pump with its hose. */
+function FuelTank({ x, y }) {
+  return (
+    <g class="fuel-group">
+      <path class="tank-leg" d={`M${x + 3},${y - 3}l-1,3M${x + 11},${y - 3}l1,3`} />
+      <rect class="tank" x={x} y={y - 9.5} width="14" height="6.5" rx="3.2" />
+      <path class="tank-shine" d={`M${x + 2.5},${y - 8.4}h9`} />
+      <path class="tank-band" d={`M${x + 2.4},${y - 9.3}v6.1M${x + 11.6},${y - 9.3}v6.1`} />
+      <rect class="hatch" x={x + 6} y={y - 10.6} width="2" height="1.1" rx="0.3" />
+      <text class="tank-label" x={x + 7} y={y - 5.3}>
+        FUEL
+      </text>
+      <rect class="pump" x={x + 15.5} y={y - 6} width="2.6" height="6" rx="0.4" />
+      <rect class="pump-face" x={x + 16} y={y - 5.3} width="1.6" height="1.4" />
+      <path class="hose" d={`M${x + 14},${y - 4.5}q1,0 1.5,0.5M${x + 18.1},${y - 4.8}q1.5,0 1.5,1.8v1.2`} />
+      <rect class="nozzle" x={x + 19} y={y - 1.9} width="1" height="1.4" rx="0.3" />
     </g>
   );
 }
@@ -174,22 +282,16 @@ function Airstrip({ x0, x1, y }) {
       <path class="dashes" d={dashes.join("")} />
       <path class="threshold" d={`M${x0 + 3},${y + 1.4}h6M${x1 - 9},${y + 1.4}h6`} />
       <line class="pole" x1={x0 - 10} y1={y} x2={x0 - 10} y2={y - 14} />
-      <polygon
-        class="sock"
-        points={`${x0 - 10},${y - 14} ${x0 - 1},${y - 13} ${x0 - 1},${y - 11.5} ${x0 - 10},${y - 10.5}`}
-      />
-      <path class="sock-stripes" d={`M${x0 - 7},${y - 13.7}v3M${x0 - 4},${y - 13.4}v2.4`} />
-      <path class="hangar" d={`M${x1 + 6},${y}v-12q12,-9 24,0v12Z`} />
-      <rect class="hangar-door" x={x1 + 11} y={y - 9} width="14" height="9" />
-      {/* A sign above the door, centered on the hangar and below its arched roof. */}
-      <rect class="sign" x={x1 + 12} y={y - 12.6} width="12" height="3.2" rx="0.5" />
-      <text class="sign-label" x={x1 + 18} y={y - 10.05}>
-        MAIL
-      </text>
-      <rect class="tank" x={x1 + 32} y={y - 10} width="10" height="10" rx="2" />
-      <text class="tank-label" x={x1 + 37} y={y - 3.5}>
-        FUEL
-      </text>
+      {/* The windsock flutters from the top of its pole. */}
+      <g class="windsock">
+        <polygon
+          class="sock"
+          points={`${x0 - 10},${y - 14} ${x0 - 1},${y - 13} ${x0 - 1},${y - 11.5} ${x0 - 10},${y - 10.5}`}
+        />
+        <path class="sock-stripes" d={`M${x0 - 7},${y - 13.7}v3M${x0 - 4},${y - 13.4}v2.4`} />
+      </g>
+      <Hangar x={x1 + 6} y={y} />
+      <FuelTank x={x1 + 33} y={y} />
     </g>
   );
 }

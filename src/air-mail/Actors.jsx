@@ -14,6 +14,9 @@ function Plane({ state }) {
   const blink = state.safe > 0 && Math.floor(state.safe * 8) % 2 === 1;
   // The scarf flutters faster the faster the plane flies.
   const flutter = round(Math.sin(state.clock * (8 + state.speed / 8)) * 0.9);
+  // ...and streams out further: from 4.6 units at rest to 9 at top speed.
+  const tail = round(0.8 - 4.6 - Math.min(state.speed, 110) * 0.04);
+  const mid = round((0.8 + tail) / 2);
   return (
     <g
       class="plane"
@@ -39,7 +42,7 @@ function Plane({ state }) {
       {/* The open cockpit: the pilot sits in it behind a small windscreen. */}
       <path
         class="scarf"
-        d={`M0.8,-4.6Q-1.6,${round(-5.2 + flutter)} -3.8,${round(-4.4 - flutter)}L-3.6,${round(-3.7 - flutter)}Q-1.6,${round(-4.4 + flutter)} 0.8,-3.9Z`}
+        d={`M0.8,-4.6Q${mid},${round(-5.2 + flutter)} ${tail},${round(-4.4 - flutter)}L${round(tail + 0.2)},${round(-3.7 - flutter)}Q${mid},${round(-4.4 + flutter)} 0.8,-3.9Z`}
       />
       <path class="jacket" d="M-0.6,-3.6Q-0.4,-5.2 1.3,-5.2Q3,-5.2 3.2,-3.6Z" />
       <circle class="face" cx="1.5" cy="-6.1" r="1.15" />
@@ -78,28 +81,49 @@ function Parcel({ drop, camera }) {
       </g>
     );
   }
-  // The swing builds up after the chute opens; the canopy tilts along a little.
+  // The chute pops open with a little overshoot, then breathes as the air fills
+  // it; the swing builds up after it opens and the canopy tilts along a little.
   const open = drop.t - 0.45;
+  const k = Math.min(1, open / 0.3);
+  const pop = 1 - (1 - k) ** 3 + Math.sin(k * Math.PI) * 0.2;
+  const breath = Math.sin(open * 7) * 0.07;
   const swing = Math.sin(open * 3.2) * 20 * Math.min(1, open * 1.5);
   const pivot = `${x} ${y - 10}`;
   return (
     <g class="parcel">
-      <path
-        class="chute"
-        d={`M${x - 6},${y - 7}Q${x},${y - 15} ${x + 6},${y - 7}Z`}
-        transform={`rotate(${round(swing * 0.35)} ${pivot})`}
-      />
-      <g transform={`rotate(${round(swing)} ${pivot})`}>
-        <path
-          class="lines"
-          d={`M${x - 6},${y - 7}L${x - 1.5},${y - 1.5}M${x + 6},${y - 7}L${x + 1.5},${y - 1.5}`}
-        />
-        <rect class="box" x={x - 2} y={y - 2} width="4" height="4" rx="0.5" />
-        <path class="string" d={`M${x},${y - 2}v4M${x - 2},${y}h4`} />
+      <g transform={`translate(${x} ${y - 2}) scale(${round(pop)}) translate(${-x} ${-(y - 2)})`}>
+        <g
+          transform={`translate(${x} ${y - 10}) rotate(${round(swing * 0.35)}) scale(${round(1 + breath)} ${round(1 - breath)})`}
+        >
+          <path class="chute" d={CANOPY} />
+          <path class="gores" d={GORES} />
+          <path class="shade" d="M0,-5.2Q-7,-4.2 -7,3Q-5.25,1.6 -3.5,3Q-1.75,1.6 0,3Z" />
+          <path class="hem" d={CANOPY} />
+          <circle class="vent" cx="0" cy="-4.9" r="0.7" />
+        </g>
+        <g transform={`rotate(${round(swing)} ${pivot})`}>
+          <path
+            class="lines"
+            d={`M${x - 7},${y - 7}L${x - 1.6},${y - 2}M${x - 3.5},${y - 7}L${x - 0.6},${y - 2}M${x + 3.5},${y - 7}L${x + 0.6},${y - 2}M${x + 7},${y - 7}L${x + 1.6},${y - 2}`}
+          />
+          <rect class="box" x={x - 2} y={y - 2} width="4" height="4" rx="0.5" />
+          <path class="string" d={`M${x},${y - 2}v4M${x - 2},${y}h4`} />
+        </g>
       </g>
     </g>
   );
 }
+
+/** The canopy around its centre: a dome with a scalloped hem. */
+const CANOPY =
+  "M-7,3Q-7,-4.2 0,-5.2Q7,-4.2 7,3Q5.25,1.6 3.5,3Q1.75,1.6 0,3Q-1.75,1.6 -3.5,3Q-5.25,1.6 -7,3Z";
+/** Every second panel of the canopy is red. */
+const GORES = [
+  [-7, -3.5],
+  [0, 3.5],
+]
+  .map(([a, b]) => `M${a},3Q${a},-4.2 0,-5.2Q${b},-4.2 ${b},3Q${(a + b) / 2},1.6 ${a},3Z`)
+  .join("");
 
 /** Fire, smoke and pieces of the plane where it crashed. */
 function Crash({ state, camera }) {

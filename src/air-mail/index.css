@@ -10,6 +10,14 @@
   .track {
     grid-template-columns: minmax(0, 720px);
   }
+  /* Let game, pad and stream info share the grid, with the stream info last. */
+  .display {
+    display: contents;
+  }
+  .track .stream {
+    order: 1;
+    margin-top: 0;
+  }
 }
 
 .defs {
@@ -409,6 +417,79 @@
 .chunk .window {
   fill: #fde047;
 }
+.chunk .mullion {
+  stroke: #f8fafc;
+  stroke-width: 0.3;
+}
+.chunk .sill,
+.chunk .step,
+.chunk .cornice,
+.chunk .chimney-cap {
+  fill: #a8a29e;
+}
+.chunk .shutter {
+  stroke: #1c1917;
+  stroke-width: 0.15;
+}
+.chunk .eave-shade {
+  fill: #000;
+  opacity: 0.15;
+}
+.chunk .tiles {
+  stroke: #000;
+  stroke-opacity: 0.25;
+  stroke-width: 0.3;
+}
+.chunk .flowers {
+  stroke: #ec4899;
+  stroke-width: 0.9;
+  stroke-linecap: round;
+}
+.chunk .knob {
+  fill: #facc15;
+}
+.chunk .belfry {
+  fill: #1e293b;
+}
+.chunk .bell {
+  fill: #ca8a04;
+}
+.chunk .hands {
+  stroke: #1c1917;
+  stroke-width: 0.25;
+  stroke-linecap: round;
+}
+.chunk .cross {
+  stroke: #ca8a04;
+  stroke-width: 0.5;
+}
+/* Smoke curls up from the chimneys and fades away. */
+.chunk .smoke circle {
+  fill: #e2e8f0;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: chimney-smoke 3.5s linear infinite;
+  animation-delay: var(--delay);
+}
+.chunk .smoke circle + circle {
+  animation-delay: calc(var(--delay) - 1.75s);
+}
+@keyframes chimney-smoke {
+  from {
+    opacity: 0.8;
+    transform: translate(0, 0) scale(0.6);
+  }
+  to {
+    opacity: 0;
+    transform: translate(2px, -6px) scale(1.6);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .chunk .smoke circle {
+    animation: none;
+    opacity: 0.5;
+  }
+}
 .chunk .clock {
   fill: #fff;
   stroke: #1c1917;
@@ -430,6 +511,41 @@
   fill: #dc2626;
   stroke: #57534e;
   stroke-width: 0.4;
+  transform-box: fill-box;
+  transform-origin: 0% 100%;
+  animation: flag-wave 0.6s linear infinite;
+}
+/* The rings of the target pulse to catch the pilot's eye. */
+.chunk .drop-zone .ring {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: ring-pulse 1.6s ease-in-out infinite;
+}
+@keyframes flag-wave {
+  0%,
+  100% {
+    transform: skewY(-10deg) scaleX(0.9);
+  }
+  25% {
+    transform: skewY(6deg) scaleX(1);
+  }
+  50% {
+    transform: skewY(-4deg) scaleX(0.8);
+  }
+  75% {
+    transform: skewY(12deg) scaleX(0.95);
+  }
+}
+@keyframes ring-pulse {
+  50% {
+    transform: scale(1.12);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .chunk .drop-zone .flag,
+  .chunk .drop-zone .ring {
+    animation: none;
+  }
 }
 .chunk .runway {
   fill: #44403c;
@@ -450,6 +566,31 @@
 .chunk .sock {
   fill: #f97316;
 }
+.chunk .windsock {
+  transform-box: fill-box;
+  transform-origin: 0% 50%;
+  animation: windsock 0.9s ease-in-out infinite;
+}
+@keyframes windsock {
+  0%,
+  100% {
+    transform: skewY(4deg) scaleX(1);
+  }
+  30% {
+    transform: skewY(-6deg) scaleX(0.92);
+  }
+  60% {
+    transform: skewY(2deg) scaleX(0.97);
+  }
+  80% {
+    transform: skewY(-3deg) scaleX(0.9);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .chunk .windsock {
+    animation: none;
+  }
+}
 .chunk .sock-stripes {
   stroke: #fff;
   stroke-width: 1;
@@ -460,7 +601,53 @@
   stroke-width: 0.5;
 }
 .chunk .hangar-door {
+  fill: #1e293b;
+}
+.chunk .siding {
+  stroke: #64748b;
+  stroke-width: 0.3;
+}
+.chunk .roof-trim {
+  fill: none;
+  stroke: #b91c1c;
+  stroke-width: 1.2;
+  stroke-linecap: round;
+}
+.chunk .parked {
+  fill: #facc15;
+}
+.chunk .parked-hub {
+  fill: #b45309;
+}
+.chunk .parked-wheels {
+  stroke: #0f172a;
+  stroke-width: 0.5;
+}
+.chunk .nozzle {
+  fill: #1c1917;
+}
+.chunk .parked-prop {
+  stroke: #cbd5e1;
+  stroke-width: 0.4;
+}
+.chunk .door-track {
+  stroke: #475569;
+  stroke-width: 0.5;
+}
+.chunk .door-panel {
+  fill: #64748b;
+  stroke: #334155;
+  stroke-width: 0.3;
+}
+.chunk .brace {
+  stroke: #475569;
+  stroke-width: 0.3;
+}
+.chunk .lamp {
   fill: #334155;
+}
+.chunk .lamp-light {
+  fill: #fde047;
 }
 .chunk .airstrip text {
   font: 800 4px sans-serif;
@@ -478,6 +665,34 @@
 }
 .chunk .tank {
   fill: #dc2626;
+  stroke: #7f1d1d;
+  stroke-width: 0.3;
+}
+.chunk .tank-shine {
+  stroke: #fca5a5;
+  stroke-width: 0.6;
+  stroke-linecap: round;
+}
+.chunk .tank-band {
+  stroke: #991b1b;
+  stroke-width: 0.4;
+}
+.chunk .tank-leg {
+  stroke: #475569;
+  stroke-width: 0.7;
+}
+.chunk .hatch,
+.chunk .pump {
+  fill: #475569;
+}
+.chunk .pump-face {
+  fill: #fde047;
+}
+.chunk .hose {
+  fill: none;
+  stroke: #1c1917;
+  stroke-width: 0.45;
+  stroke-linecap: round;
 }
 .chunk .airstrip .tank-label {
   font-size: 2.6px;
@@ -725,12 +940,27 @@
 }
 .parcel .chute {
   fill: #f8fafc;
-  stroke: #dc2626;
-  stroke-width: 0.6;
+}
+.parcel .gores {
+  fill: #dc2626;
+}
+/* The side away from the sun lies in shadow. */
+.parcel .shade {
+  fill: #0f172a;
+  opacity: 0.18;
+}
+.parcel .hem {
+  fill: none;
+  stroke: #7f1d1d;
+  stroke-width: 0.35;
+  stroke-linejoin: round;
+}
+.parcel .vent {
+  fill: #7f1d1d;
 }
 .parcel .lines {
   stroke: #e5e7eb;
-  stroke-width: 0.3;
+  stroke-width: 0.25;
 }
 .crash .smoke {
   fill: #57534e;
