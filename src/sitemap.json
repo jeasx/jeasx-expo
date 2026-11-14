@@ -94,6 +94,7 @@
     "links": [
       { "path": "/client-jsx", "title": "Client-side JSX" },
       { "path": "/social-feed", "title": "Social feed" },
+      { "path": "/kanban", "title": "Kanban board" },
       { "path": "/dependency-tree", "title": "Dependency tree" },
       { "path": "/game-of-life", "title": "Game of Life" },
       { "path": "/maze-chase", "title": "Maze chase" },
