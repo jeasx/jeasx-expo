@@ -29,14 +29,14 @@ Then open [http://localhost:3000](http://localhost:3000). The start page links t
 
 Each example lives in its own folder below [`src/`](src) and is served at the matching path (e.g. `src/todos` → `/todos`).
 
-- **Server-side JSX with jsx-async-runtime**: what JSX renders, `this` as context, render props, intercepting JSX, Declarative Shadow DOM, unit tests
-- **Streaming with jsx-async-runtime**: out-of-order and parallel loading, parallel API aggregator, streaming HTML, async iterables, ReadableStreams, Mandelbrot explorer
-- **Client-side apps with jsx-async-runtime**: client-side JSX, Kanban board and cinema seat booking (with and without JavaScript), social feed, async dependency tree
-- **Client-side games with jsx-async-runtime**: Game of Life, maze chase game, racing game, isometric shooter, flight game with a streamed landscape
+- **Server-side JSX with jsx-async-runtime**: what JSX renders, `this` as context, render props, intercepting JSX, web components with Declarative Shadow DOM, unit tests
+- **Streaming with jsx-async-runtime**: parallel loading, parallel API aggregator, streaming HTML, slotted (out-of-order) streaming, ReadableStreams, async iterables, Mandelbrot explorer
 - **Server-rendered websites and apps**: blog, products, MDX, todos, multi-step wizard, lottery, jokes, GitHub repos, A/B testing, i18n
-- **Images, JSON and other content types**: Open Graph images, HTML emails with plain-text alternative, SVG charts, image scaling with sharp, image upload, Server-Sent Events, live cursors with WebSockets, PDF invoices with JSX, content negotiation, JSON and `Response` objects
-- **Security, errors and post-processing**: login and sessions, basic auth, signed cookies, Content Security Policy, Cap.js captcha, rate limiting, error handlers, prettifying HTML, extracting styles with Cheerio, head management
-- **Hypermedia with HTMX**: HTMX (click to edit, active search, template fragments, infinite scroll, reactive scripting)
+- **Client-side apps with jsx-async-runtime**: solar system with client-side JSX, Kanban board and cinema seat booking (with and without JavaScript), social feed, async dependency tree
+- **Client-side games with jsx-async-runtime**: Game of Life, maze chase game, racing game, isometric shooter, flight game with a streamed landscape
+- **Beyond HTML: images, PDFs, emails and live streams**: SVG charts, HTML emails with plain-text alternative, PDF invoices with JSX, Open Graph images, image scaling with sharp, image upload, Server-Sent Events, live cursors with WebSockets, content negotiation, JSON and `Response` objects
+- **Security, errors and post-processing**: login and sessions, basic auth, signed cookies, Content Security Policy, bot protection with the Cap.js captcha, rate limiting, error handlers, prettifying HTML, extracting styles with Cheerio, merging head tags from components
+- **Hypermedia with HTMX**: click to edit, active search, template fragments, infinite scroll, reactive scripting
 - **JavaScript libraries and frameworks**: React, Preact, Vue, Svelte, Lit, Alpine.js, islands mixing four frameworks with lazy hydration
 
 The full list with descriptions is in [`src/sitemap.json`](src/sitemap.json).
