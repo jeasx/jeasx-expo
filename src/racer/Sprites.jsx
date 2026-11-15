@@ -47,7 +47,7 @@ const OUTLINE = "#3b342e";
  * One leg from the hip or shoulder down to the hoof, outlined by drawing it
  * twice. `dx` swings the hoof forwards or backwards for the walk.
  */
-function Leg({ x, dx, far }) {
+function Leg({ x, dx, far = false }) {
   const d = `M${x} 30 Q${x + dx * 0.3} 46 ${x + dx} 55`;
   return (
     <>
