@@ -7,7 +7,7 @@
       { "path": "/context", "title": "'this' as context" },
       { "path": "/render-props", "title": "Render props" },
       { "path": "/interceptor", "title": "Intercept JSX" },
-      { "path": "/shadow-dom", "title": "Declarative Shadow DOM" },
+      { "path": "/shadow-dom", "title": "Shadow DOM" },
       { "path": "/testing", "title": "Unit tests" }
     ]
   },
@@ -68,15 +68,14 @@
     "links": [
       { "path": "/og", "title": "Open Graph images" },
       { "path": "/email", "title": "JSX for emails" },
-      { "path": "/pdf", "title": "PDF with JSX" },
-      { "path": "/svg", "title": "SVG charts" },
+      { "path": "/pdf", "title": "JSX for PDF" },
+      { "path": "/svg", "title": "JSX for SVG" },
       { "path": "/sharp", "title": "Image scaling" },
       { "path": "/upload", "title": "Image upload" },
       { "path": "/sse", "title": "Server-Sent Events" },
-      { "path": "/websocket", "title": "WebSocket cursors" },
+      { "path": "/websocket", "title": "WebSocket" },
       { "path": "/negotiation", "title": "Content negotiation" },
-      { "path": "/response", "title": "Response objects" },
-      { "path": "/sitemap.xml", "title": "XML sitemap" }
+      { "path": "/response", "title": "Response objects" }
     ]
   },
   {
