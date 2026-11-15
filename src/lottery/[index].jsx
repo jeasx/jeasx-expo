@@ -7,7 +7,7 @@ import Lottery from "./Lottery";
 export default function ({ numbers, number, delta, submit }) {
   return (
     <Layout
-      title={numbers.length > 0 ? `Lottery ${numbers.join(", ")}` : "Lottery"}
+      title="Lottery"
       description="Pick six numbers: rendered on the server, then the same JSX component runs in the browser."
       css="/lottery/index.css"
       script="/lottery/index.js"
@@ -17,8 +17,8 @@ export default function ({ numbers, number, delta, submit }) {
           Lottery <span class="lottery-badge">6 out of 49</span>
         </h1>
         <p class="lottery-lead">
-          Pick six numbers, then reveal the draw. The server renders the first page. After that,
-          the browser handles every click with the same reducer and JSX component, so no request is
+          Pick six numbers, then reveal the draw. The server renders the first page. After that, the
+          browser handles every click with the same reducer and JSX component, so no request is
           needed. Without JavaScript, every click submits a plain HTML form and the server renders
           the updated page.
         </p>
