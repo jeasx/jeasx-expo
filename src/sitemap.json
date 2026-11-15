@@ -36,18 +36,12 @@
     ]
   },
   {
-    "title": "Client-side apps with jsx-async-runtime",
-    "description": "Render JSX components right in the browser with jsx-async-runtime: async components which fetch their own data, live updates and streamed async trees.",
+    "title": "Client-side apps and games with jsx-async-runtime",
+    "description": "Render JSX right in the browser with jsx-async-runtime: async components which fetch their own data, live feeds, streamed async trees, and games which render every frame.",
     "links": [
       { "path": "/client-jsx", "title": "Solar system" },
       { "path": "/social-feed", "title": "Social feed" },
-      { "path": "/dependency-tree", "title": "Dependency tree" }
-    ]
-  },
-  {
-    "title": "Client-side games with jsx-async-runtime",
-    "description": "Games where jsx-async-runtime renders every frame in the browser: animation, input and game logic with plain JSX components.",
-    "links": [
+      { "path": "/dependency-tree", "title": "Dependency tree" },
       { "path": "/game-of-life", "title": "Game of Life" },
       { "path": "/maze-chase", "title": "Maze chase" },
       { "path": "/racer", "title": "Racer" },

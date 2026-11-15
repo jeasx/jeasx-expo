@@ -31,10 +31,9 @@ Each example lives in its own folder below [`src/`](src) and is served at the ma
 
 - **Server-side JSX with jsx-async-runtime**: what JSX renders, `this` as context, render props, intercepting JSX, web components with Declarative Shadow DOM, unit tests
 - **Streaming with jsx-async-runtime**: parallel loading, parallel API aggregator, streaming HTML, slotted (out-of-order) streaming, ReadableStreams, async iterables, Mandelbrot explorer
-- **Server-rendered websites and apps**: blog, products, MDX, multi-step wizard, GitHub repos, A/B testing, i18n
 - **Isomorphic apps with jsx-async-runtime**: todos, lottery, jokes, Kanban board and cinema seat booking, rendered on the server first, then in the browser with the same components, and working without JavaScript
-- **Client-side apps with jsx-async-runtime**: solar system with client-side JSX, social feed, async dependency tree
-- **Client-side games with jsx-async-runtime**: Game of Life, maze chase game, racing game, isometric shooter, flight game with a streamed landscape
+- **Client-side apps and games with jsx-async-runtime**: solar system with client-side JSX, social feed, async dependency tree, Game of Life, maze chase game, racing game, isometric shooter, flight game with a streamed landscape
+- **Server-rendered websites and apps**: blog, products, MDX, multi-step wizard, GitHub repos, A/B testing, i18n
 - **Beyond HTML: images, PDFs, emails and live streams**: SVG charts, HTML emails with plain-text alternative, PDF invoices with JSX, Open Graph images, image scaling with sharp, image upload, Server-Sent Events, live cursors with WebSockets, content negotiation, JSON and `Response` objects
 - **Security, errors and post-processing**: login and sessions, basic auth, signed cookies, Content Security Policy, bot protection with the Cap.js captcha, rate limiting, error handlers, prettifying HTML, extracting styles with Cheerio, merging head tags from components
 - **Hypermedia with HTMX**: click to edit, active search, template fragments, infinite scroll, reactive scripting
