@@ -272,8 +272,6 @@ export default function Sprites() {
       <symbol id="car" viewBox="0 0 100 60">
         <rect x="2" y="30" width="22" height="28" rx="4" fill="#111" />
         <rect x="76" y="30" width="22" height="28" rx="4" fill="#111" />
-        <rect x="5" y="34" width="16" height="2" fill="#444" />
-        <rect x="79" y="34" width="16" height="2" fill="#444" />
         <path d="M22 50 L28 22 L72 22 L78 50 Z" fill="currentColor" />
         <path d="M38 22 L42 10 L58 10 L62 22 Z" fill="currentColor" />
         <circle cx="50" cy="13" r="5" fill="#fbbf24" stroke="#111" stroke-width="1.5" />

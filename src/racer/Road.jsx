@@ -330,6 +330,38 @@ function Moo({ x, y, w, h, dir, loud }) {
   );
 }
 
+/** Tread bars on the visible half of a tire, and how far the car travels while they cycle through. */
+const TREADS = 8;
+// At top speed (45 segments per second) and 60 frames per second, the car
+// travels 150 units per frame. A bar must move clearly less than half the gap
+// to the next per frame; with this distance it moves 0.4 of the gap.
+const TREAD_TRAVEL = 3000;
+
+/**
+ * Tread bars on the back of the rear tires, as one path in the car's artwork
+ * units (100 × 60, tires at 2 and 76, 22 wide, 30 to 58 high). A tire rolling
+ * forwards turns its back side upwards, so the bars climb. They sit on a
+ * cylinder seen from behind: around the middle they are far apart and full
+ * height, towards the top and bottom they crowd together and thin out. Even
+ * at top speed a bar moves less than half the gap per frame, so the tires
+ * never seem to spin backwards.
+ */
+function treads(position) {
+  const phase = (position / TREAD_TRAVEL) % 1;
+  const parts = [];
+  for (const x of [5, 79]) {
+    for (let i = 0; i < TREADS; i++) {
+      // Angle around the visible half of the tire: 0 at the top, π at the bottom.
+      const angle = ((((i / TREADS - phase) % 1) + 1) % 1) * Math.PI;
+      const height = 1.2 * Math.sin(angle);
+      if (height < 0.2) continue;
+      const y = 44 - 13 * Math.cos(angle) - height / 2;
+      parts.push(`M${x} ${round(y)}h16v${round(height)}h-16Z`);
+    }
+  }
+  return parts.join("");
+}
+
 /**
  * The player's car at the bottom of the screen. It bounces at speed, leans
  * into the steering and shakes after a crash.
@@ -346,17 +378,64 @@ function Player({ state, sun }) {
   return (
     <>
       <Shadow x={WIDTH / 2 + shake} y={bottom - 2} w={w} h={h} sun={sun} />
-      <use
-        href="#car"
-        class="car player red"
-        x={round(left)}
-        y={round(bottom - h)}
-        width={round(w)}
-        height={round(h)}
-        transform={`rotate(${round(state.steer * 3 * percent)} ${WIDTH / 2} ${HEIGHT})`}
-      />
+      <g transform={`rotate(${round(state.steer * 3 * percent)} ${WIDTH / 2} ${HEIGHT})`}>
+        <use
+          href="#car"
+          class="car player red"
+          x={round(left)}
+          y={round(bottom - h)}
+          width={round(w)}
+          height={round(h)}
+        />
+        <path
+          class="treads"
+          d={treads(state.position)}
+          transform={`translate(${round(left)} ${round(bottom - h)}) scale(${(w / 100).toFixed(3)})`}
+        />
+      </g>
       {state.drift > 0.02 && <Smoke left={left} bottom={bottom} w={w} state={state} />}
+      {Math.abs(state.x) > 1 && percent > 0.05 && (
+        <Dirt left={left} bottom={bottom} w={w} percent={percent} clock={state.clock} />
+      )}
     </>
+  );
+}
+
+const CLUMPS = 8;
+/** Seconds a clump of dirt flies. */
+const CLUMP_LIFE = 0.5;
+const DIRT = ["#5b3a1e", "#7c4f2a", "#3f6212", "#4a2f19"];
+
+/**
+ * Dirt and bits of grass thrown up by the rear tires on the grass, more and
+ * higher the faster the car goes. Like the smoke, each clump's flight comes
+ * from the race clock: it is flung up and out, falls back on an arc, grows
+ * as it comes towards the camera and fades out.
+ */
+function Dirt({ left, bottom, w, percent, clock }) {
+  const wheels = [left + w * 0.13, left + w * 0.87];
+  const strength = Math.min(1, percent * 1.5);
+  return (
+    <g class="dirt">
+      {wheels.flatMap((wheel, side) =>
+        Array.from({ length: CLUMPS }, (_, i) => {
+          const age = (clock / CLUMP_LIFE + i / CLUMPS + side * 0.37) % 1;
+          // A fixed spread per clump, so they don't fly in line.
+          const spread = Math.sin(i * 3.7 + side * 1.3);
+          const out = (side ? 1 : -1) * (0.15 + 0.25 * Math.abs(spread)) + spread * 0.1;
+          const rise = (0.25 + 0.2 * Math.abs(Math.cos(i * 2.3))) * strength;
+          return (
+            <circle
+              cx={round(wheel + out * age * w)}
+              cy={round(bottom - 4 - (rise * age - 0.45 * strength * age * age) * w)}
+              r={round(w * (0.012 + age * 0.02))}
+              fill={DIRT[(i + side) % DIRT.length]}
+              opacity={round(strength * (1 - age) * 100) / 100}
+            />
+          );
+        }),
+      )}
+    </g>
   );
 }
 
@@ -446,7 +525,13 @@ export default function Road({ state }) {
     rows.push({ segment, p1, p2, visible });
   }
 
-  const sun = 470 - ((state.sky * 40) % 1000);
+  // The sun is farther away than anything, so it sweeps across the sky in
+  // curves like the far mountains. It wraps around a span twice the screen
+  // wide, so it leaves on one side and comes back on the other.
+  const span = WIDTH * 2;
+  const sun =
+    ((((470 + (span - WIDTH) / 2 - state.sky * WIDTH * 0.5) % span) + span) % span) -
+    (span - WIDTH) / 2;
 
   return (
     <svg

@@ -112,6 +112,9 @@
   font: 900 13px sans-serif;
   fill: #1e293b;
 }
+.road .treads {
+  fill: #2e2e2e;
+}
 .road .flash {
   fill: #fff;
 }
