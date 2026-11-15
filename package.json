@@ -9,7 +9,6 @@
     "test": "node -e \"require('fs').rmSync('dist-test',{recursive:true,force:true})\" && esbuild \"src/**/*.test.*\" --bundle --platform=node --format=esm --packages=external --loader:.svg=file --outbase=src --outdir=dist-test --log-level=warning && node --test dist-test"
   },
   "dependencies": {
-    "@arrow-js/core": "1.0.6",
     "@cap.js/server": "4.0.5",
     "@cap.js/widget": "0.1.63",
     "@fastify/cookie": "11.1.5",
@@ -20,7 +19,6 @@
     "alpinejs": "3.17.5",
     "cheerio": "1.2.0",
     "esbuild-svelte": "0.9.5",
-    "fixi-js": "0.9.4",
     "htmx.org": "4.0.1",
     "jeasx": "3.0.1",
     "lit": "3.3.3",

@@ -43,7 +43,6 @@
       { "path": "/maze-chase", "title": "Maze chase" },
       { "path": "/racer", "title": "Racer" },
       { "path": "/sky-fortress", "title": "Sky fortress" },
-      { "path": "/jungle-run", "title": "Jungle run" },
       { "path": "/air-mail", "title": "Air mail" }
     ]
   },
@@ -101,14 +100,13 @@
   },
   {
     "title": "Hypermedia with HTMX",
-    "description": "Every Jeasx route can return an HTML fragment, so hypermedia libraries like HTMX and Fixi can update parts of a page with markup rendered on the server.",
+    "description": "Every Jeasx route can return an HTML fragment, so hypermedia libraries like HTMX can update parts of a page with markup rendered on the server.",
     "links": [
       { "path": "/htmx", "title": "Click to edit" },
       { "path": "/active-search", "title": "Active search" },
       { "path": "/fragments", "title": "Template fragments" },
       { "path": "/infinite-scroll", "title": "Infinite scroll" },
-      { "path": "/hx-live", "title": "Reactive scripting" },
-      { "path": "/fixi", "title": "Fixi.js" }
+      { "path": "/hx-live", "title": "Reactive scripting" }
     ]
   },
   {
@@ -121,7 +119,6 @@
       { "path": "/svelte", "title": "Svelte" },
       { "path": "/lit", "title": "Lit" },
       { "path": "/alpine", "title": "Alpine.js" },
-      { "path": "/arrowjs", "title": "ArrowJS" },
       { "path": "/islands", "title": "Islands" }
     ]
   }

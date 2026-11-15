@@ -32,12 +32,12 @@ Each example lives in its own folder below [`src/`](src) and is served at the ma
 - **Server-side JSX with jsx-async-runtime**: what JSX renders, `this` as context, render props, intercepting JSX, Declarative Shadow DOM, unit tests
 - **Streaming with jsx-async-runtime**: out-of-order and parallel loading, parallel API aggregator, streaming HTML, async iterables, ReadableStreams, Mandelbrot explorer
 - **Client-side apps with jsx-async-runtime**: client-side JSX, Kanban board and cinema seat booking (with and without JavaScript), social feed, async dependency tree
-- **Client-side games with jsx-async-runtime**: Game of Life, maze chase game, racing game, isometric shooter, jungle platformer, flight game with a streamed landscape
+- **Client-side games with jsx-async-runtime**: Game of Life, maze chase game, racing game, isometric shooter, flight game with a streamed landscape
 - **Server-rendered websites and apps**: blog, products, planet gallery with view transitions, MDX, todos, multi-step wizard, lottery, jokes, GitHub repos, A/B testing, i18n
 - **Images, JSON and other content types**: Open Graph images, HTML emails with plain-text alternative, SVG charts, image scaling with sharp, image upload, JSON, Server-Sent Events, chat with SSE, live cursors with WebSockets, PDF invoices with JSX, content negotiation, `Response` objects, XML sitemap
 - **Security, errors and post-processing**: login and sessions, basic auth, signed cookies, Content Security Policy, Cap.js captcha, rate limiting, error handlers, prettifying HTML, extracting styles with Cheerio, head management
-- **Hypermedia with HTMX**: HTMX (click to edit, active search, template fragments, infinite scroll, reactive scripting) and Fixi.js
-- **JavaScript libraries and frameworks**: React, Preact, Vue, Svelte, Lit, Alpine.js, ArrowJS, islands mixing four frameworks with lazy hydration
+- **Hypermedia with HTMX**: HTMX (click to edit, active search, template fragments, infinite scroll, reactive scripting)
+- **JavaScript libraries and frameworks**: React, Preact, Vue, Svelte, Lit, Alpine.js, islands mixing four frameworks with lazy hydration
 
 The full list with descriptions is in [`src/sitemap.json`](src/sitemap.json).
 
