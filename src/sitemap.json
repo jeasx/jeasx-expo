@@ -17,7 +17,7 @@
     "links": [
       { "path": "/out-of-order", "title": "Out-of-order streaming" },
       { "path": "/parallel", "title": "Parallel loading" },
-      { "path": "/aggregator", "title": "Parallel API aggregator" },
+      { "path": "/aggregator", "title": "API aggregator" },
       { "path": "/streaming", "title": "Streaming HTML" },
       { "path": "/async-iterable", "title": "Async iterables" },
       { "path": "/readable-stream", "title": "ReadableStreams" },
@@ -52,7 +52,6 @@
     "links": [
       { "path": "/blog", "title": "Blog" },
       { "path": "/products", "title": "Products" },
-      { "path": "/view-transitions", "title": "Planet gallery" },
       { "path": "/mdx", "title": "MDX support" },
       { "path": "/todos", "title": "Todos" },
       { "path": "/wizard", "title": "Wizard" },

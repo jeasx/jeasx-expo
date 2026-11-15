@@ -33,7 +33,7 @@ Each example lives in its own folder below [`src/`](src) and is served at the ma
 - **Streaming with jsx-async-runtime**: out-of-order and parallel loading, parallel API aggregator, streaming HTML, async iterables, ReadableStreams, Mandelbrot explorer
 - **Client-side apps with jsx-async-runtime**: client-side JSX, Kanban board and cinema seat booking (with and without JavaScript), social feed, async dependency tree
 - **Client-side games with jsx-async-runtime**: Game of Life, maze chase game, racing game, isometric shooter, flight game with a streamed landscape
-- **Server-rendered websites and apps**: blog, products, planet gallery with view transitions, MDX, todos, multi-step wizard, lottery, jokes, GitHub repos, A/B testing, i18n
+- **Server-rendered websites and apps**: blog, products, MDX, todos, multi-step wizard, lottery, jokes, GitHub repos, A/B testing, i18n
 - **Images and other content types**: Open Graph images, HTML emails with plain-text alternative, SVG charts, image scaling with sharp, image upload, Server-Sent Events, live cursors with WebSockets, PDF invoices with JSX, content negotiation, `Response` objects, XML sitemap
 - **Security, errors and post-processing**: login and sessions, basic auth, signed cookies, Content Security Policy, Cap.js captcha, rate limiting, error handlers, prettifying HTML, extracting styles with Cheerio, head management
 - **Hypermedia with HTMX**: HTMX (click to edit, active search, template fragments, infinite scroll, reactive scripting)
