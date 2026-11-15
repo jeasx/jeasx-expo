@@ -69,14 +69,12 @@
     "links": [
       { "path": "/og", "title": "Open Graph images" },
       { "path": "/email", "title": "JSX for emails" },
+      { "path": "/pdf", "title": "PDF with JSX" },
       { "path": "/svg", "title": "SVG charts" },
       { "path": "/sharp", "title": "Image scaling" },
       { "path": "/upload", "title": "Image upload" },
-      { "path": "/json/request.json?foo=bar", "title": "JSON response" },
       { "path": "/sse", "title": "Server-Sent Events" },
-      { "path": "/chat", "title": "Chat with SSE" },
       { "path": "/websocket", "title": "WebSocket cursors" },
-      { "path": "/pdf", "title": "PDF with JSX" },
       { "path": "/negotiation", "title": "Content negotiation" },
       { "path": "/response", "title": "Response objects" },
       { "path": "/sitemap.xml", "title": "XML sitemap" }
@@ -119,7 +117,7 @@
       { "path": "/svelte", "title": "Svelte" },
       { "path": "/lit", "title": "Lit" },
       { "path": "/alpine", "title": "Alpine.js" },
-      { "path": "/islands", "title": "Islands" }
+      { "path": "/islands", "title": "Mixed islands" }
     ]
   }
 ]
