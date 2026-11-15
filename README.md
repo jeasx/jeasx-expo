@@ -31,8 +31,9 @@ Each example lives in its own folder below [`src/`](src) and is served at the ma
 
 - **Server-side JSX with jsx-async-runtime**: what JSX renders, `this` as context, render props, intercepting JSX, web components with Declarative Shadow DOM, unit tests
 - **Streaming with jsx-async-runtime**: parallel loading, parallel API aggregator, streaming HTML, slotted (out-of-order) streaming, ReadableStreams, async iterables, Mandelbrot explorer
-- **Server-rendered websites and apps**: blog, products, MDX, todos, multi-step wizard, lottery, jokes, GitHub repos, A/B testing, i18n
-- **Client-side apps with jsx-async-runtime**: solar system with client-side JSX, Kanban board and cinema seat booking (with and without JavaScript), social feed, async dependency tree
+- **Server-rendered websites and apps**: blog, products, MDX, multi-step wizard, GitHub repos, A/B testing, i18n
+- **Isomorphic apps with jsx-async-runtime**: todos, lottery, jokes, Kanban board and cinema seat booking, rendered on the server first, then in the browser with the same components, and working without JavaScript
+- **Client-side apps with jsx-async-runtime**: solar system with client-side JSX, social feed, async dependency tree
 - **Client-side games with jsx-async-runtime**: Game of Life, maze chase game, racing game, isometric shooter, flight game with a streamed landscape
 - **Beyond HTML: images, PDFs, emails and live streams**: SVG charts, HTML emails with plain-text alternative, PDF invoices with JSX, Open Graph images, image scaling with sharp, image upload, Server-Sent Events, live cursors with WebSockets, content negotiation, JSON and `Response` objects
 - **Security, errors and post-processing**: login and sessions, basic auth, signed cookies, Content Security Policy, bot protection with the Cap.js captcha, rate limiting, error handlers, prettifying HTML, extracting styles with Cheerio, merging head tags from components
@@ -49,7 +50,7 @@ Jeasx uses file-based routing inside `src/`:
 - `[...path].jsx`: a catch-all route for all paths below the folder
 - `[...guard].js(x)`: a guard that runs before every route in its folder and below (auth, redirects, request setup)
 - `[404].jsx`: the page for unknown paths
-- `index.js` / `index.css`: browser bundles, built with esbuild and served at the same path
+- `index.js(x)` / `index.css`: browser bundles, built with esbuild and served at the same path
 - other files (components, helpers): imported by routes, not served
 
 Server and browser build options, as well as Fastify plugins (multipart, cookies, form parsing), are configured in [`jeasx.config.js`](jeasx.config.js). Static files go in [`public/`](public).

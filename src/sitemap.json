@@ -25,28 +25,21 @@
     ]
   },
   {
-    "title": "Server-rendered websites and apps",
-    "description": "Render pages on the server with content from a remote API, JSON data or Markdown with MDX, and build interactive apps with plain HTML forms. No client-side JavaScript needed: view transitions make page changes feel smooth.",
+    "title": "Isomorphic apps with jsx-async-runtime",
+    "description": "The server renders the first page, then the browser re-renders the same JSX components after every click, without React, a virtual DOM or hydration. Without JavaScript, every app keeps working with plain HTML forms.",
     "links": [
-      { "path": "/blog", "title": "Blog" },
-      { "path": "/products", "title": "Products" },
-      { "path": "/mdx", "title": "MDX support" },
       { "path": "/todos", "title": "Todos" },
-      { "path": "/wizard", "title": "Wizard" },
       { "path": "/lottery", "title": "Lottery" },
       { "path": "/jokes", "title": "Jokes" },
-      { "path": "/repositories", "title": "GitHub repos" },
-      { "path": "/ab-testing", "title": "A/B testing" },
-      { "path": "/i18n", "title": "Internationalization" }
+      { "path": "/kanban", "title": "Kanban board" },
+      { "path": "/cinema", "title": "Cinema seats" }
     ]
   },
   {
     "title": "Client-side apps with jsx-async-runtime",
-    "description": "Render the same JSX components on the server and in the browser with jsx-async-runtime, without React, a virtual DOM or hydration: from simple widgets to apps that work with and without JavaScript, and streamed async trees.",
+    "description": "Render JSX components right in the browser with jsx-async-runtime: async components which fetch their own data, live updates and streamed async trees.",
     "links": [
       { "path": "/client-jsx", "title": "Solar system" },
-      { "path": "/kanban", "title": "Kanban board" },
-      { "path": "/cinema", "title": "Cinema seats" },
       { "path": "/social-feed", "title": "Social feed" },
       { "path": "/dependency-tree", "title": "Dependency tree" }
     ]
@@ -60,6 +53,19 @@
       { "path": "/racer", "title": "Racer" },
       { "path": "/sky-fortress", "title": "Sky fortress" },
       { "path": "/air-mail", "title": "Air mail" }
+    ]
+  },
+  {
+    "title": "Server-rendered websites and apps",
+    "description": "Render pages on the server with content from a remote API, JSON data or Markdown with MDX, and build multi-step forms with plain HTML. No client-side JavaScript needed: view transitions make page changes feel smooth.",
+    "links": [
+      { "path": "/blog", "title": "Blog" },
+      { "path": "/products", "title": "Products" },
+      { "path": "/wizard", "title": "Wizard" },
+      { "path": "/mdx", "title": "Cookbook" },
+      { "path": "/repositories", "title": "GitHub repos" },
+      { "path": "/ab-testing", "title": "A/B testing" },
+      { "path": "/i18n", "title": "Internationalization" }
     ]
   },
   {
