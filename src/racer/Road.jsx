@@ -13,6 +13,7 @@ import {
   TRACK,
   TRACK_LENGTH,
 } from "./game";
+import { BILLBOARDS } from "./Sprites";
 
 export const WIDTH = 640;
 export const HEIGHT = 360;
@@ -127,6 +128,55 @@ function Bird({ clock }) {
   );
 }
 
+const SUN_Y = 70;
+
+/** Twelve thin rays around the sun, as one path. */
+const RAYS = Array.from({ length: 12 }, (_, i) => {
+  const a = (i / 12) * Math.PI * 2;
+  const point = (angle, r) => `${round(Math.cos(angle) * r)},${round(Math.sin(angle) * r)}`;
+  return `M${point(a - 0.06, 30)} L${point(a, i % 2 ? 70 : 95)} L${point(a + 0.06, 30)} Z`;
+}).join(" ");
+
+/** The sun with a pulsing glow and slowly turning rays, all from the race clock. */
+function Sun({ x, clock }) {
+  const pulse = Math.sin(clock * 2);
+  return (
+    <g transform={`translate(${round(x)} ${SUN_Y})`}>
+      <circle class="sun-glow" r={round(70 + pulse * 6)} />
+      <path class="sun-rays" d={RAYS} transform={`rotate(${round(clock * 8)})`} />
+      <circle class="sun" r="26" />
+    </g>
+  );
+}
+
+/** Ghosts of the sun along the line through the center of the screen, like in a camera lens. */
+const FLARES = [
+  { t: 0.45, r: 6, color: "#fde68a" },
+  { t: 0.8, r: 16, color: "#a5f3fc" },
+  { t: 1.15, r: 9, color: "#f9a8d4" },
+  { t: 1.6, r: 28, color: "#c4b5fd" },
+  { t: 1.85, r: 12, color: "#fde68a" },
+];
+
+/**
+ * A lens flare drawn over everything. It's strongest while the sun is near
+ * the middle of the screen and fades out as the sun moves towards the edge.
+ */
+function Flare({ x, clock }) {
+  const strength = 1 - Math.min(1, Math.abs(x - WIDTH / 2) / (WIDTH / 2 + 40));
+  if (strength <= 0.05) return null;
+  const dx = WIDTH / 2 - x;
+  const dy = HEIGHT / 2 - SUN_Y;
+  const flicker = 0.9 + Math.sin(clock * 7) * 0.1;
+  return (
+    <g class="flare" opacity={round(strength * flicker * 100) / 100}>
+      {FLARES.map(({ t, r, color }) => (
+        <circle cx={round(x + dx * t)} cy={round(SUN_Y + dy * t)} r={r} fill={color} />
+      ))}
+    </g>
+  );
+}
+
 /** Projects a point of the world onto the screen. */
 function project(worldX, worldY, worldZ, cameraX, cameraY, cameraZ) {
   const scale = DEPTH / (worldZ - cameraZ);
@@ -176,20 +226,49 @@ function Slice({ index, p1, p2 }) {
   );
 }
 
+/** Sprites that cast one shadow; billboards cast one per post, crowds stand behind barriers. */
+const SHADOWS = new Set(["tree", "pine", "bush", "car"]);
+
+/**
+ * A flat shadow on the ground, cast away from the sun. Taller things cast
+ * longer shadows, and as the sun moves across the sky in curves, the shadows
+ * swing around. It's a single plain ellipse without blur filters, so it costs
+ * next to nothing per frame.
+ */
+function Shadow({ x, y, w, h, sun }) {
+  if (w < 2) return null;
+  const dir = Math.max(-1, Math.min(1, (x - sun) / (WIDTH / 2)));
+  return (
+    <ellipse
+      class="shadow"
+      cx={round(x + dir * h * 0.35)}
+      cy={round(y)}
+      rx={round(w * 0.45 + Math.abs(dir) * h * 0.25)}
+      ry={round(Math.max(1, w * 0.08))}
+    />
+  );
+}
+
 /** A sprite standing on the road, anchored at its bottom center. */
-function Thing({ type, x, y, scale, width, height, color = "" }) {
+function Thing({ type, symbol = type, x, y, scale, width, height, sun, color = "" }) {
   const w = scale * width * (WIDTH / 2);
   const h = scale * height * (WIDTH / 2);
   if (w < 1 || w > WIDTH * 4) return null;
   return (
-    <use
-      href={`#${type}`}
-      class={color && `car ${color}`}
-      x={round(x - w / 2)}
-      y={round(y - h)}
-      width={round(w)}
-      height={round(h)}
-    />
+    <>
+      {SHADOWS.has(type) && <Shadow x={x} y={y} w={w} h={h} sun={sun} />}
+      {type === "billboard" &&
+        // One thin shadow per post; the posts stand at 24 and 126 of the 150 wide artwork.
+        [-0.34, 0.34].map((post) => <Shadow x={x + post * w} y={y} w={w * 0.12} h={h} sun={sun} />)}
+      <use
+        href={`#${symbol}`}
+        class={color && `car ${color}`}
+        x={round(x - w / 2)}
+        y={round(y - h)}
+        width={round(w)}
+        height={round(h)}
+      />
+    </>
   );
 }
 
@@ -197,7 +276,7 @@ function Thing({ type, x, y, scale, width, height, color = "" }) {
  * A cow standing on a segment of the road, facing the way it walks. Its legs
  * step in turns, and it moos when it gets hit, or just now and then.
  */
-function Cow({ cow, p1, p2, clock }) {
+function Cow({ cow, p1, p2, clock, sun }) {
   const p = (cow.z % SEGMENT) / SEGMENT;
   const scale = lerp(p1.scale, p2.scale, p);
   const w = scale * COW.width * (WIDTH / 2);
@@ -209,6 +288,7 @@ function Cow({ cow, p1, p2, clock }) {
   const moo = cow.hit || clock % 3 < 1;
   return (
     <>
+      <Shadow x={x} y={y} w={w * 0.8} h={h} sun={sun} />
       <use
         href={`#${step}`}
         x={round(x - w / 2)}
@@ -254,7 +334,7 @@ function Moo({ x, y, w, h, dir, loud }) {
  * The player's car at the bottom of the screen. It bounces at speed, leans
  * into the steering and shakes after a crash.
  */
-function Player({ state }) {
+function Player({ state, sun }) {
   // On the projection plane, the scale is the same as for the camera height.
   const w = (CAR_WIDTH * ROAD * (WIDTH / 2) * DEPTH) / PLAYER_Z;
   const h = w * 0.6;
@@ -265,6 +345,7 @@ function Player({ state }) {
   const bottom = HEIGHT - 8 + bounce;
   return (
     <>
+      <Shadow x={WIDTH / 2 + shake} y={bottom - 2} w={w} h={h} sun={sun} />
       <use
         href="#car"
         class="car player red"
@@ -365,6 +446,8 @@ export default function Road({ state }) {
     rows.push({ segment, p1, p2, visible });
   }
 
+  const sun = 470 - ((state.sky * 40) % 1000);
+
   return (
     <svg
       class="road"
@@ -374,7 +457,7 @@ export default function Road({ state }) {
       aria-label={`Road ahead, ${state.cars.length} cars on the track`}
     >
       <rect class="sky" width={WIDTH} height={HEIGHT} />
-      <circle class="sun" cx={round(470 - ((state.sky * 40) % 1000))} cy="70" r="26" />
+      <Sun x={sun} clock={state.clock} />
       <Clouds clock={state.clock} sky={state.sky} />
       <Mountains sky={state.sky} horizon={horizon - HEIGHT / 2} />
       <Bird clock={state.clock} />
@@ -390,11 +473,18 @@ export default function Road({ state }) {
                   ? "crowd-cheer"
                   : sprite.type
               }
+              symbol={
+                // Billboards take turns showing their messages along the track.
+                sprite.type === "billboard"
+                  ? `billboard-${Math.floor(segment.index / 120) % BILLBOARDS.length}`
+                  : undefined
+              }
               x={p1.x + sprite.offset * p1.w}
               y={p1.y}
               scale={p1.scale}
               width={sprite.width}
               height={sprite.height}
+              sun={sun}
             />
           ))}
           {(traffic.get(segment.index) || [])
@@ -412,15 +502,17 @@ export default function Road({ state }) {
                   scale={lerp(p1.scale, p2.scale, p)}
                   width={CAR_WIDTH * ROAD}
                   height={CAR_WIDTH * ROAD * 0.6}
+                  sun={sun}
                 />
               );
             })}
           {state.cow && segmentAt(state.cow.z) === segment && (
-            <Cow cow={state.cow} p1={p1} p2={p2} clock={state.clock} />
+            <Cow cow={state.cow} p1={p1} p2={p2} clock={state.clock} sun={sun} />
           )}
         </>
       ))}
-      <Player state={state} />
+      <Player state={state} sun={sun} />
+      <Flare x={sun} clock={state.clock} />
       {state.crash > 0 && (
         <rect class="flash" width={WIDTH} height={HEIGHT} opacity={round(state.crash)} />
       )}
