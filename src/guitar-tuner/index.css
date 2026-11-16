@@ -256,6 +256,39 @@
   cursor: pointer;
   transition: filter 0.15s;
 }
+.tuner .listen > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.tuner .listen svg {
+  width: 1.15em;
+  height: 1.15em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.tuner .listen .stop svg {
+  fill: currentColor;
+  stroke: none;
+}
+.tuner .listen .stop,
+.tuner .listen.on .start {
+  display: none;
+}
+.tuner .listen.on .stop {
+  display: inline-flex;
+}
+.tuner .listen:active {
+  filter: brightness(0.92);
+  transform: translateY(1px);
+}
+.tuner .listen:disabled {
+  opacity: 0.7;
+  cursor: progress;
+}
 .tuner .listen:hover {
   filter: brightness(1.12);
 }

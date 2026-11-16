@@ -28,6 +28,17 @@ function context() {
   return audio;
 }
 
+/**
+ * Tells iOS (Safari 17+) what the audio is for: "playback" keeps the tones audible even
+ * with the ringer switched to silent, "play-and-record" is needed while the microphone listens.
+ *
+ * @param {"playback" | "play-and-record"} type
+ */
+function session(type) {
+  const audioSession = /** @type {any} */ (navigator).audioSession;
+  if (audioSession) audioSession.type = type;
+}
+
 /** What the display shows at the moment, to skip renders which wouldn't change anything. */
 let shown = "";
 
@@ -50,6 +61,7 @@ async function render() {
 async function start() {
   // Safari only starts audio within the tap itself, so create and resume the context
   // before waiting for the microphone permission; awaiting first would leave it suspended.
+  session("play-and-record");
   const ctx = context();
   const resumed = ctx.resume();
   listen.disabled = true;
@@ -84,7 +96,7 @@ async function start() {
     .connect(mute)
     .connect(ctx.destination);
   const samples = new Float32Array(analyser.fftSize);
-  listen.textContent = "⏹ Stop";
+  listen.classList.add("on");
   hint.textContent = "Listening… pluck one string at a time.";
 
   let last = 0;
@@ -121,7 +133,8 @@ async function stop() {
   stream?.getTracks().forEach((track) => track.stop());
   stream = null;
   frequency = null;
-  listen.textContent = "🎤 Start tuning";
+  session("playback");
+  listen.classList.remove("on");
   hint.textContent = "Standard tuning E A D G B E, A4 = 440 Hz.";
   await render();
 }
@@ -139,14 +152,20 @@ function pluck(index, when) {
   const ctx = context();
   const gain = ctx.createGain();
   gain.gain.setValueAtTime(0, when);
-  gain.gain.linearRampToValueAtTime(0.3, when + 0.01);
+  // A short but not instant attack: a jump from silence would be heard as a click.
+  // The level is as loud as possible for weak phone speakers, yet the harmonics summed up
+  // (1 + 0.7 + 0.45 + 0.25 = 2.4) stay below full scale: 0.4 × 2.4 = 0.96, so it never crackles.
+  // A new pluck only starts when the previous one has faded, so they don't add up.
+  gain.gain.linearRampToValueAtTime(0.4, when + 0.02);
   gain.gain.exponentialRampToValueAtTime(0.001, when + REPEAT);
   gain.connect(ctx.destination);
-  return [1, 2, 3].map((harmonic, i) => {
+  // Strong overtones: phone speakers hardly reproduce the low fundamentals (82 Hz for
+  // the low E), the ear still hears the pitch from the harmonics, like on a real string.
+  return [1, 2, 3, 4].map((harmonic, i) => {
     const oscillator = ctx.createOscillator();
     const level = ctx.createGain();
     oscillator.frequency.value = STRINGS[index].frequency * harmonic;
-    level.gain.value = [1, 0.4, 0.15][i];
+    level.gain.value = [1, 0.7, 0.45, 0.25][i];
     oscillator.connect(level).connect(gain);
     oscillator.start(when);
     oscillator.stop(when + REPEAT);
@@ -161,6 +180,7 @@ function pluck(index, when) {
  * @param {number} index
  */
 function repeat(index) {
+  if (!stream) session("playback");
   const ctx = context();
   ctx.resume();
   let next = ctx.currentTime;

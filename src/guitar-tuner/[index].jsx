@@ -27,8 +27,21 @@ export default function () {
           <Gauge />
           <Strings />
         </div>
+        {/* Both states are in the markup; the "on" class shows one of them. */}
         <button class="listen" type="button" id="listen">
-          🎤 Start tuning
+          <span class="start">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="9" y="3" width="6" height="11" rx="3" />
+              <path d="M6 11a6 6 0 0 0 12 0M12 17v4M9 21h6" />
+            </svg>
+            Start tuning
+          </span>
+          <span class="stop">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="6" y="6" width="12" height="12" rx="2.5" />
+            </svg>
+            Stop
+          </span>
         </button>
         <p class="hint" id="hint">
           Standard tuning E A D G B E, A4 = 440 Hz.
