@@ -28,10 +28,6 @@
   opacity: 0.7;
 }
 
-.blog-hint code {
-  font-size: inherit;
-}
-
 /* A gradient generated from the slug stands in for a cover image. */
 .blog-cover {
   --hue: 220;
