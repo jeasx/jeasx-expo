@@ -98,6 +98,6 @@
     color: var(--cte-accent);
     font-weight: 600;
     font-variant-numeric: tabular-nums;
-    font-family: ui-monospace, monospace;
+    font-family: var(--mono);
   }
 }
