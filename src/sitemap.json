@@ -97,7 +97,7 @@
       },
       {
         "title": "Security, errors and post-processing",
-        "description": "Protect routes with basic auth or sessions, sign cookies, block injected scripts stop bots with a proof-of-work captcha and rate-limit APIs. Catch errors, manage the head and transform the final HTML before it is sent to the browser.",
+        "description": "Protect routes with basic auth or sessions, sign cookies, block injected scripts, stop bots with a proof-of-work captcha and rate-limit APIs. Catch errors, manage the head and transform the final HTML before it is sent to the browser.",
         "links": [
           { "path": "/login", "title": "Login and sessions" },
           { "path": "/basic-auth", "title": "Basic auth" },

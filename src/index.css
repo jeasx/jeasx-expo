@@ -28,8 +28,11 @@
   --error-bg: #45150c;
   --accent: #6c8f00;
   --del: #cd7e7b;
-  --code-bg: #1a1e28;
-  --code: #8891a4;
+  --code-bg: #232937;
+  --code: #d4d9e2;
+  /* Inline code is tinted with the primary color, so it stands out from the text around it. */
+  --code-inline: var(--primary-hover);
+  --code-inline-bg: color-mix(in srgb, var(--primary) 12%, var(--code-bg));
   --input-bg: #1c212b;
   --input-border: #2a3140;
   --input-px: 1rem;
@@ -314,9 +317,9 @@ code,
 kbd {
   display: inline-block;
   border-radius: var(--radius);
-  background: var(--code-bg);
+  background: var(--code-inline-bg);
   padding: 0.125rem 0.375rem;
-  color: var(--code);
+  color: var(--code-inline);
   line-height: normal;
 }
 kbd {
@@ -347,6 +350,7 @@ code[class*="language-"] {
 pre > code {
   display: block;
   background: none;
+  color: inherit;
   padding: 1rem;
   font-size: inherit;
   line-height: 1.5;
