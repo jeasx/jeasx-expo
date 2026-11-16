@@ -10,9 +10,12 @@ export default function () {
     >
       <h1>Render props with async components</h1>
       <p class="lead">
-        A component receives its <code>children</code> as written: A single function child works as
-        a <em>render prop</em>: the component loads the data, and the caller decides how it looks.
-        The same <code>&lt;Jokes&gt;</code> loader is used twice below with different markup.{" "}
+        A single function child works as a <em>render prop</em>: the component loads the data, and
+        the caller decides how it looks.
+      </p>
+      <p>
+        A component receives its <code>children</code> as written, so the same{" "}
+        <code>&lt;Jokes&gt;</code> loader is used twice below with different markup.{" "}
         <a href="">Reload</a> for new jokes.
       </p>
 

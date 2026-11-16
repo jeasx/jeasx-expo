@@ -10,9 +10,12 @@ export default function () {
       <h1>Return web-standard responses</h1>
       <p class="lead">
         Besides JSX, strings, buffers and JSON, a route can return a standard{" "}
-        <a href="https://developer.mozilla.org/en-US/docs/Web/API/Response">Response</a> object.
-        Status, headers and body are taken from it. This makes it easy to reuse code written for
-        other web-standard runtimes or to proxy a <code>fetch</code> call straight through.
+        <a href="https://developer.mozilla.org/en-US/docs/Web/API/Response">Response</a> object:
+        status, headers and body are taken from it.
+      </p>
+      <p>
+        This makes it easy to reuse code written for other web-standard runtimes or to proxy a{" "}
+        <code>fetch</code> call straight through. Click a card to see each response.
       </p>
       <div class="response-grid">
         <Card href="./export.csv" title="CSV download" status="200" type="text/csv">
