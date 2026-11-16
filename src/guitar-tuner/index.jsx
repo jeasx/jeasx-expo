@@ -80,7 +80,7 @@ function drawWave(samples, pitched) {
   const offset = samples.length - count;
   let peak = 0;
   for (let i = offset; i < samples.length; i++) peak = Math.max(peak, Math.abs(samples[i]));
-  const gain = Math.min(8, 0.9 / Math.max(peak, 1e-4));
+  const gain = Math.min(40, 0.9 / Math.max(peak, 1e-5));
   ctx.lineWidth = 1.5 * ratio;
   ctx.lineJoin = "round";
   ctx.strokeStyle = pitched ? "#fbbf24" : "#a8a29e";
