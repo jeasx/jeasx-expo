@@ -26,6 +26,8 @@ export default function () {
           <Gauge />
           <Strings />
         </div>
+        {/* Live input level, drawn while listening; outside #display so renders don't reset it. */}
+        <canvas class="wave" id="wave" aria-hidden="true"></canvas>
         {/* Both states are in the markup; the "on" class shows one of them. */}
         <button class="listen" type="button" id="listen">
           <span class="start">
