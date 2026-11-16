@@ -76,7 +76,8 @@ export function detectPitch(samples, sampleRate) {
   const size = samples.length;
   let rms = 0;
   for (let i = 0; i < size; i++) rms += samples[i] * samples[i];
-  if (Math.sqrt(rms / size) < 0.01) return null;
+  // Phone microphones without automatic gain are quiet, so the threshold is low.
+  if (Math.sqrt(rms / size) < 0.003) return null;
 
   const minLag = Math.floor(sampleRate / 1000);
   const maxLag = Math.min(Math.floor(sampleRate / 60), size >> 1);

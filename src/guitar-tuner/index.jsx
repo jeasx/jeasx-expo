@@ -4,7 +4,9 @@ import { STRINGS, detectPitch, nearestString, noteOf } from "./pitch";
 import Strings from "./Strings";
 
 const display = document.getElementById("display");
-const listen = document.getElementById("listen");
+const listen = /** @type {HTMLButtonElement} */ (
+  document.getElementById("listen")
+);
 const hint = document.getElementById("hint");
 
 /** @type {AudioContext | null} */
@@ -26,9 +28,17 @@ function context() {
   return audio;
 }
 
+/** What the display shows at the moment, to skip renders which wouldn't change anything. */
+let shown = "";
+
 async function render() {
   const note = frequency ? noteOf(frequency) : null;
   const active = frequency ? STRINGS.indexOf(nearestString(frequency)) : null;
+  // Rendering is the expensive part (Safari is slow with the SVG filters of the dial),
+  // so only render when the visible values changed.
+  const state = JSON.stringify([note, frequency?.toFixed(1), active, playing]);
+  if (state === shown) return;
+  shown = state;
   display.innerHTML = await jsxToString(
     <>
       <Gauge note={note} frequency={frequency} />
@@ -38,6 +48,12 @@ async function render() {
 }
 
 async function start() {
+  // Safari only starts audio within the tap itself, so create and resume the context
+  // before waiting for the microphone permission; awaiting first would leave it suspended.
+  const ctx = context();
+  const resumed = ctx.resume();
+  listen.disabled = true;
+  hint.textContent = "Waiting for the microphone…";
   try {
     stream = await navigator.mediaDevices.getUserMedia({
       // Processing meant for speech would distort the guitar.
@@ -48,20 +64,40 @@ async function start() {
       },
     });
   } catch {
+    listen.disabled = false;
     hint.textContent =
       "No microphone access. You can still tune by ear with the reference tones.";
     return;
   }
-  const ctx = context();
-  await ctx.resume();
+  // Don't block on the promise: if Safari keeps it pending, the loop below resumes later.
+  resumed.catch(() => {});
+  listen.disabled = false;
   const analyser = ctx.createAnalyser();
   analyser.fftSize = 4096;
-  ctx.createMediaStreamSource(stream).connect(analyser);
+  // Safari only processes nodes which lead to the output, otherwise the analyser
+  // delivers stale samples. A muted gain completes the path without making a sound.
+  const mute = ctx.createGain();
+  mute.gain.value = 0;
+  ctx
+    .createMediaStreamSource(stream)
+    .connect(analyser)
+    .connect(mute)
+    .connect(ctx.destination);
   const samples = new Float32Array(analyser.fftSize);
   listen.textContent = "⏹ Stop";
   hint.textContent = "Listening… pluck one string at a time.";
 
-  const loop = async () => {
+  let last = 0;
+  const loop = async (/** @type {number} */ now) => {
+    if (!stream) return;
+    // About 20 measurements per second are plenty for a tuner and keep phones cool.
+    if (now - last < 50) {
+      frame = requestAnimationFrame(loop);
+      return;
+    }
+    last = now;
+    // iOS suspends ("interrupts") audio e.g. after a phone call or when the app was hidden.
+    if (ctx.state !== "running") ctx.resume();
     analyser.getFloatTimeDomainData(samples);
     const detected = detectPitch(samples, ctx.sampleRate);
     if (detected) {
@@ -71,7 +107,7 @@ async function start() {
         frequency && Math.abs(Math.log2(detected / frequency)) < 1 / 12
           ? frequency * 0.7 + detected * 0.3
           : detected;
-    } else if (++silence > 30) {
+    } else if (++silence > 10) {
       frequency = null;
     }
     await render();
@@ -148,7 +184,12 @@ function repeat(index) {
 
 listen.addEventListener("click", () => (stream ? stop() : start()));
 
-display.addEventListener("click", async (event) => {
+/**
+ * Plays or silences the reference tone of the pressed string.
+ *
+ * @param {Event} event
+ */
+async function press(event) {
   const button = /** @type {Element} */ (event.target).closest("[data-string]");
   if (!(button instanceof HTMLElement)) return;
   const index = Number(button.dataset.string);
@@ -165,4 +206,14 @@ display.addEventListener("click", async (event) => {
   /** @type {HTMLElement} */ (
     display.querySelector(`[data-string="${index}"]`)
   ).focus();
+}
+
+// While tuning, the strings are rendered anew every frame, and Safari on iOS swallows
+// clicks on such changing content. So taps act on release; keyboard activation fires
+// a click without a pointer (detail 0), so that still counts.
+display.addEventListener("pointerup", (event) => {
+  if (event.button === 0) press(event);
+});
+display.addEventListener("click", (event) => {
+  if (event.detail === 0) press(event);
 });
