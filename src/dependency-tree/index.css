@@ -1,7 +1,3 @@
-.lead {
-  max-width: 50rem;
-}
-
 /* Explorer on the left, live stats and steps on the right; stacked on narrow screens. */
 .workbench {
   display: grid;

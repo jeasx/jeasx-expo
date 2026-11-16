@@ -54,17 +54,16 @@ export default async function (props) {
       css="/error-handler/index.css"
     >
       <h1>Catch errors at runtime</h1>
-      <p>
+      <p class="lead">
         Jeasx streams markup by default. Errors that happen before the first chunk is sent are
-        handled by Fastify's error handler, which answers with the right status code. By default, it
-        responds with JSON; register your own via <code>setErrorHandler()</code> in{" "}
-        <code>FASTIFY_SERVER</code> of <code>jeasx.config.js</code> to render a user-friendly error
-        page.
+        handled by Fastify's error handler, which answers with the right status code.
       </p>
       <p>
-        Once streaming has started, status and headers are already sent: wrap risky components in an
-        error boundary to render a fallback instead. Pick a scenario below and have a look at the
-        source to see how things are wired up.
+        By default, it responds with JSON; register your own via <code>setErrorHandler()</code> in{" "}
+        <code>FASTIFY_SERVER</code> of <code>jeasx.config.js</code> to render a user-friendly error
+        page. Once streaming has started, status and headers are already sent: wrap risky components
+        in an error boundary to render a fallback instead. Pick a scenario below and have a look at
+        the source to see how things are wired up.
       </p>
 
       <div class="scenarios">

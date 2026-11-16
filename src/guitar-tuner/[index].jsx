@@ -11,16 +11,15 @@ export default function () {
       script="/guitar-tuner/index.js"
     >
       <h1>Guitar tuner with client-side JSX</h1>
-      <p>
+      <p class="lead">
         A chromatic tuner built from plain JSX components with{" "}
-        <a href="https://github.com/jeasx/jsx-async-runtime">
-          jsx-async-runtime
-        </a>
-        . The server renders the resting dial, then the browser listens to your
-        microphone with the Web Audio API, detects the pitch by autocorrelation
-        and renders the very same components many times per second. No audio
-        leaves your device. Press a string to hear its reference tone
-        repeatedly, press it again to stop.
+        <a href="https://github.com/jeasx/jsx-async-runtime">jsx-async-runtime</a>.
+      </p>
+      <p>
+        The server renders the resting dial, then the browser listens to your microphone with the
+        Web Audio API, detects the pitch by autocorrelation and renders the very same components
+        many times per second. No audio leaves your device. Press a string to hear its reference
+        tone repeatedly, press it again to stop.
       </p>
       <section class="tuner">
         <div id="display">

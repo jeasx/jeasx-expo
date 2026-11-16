@@ -14,11 +14,7 @@ export default function Strings({ active = null, playing = null }) {
         <li>
           <button
             type="button"
-            class={[
-              "string",
-              index === active && "active",
-              index === playing && "playing",
-            ]
+            class={["string", index === active && "active", index === playing && "playing"]
               .filter(Boolean)
               .join(" ")}
             data-string={String(index)}

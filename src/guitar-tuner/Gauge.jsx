@@ -50,10 +50,7 @@ export default function Gauge({ note = null, frequency = null }) {
         </text>
         <g class="marker" style={`transform: rotate(${angle(cents)}deg)`}>
           {/* A tapered needle across the arc, short enough to leave the note free. */}
-          <path
-            class="needle"
-            d="M -0.6 -124 L 0.6 -124 L 2.6 -78 A 2.6 2.6 0 0 1 -2.6 -78 Z"
-          />
+          <path class="needle" d="M -0.6 -124 L 0.6 -124 L 2.6 -78 A 2.6 2.6 0 0 1 -2.6 -78 Z" />
           <line class="shine" y1="-120" y2="-80" />
         </g>
       </svg>
@@ -63,9 +60,7 @@ export default function Gauge({ note = null, frequency = null }) {
           <sub>{note ? note.octave : ""}</sub>
         </strong>
         <span class="cents">
-          {note
-            ? `${note.cents > 0 ? "+" : ""}${note.cents} cents`
-            : "Play a string"}
+          {note ? `${note.cents > 0 ? "+" : ""}${note.cents} cents` : "Play a string"}
         </span>
       </div>
       <p class="status">

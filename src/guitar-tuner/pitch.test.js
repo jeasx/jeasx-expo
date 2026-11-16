@@ -15,10 +15,7 @@ function tone(frequency, length = 4096) {
 test("detects the open strings within a cent", () => {
   for (const string of STRINGS) {
     const detected = detectPitch(tone(string.frequency), RATE);
-    assert.ok(
-      Math.abs(noteOf(detected).cents) <= 1,
-      `${string.name}${string.octave}: ${detected}`,
-    );
+    assert.ok(Math.abs(noteOf(detected).cents) <= 1, `${string.name}${string.octave}: ${detected}`);
     assert.equal(nearestString(detected), string);
   }
 });

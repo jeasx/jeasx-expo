@@ -1,18 +1,5 @@
 /** Note names within an octave, starting at C. */
-export const NOTES = [
-  "C",
-  "C♯",
-  "D",
-  "D♯",
-  "E",
-  "F",
-  "F♯",
-  "G",
-  "G♯",
-  "A",
-  "A♯",
-  "B",
-];
+export const NOTES = ["C", "C♯", "D", "D♯", "E", "F", "F♯", "G", "G♯", "A", "A♯", "B"];
 
 /** Reference pitch of A4 in Hz. */
 export const A4 = 440;
@@ -57,11 +44,8 @@ export function noteOf(frequency) {
  * @param {number} frequency
  */
 export function nearestString(frequency) {
-  const distance = (string) =>
-    Math.abs(Math.log2(frequency / string.frequency));
-  return STRINGS.reduce((best, string) =>
-    distance(string) < distance(best) ? string : best,
-  );
+  const distance = (string) => Math.abs(Math.log2(frequency / string.frequency));
+  return STRINGS.reduce((best, string) => (distance(string) < distance(best) ? string : best));
 }
 
 /**
@@ -96,8 +80,7 @@ export function detectPitch(samples, sampleRate) {
   // Take the first peak that is nearly as high as the best one: later peaks at
   // two or three periods are just as high and would give octave errors.
   let best = 0;
-  for (let lag = minLag; lag <= maxLag; lag++)
-    best = Math.max(best, correlation[lag]);
+  for (let lag = minLag; lag <= maxLag; lag++) best = Math.max(best, correlation[lag]);
   if (best < 0.8) return null;
   let lag = minLag;
   while (
@@ -112,11 +95,7 @@ export function detectPitch(samples, sampleRate) {
   }
 
   // Parabolic interpolation between the neighbors for a period below one sample.
-  const [a, b, c] = [
-    correlation[lag - 1],
-    correlation[lag],
-    correlation[lag + 1],
-  ];
+  const [a, b, c] = [correlation[lag - 1], correlation[lag], correlation[lag + 1]];
   const shift = a - 2 * b + c ? (a - c) / (2 * (a - 2 * b + c)) : 0;
   return sampleRate / (lag + shift);
 }

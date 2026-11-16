@@ -31,12 +31,6 @@
     font-size: clamp(2.2rem, 6vw, 3.4rem);
     letter-spacing: -0.02em;
   }
-
-  & p {
-    margin: 0 auto;
-    max-width: 42rem;
-    font-size: 1.05rem;
-  }
 }
 
 .em-kicker {

@@ -18,12 +18,6 @@
     background-clip: text;
     color: transparent;
   }
-
-  & p {
-    margin: 0 auto;
-    color: var(--muted);
-    font-size: 1.05rem;
-  }
 }
 
 .pdf-kicker {

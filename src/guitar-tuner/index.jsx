@@ -4,9 +4,7 @@ import { STRINGS, detectPitch, nearestString, noteOf } from "./pitch";
 import Strings from "./Strings";
 
 const display = document.getElementById("display");
-const listen = /** @type {HTMLButtonElement} */ (
-  document.getElementById("listen")
-);
+const listen = /** @type {HTMLButtonElement} */ (document.getElementById("listen"));
 const hint = document.getElementById("hint");
 
 /** @type {AudioContext | null} */
@@ -77,8 +75,7 @@ async function start() {
     });
   } catch {
     listen.disabled = false;
-    hint.textContent =
-      "No microphone access. You can still tune by ear with the reference tones.";
+    hint.textContent = "No microphone access. You can still tune by ear with the reference tones.";
     return;
   }
   // Don't block on the promise: if Safari keeps it pending, the loop below resumes later.
@@ -90,11 +87,7 @@ async function start() {
   // delivers stale samples. A muted gain completes the path without making a sound.
   const mute = ctx.createGain();
   mute.gain.value = 0;
-  ctx
-    .createMediaStreamSource(stream)
-    .connect(analyser)
-    .connect(mute)
-    .connect(ctx.destination);
+  ctx.createMediaStreamSource(stream).connect(analyser).connect(mute).connect(ctx.destination);
   const samples = new Float32Array(analyser.fftSize);
   listen.classList.add("on");
   hint.textContent = "Listening… pluck one string at a time.";
@@ -223,9 +216,7 @@ async function press(event) {
     tone = repeat(index);
   }
   await render();
-  /** @type {HTMLElement} */ (
-    display.querySelector(`[data-string="${index}"]`)
-  ).focus();
+  /** @type {HTMLElement} */ (display.querySelector(`[data-string="${index}"]`)).focus();
 }
 
 // While tuning, the strings are rendered anew every frame, and Safari on iOS swallows
