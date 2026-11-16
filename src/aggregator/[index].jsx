@@ -182,12 +182,9 @@ export default function ({ request }) {
       <h1>Parallel API aggregator</h1>
       <p class="lead">
         This page acts as a <em>backend for frontend</em>: it queries six public APIs on the server
-        and merges their answers into one page.
-      </p>
-      <p>
-        All requests start at once, and each card is an async component that only awaits its own
-        promise. The page streams card by card and the whole page takes about as long as the slowest
-        service, not the sum of all of them.
+        and merges their answers into one page. All requests start at once, and each card is an
+        async component that only awaits its own promise. The page streams card by card and the
+        whole page takes about as long as the slowest service, not the sum of all of them.
       </p>
       <p>
         A shared <code>AbortSignal</code> gives every request a time budget and also cancels

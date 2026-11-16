@@ -28,7 +28,7 @@ export default function () {
         an HTML string. So you can test them with the built-in test runner of Node.js and simple
         string checks: no browser, no DOM and no extra test framework needed.
       </p>
-      <ul>
+      <ul class="test-points">
         <li>
           Async components are awaited by <code>jsxToString</code>, so tests just <code>await</code>{" "}
           the result.

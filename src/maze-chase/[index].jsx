@@ -15,13 +15,13 @@ export default function () {
       <h1>Maze chase with client-side JSX</h1>
       <p class="lead">
         An arcade maze chase, built from plain JSX components with{" "}
-        <a href="https://github.com/jeasx/jsx-async-runtime">jsx-async-runtime</a>.{" "}
+        <a href="https://github.com/jeasx/jsx-async-runtime">jsx-async-runtime</a>. The server
+        renders the first frame, then the very same components render every tick of the game in your
+        browser, without React, a virtual DOM or a canvas.
       </p>
       <p>
-        The server renders the first frame, then the very same components render every tick of the
-        game in your browser, without React, a virtual DOM or a canvas. Help Blip the slime collect
-        every gem, dodge the drones and grab a crystal to overload them, so you can zap them for a
-        few seconds.
+        Help Blip the slime collect every gem, dodge the drones and grab a crystal to overload them,
+        so you can zap them for a few seconds.
       </p>
       <div class="arcade">
         <section class="cabinet" id="game" tabindex="0" aria-label="Game">
