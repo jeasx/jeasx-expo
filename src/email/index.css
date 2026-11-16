@@ -255,7 +255,6 @@
   & figure {
     display: flex;
     flex-direction: column;
-    margin: 0;
     border: 1px solid var(--border);
     border-radius: 0.75rem;
     min-width: 0;
