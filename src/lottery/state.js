@@ -34,24 +34,9 @@ export function reduce(state, input) {
 }
 
 /**
- * Parses the submitted numbers; returns an empty list for invalid input.
- *
- * @param {unknown} value
- * @returns {number[]}
- */
-export function parseNumbers(value) {
-  try {
-    const numbers = JSON.parse(String(value));
-    return Array.isArray(numbers) ? [...new Set(numbers.filter(isValidNumber))].slice(0, 6) : [];
-  } catch {
-    return [];
-  }
-}
-
-/**
  * @param {unknown} value
  * @returns {value is number}
  */
-function isValidNumber(value) {
+export function isValidNumber(value) {
   return typeof value === "number" && Number.isInteger(value) && value >= 1 && value <= 49;
 }

@@ -3,10 +3,13 @@
  *
  * @param {import("./state").State} state
  */
-export default function Lottery(state) {
-  const { number, delta, numbers, submit } = state;
+export default function Lottery({ number, delta, numbers, submit }) {
   return (
-    <form method="post" data-lottery data-state={JSON.stringify(state)}>
+    <form
+      method="post"
+      data-lottery
+      data-state={JSON.stringify({ number, delta, numbers, submit })}
+    >
       <input type="hidden" name="numbers" value={JSON.stringify(numbers)} />
       <div class="lottery-status">
         <span>Your picks</span>

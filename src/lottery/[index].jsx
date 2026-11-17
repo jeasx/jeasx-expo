@@ -1,10 +1,17 @@
 import Layout from "../Layout";
 import Lottery from "./Lottery";
+import { INITIAL, isValidNumber, reduce } from "./state";
 
 /**
- * @param {import("./state").State} props
+ * @param {import("../types").RouteProps} props
  */
-export default function ({ numbers, number, delta, submit }) {
+export default function ({ request }) {
+  const body = /** @type {Record<string, unknown>} */ (request.body || {});
+  const { numbers, number, delta, submit } = reduce(
+    { ...INITIAL, numbers: parseNumbers(body["numbers"]) },
+    body,
+  );
+
   return (
     <Layout
       title="Lottery"
@@ -26,4 +33,19 @@ export default function ({ numbers, number, delta, submit }) {
       </div>
     </Layout>
   );
+}
+
+/**
+ * Parses the submitted numbers; returns an empty list for invalid input.
+ *
+ * @param {unknown} value
+ * @returns {number[]}
+ */
+function parseNumbers(value) {
+  try {
+    const numbers = JSON.parse(String(value));
+    return Array.isArray(numbers) ? [...new Set(numbers.filter(isValidNumber))].slice(0, 6) : [];
+  } catch {
+    return [];
+  }
 }
