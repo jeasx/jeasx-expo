@@ -1,9 +1,9 @@
 // The state and its changes, shared by the server ("./[...guard].jsx") and the browser ("./index.jsx").
 
-/** @typedef {{ numbers: number[], number: number, delta: number, submit: boolean }} State */
+/** @typedef {{ numbers: number[], number: number, revealed: boolean }} State */
 
 /** @type {State} */
-export const INITIAL = { numbers: [], number: 0, delta: 0, submit: false };
+export const INITIAL = { numbers: [], number: 0, revealed: false };
 
 /**
  * Applies a submitted form to the state.
@@ -13,24 +13,29 @@ export const INITIAL = { numbers: [], number: 0, delta: 0, submit: false };
  * @returns {State}
  */
 export function reduce(state, input) {
-  if (input["restart"]) {
+  if (input["intent"] === "restart") {
     return INITIAL;
   }
   const number = Number(input["number"]);
   // Keep the numbers when the results are revealed, so they are shown next to them.
   const numbers = [...state.numbers];
-  let delta = 0;
+  let changed = false;
   if (isValidNumber(number)) {
     const index = numbers.indexOf(number);
     if (index === -1 && numbers.length < 6) {
       numbers.push(number);
-      delta = 1;
+      changed = true;
     } else if (index !== -1) {
       numbers.splice(index, 1);
-      delta = -1;
+      changed = true;
     }
   }
-  return { numbers, number, delta, submit: Boolean(input["submit"]) };
+  // Only remember the number if it changed the picks, so the view can tell what happened.
+  return {
+    numbers,
+    number: changed ? number : 0,
+    revealed: input["intent"] === "reveal" && numbers.length === 6,
+  };
 }
 
 /**

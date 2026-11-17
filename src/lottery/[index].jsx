@@ -7,7 +7,7 @@ import { INITIAL, isValidNumber, reduce } from "./state";
  */
 export default function ({ request }) {
   const body = /** @type {Record<string, unknown>} */ (request.body || {});
-  const { numbers, number, delta, submit } = reduce(
+  const { numbers, number, revealed } = reduce(
     { ...INITIAL, numbers: parseNumbers(body["numbers"]) },
     body,
   );
@@ -29,7 +29,7 @@ export default function ({ request }) {
           same reducer and JSX component, so no request is needed. Without JavaScript, every click
           submits a plain HTML form and the server renders the updated page.
         </p>
-        <Lottery numbers={numbers} number={number} delta={delta} submit={submit} />
+        <Lottery numbers={numbers} number={number} revealed={revealed} />
       </div>
     </Layout>
   );
