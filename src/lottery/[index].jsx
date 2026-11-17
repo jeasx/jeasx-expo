@@ -6,7 +6,9 @@ import { INITIAL, isValidNumber, reduce } from "./state";
  * @param {import("../types").RouteProps} props
  */
 export default function ({ request }) {
-  const body = /** @type {Record<string, unknown>} */ (request.body || {});
+  const body = /** @type {Record<string, unknown>} */ (
+    request.body && typeof request.body === "object" ? request.body : {}
+  );
   const { numbers, number, revealed } = reduce(
     { ...INITIAL, numbers: parseNumbers(body["numbers"]) },
     body,
