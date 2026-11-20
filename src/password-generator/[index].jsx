@@ -12,15 +12,19 @@ export default function () {
     >
       <h1>Password generator</h1>
       <p class="lead">
-        Fresh, cryptographically secure passwords from <code>crypto.getRandomValues</code> —
-        generated entirely in your browser, nothing ever leaves this page.
+        Fresh, cryptographically secure passwords from{" "}
+        <code>crypto.getRandomValues</code> — generated entirely in your
+        browser, nothing ever leaves this page.
       </p>
       <p>
         The results are rendered with{" "}
-        <a href="https://github.com/jeasx/jsx-async-runtime">jsx-async-runtime</a>: a plain JSX
-        component is serialized to HTML with <code>jsxToString</code> after every change, no
-        framework, no virtual DOM, no hydration. Every password keeps one character from each
-        enabled set, and moving a control rolls all five instantly.
+        <a href="https://github.com/jeasx/jsx-async-runtime">
+          jsx-async-runtime
+        </a>
+        : a plain JSX component is serialized to HTML with{" "}
+        <code>jsxToString</code> after every change, no framework, no virtual
+        DOM, no hydration. Every password keeps one character from each enabled
+        set, and moving a control rolls all five instantly.
       </p>
       <div class="vault">
         <svg
@@ -44,7 +48,14 @@ export default function () {
             <span class="length-label">
               Length <output for="length">{LENGTH}</output>
             </span>
-            <input type="range" name="length" min="8" max="64" value={LENGTH} autocomplete="off" />
+            <input
+              type="range"
+              name="length"
+              min="8"
+              max="64"
+              value={LENGTH}
+              autocomplete="off"
+            />
             <div class="ticks" aria-hidden="true">
               <span>8</span>
               <span>64</span>

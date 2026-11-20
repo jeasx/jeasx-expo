@@ -19,11 +19,20 @@ async function render(form) {
     container.innerHTML = "<p>Pick at least one character set.</p>";
     return;
   }
-  const passwords = Array.from({ length: 5 }, () => generatePassword({ length, sets }));
-  const alphabetSize = sets.reduce((sum, set) => sum + SET_ALPHABET_SIZES[set], 0);
+  const passwords = Array.from({ length: 5 }, () =>
+    generatePassword({ length, sets }),
+  );
+  const alphabetSize = sets.reduce(
+    (sum, set) => sum + SET_ALPHABET_SIZES[set],
+    0,
+  );
   // Render the JSX component to HTML right in the browser.
   container.innerHTML = await jsxToString(
-    <PasswordList passwords={passwords} length={length} alphabetSize={alphabetSize} />,
+    <PasswordList
+      passwords={passwords}
+      length={length}
+      alphabetSize={alphabetSize}
+    />,
   );
   matrixReveal(container);
 }
@@ -58,7 +67,7 @@ function matrixReveal(container) {
 }
 
 /** Glyphs the matrix reveal shuffles through before a character settles. */
-const MATRIX_GLYPHS = "0123456789$#%?!/\\|*+-<>=?ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿ";
+const MATRIX_GLYPHS = "0123456789$#%?!/\\|*+-<>=?";
 
 function randomGlyph() {
   return MATRIX_GLYPHS[Math.floor(Math.random() * MATRIX_GLYPHS.length)];
@@ -77,22 +86,26 @@ document.addEventListener("input", (event) => {
 
 // Submitting (Enter or Enter on the Roll button) also rolls with fresh randomness.
 document.addEventListener("submit", (event) => {
-  if (event.target instanceof HTMLFormElement && event.target.id === "password-form") {
+  if (
+    event.target instanceof HTMLFormElement &&
+    event.target.id === "password-form"
+  ) {
     event.preventDefault();
     render(event.target);
   }
 });
 
-// Copy a password on button click, even after the list has been re-rendered.
+// Clicking a password row copies it, even after the list has been re-rendered.
 document.addEventListener("click", async (event) => {
   if (!(event.target instanceof HTMLElement)) {
     return;
   }
-  const button = event.target.closest("button[data-copy]");
-  if (!(button instanceof HTMLButtonElement)) {
+  const row = event.target.closest("button[data-copy]");
+  if (!(row instanceof HTMLButtonElement)) {
     return;
   }
-  await navigator.clipboard.writeText(button.dataset.copy);
-  button.textContent = "Copied!";
-  setTimeout(() => (button.textContent = "Copy"), 1500);
+  await navigator.clipboard.writeText(row.dataset.copy);
+  // The copy icon flips to a checkmark for a moment.
+  row.classList.add("copied");
+  setTimeout(() => row.classList.remove("copied"), 1500);
 });
