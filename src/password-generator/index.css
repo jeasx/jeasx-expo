@@ -221,6 +221,11 @@ button.reroll:active svg {
 .pin .symbol {
   color: #05b8b8;
 }
+/* While a character is still shuffling, it shows a random matrix glyph. */
+.pin .matrix {
+  opacity: 0.85;
+  color: #4af626;
+}
 
 .strength {
   flex-shrink: 0;
@@ -279,9 +284,9 @@ button.reroll:active svg {
 /* Shown before the first roll, so no password exists outside the browser. */
 .empty-hint {
   margin: 0;
-  padding: 0.6rem 0.85rem;
   border: 1px dashed #2a3140;
   border-radius: 0.6rem;
+  padding: 0.6rem 0.85rem;
   color: var(--muted);
 }
 

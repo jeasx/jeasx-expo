@@ -25,6 +25,43 @@ async function render(form) {
   container.innerHTML = await jsxToString(
     <PasswordList passwords={passwords} length={length} alphabetSize={alphabetSize} />,
   );
+  matrixReveal(container);
+}
+
+/**
+ * Matrix-like reveal: every character flickers through random glyphs and
+ * settles on its real value after a random delay, row by row.
+ */
+function matrixReveal(container) {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    return;
+  }
+  const rows = container.querySelectorAll(".password-row");
+  rows.forEach((row) => {
+    row.querySelectorAll(".pin span").forEach((span) => {
+      // The real character was rendered by jsxToString; grab it before shuffling.
+      const final = span.textContent;
+      span.classList.add("matrix");
+      span.textContent = randomGlyph();
+      const start = Math.random() * 300;
+      const settle = start + 200 + Math.random() * 500;
+      const timer = setInterval(() => {
+        span.textContent = randomGlyph();
+      }, 60);
+      setTimeout(() => {
+        clearInterval(timer);
+        span.textContent = final;
+        span.classList.remove("matrix");
+      }, settle);
+    });
+  });
+}
+
+/** Glyphs the matrix reveal shuffles through before a character settles. */
+const MATRIX_GLYPHS = "0123456789$#%?!/\\|*+-<>=?ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿ";
+
+function randomGlyph() {
+  return MATRIX_GLYPHS[Math.floor(Math.random() * MATRIX_GLYPHS.length)];
 }
 
 // Any control change (slider, checkboxes) refreshes the passwords immediately.
