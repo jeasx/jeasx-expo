@@ -19,20 +19,11 @@ async function render(form) {
     container.innerHTML = "<p>Pick at least one character set.</p>";
     return;
   }
-  const passwords = Array.from({ length: 5 }, () =>
-    generatePassword({ length, sets }),
-  );
-  const alphabetSize = sets.reduce(
-    (sum, set) => sum + SET_ALPHABET_SIZES[set],
-    0,
-  );
+  const passwords = Array.from({ length: 5 }, () => generatePassword({ length, sets }));
+  const alphabetSize = sets.reduce((sum, set) => sum + SET_ALPHABET_SIZES[set], 0);
   // Render the JSX component to HTML right in the browser.
   container.innerHTML = await jsxToString(
-    <PasswordList
-      passwords={passwords}
-      length={length}
-      alphabetSize={alphabetSize}
-    />,
+    <PasswordList passwords={passwords} length={length} alphabetSize={alphabetSize} />,
   );
   matrixReveal(container);
 }
@@ -86,10 +77,7 @@ document.addEventListener("input", (event) => {
 
 // Submitting (Enter or Enter on the Roll button) also rolls with fresh randomness.
 document.addEventListener("submit", (event) => {
-  if (
-    event.target instanceof HTMLFormElement &&
-    event.target.id === "password-form"
-  ) {
+  if (event.target instanceof HTMLFormElement && event.target.id === "password-form") {
     event.preventDefault();
     render(event.target);
   }

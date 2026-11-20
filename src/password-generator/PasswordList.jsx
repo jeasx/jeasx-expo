@@ -51,8 +51,8 @@ export default function PasswordList({ passwords, length, alphabetSize }) {
         </li>
       ))}
       <li class="entropy-note">
-        ~{Math.round(entropy)} bits of entropy · {alphabetSize} possible
-        characters · {length} positions
+        ~{Math.round(entropy)} bits of entropy · {alphabetSize} possible characters · {length}{" "}
+        positions
       </li>
     </ul>
   );
@@ -61,11 +61,7 @@ export default function PasswordList({ passwords, length, alphabetSize }) {
 /** Colors digits and symbols differently, so the mix is visible at a glance. */
 function colorize(password) {
   return [...password].map((char) => {
-    const kind = /\d/.test(char)
-      ? "digit"
-      : /[a-zA-Z]/.test(char)
-        ? "alpha"
-        : "symbol";
+    const kind = /\d/.test(char) ? "digit" : /[a-zA-Z]/.test(char) ? "alpha" : "symbol";
     return <span class={kind}>{char}</span>;
   });
 }
