@@ -17,6 +17,7 @@
           { "path": "/render-props", "title": "Render props" },
           { "path": "/interceptor", "title": "Intercept JSX" },
           { "path": "/shadow-dom", "title": "Web components" },
+          { "path": "/lazy-load", "title": "Lazy loading" },
           { "path": "/testing", "title": "Unit tests" }
         ]
       },
