@@ -2,16 +2,19 @@ import ShadowRoot from "../shadow-dom/ShadowRoot";
 import { LoadedWidget, WIDGETS } from "./widgets";
 
 /**
- * Puts a widget anywhere in the page. By default only a skeleton is sent, and the browser
- * fetches the widget once it scrolls into view. With `eager`, the server renders it inline.
+ * Puts a widget anywhere in the page. Only a skeleton is sent, and the browser fetches the
+ * widget once it scrolls into view. Without JavaScript nothing would ever load, so with "?noscript"
+ * in the URL the server renders the widget inline instead. Wrap the widgets in <Parallel>, so
+ * the async ones don't wait for each other then.
  *
  * `props` are passed on to the widget component. For lazy loading they travel as JSON in the
  * query string, so they must be serializable (strings, numbers, booleans, arrays, objects).
  *
- * @param {{ name: keyof typeof WIDGETS, props?: Record<string, unknown>, eager?: boolean }} props
+ * @this {import("../types").ThisContext}
+ * @param {{ name: keyof typeof WIDGETS, props?: Record<string, unknown> }} props
  */
-export default function Lazy({ name, props = {}, eager = false }) {
-  if (eager) {
+export default function Lazy({ name, props = {} }) {
+  if (this.request.query["noscript"] !== undefined) {
     return <LoadedWidget name={name} props={props} />;
   }
   const query = new URLSearchParams({ name, props: JSON.stringify(props) });

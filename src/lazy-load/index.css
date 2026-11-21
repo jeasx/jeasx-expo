@@ -30,6 +30,82 @@ main:has(> .lazy-article > .lazy-hero:first-child) {
   text-align: center;
 }
 
+/* Highlighted notice, only shown without JavaScript. */
+.lazy-noscript {
+  --notice: #f59e0b;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 0 auto 2rem;
+  box-shadow: 0 0.75rem 2rem -1rem color-mix(in srgb, var(--notice) 45%, transparent);
+  border: 1px solid color-mix(in srgb, var(--notice) 40%, transparent);
+  border-radius: 1rem;
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--notice) 14%, transparent), transparent 70%),
+    color-mix(in srgb, var(--bg) 85%, transparent);
+  padding: 0.9rem 1rem;
+  max-width: 40rem;
+  text-align: start;
+  backdrop-filter: blur(8px);
+}
+
+.lazy-noscript-icon {
+  display: grid;
+  flex: none;
+  place-items: center;
+  border-radius: 0.7rem;
+  background: color-mix(in srgb, var(--notice) 20%, transparent);
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: 1.2rem;
+}
+
+.lazy-noscript p {
+  display: grid;
+  flex: 1;
+  gap: 0.1rem;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.lazy-noscript strong {
+  color: var(--heading);
+}
+
+.lazy-noscript p span {
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+.lazy-noscript a {
+  flex: none;
+  transition: background 0.15s;
+  border-radius: 2rem;
+  background: var(--notice);
+  padding: 0.5rem 1rem;
+  color: #1c1300;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.lazy-noscript a:hover,
+.lazy-noscript a:focus-visible {
+  background: color-mix(in srgb, var(--notice) 80%, white);
+  color: #1c1300;
+}
+
+@media (max-width: 36rem) {
+  .lazy-noscript {
+    flex-wrap: wrap;
+  }
+
+  .lazy-noscript a {
+    margin-inline-start: 3.5rem;
+  }
+}
+
 .lazy-hero h1 {
   margin-block: 0.75rem;
   font-size: clamp(2rem, 6vw, 3.2rem);
@@ -296,4 +372,9 @@ lazy-load[aria-busy="true"]::before {
   .lazy-meter-dots [data-state="loading"] {
     animation: none;
   }
+}
+
+/* No smooth scrolling on this page. */
+html {
+  scroll-behavior: auto;
 }

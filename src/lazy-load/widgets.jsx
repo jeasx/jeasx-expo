@@ -59,7 +59,7 @@ export function Widget({ name, ms, failed = false, children }) {
  * an async one a promise of JSX: awaiting works for both.
  *
  * A component that throws (or rejects) becomes an error card instead, so one broken widget
- * doesn't break the page, neither when loaded lazily nor when rendered inline with "?eager".
+ * doesn't break the page, neither when loaded lazily nor when rendered inline with "?noscript".
  *
  * @param {{ name: string, props?: Record<string, unknown> }} props
  */
