@@ -105,6 +105,12 @@
   animation: spin 0.8s linear infinite;
 }
 
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .is-end td {
   background: color-mix(in srgb, var(--is-accent) 8%, transparent);
   color: var(--is-accent);
