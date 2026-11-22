@@ -1,3 +1,5 @@
+@import "../@styles/forms.css";
+
 .auth-card,
 .account {
   max-width: 26rem;

@@ -1,3 +1,5 @@
+@import "../@styles/forms.css";
+
 /* Builds on the site theme (--primary, --border, --input-bg, …). Each card brings its own
    hue (--hue) for the avatar and the accents. */
 .cte {

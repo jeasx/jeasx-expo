@@ -1,4 +1,5 @@
 @import "../streaming/shared.css";
+@import "../@styles/forms.css";
 
 .rl-remaining {
   color: var(--sx-muted);

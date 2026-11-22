@@ -1,4 +1,5 @@
 @import "../@styles/busy.css";
+@import "../@styles/forms.css";
 
 /* Builds on the site theme (--primary, --border, --input-bg, …). Each destination brings its
    own hue (--hue), which tints the tiles, the boarding pass and the confirmation. */

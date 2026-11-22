@@ -1,3 +1,4 @@
+import "../@styles/forms.css";
 import { hydrate } from "svelte";
 import COMPONENTS from "./$components";
 import "./page.css";
