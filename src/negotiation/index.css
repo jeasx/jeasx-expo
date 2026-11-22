@@ -1,4 +1,5 @@
 @import "../@styles/forms.css";
+@import "../@styles/table.css";
 
 /* Presets wrap onto several lines with even spacing in both directions. */
 .presets {

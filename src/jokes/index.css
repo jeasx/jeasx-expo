@@ -1,5 +1,6 @@
 @import "../@styles/busy.css";
 @import "../@styles/forms.css";
+@import "../@styles/details.css";
 
 /* Skeleton placeholder with a shimmer while content loads. */
 .skeleton {

@@ -1,4 +1,6 @@
 @import "../@styles/forms.css";
+@import "../@styles/table.css";
+@import "../@styles/details.css";
 
 /* The examples always use the dark theme, so only the dark steps of the palette are needed. */
 .charts {

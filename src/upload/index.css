@@ -1,4 +1,5 @@
 @import "../@styles/forms.css";
+@import "../@styles/table.css";
 
 /* Columns of the .row with the options: full width on phones, a quarter from tablets on. */
 .col-12 {

@@ -1,4 +1,5 @@
 import "../@styles/forms.css";
+import "../@styles/details.css";
 import { createSSRApp } from "vue";
 import COMPONENTS from "./$components";
 
