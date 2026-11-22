@@ -1,4 +1,5 @@
 @import "../streaming/shared.css";
+@import "../@styles/card.css";
 @import "../@styles/busy.css";
 .oo-grid {
   display: grid;
