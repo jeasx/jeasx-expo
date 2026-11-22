@@ -1,6 +1,12 @@
 @import "../node_modules/prismjs/themes/prism-okaidia.css";
 
-/* Base styles: dark theme, classless defaults and a few utility classes. */
+/* Global styles for every page: theme tokens, base typography, layout utilities, alerts, badges
+   and the shell. Keep this file small, as every rule here reaches all examples.
+
+   Styles for elements and components that only some examples use live in src/@styles/
+   (buttons, card, forms, table, details, busy). An example opts in by importing them at the top
+   of its stylesheet, e.g. @import "../@styles/forms.css"; Anything used by a single example
+   belongs in that example's own stylesheet. */
 :root {
   color-scheme: dark;
   --bg: #13171f;
