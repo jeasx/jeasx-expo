@@ -4,9 +4,6 @@ import Prism from "prismjs";
 import "prismjs/components/prism-jsx.js";
 import Layout from "../Layout";
 
-/**
- * @this {import("../types").ThisContext}
- */
 export default function () {
   return (
     <Layout
@@ -53,8 +50,6 @@ export default function () {
 /**
  * Shows the code of a step, its rendered result and the generated HTML.
  * `render` is called twice: once to show the result, once to show the markup.
- *
- * @this {import("../types").ThisContext}
  */
 async function Step({ number, id, title, intro, code, render, note = null }) {
   // Prettier breaks the one-line output into indented lines, so the structure is easy to see.

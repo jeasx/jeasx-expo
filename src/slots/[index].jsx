@@ -28,9 +28,6 @@ const SNIPPET = `function Card({ accent, media, header, footer = <small>No foote
   <dl class="sl-stats">…</dl>
 </Card>`;
 
-/**
- * @this {import("../types").ThisContext}
- */
 export default function () {
   return (
     <Layout
