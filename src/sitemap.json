@@ -10,12 +10,13 @@
     "topics": [
       {
         "title": "Server-side JSX",
-        "description": "Learn how JSX works on the server, where every component simply returns HTML. These examples show what you can put into JSX (text, numbers, arrays, even promises that resolve later), how to pass request data down to every component without prop drilling, how to reuse layouts with render props, how to tweak the generated HTML globally, how to build web components with Shadow DOM, and how to test your components like plain functions.",
+        "description": "Learn how JSX works on the server, where every component simply returns HTML. These examples show what you can put into JSX (text, numbers, arrays, even promises that resolve later), how to pass request data down to every component without prop drilling, how to reuse layouts with render props, how to cache the HTML of slow components, how to tweak the generated HTML globally, how to build web components with Shadow DOM, and how to test your components like plain functions.",
         "links": [
           { "path": "/essentials", "title": "JSX essentials" },
           { "path": "/values", "title": "What JSX renders" },
           { "path": "/context", "title": "'this' as context" },
           { "path": "/render-props", "title": "Render props" },
+          { "path": "/component-cache", "title": "Component caching" },
           { "path": "/interceptor", "title": "Intercept JSX" },
           { "path": "/shadow-dom", "title": "Web components" },
           { "path": "/testing", "title": "Unit tests" }
