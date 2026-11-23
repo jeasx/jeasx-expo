@@ -98,7 +98,8 @@
           { "path": "/sse", "title": "Server-Sent Events" },
           { "path": "/websocket", "title": "WebSocket" },
           { "path": "/negotiation", "title": "Content negotiation" },
-          { "path": "/response", "title": "Response objects" }
+          { "path": "/response", "title": "Response objects" },
+          { "path": "/api-server", "title": "JSON API" }
         ]
       },
       {
