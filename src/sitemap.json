@@ -16,6 +16,7 @@
           { "path": "/values", "title": "What JSX renders" },
           { "path": "/context", "title": "'this' as context" },
           { "path": "/render-props", "title": "Render props" },
+          { "path": "/slots", "title": "Named slots" },
           { "path": "/component-cache", "title": "Component caching" },
           { "path": "/interceptor", "title": "Intercept JSX" },
           { "path": "/shadow-dom", "title": "Web components" },
