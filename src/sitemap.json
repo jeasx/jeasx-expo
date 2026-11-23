@@ -102,7 +102,7 @@
       },
       {
         "title": "Security, errors and post-processing",
-        "description": "Everything a real site needs before going live. Learn how to restrict pages to logged-in users (with a simple password prompt or a full login with sessions), keep cookies tamper-proof, defend against injected scripts with a Content Security Policy, keep bots out with a captcha, and limit how often an API can be called. The remaining examples show how to show friendly error pages and how to clean up or adjust the final HTML just before it is sent to the browser.",
+        "description": "Everything a real site needs before going live. Learn how to restrict pages to logged-in users (with a simple password prompt or a full login with sessions), keep cookies tamper-proof, defend against injected scripts with a Content Security Policy, keep bots out with a captcha, and limit how often an API can be called. The remaining examples show how to catch errors with error boundaries, so a failing or slow part of a page shows a fallback instead of breaking the whole page, and how to clean up or adjust the final HTML just before it is sent to the browser.",
         "links": [
           { "path": "/login", "title": "Login and sessions" },
           { "path": "/basic-auth", "title": "Basic auth" },
@@ -110,7 +110,7 @@
           { "path": "/csp", "title": "Content Security Policy" },
           { "path": "/cap", "title": "Bot protection" },
           { "path": "/rate-limit", "title": "Rate limiting" },
-          { "path": "/error-handler", "title": "Catch errors" },
+          { "path": "/error-handler", "title": "Error boundaries" },
           { "path": "/prettier", "title": "Prettify HTML" },
           { "path": "/cheerio", "title": "Extract styles" },
           { "path": "/head", "title": "Merge head tags" }

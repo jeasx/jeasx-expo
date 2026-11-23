@@ -390,7 +390,9 @@ async function Weather({ city }) {
     note: (
       <>
         Promises work anywhere, as children and as attribute values, e.g.{" "}
-        <code>&lt;img src=&#123;loadAvatarUrl()&#125; /&gt;</code>.
+        <code>&lt;img src=&#123;loadAvatarUrl()&#125; /&gt;</code>. If a component throws, the
+        whole render fails; wrap risky parts in an error boundary to show a fallback instead (see{" "}
+        <a href="/error-handler">Error boundaries</a>).
       </>
     ),
   },
