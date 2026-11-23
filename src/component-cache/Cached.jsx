@@ -3,10 +3,10 @@ import cache from "../@helpers/cache";
 
 /**
  * Rendered markup of all <Cached> components, kept for 30 seconds.
- * Each route bundles its own copy of this module, so other routes don't share the entries.
+ * Each route bundles its own copy of this module, so the cache lives on globalThis to be shared by all routes.
  */
 const TTL = 30;
-const cached = cache({ ttl: TTL * 1000 });
+const componentCache = (globalThis.$componentCache ??= cache({ ttl: TTL * 1000 }));
 
 /**
  * @typedef {object} CacheInfo
@@ -34,7 +34,7 @@ const cached = cache({ ttl: TTL * 1000 });
 export default async function Cached({ cacheKey, children, status }) {
   const start = performance.now();
   let rendered = false;
-  const entry = await cached(cacheKey, async () => {
+  const entry = await componentCache(cacheKey, async () => {
     rendered = true;
     // `this` is passed on, so the children can still read the request context.
     const markup = await jsxToString.call(this, children);
