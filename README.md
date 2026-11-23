@@ -56,7 +56,7 @@ Jeasx uses file-based routing inside `src/`:
 
 Styles: [`src/index.css`](src/index.css) holds only what every page needs. Shared styles (buttons, cards, forms, tables, details, loading indicators, the look of the streaming examples) live in [`src/@styles/`](src/@styles), and an example opts in by importing them at the top of its own `index.css`.
 
-Server and browser build options, as well as Fastify plugins (multipart, cookies, form parsing), are configured in [`jeasx.config.js`](jeasx.config.js). Static files go in [`public/`](public).
+Server and browser build options, as well as Fastify plugins and body parsers (cookies, forms, file uploads), are configured in [`jeasx.config.js`](jeasx.config.js). Static files go in [`public/`](public).
 
 ## Configuration
 
