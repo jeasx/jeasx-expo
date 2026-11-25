@@ -14,8 +14,8 @@
     "@mdx-js/esbuild": "3.1.1",
     "@preact/signals": "2.11.4",
     "alpinejs": "3.17.5",
-    "cap-widget": "0.1.63",
-    "capjs-core": "0.1.19",
+    "cap-widget": "0.1.64",
+    "capjs-core": "0.1.20",
     "cheerio": "1.2.0",
     "esbuild-svelte": "0.9.5",
     "htmx.org": "4.0.2",
@@ -34,7 +34,7 @@
     "vue": "3.5.46"
   },
   "devDependencies": {
-    "@types/react": "19.3.0",
+    "@types/react": "19.3.2",
     "@types/react-dom": "19.3.0"
   },
   "allowScripts": {
