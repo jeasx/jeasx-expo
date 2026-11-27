@@ -3,27 +3,30 @@ import Layout from "../Layout";
 const PAGES = 5;
 const PAGE_SIZE = 3;
 const PAGE_DELAY = 700;
+const WORD_DELAY = 60;
+
+const ANSWER = `ReadableStreams are rendered chunk by chunk as they arrive. This text comes from a
+ReadableStream which emits one word every ${WORD_DELAY} ms. Text chunks are escaped like any other
+string, so <b>this markup</b> shows up as plain text. A fetch response body works the same way:
+response.body.pipeThrough(new TextDecoderStream()).`.replace(/\s+/g, " ");
 
 export default function () {
   const start = Date.now();
 
   return (
     <Layout
-      title="Render async iterables"
-      description="Render async generators directly in JSX and stream each item as it arrives."
+      title="Render async iterables and ReadableStreams"
+      description="Render async generators and ReadableStreams directly in JSX and stream each item as it arrives."
       css="/async-iterable/index.css"
     >
-      <h1>Render async iterables</h1>
+      <h1>Render async iterables and ReadableStreams</h1>
       <p class="lead">
-        JSX children can be async iterables: a component written as <code>async function*</code>{" "}
-        yields markup, and every item is streamed to the browser as soon as it is ready.
+        JSX children can be async iterables or a <code>ReadableStream</code>: every item is streamed
+        to the browser as soon as it is ready.
       </p>
       <p>
         Items are rendered in order, and the markup rendered so far is sent while waiting for the
-        next one. This is a natural fit for paginated APIs or database cursors: the next page is
-        only loaded when the renderer needs it. If the browser stops loading the page, the generator
-        is stopped like a <code>for await</code> loop on <code>break</code>, so its{" "}
-        <code>finally</code> block runs and can release resources.
+        next one.
       </p>
 
       <p class="center">
@@ -31,9 +34,18 @@ export default function () {
           Watch it again
         </a>
       </p>
+
+      <h2>Async iterables</h2>
+      <p>
+        A component written as <code>async function*</code> yields markup. This is a natural fit for
+        paginated APIs or database cursors: the next page is only loaded when the renderer needs it.
+        If the browser stops loading the page, the generator is stopped like a{" "}
+        <code>for await</code> loop on <code>break</code>, so its <code>finally</code> block runs
+        and can release resources.
+      </p>
       <section class="sx-card">
         <header>
-          <h2>Releases</h2>
+          <h3>Releases</h3>
           <small>
             {PAGES} pages of {PAGE_SIZE}, {PAGE_DELAY} ms per page
           </small>
@@ -52,12 +64,26 @@ export default function () {
           </tbody>
         </table>
       </section>
+
+      <h2>ReadableStreams</h2>
+      <p>
+        A <code>ReadableStream</code> works the same way, e.g. a streamed answer from an AI service
+        or the decoded body of a <code>fetch</code> response. Its <code>pull</code> method is only
+        called when the renderer wants the next chunk.
+      </p>
+      <section class="sx-card rs-chat" aria-live="polite">
+        <p class="rs-bubble rs-question">How does Jeasx render a ReadableStream?</p>
+        <p class="rs-bubble rs-answer">
+          {answerStream()}
+          <span class="rs-end"></span>
+        </p>
+      </section>
       <Done start={start} />
     </Layout>
   );
 }
 
-/** Rendered after the async iterable is finished. */
+/** Rendered after the async iterable and the stream are finished. */
 function Done({ start }) {
   return <output class="sx-done">All done after {Date.now() - start} ms</output>;
 }
@@ -110,6 +136,22 @@ function openConnection() {
     },
     close() {},
   };
+}
+
+/** Emits the answer word by word. `pull` is only called when the renderer wants more. */
+function answerStream() {
+  const words = ANSWER.split(/(?<= )/);
+  return new ReadableStream({
+    async pull(controller) {
+      await sleep(WORD_DELAY);
+      const word = words.shift();
+      if (word === undefined) {
+        controller.close();
+      } else {
+        controller.enqueue(word);
+      }
+    },
+  });
 }
 
 function sleep(ms) {

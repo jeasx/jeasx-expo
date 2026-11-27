@@ -29,8 +29,7 @@
           { "path": "/streaming", "title": "Streaming HTML" },
           { "path": "/out-of-order", "title": "Slotted streaming" },
           { "path": "/lazy-load", "title": "Lazy loading" },
-          { "path": "/readable-stream", "title": "ReadableStreams" },
-          { "path": "/async-iterable", "title": "Async iterables" },
+          { "path": "/async-iterable", "title": "Iterables and streams" },
           { "path": "/mandelbrot", "title": "Mandelbrot explorer" }
         ]
       },
