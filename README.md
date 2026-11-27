@@ -31,7 +31,7 @@ The first four topics cover [jsx-async-runtime](https://github.com/jeasx/jsx-asy
 
 Each example lives in its own folder below [`src/`](src) and is served at the matching path (e.g. `src/todos` → `/todos`).
 
-- **Server-side JSX**: what JSX renders, `this` as context, render props, named slots, component caching, intercepting JSX, web components with Declarative Shadow DOM, unit tests
+- **Server-side JSX**: JSX essentials and what JSX renders, `this` as context, render props, named slots, component caching, intercepting JSX, web components with Declarative Shadow DOM, unit tests
 - **Streaming**: parallel loading, parallel API aggregator, streaming HTML, slotted (out-of-order) streaming, lazy loading, ReadableStreams, async iterables, Mandelbrot explorer
 - **Isomorphic apps**: todos, lottery, jokes, Kanban board, cinema seat booking, shopping cart and spreadsheet, rendered on the server first, then in the browser with the same components, and working without JavaScript
 - **Client-side apps and games**: solar system with client-side JSX, social feed, async dependency tree, password generator, guitar tuner, Game of Life, maze chase game, racing game, isometric shooter, flight game with a streamed landscape
