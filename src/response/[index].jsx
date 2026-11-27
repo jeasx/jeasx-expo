@@ -33,17 +33,9 @@ export default function () {
             A <code>content-disposition</code> header makes the browser save it as a file.
           </p>
         </Card>
-        <Card href="./data.json" title="JSON" status="200" type="application/json">
-          <Code>{`Response.json(data)`}</Code>
-          <p>Sets body and content type in one go.</p>
-        </Card>
         <Card href="./redirect" title="Redirect" status="303" type="Location: /response">
           <Code>{`new Response(null, {\n  status: 303, headers\n})`}</Code>
           <p>Sends the browser straight back to this page.</p>
-        </Card>
-        <Card href="./teapot" title="Custom status" status="418" type="text/plain">
-          <Code>{`new Response(body, {\n  status: 418\n})`}</Code>
-          <p>Any status code works, even the teapot.</p>
         </Card>
         <Card href="./proxy" title="Proxy" status="200" type="from api.github.com">
           <Code>{`fetch(url)`}</Code>
@@ -120,7 +112,7 @@ export default function () {
 }
 
 function Card({ href, title, status, type, children }) {
-  const kind = status.startsWith("2") ? "success" : status.startsWith("3") ? "secondary" : "error";
+  const kind = status.startsWith("2") ? "success" : "secondary";
   return (
     <a class="response-card" href={href}>
       <article>
