@@ -31,17 +31,17 @@ The first four topics cover [jsx-async-runtime](https://github.com/jeasx/jsx-asy
 
 Each example lives in its own folder below [`src/`](src) and is served at the matching path (e.g. `src/todos` → `/todos`).
 
-- **Server-side JSX**: JSX essentials and what JSX renders, `this` as context, named slots and render props, component caching, intercepting JSX, web components with Declarative Shadow DOM, unit tests
-- **Streaming**: parallel loading with an API aggregator, streaming HTML, slotted (out-of-order) streaming, lazy loading, ReadableStreams and async iterables, Mandelbrot explorer
-- **Isomorphic apps**: todos, lottery, jokes, Kanban board, cinema seat booking, shopping cart and spreadsheet, rendered on the server first, then in the browser with the same components, and working without JavaScript
-- **Client-side apps and games**: solar system with client-side JSX, social feed, async dependency tree, password generator, guitar tuner, Game of Life, maze chase game, racing game, isometric shooter, flight game with a streamed landscape
-- **Server-rendered websites and apps**: blog, products, periodic table with pagination, MDX cookbook, flight booking, GitHub repos, SQLite CRUD, A/B testing, i18n
-- **Beyond HTML: images, PDFs, emails and live streams**: SVG charts, HTML emails with plain-text alternative, PDF invoices with JSX, Open Graph images, image scaling with sharp, image upload, Server-Sent Events, live cursors with WebSockets, `Response` objects with content negotiation, a JSON API
-- **Security, errors and post-processing**: login and sessions, basic auth, signed cookies, Content Security Policy, bot protection with the Cap.js captcha, rate limiting, error handlers and boundaries with retries and timeouts, post-processing HTML with Cheerio, merging head tags from components
-- **Hypermedia with HTMX**: click to edit, active search, template fragments, infinite scroll, reactive scripting
-- **JavaScript libraries and frameworks**: React, Preact, Vue, Svelte, Lit, Alpine.js, islands mixing four frameworks with lazy hydration
+- **Server-side JSX**: what JSX renders, context, slots, caching, intercepting JSX, web components, unit tests
+- **Streaming**: parallel loading, streaming and out-of-order HTML, lazy loading, async iterables
+- **Isomorphic apps**: the same components render on the server and in the browser, and work without JavaScript
+- **Client-side apps and games**: client-side JSX, from small tools to games
+- **Server-rendered websites and apps**: content sites, forms, pagination, databases, A/B testing, i18n
+- **Beyond HTML**: SVG, emails, PDFs, images, Server-Sent Events, WebSockets, `Response` objects, JSON APIs
+- **Security, errors and post-processing**: sessions, cookies, CSP, captchas, rate limiting, error boundaries, HTML post-processing
+- **Hypermedia with HTMX**: classic HTMX patterns
+- **JavaScript libraries and frameworks**: React, Preact, Vue, Svelte, Lit, Alpine.js and mixed islands
 
-The full list with descriptions is in [`src/sitemap.json`](src/sitemap.json).
+Every example, with a description, is listed on the start page and in [`src/sitemap.json`](src/sitemap.json).
 
 ## Project structure
 
