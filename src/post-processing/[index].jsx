@@ -29,13 +29,13 @@ export default function ({ request }) {
 
   return (
     <Layout
-      title="Post-process HTML"
+      title="Post-process HTML with Prettier and Cheerio"
       description="Rewrite the finished HTML in a response handler: move inline styles into the head with Cheerio and format the result with Prettier."
       css="/post-processing/index.css"
     >
       {/* The inline styles on this page are deliberate: they are what the Cheerio step rewrites. */}
       <section class="pp-hero" style="--heading:orange; text-align:center">
-        <h1>Post-process HTML</h1>
+        <h1>Post-process HTML with Prettier and Cheerio</h1>
         <p class="lead">
           Jeasx lets you rewrite the finished HTML with a{" "}
           <a href="https://www.jeasx.dev/faq#response-handler">response handler</a>. It is set on{" "}
