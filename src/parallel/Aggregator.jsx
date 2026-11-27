@@ -1,7 +1,5 @@
-import Layout from "../Layout";
-
 /** Time budgets the visitor can choose from, in ms. */
-const BUDGETS = [250, 1000, 5000];
+export const BUDGETS = [250, 1000, 5000];
 
 /**
  * Public APIs without keys. Each service knows how to fetch and summarize its data.
@@ -156,12 +154,12 @@ const SERVICES = [
 ];
 
 /**
- * @param {import("../types").RouteProps} props
+ * Queries all services at once, when this component is rendered.
+ * Each card streams in as soon as its own service answers.
+ *
+ * @param {{ request: import("fastify").FastifyRequest, budget: number, mode: string }} props
  */
-export default function ({ request }) {
-  const budget = BUDGETS.includes(Number(request.query["budget"]))
-    ? Number(request.query["budget"])
-    : 1000;
+export default function Aggregator({ request, budget, mode }) {
   const start = Date.now();
 
   // One signal for all requests: it fires when the budget is spent or the client disconnects.
@@ -173,29 +171,13 @@ export default function ({ request }) {
   const results = SERVICES.map((service) => settle(service, signal, start, arrivals));
 
   return (
-    <Layout
-      title="Parallel API aggregator"
-      description="A backend-for-frontend page that queries six public APIs in parallel, with a time budget and isolated failures."
-      css="/aggregator/index.css"
-    >
-      <h1>Parallel API aggregator</h1>
-      <p class="lead">
-        A <em>backend for frontend</em>: the server queries six public APIs at once and merges their
-        answers into one page, which takes about as long as the slowest service, not the sum of all
-        of them.
-      </p>
-      <p>
-        Each card is an async component that only awaits its own promise, so the page streams card
-        by card.
-      </p>
-      <p>
-        A shared <code>AbortSignal</code> gives every request a time budget and also cancels
-        everything when the browser goes away. Errors and timeouts stay inside their card, so one
-        broken service never takes the page down.
-      </p>
+    <>
       <nav class="sx-toggle" aria-label="Time budget">
         {BUDGETS.map((value) => (
-          <a href={`?budget=${value}`} aria-current={value === budget ? "page" : undefined}>
+          <a
+            href={`?mode=${mode}&budget=${value}#aggregator`}
+            aria-current={value === budget ? "page" : undefined}
+          >
             {value < 1000 ? `${value} ms` : `${value / 1000} s`}
           </a>
         ))}
@@ -206,7 +188,7 @@ export default function ({ request }) {
         ))}
       </div>
       <Summary results={results} start={start} />
-    </Layout>
+    </>
   );
 }
 
@@ -221,7 +203,7 @@ async function Card({ service, result, budget }) {
           {service.icon}
         </span>
         <div>
-          <h2>{service.name}</h2>
+          <h3>{service.name}</h3>
           <small>{service.source}</small>
         </div>
         <span class="ag-pill">{label}</span>

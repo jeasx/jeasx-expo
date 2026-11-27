@@ -1,4 +1,5 @@
 import Layout from "../Layout";
+import Aggregator, { BUDGETS } from "./Aggregator";
 
 const USERS = ["Ada", "Grace", "Linus"];
 const DELAY = 1000;
@@ -11,12 +12,15 @@ const SCALE = USERS.length * DELAY + 300;
  */
 export default async function ({ request }) {
   const mode = request.query["mode"] === "parallel" ? "parallel" : "sequential";
+  const budget = BUDGETS.includes(Number(request.query["budget"]))
+    ? Number(request.query["budget"])
+    : 1000;
   const start = Date.now();
 
   return (
     <Layout
       title="Load data in parallel with async components"
-      description="Async JSX components render in order; start promises early to load data in parallel."
+      description="Start promises early to load data in parallel, then query six public APIs at once with a time budget and isolated failures."
       css="/parallel/index.css"
     >
       <h1>Load data in parallel with async components</h1>
@@ -32,10 +36,16 @@ export default async function ({ request }) {
         and finished.
       </p>
       <nav class="sx-toggle" aria-label="Loading mode">
-        <a href="?mode=sequential" aria-current={mode === "sequential" ? "page" : undefined}>
+        <a
+          href={`?mode=sequential&budget=${budget}`}
+          aria-current={mode === "sequential" ? "page" : undefined}
+        >
           Sequential
         </a>
-        <a href="?mode=parallel" aria-current={mode === "parallel" ? "page" : undefined}>
+        <a
+          href={`?mode=parallel&budget=${budget}`}
+          aria-current={mode === "parallel" ? "page" : undefined}
+        >
           Parallel
         </a>
       </nav>
@@ -53,6 +63,20 @@ export default async function ({ request }) {
         {mode === "sequential" ? <Sequential start={start} /> : <Parallel start={start} />}
       </section>
       <Elapsed start={start} />
+
+      <h2 id="aggregator">In practice: an API aggregator</h2>
+      <p>
+        A <em>backend for frontend</em> uses the same technique: the server queries six public APIs
+        at once and merges their answers into one page, which takes about as long as the slowest
+        service, not the sum of all of them. Each card is an async component that only awaits its
+        own promise, so the page streams card by card.
+      </p>
+      <p>
+        A shared <code>AbortSignal</code> gives every request a time budget and also cancels
+        everything when the browser goes away. Errors and timeouts stay inside their card, so one
+        broken service never takes the page down.
+      </p>
+      <Aggregator request={request} budget={budget} mode={mode} />
     </Layout>
   );
 }
