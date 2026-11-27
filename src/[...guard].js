@@ -1,4 +1,4 @@
-import isCrossSite from "./@helpers/crossSite";
+import isCrossSite from "./@helpers/isCrossSite";
 
 /**
  * @this {import("./types").ThisContext}
