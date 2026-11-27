@@ -1,12 +1,7 @@
 import Layout from "../Layout";
 import { OFFERS } from "./planets";
 
-const PRESETS = [
-  ...OFFERS,
-  "text/*;q=0.5, application/json;q=0.9",
-  "text/*, text/html;q=0",
-  "image/png",
-];
+const PRESETS = [...OFFERS, "image/png"];
 
 export default function () {
   return (
@@ -62,22 +57,10 @@ export default function () {
         copy per format.
       </p>
       <p>
-        Pick a preset or write your own header. The request is sent with <code>fetch()</code>, as
+        Pick an <code>Accept</code> header below. The request is sent with <code>fetch()</code>, as
         browsers always send their own <code>Accept</code> header when you follow a link.
       </p>
-      <form id="negotiation" method="get" action="/response/planets">
-        <fieldset role="group">
-          <input
-            type="text"
-            name="accept"
-            aria-label="Accept header"
-            value="application/json"
-            required
-          />
-          <input type="submit" value="Send request" />
-        </fieldset>
-      </form>
-      <p class="presets">
+      <p class="presets" data-url="/response/planets">
         {PRESETS.map((accept) => (
           <button
             type="button"
@@ -91,7 +74,7 @@ export default function () {
       </p>
       <article>
         <header>
-          <output id="status" form="negotiation">
+          <output id="status">
             <noscript>This playground needs JavaScript. Try the commands below instead.</noscript>
           </output>
         </header>

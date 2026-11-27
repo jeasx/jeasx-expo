@@ -1,27 +1,26 @@
-const playground = /** @type {HTMLFormElement} */ (document.getElementById("negotiation"));
-const input = /** @type {HTMLInputElement} */ (playground.elements.namedItem("accept"));
+const presets = /** @type {HTMLElement} */ (document.querySelector(".presets"));
 const statusLine = /** @type {HTMLOutputElement} */ (document.getElementById("status"));
 const body = /** @type {HTMLElement} */ (document.getElementById("body"));
+const buttons = /** @type {NodeListOf<HTMLButtonElement>} */ (
+  presets.querySelectorAll("[data-accept]")
+);
 
-for (const button of document.querySelectorAll("[data-accept]")) {
-  button.addEventListener("click", () => {
-    input.value = /** @type {HTMLElement} */ (button).dataset.accept;
-    playground.requestSubmit();
-  });
+for (const button of buttons) {
+  button.addEventListener("click", () => send(button.dataset.accept));
 }
 
-playground.addEventListener("submit", async (event) => {
-  event.preventDefault();
-  // Highlight the preset matching the header, also when it was typed by hand.
-  for (const button of document.querySelectorAll("[data-accept]")) {
-    const pressed = /** @type {HTMLElement} */ (button).dataset.accept === input.value.trim();
-    button.setAttribute("aria-pressed", String(pressed));
+/**
+ * Requests the planets with the given Accept header and shows the answer.
+ *
+ * @param {string} accept
+ */
+async function send(accept) {
+  for (const button of buttons) {
+    button.setAttribute("aria-pressed", String(button.dataset.accept === accept));
   }
   statusLine.textContent = "Loading…";
   try {
-    const response = await fetch(playground.action, {
-      headers: { accept: input.value },
-    });
+    const response = await fetch(presets.dataset.url, { headers: { accept } });
     statusLine.textContent = `${response.status} ${response.statusText} · Content-Type: ${response.headers.get("content-type")}`;
     const text = await response.text();
     // Indent JSON for reading. textContent shows HTML as source instead of rendering it.
@@ -32,9 +31,9 @@ playground.addEventListener("submit", async (event) => {
     statusLine.textContent = `Request failed: ${error.message}`;
     body.textContent = "";
   }
-});
+}
 
-playground.requestSubmit();
+send("application/json");
 
 // Makes this file a module, so TypeScript keeps its top-level names out of the global scope.
 export {};
