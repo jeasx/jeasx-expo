@@ -4,76 +4,71 @@ import querystring from "node:querystring";
 
 const NODE_ENV_IS_DEVELOPMENT = process.env.NODE_ENV === "development";
 
+// Computed once, so server bundles built with esbuild and Bun get the same id.
+const BUILD_ID = Date.now().toString(36);
+
+// Plugins and defines shared by the esbuild and Bun builds.
+// esbuild-svelte and @mdx-js/esbuild work with both bundlers.
+
+/** @param {"server" | "client"} generate */
+const svelte = async (generate) =>
+  (await import("esbuild-svelte")).default({ compilerOptions: { generate, css: "external" } });
+
+const mdx = async () =>
+  (await import("@mdx-js/esbuild")).default({
+    development: NODE_ENV_IS_DEVELOPMENT,
+    jsxImportSource: "jsx-async-runtime",
+    elementAttributeNameCase: "html",
+    stylePropertyNameCase: "css",
+    rehypePlugins: [(await import("rehype-prism-plus")).default],
+  });
+
+const VUE_DEFINES = {
+  __VUE_OPTIONS_API__: "false",
+  __VUE_PROD_DEVTOOLS__: "false",
+  __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: "false",
+};
+
 export default {
   /** @type {() => Promise<import("esbuild").BuildOptions>} */
   ESBUILD_SERVER_OPTIONS: async () => ({
-    define: { "process.env.BUILD_ID": `"${Date.now().toString(36)}"` },
+    define: { "process.env.BUILD_ID": `"${BUILD_ID}"` },
     sourcemap: NODE_ENV_IS_DEVELOPMENT && "inline",
     loader: { ".svg": "file" },
     plugins: [
       (await import("unplugin-vue/esbuild")).default({ ssr: true, sourceMap: false }),
-      (await import("esbuild-svelte")).default({
-        compilerOptions: { generate: "server", css: "external" },
-      }),
-      (await import("@mdx-js/esbuild")).default({
-        development: NODE_ENV_IS_DEVELOPMENT,
-        jsxImportSource: "jsx-async-runtime",
-        elementAttributeNameCase: "html",
-        stylePropertyNameCase: "css",
-        rehypePlugins: [(await import("rehype-prism-plus")).default],
-      }),
+      await svelte("server"),
+      await mdx(),
     ],
   }),
 
   /** @type {() => Promise<import("bun").BuildConfig>} */
   BUN_SERVER_OPTIONS: async () => ({
-    define: {
-      "process.env.BUILD_ID": `"${Date.now().toString(36)}"`,
-    },
+    define: { "process.env.BUILD_ID": `"${BUILD_ID}"` },
     sourcemap: NODE_ENV_IS_DEVELOPMENT ? "inline" : "none",
     plugins: [
       (await import("unplugin-vue")).default.bun({ ssr: true, sourceMap: false }),
-      (await import("esbuild-svelte")).default({
-        compilerOptions: { generate: "server", css: "external" },
-      }),
-      (await import("@mdx-js/esbuild")).default({
-        development: NODE_ENV_IS_DEVELOPMENT,
-        jsxImportSource: "jsx-async-runtime",
-        elementAttributeNameCase: "html",
-        stylePropertyNameCase: "css",
-        rehypePlugins: [(await import("rehype-prism-plus")).default],
-      }),
+      await svelte("server"),
+      await mdx(),
     ],
   }),
 
   /** @type {() => Promise<import("esbuild").BuildOptions>} */
   ESBUILD_BROWSER_OPTIONS: async () => ({
-    define: {
-      __VUE_OPTIONS_API__: "false",
-      __VUE_PROD_DEVTOOLS__: "false",
-      __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: "false",
-    },
+    define: VUE_DEFINES,
     loader: { ".svg": "file" },
     plugins: [
       (await import("unplugin-vue/esbuild")).default({ sourceMap: false }),
-      (await import("esbuild-svelte")).default({
-        compilerOptions: { generate: "client", css: "external" },
-      }),
+      await svelte("client"),
     ],
   }),
 
   /** @type {() => Promise<import("bun").BuildConfig>} */
   BUN_BROWSER_OPTIONS: async () => ({
-    define: {
-      __VUE_OPTIONS_API__: "false",
-      __VUE_PROD_DEVTOOLS__: "false",
-      __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: "false",
-    },
+    define: VUE_DEFINES,
     plugins: [
       (await import("unplugin-vue")).default.bun({ sourceMap: false }),
-      (await import("esbuild-svelte")).default({
-        compilerOptions: { generate: "client", css: "external" },
-      }),
+      await svelte("client"),
     ],
   }),
 
