@@ -66,3 +66,16 @@
     opacity: 0;
   }
 }
+
+/* Both demos side by side on wide screens, the short stream first. */
+.ai-columns {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem 2rem;
+  align-items: start;
+}
+@media (min-width: 900px) {
+  .ai-columns {
+    grid-template-columns: 1fr 1fr;
+  }
+}

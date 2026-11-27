@@ -15,14 +15,14 @@ export default function () {
 
   return (
     <Layout
-      title="Render async iterables and ReadableStreams"
-      description="Render async generators and ReadableStreams directly in JSX and stream each item as it arrives."
+      title="Render ReadableStreams and async iterables"
+      description="Render ReadableStreams and async generators directly in JSX and stream each item as it arrives."
       css="/async-iterable/index.css"
     >
-      <h1>Render async iterables and ReadableStreams</h1>
+      <h1>Render ReadableStreams and async iterables</h1>
       <p class="lead">
-        JSX children can be async iterables or a <code>ReadableStream</code>: every item is streamed
-        to the browser as soon as it is ready.
+        JSX children can be a <code>ReadableStream</code> or an async iterable: every item is
+        streamed to the browser as soon as it is ready.
       </p>
       <p>
         Items are rendered in order, and the markup rendered so far is sent while waiting for the
@@ -35,49 +35,55 @@ export default function () {
         </a>
       </p>
 
-      <h2>Async iterables</h2>
-      <p>
-        A component written as <code>async function*</code> yields markup. This is a natural fit for
-        paginated APIs or database cursors: the next page is only loaded when the renderer needs it.
-        If the browser stops loading the page, the generator is stopped like a{" "}
-        <code>for await</code> loop on <code>break</code>, so its <code>finally</code> block runs
-        and can release resources.
-      </p>
-      <section class="sx-card">
-        <header>
-          <h3>Releases</h3>
-          <small>
-            {PAGES} pages of {PAGE_SIZE}, {PAGE_DELAY} ms per page
-          </small>
-        </header>
-        <table class="ai-table">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Release</th>
-              <th>Page</th>
-              <th>Flushed after</th>
-            </tr>
-          </thead>
-          <tbody>
-            <Releases start={start} />
-          </tbody>
-        </table>
-      </section>
-
-      <h2>ReadableStreams</h2>
-      <p>
-        A <code>ReadableStream</code> works the same way, e.g. a streamed answer from an AI service
-        or the decoded body of a <code>fetch</code> response. Its <code>pull</code> method is only
-        called when the renderer wants the next chunk.
-      </p>
-      <section class="sx-card rs-chat" aria-live="polite">
-        <p class="rs-bubble rs-question">How does Jeasx render a ReadableStream?</p>
-        <p class="rs-bubble rs-answer">
-          {answerStream()}
-          <span class="rs-end"></span>
-        </p>
-      </section>
+      <div class="ai-columns">
+        <section>
+          <h2>ReadableStreams</h2>
+          <p>
+            A <code>ReadableStream</code> is rendered chunk by chunk, e.g. a streamed answer from an
+            AI service or the decoded body of a <code>fetch</code> response. Its <code>pull</code>{" "}
+            method is only called when the renderer wants the next chunk.
+          </p>
+          <section class="sx-card rs-chat" aria-live="polite">
+            <p class="rs-bubble rs-question">How does Jeasx render a ReadableStream?</p>
+            <p class="rs-bubble rs-answer">
+              {answerStream()}
+              <span class="rs-end"></span>
+            </p>
+          </section>
+        </section>
+        <section>
+          <h2>Async iterables</h2>
+          <p>
+            A component written as <code>async function*</code> yields markup. It starts once the
+            stream is done, as JSX renders in order. This is a natural fit for paginated APIs or
+            database cursors: the next page is only loaded when the renderer needs it. If the
+            browser stops loading the page, the generator is stopped like a <code>for await</code>{" "}
+            loop on <code>break</code>, so its <code>finally</code> block runs and can release
+            resources.
+          </p>
+          <section class="sx-card">
+            <header>
+              <h3>Releases</h3>
+              <small>
+                {PAGES} pages of {PAGE_SIZE}, {PAGE_DELAY} ms per page
+              </small>
+            </header>
+            <table class="ai-table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Release</th>
+                  <th>Page</th>
+                  <th>Flushed after</th>
+                </tr>
+              </thead>
+              <tbody>
+                <Releases start={start} />
+              </tbody>
+            </table>
+          </section>
+        </section>
+      </div>
       <Done start={start} />
     </Layout>
   );
