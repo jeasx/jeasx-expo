@@ -35,7 +35,7 @@ Each example lives in its own folder below [`src/`](src) and is served at the ma
 - **Streaming**: parallel loading with an API aggregator, streaming HTML, slotted (out-of-order) streaming, lazy loading, ReadableStreams and async iterables, Mandelbrot explorer
 - **Isomorphic apps**: todos, lottery, jokes, Kanban board, cinema seat booking, shopping cart and spreadsheet, rendered on the server first, then in the browser with the same components, and working without JavaScript
 - **Client-side apps and games**: solar system with client-side JSX, social feed, async dependency tree, password generator, guitar tuner, Game of Life, maze chase game, racing game, isometric shooter, flight game with a streamed landscape
-- **Server-rendered websites and apps**: blog, products, periodic table with pagination, MDX cookbook, flight booking, GitHub repos, A/B testing, i18n
+- **Server-rendered websites and apps**: blog, products, periodic table with pagination, MDX cookbook, flight booking, GitHub repos, SQLite CRUD, A/B testing, i18n
 - **Beyond HTML: images, PDFs, emails and live streams**: SVG charts, HTML emails with plain-text alternative, PDF invoices with JSX, Open Graph images, image scaling with sharp, image upload, Server-Sent Events, live cursors with WebSockets, `Response` objects with content negotiation, a JSON API
 - **Security, errors and post-processing**: login and sessions, basic auth, signed cookies, Content Security Policy, bot protection with the Cap.js captcha, rate limiting, error handlers and boundaries with retries and timeouts, post-processing HTML with Cheerio, merging head tags from components
 - **Hypermedia with HTMX**: click to edit, active search, template fragments, infinite scroll, reactive scripting

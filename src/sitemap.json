@@ -79,6 +79,7 @@
           { "path": "/wizard", "title": "Flight booking" },
           { "path": "/mdx", "title": "Cookbook" },
           { "path": "/repositories", "title": "GitHub repos" },
+          { "path": "/sqlite", "title": "SQLite CRUD" },
           { "path": "/ab-testing", "title": "A/B testing" },
           { "path": "/i18n", "title": "Internationalization" }
         ]
