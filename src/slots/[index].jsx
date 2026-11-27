@@ -54,7 +54,7 @@ export default function () {
       <p>
         If the markup needs data from the component, pass a function instead. Here the async{" "}
         <code>&lt;Jokes&gt;</code> component loads the data, and the caller decides how it looks:
-        the same loader renders a list and cards. <a href="">Reload</a> for new jokes.
+        the same loader renders a list and cards.
       </p>
       <Example
         code={`async function Jokes({ amount, children }) {
