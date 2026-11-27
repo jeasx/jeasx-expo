@@ -1,6 +1,7 @@
 import { html } from "jsx-async-runtime";
 import Prism from "prismjs";
 import "prismjs/components/prism-jsx.js";
+import { pick } from "../jokes/jokes";
 import Layout from "../Layout";
 
 const SNIPPET = `function Card({ accent, media, header, footer = <small>No footer</small>, children }) {
@@ -28,21 +29,31 @@ const SNIPPET = `function Card({ accent, media, header, footer = <small>No foote
   <dl class="sl-stats">…</dl>
 </Card>`;
 
+const RENDER_PROP_SNIPPET = `async function Jokes({ category, amount, children }) {
+  const data = await loadJokes(category, amount);
+  return children(data);
+}
+
+<Jokes category="programming" amount={3}>
+  {(items) => <ul>{items.map((joke) => <li>{joke.setup}</li>)}</ul>}
+</Jokes>`;
+
 export default function () {
   return (
     <Layout
-      title="Named slots"
-      description="Pass JSX elements as any prop to fill several slots of a component."
+      title="Component slots and render props"
+      description="Fill several slots of a component with JSX, or pass a function to let an async component load the data."
       css="/slots/index.css"
     >
-      <h1>Named slots</h1>
+      <h1>Component slots and render props</h1>
       <p class="lead">
         A component can offer more than one place to fill in content. Besides <code>children</code>,
         any prop can hold JSX, so a card can have named slots for its header, footer and media.
       </p>
       <p>
         A slot is an ordinary prop: leave it out to skip it, or give it a default value as a
-        fallback. Unlike render props, a slot receives finished markup instead of a function.
+        fallback. If a slot needs data from the component, pass a function instead: a{" "}
+        <a href="#render-props">render prop</a>.
       </p>
       <pre class="language-jsx">
         <code class="language-jsx">
@@ -61,7 +72,7 @@ export default function () {
               <h3>Jeasx 3.0</h3>
             </>
           }
-          footer={<a href="/slots">Read the changelog →</a>}
+          footer={<a href="/slots#render-props">Read the changelog →</a>}
         >
           <ul class="sl-list">
             <li>Faster streaming</li>
@@ -122,10 +133,52 @@ export default function () {
         </Card>
       </div>
 
+      <h2 id="render-props">Render props</h2>
       <p>
-        If a slot needs data from the component, pass a function instead: see{" "}
-        <a href="/render-props">Render props</a>.
+        A single function child works as a <em>render prop</em>: the async component loads the data,
+        and the caller decides how it looks. The same <code>&lt;Jokes&gt;</code> loader is used
+        twice below with different markup. <a href="">Reload</a> for new jokes.
       </p>
+      <pre class="language-jsx">
+        <code class="language-jsx">
+          {html(Prism.highlight(RENDER_PROP_SNIPPET, Prism.languages.jsx, "jsx"))}
+        </code>
+      </pre>
+
+      <div class="joke-columns">
+        <section>
+          <h3>As a list</h3>
+          <Jokes category="programming" amount={3}>
+            {(items) => (
+              <ul class="joke-list">
+                {items.map((joke) => (
+                  <li>
+                    {joke.setup} <em>{joke.punchline}</em>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </Jokes>
+        </section>
+        <section>
+          <h3>As cards</h3>
+          <Jokes category="general" amount={2}>
+            {(items) => (
+              <div class="joke-grid">
+                {items.map((joke, index) => (
+                  <div class="joke-card">
+                    <strong>Joke #{index + 1}</strong>
+                    <p>{joke.setup}</p>
+                    <p>
+                      <em>{joke.punchline}</em>
+                    </p>
+                  </div>
+                ))}
+              </div>
+            )}
+          </Jokes>
+        </section>
+      </div>
     </Layout>
   );
 }
@@ -146,4 +199,28 @@ function Card({ accent, media, header, footer = <small>No footer</small>, childr
       <footer>{footer}</footer>
     </article>
   );
+}
+
+/** @typedef {import("../jokes/state").Joke} Joke */
+
+/**
+ * Loads the data and calls the render prop with it.
+ *
+ * @param {{ category: string, amount: number, children: (jokes: Joke[]) => JSX.Element }} props
+ */
+async function Jokes({ category, amount, children }) {
+  const data = await loadJokes(category, amount);
+  return children(data);
+}
+
+/**
+ * Simulates a slow API call.
+ *
+ * @param {string} category
+ * @param {number} amount
+ * @returns {Promise<Joke[]>}
+ */
+async function loadJokes(category, amount) {
+  await new Promise((resolve) => setTimeout(resolve, 500));
+  return pick(category, amount);
 }
