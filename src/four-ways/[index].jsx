@@ -11,7 +11,7 @@ const WAYS = [
   {
     id: "jeasx",
     name: "Jeasx",
-    how: "Client-side JSX: the browser renders the same component as the server and saves in the background. Without JavaScript, the forms post to the server.",
+    how: "Isomorphic JSX: the browser renders the same component as the server and saves in the background. Without JavaScript, the forms post to the server.",
     state: "server",
   },
   {

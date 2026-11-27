@@ -1,4 +1,4 @@
-// Client-side JSX: the browser renders the same ServerList component as the server with
+// Isomorphic JSX: the browser renders the same ServerList component as the server with
 // jsxToString, and saves every change in the background (see "../../@helpers/isomorphic").
 import { mount, postForm } from "../../@helpers/isomorphic";
 import ServerList from "../ServerList";
