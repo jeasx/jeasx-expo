@@ -1,9 +1,11 @@
 @import "../@styles/stream.css";
 @import "../@styles/card.css";
 
+/* Fixed columns (at most three, at least 14.5rem wide) from the start: auto-fill keeps
+   empty tracks, so the first cards don't stretch and shrink while the others stream in. */
 .ag-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(14.5rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(max(14.5rem, calc((100% - 2rem) / 3)), 1fr));
   gap: 0 1rem;
   margin: 2rem 0;
 }
