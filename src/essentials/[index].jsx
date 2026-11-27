@@ -3,7 +3,6 @@ import * as prettier from "prettier";
 import Prism from "prismjs";
 import "prismjs/components/prism-jsx.js";
 import Layout from "../Layout";
-import avatarUrl from "./avatar.svg";
 
 export default function () {
   return (
@@ -50,10 +49,6 @@ export default function () {
         </p>
 
         <h3>Children</h3>
-
-        <Sample title="Promises" render={() => <p>{loadGreeting()}</p>}>
-          A promise is awaited and its value rendered in place.
-        </Sample>
 
         <Sample
           title="Sets and other iterables"
@@ -118,24 +113,14 @@ export default function () {
         </Sample>
 
         <Sample
-          title="Nothing at all"
-          render={() => (
-            <p>{[null, undefined, false, true, [], () => "a function", { plain: "object" }]}</p>
-          )}
+          title="Functions and plain objects"
+          render={() => <p>{[[], () => "a function", { plain: "object" }]}</p>}
         >
-          <code>null</code>, <code>undefined</code>, booleans, empty arrays, functions and plain
-          objects render nothing.
+          Like <code>null</code> and booleans, empty arrays, functions and plain objects render
+          nothing.
         </Sample>
 
         <h3>Attributes</h3>
-
-        <Sample
-          title="Promise attributes"
-          render={() => <img src={loadAvatarUrl()} alt={loadAvatarAlt()} width="64" height="64" />}
-        >
-          A promise as attribute value is awaited. All promise attributes of a tag are loaded in
-          parallel.
-        </Sample>
 
         <Sample
           title="Objects and arrays as JSON"
@@ -149,20 +134,18 @@ export default function () {
         </Sample>
 
         <Sample
-          title="URLs, dates and booleans"
+          title="URLs and dates"
           render={() => (
             <a
               // @ts-expect-error The runtime renders a URL via toString(), but the types expect a string.
               href={new URL("/essentials", "https://expo.jeasx.dev")}
               data-date={new Date(0)}
-              download
             >
               Download
             </a>
           )}
         >
-          Values with their own <code>toString</code> use their string form, <code>true</code>{" "}
-          renders the attribute name only.
+          Values with their own <code>toString</code> use their string form.
         </Sample>
 
         <Sample
@@ -677,21 +660,6 @@ function* Fibonacci({ count }) {
     yield <li>{a}</li>;
     [a, b] = [b, a + b];
   }
-}
-
-async function loadGreeting() {
-  await sleep(100);
-  return "Hello from a promise!";
-}
-
-async function loadAvatarUrl() {
-  await sleep(100);
-  return avatarUrl;
-}
-
-async function loadAvatarAlt() {
-  await sleep(100);
-  return "Avatar loaded asynchronously";
 }
 
 function sleep(ms) {
