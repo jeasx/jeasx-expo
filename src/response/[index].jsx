@@ -1,11 +1,20 @@
 import Layout from "../Layout";
+import { OFFERS } from "./planets";
+
+const PRESETS = [
+  ...OFFERS,
+  "text/*;q=0.5, application/json;q=0.9",
+  "text/*, text/html;q=0",
+  "image/png",
+];
 
 export default function () {
   return (
     <Layout
       title="Return web-standard responses"
-      description="Route handlers can return a standard Response object with status, headers and body."
+      description="Return a standard Response object with status, headers and body, and pick its format from the Accept header."
       css="/response/index.css"
+      script="/response/index.js"
     >
       <h1>Return web-standard responses</h1>
       <p class="lead">
@@ -41,6 +50,71 @@ export default function () {
           <p>Passes a remote response through, cached for five minutes.</p>
         </Card>
       </div>
+
+      <h2 id="content-negotiation">Content negotiation: one URL, many formats</h2>
+      <p>
+        With{" "}
+        <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Content_negotiation">
+          content negotiation
+        </a>
+        , a client tells the server in the <code>Accept</code> header which formats it understands
+        and how much it prefers each one.
+      </p>
+      <p>
+        The route{" "}
+        <a href="/response/planets">
+          <code>/response/planets</code>
+        </a>{" "}
+        reads the header and returns a <code>Response</code> in the best matching format, or{" "}
+        <code>406 Not Acceptable</code>. It also sends <code>Vary: Accept</code>, so caches keep one
+        copy per format.
+      </p>
+      <p>
+        Pick a preset or write your own header. The request is sent with <code>fetch()</code>, as
+        browsers always send their own <code>Accept</code> header when you follow a link.
+      </p>
+      <form id="negotiation" method="get" action="/response/planets">
+        <fieldset role="group">
+          <input
+            type="text"
+            name="accept"
+            aria-label="Accept header"
+            value="application/json"
+            required
+          />
+          <input type="submit" value="Send request" />
+        </fieldset>
+      </form>
+      <p class="presets">
+        {PRESETS.map((accept) => (
+          <button
+            type="button"
+            class="btn-outline"
+            data-accept={accept}
+            aria-pressed={accept === "application/json" ? "true" : "false"}
+          >
+            {accept}
+          </button>
+        ))}
+      </p>
+      <article>
+        <header>
+          <output id="status" form="negotiation">
+            <noscript>This playground needs JavaScript. Try the commands below instead.</noscript>
+          </output>
+        </header>
+        <pre style="max-height: 24rem; overflow: auto;">
+          <code id="body"></code>
+        </pre>
+      </article>
+      <h3>From the command line</h3>
+      <pre>
+        <code>
+          {OFFERS.map(
+            (type) => `curl -H "Accept: ${type}" https://expo.jeasx.dev/response/planets\n`,
+          )}
+        </code>
+      </pre>
     </Layout>
   );
 }
