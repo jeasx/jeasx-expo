@@ -1,17 +1,6 @@
 @import "../@styles/stream.css";
 @import "../@styles/card.css";
-@import "../@styles/busy.css";
 
-.px-axis {
-  display: flex;
-  justify-content: space-between;
-  margin: -0.5rem 0 0.75rem;
-  color: var(--sx-muted);
-  font-size: 0.75rem;
-  font-variant-numeric: tabular-nums;
-}
-
-/* API aggregator */
 .ag-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(14.5rem, 1fr));
@@ -29,7 +18,8 @@
   grid-template-columns: minmax(0, 1fr);
   gap: 0.75rem;
   margin-bottom: 1rem;
-  animation: ag-pop 0.5s cubic-bezier(0.2, 0.9, 0.3, 1.3) both;
+  /* Fade and slide in on arrival, without overshoot. */
+  animation: ag-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
   transition:
     transform 0.2s,
     box-shadow 0.2s;
@@ -78,7 +68,7 @@
       min-width: 0;
     }
 
-    & h3 {
+    & h2 {
       margin: 0;
       font-size: 0.95rem;
       line-height: 1.2;
@@ -238,7 +228,8 @@
   &::after {
     display: block;
     transform-origin: left;
-    animation: ag-grow 0.8s ease-out both;
+    /* Grows once the card has faded in. */
+    animation: ag-grow 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
     border-radius: inherit;
     background: linear-gradient(90deg, var(--sx-accent), var(--tone));
     width: calc(var(--to) * 100%);
@@ -258,7 +249,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr));
   gap: 0.75rem;
-  animation: ag-pop 0.5s ease-out both;
+  animation: ag-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .ag-stat {
@@ -309,9 +300,9 @@
   }
 }
 
-@keyframes ag-pop {
+@keyframes ag-in {
   from {
-    transform: translateY(0.75rem) scale(0.96);
+    transform: translateY(0.5rem);
     opacity: 0;
   }
 }
@@ -319,5 +310,18 @@
 @keyframes ag-grow {
   from {
     transform: scaleX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ag-card,
+  .ag-summary,
+  .ag-meter::after,
+  .ag-card .ag-pill::before {
+    animation: none;
+  }
+
+  .ag-card:hover {
+    transform: none;
   }
 }

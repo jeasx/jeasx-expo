@@ -1,11 +1,8 @@
-/** Time budgets the visitor can choose from, in ms. */
-export const BUDGETS = [250, 1000, 5000];
-
 /**
  * Public APIs without keys. Each service knows how to fetch and summarize its data.
  * They all receive an AbortSignal, so a slow service is cancelled when the budget is spent.
  */
-const SERVICES = [
+export const SERVICES = [
   {
     id: "weather",
     icon: "🌤️",
@@ -153,84 +150,8 @@ const SERVICES = [
   },
 ];
 
-/**
- * Queries all services at once, when this component is rendered.
- * Each card streams in as soon as its own service answers.
- *
- * @param {{ request: import("fastify").FastifyRequest, budget: number, mode: string }} props
- */
-export default function Aggregator({ request, budget, mode }) {
-  const start = Date.now();
-
-  // One signal for all requests: it fires when the budget is spent or the client disconnects.
-  const signal = AbortSignal.any([AbortSignal.timeout(budget), abortOnClose(request)]);
-
-  // Start every request right away. Each promise always resolves (never rejects),
-  // so a failing service becomes a result of its own, like Promise.allSettled.
-  const arrivals = { count: 0 };
-  const results = SERVICES.map((service) => settle(service, signal, start, arrivals));
-
-  return (
-    <>
-      <nav class="sx-toggle" aria-label="Time budget">
-        {BUDGETS.map((value) => (
-          <a
-            href={`?mode=${mode}&budget=${value}#aggregator`}
-            aria-current={value === budget ? "page" : undefined}
-          >
-            {value < 1000 ? `${value} ms` : `${value / 1000} s`}
-          </a>
-        ))}
-      </nav>
-      <div class="ag-grid">
-        {SERVICES.map((service, index) => (
-          <Card service={service} result={results[index]} budget={budget} />
-        ))}
-      </div>
-      <Summary results={results} start={start} />
-    </>
-  );
-}
-
-/** Renders one service as soon as its result is available. */
-async function Card({ service, result, budget }) {
-  const { status, value, time, rank } = await result;
-  const label = { ok: "live", error: "failed", timeout: "timeout" }[status];
-  return (
-    <article class="ag-card" data-status={status}>
-      <header>
-        <span class="ag-icon" aria-hidden="true">
-          {service.icon}
-        </span>
-        <div>
-          <h3>{service.name}</h3>
-          <small>{service.source}</small>
-        </div>
-        <span class="ag-pill">{label}</span>
-      </header>
-      <div class="ag-body">
-        {status === "ok" ? (
-          value
-        ) : (
-          <>
-            <Figure value={status === "timeout" ? "⏱" : "✕"} />
-            <p class="ag-message">{value}</p>
-          </>
-        )}
-      </div>
-      <footer>
-        <span class="ag-rank" title="Order of arrival">
-          #{rank}
-        </span>
-        <div class="ag-meter" style={`--to: ${Math.min(time / budget, 1).toFixed(3)}`}></div>
-        <span class="ag-time">{status === "timeout" ? `> ${budget} ms` : `${time} ms`}</span>
-      </footer>
-    </article>
-  );
-}
-
 /** The headline number of a card. */
-function Figure({ value, unit = "" }) {
+export function Figure({ value, unit = "" }) {
   return (
     <p class="ag-figure">
       <strong>{value}</strong> {unit && <span>{unit}</span>}
@@ -252,54 +173,6 @@ function Details({ rows }) {
   );
 }
 
-/** Rendered after all cards, so it can report on the whole run. */
-async function Summary({ results, start }) {
-  const settled = await Promise.all(results);
-  const count = (status) => settled.filter((result) => result.status === status).length;
-  const sum = settled.reduce((total, result) => total + result.time, 0);
-  const total = Date.now() - start;
-  return (
-    <section class="ag-summary" aria-label="Summary">
-      <div class="ag-stat ag-hero">
-        <strong>{total} ms</strong>
-        <small>total render time</small>
-      </div>
-      <div class="ag-stat">
-        <strong>{(sum / Math.max(total, 1)).toFixed(1)}×</strong>
-        <small>faster than {sum} ms sequential</small>
-      </div>
-      <div class="ag-stat" data-status="ok">
-        <strong>{count("ok")}</strong>
-        <small>ok</small>
-      </div>
-      <div class="ag-stat" data-status="error">
-        <strong>{count("error")}</strong>
-        <small>failed</small>
-      </div>
-      <div class="ag-stat" data-status="timeout">
-        <strong>{count("timeout")}</strong>
-        <small>timed out</small>
-      </div>
-    </section>
-  );
-}
-
-/** Runs a service and turns any outcome into a plain result object. */
-async function settle(service, signal, start, arrivals) {
-  try {
-    const value = await service.load(signal);
-    return { status: "ok", value, time: Date.now() - start, rank: ++arrivals.count };
-  } catch (error) {
-    const timeout = signal.aborted;
-    return {
-      status: timeout ? "timeout" : "error",
-      value: timeout ? "Cancelled: time budget exceeded." : `Failed: ${error.message}`,
-      time: Date.now() - start,
-      rank: ++arrivals.count,
-    };
-  }
-}
-
 async function getJson(url, signal) {
   const response = await fetch(url, {
     signal,
@@ -309,11 +182,4 @@ async function getJson(url, signal) {
     throw new Error(`${response.status} ${response.statusText}`);
   }
   return response.json();
-}
-
-/** Returns a signal that aborts when the client closes the connection. */
-function abortOnClose(request) {
-  const controller = new AbortController();
-  request.raw.once("close", () => controller.abort(new Error("Client disconnected")));
-  return controller.signal;
 }
