@@ -37,7 +37,7 @@ Each example lives in its own folder below [`src/`](src) and is served at the ma
 - **Client-side apps and games**: solar system with client-side JSX, social feed, async dependency tree, password generator, guitar tuner, Game of Life, maze chase game, racing game, isometric shooter, flight game with a streamed landscape
 - **Server-rendered websites and apps**: blog, products, periodic table with pagination, MDX cookbook, flight booking, GitHub repos, A/B testing, i18n
 - **Beyond HTML: images, PDFs, emails and live streams**: SVG charts, HTML emails with plain-text alternative, PDF invoices with JSX, Open Graph images, image scaling with sharp, image upload, Server-Sent Events, live cursors with WebSockets, content negotiation, `Response` objects, a JSON API
-- **Security, errors and post-processing**: login and sessions, basic auth, signed cookies, Content Security Policy, bot protection with the Cap.js captcha, rate limiting, error handlers and boundaries with retries and timeouts, prettifying HTML, extracting styles with Cheerio, merging head tags from components
+- **Security, errors and post-processing**: login and sessions, basic auth, signed cookies, Content Security Policy, bot protection with the Cap.js captcha, rate limiting, error handlers and boundaries with retries and timeouts, post-processing HTML with Prettier and Cheerio, merging head tags from components
 - **Hypermedia with HTMX**: click to edit, active search, template fragments, infinite scroll, reactive scripting
 - **JavaScript libraries and frameworks**: React, Preact, Vue, Svelte, Lit, Alpine.js, islands mixing four frameworks with lazy hydration
 

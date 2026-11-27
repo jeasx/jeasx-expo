@@ -111,8 +111,7 @@
           { "path": "/cap", "title": "Bot protection" },
           { "path": "/rate-limit", "title": "Rate limiting" },
           { "path": "/error-handler", "title": "Error boundaries" },
-          { "path": "/prettier", "title": "Prettify HTML" },
-          { "path": "/cheerio", "title": "Extract styles" },
+          { "path": "/post-processing", "title": "Post-process HTML" },
           { "path": "/head", "title": "Merge head tags" }
         ]
       }
