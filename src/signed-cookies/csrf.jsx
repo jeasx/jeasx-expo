@@ -10,9 +10,9 @@ import { readSignedCookie } from "../@helpers/cookies";
  * into a forged form. The signature stops them from planting a cookie with a token of their
  * own, e.g. from a subdomain.
  *
- * The other examples use the simpler check in "../@helpers/crossSite.js" instead, which
- * rejects forms from other sites by their "Sec-Fetch-Site" or "Origin" header and needs no
- * token. Tokens are shown here as a use case for signed cookies.
+ * The root guard (src/[...guard].js) already protects the whole site with the simpler check
+ * in "../@helpers/crossSite.js", which rejects forms from other sites by their "Sec-Fetch-Site"
+ * or "Origin" header and needs no token. Tokens are shown here as a use case for signed cookies.
  *
  * Returns the token to put into forms and, for a POST with a missing or wrong token,
  * an error page to answer with.

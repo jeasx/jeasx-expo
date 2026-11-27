@@ -1,3 +1,5 @@
+import isCrossSite, { crossSiteResponse } from "./@helpers/crossSite";
+
 /**
  * Examples which were merged into others: old path -> new location.
  * Each path is matched exactly (a trailing slash is ignored).
@@ -21,6 +23,12 @@ export default async function ({ request, reply }) {
   const target = REDIRECTS[request.path.replace(/\/+$/, "")];
   if (target) {
     return new Response(null, { status: 301, headers: { location: target } });
+  }
+
+  // Requests which change state (forms, fetch calls) must come from this site, so other
+  // sites can't forge them (CSRF). GET and HEAD always pass, see "./@helpers/crossSite.js".
+  if (isCrossSite(request)) {
+    return crossSiteResponse();
   }
 
   // Prepare "this" context

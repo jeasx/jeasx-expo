@@ -1,5 +1,4 @@
 import { readSignedCookie } from "../@helpers/cookies";
-import isCrossSite, { crossSiteResponse } from "../@helpers/crossSite";
 import Layout from "../Layout";
 import { countAttempt } from "./attempts";
 import { PATH } from "./session";
@@ -7,7 +6,6 @@ import { getSession } from "./store";
 
 /**
  * Runs before every route of this example:
- * - rejects forms sent from other sites (CSRF, see "../@helpers/crossSite.js"),
  * - limits the number of POSTs per IP address, as each one may hash a password,
  * - looks up the session of the visitor.
  *
@@ -22,10 +20,8 @@ export default function ({ request, reply }) {
   // Pages with a login form or personal data must not end up in a shared cache.
   reply.header("cache-control", "no-store");
 
-  // Also stops "login CSRF": another site signing the visitor in to an account of its own.
-  if (isCrossSite(request)) {
-    return crossSiteResponse();
-  }
+  // Forms from other sites, including "login CSRF" (another site signing the visitor in
+  // to an account of its own), are rejected by the root guard (src/[...guard].js).
 
   if (request.method === "POST") {
     const wait = countAttempt(request.ip);
