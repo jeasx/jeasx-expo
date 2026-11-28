@@ -1,7 +1,7 @@
 import { html } from "jsx-async-runtime";
 import Layout from "../Layout";
-import { encodePng } from "./png";
-import { HEIGHT, TILE, WIDTH, parseView, renderTile, tiles } from "./tracer";
+import { THREADS, traceTile } from "./pool";
+import { HEIGHT, TILE, WIDTH, parseView, tiles } from "./tracer";
 
 const QUALITY = [
   { samples: 1, name: "Draft" },
@@ -43,10 +43,11 @@ export default function ({ request }) {
         spheres and the sheet, and a lens flare with ghosts and streaks completes the view.
       </p>
       <p>
-        An <code>async function*</code> component traces the image in {TILE}×{TILE} pixel tiles,
-        spiralling outwards from the center. Every finished tile is encoded as a PNG with nothing
-        but <code>node:zlib</code> and streamed right away as an <code>&lt;img&gt;</code> with a
-        data URL. CSS grid puts each tile in place, no matter in which order it arrives. Apart
+        The image is traced in {TILE}×{TILE} pixel tiles, spiralling outwards from the center, by
+        a pool of worker threads on the server: one per CPU core, shared by all requests, so the
+        main thread stays free. Every finished tile is encoded as a PNG with nothing but{" "}
+        <code>node:zlib</code>, and an <code>async function*</code> component streams it right
+        away as an <code>&lt;img&gt;</code> with a data URL. CSS grid puts each tile in place, no matter in which order it arrives. Apart
         from a tiny inline script that keeps your scroll position when you change the view, no
         JavaScript runs in your browser.
       </p>
@@ -141,19 +142,35 @@ export default function ({ request }) {
   );
 }
 
-/** Traces tile after tile and yields each one as soon as it is ready. */
+/**
+ * Traces the tiles in the shared pool of worker threads and yields each one as soon as it is
+ * ready, in whatever order they finish. A request keeps at most one tile per thread in the
+ * pool, so concurrent requests take turns instead of waiting for each other's whole image.
+ */
 async function* Tiles({ view }) {
   const list = tiles();
+  /** @type {Map<number, Promise<{ key: number, column: number, row: number, png: string }>>} */
+  const running = new Map();
+  let next = 0;
+  const submit = () => {
+    const key = next;
+    const { column, row } = list[next++];
+    running.set(
+      key,
+      traceTile(view, column, row).then((png) => ({ key, column, row, png })),
+    );
+  };
+  while (next < Math.min(THREADS, list.length)) submit();
   let done = 0;
-  for (const { column, row } of list) {
-    // Tracing blocks the event loop, so give it a chance to flush the previous tile first.
-    await new Promise((resolve) => setImmediate(resolve));
-    const png = encodePng(renderTile(view, column * TILE, row * TILE), TILE, TILE);
+  while (running.size) {
+    const { key, column, row, png } = await Promise.race(running.values());
+    running.delete(key);
+    if (next < list.length) submit();
     done++;
     yield (
       <>
         <img
-          src={`data:image/png;base64,${png.toString("base64")}`}
+          src={`data:image/png;base64,${png}`}
           width={TILE}
           height={TILE}
           alt=""
@@ -167,7 +184,11 @@ async function* Tiles({ view }) {
 }
 
 function Done({ start }) {
-  return <span class="rt-done">{Date.now() - start} ms</span>;
+  return (
+    <span class="rt-done">
+      {Date.now() - start} ms · {THREADS} threads
+    </span>
+  );
 }
 
 /**
