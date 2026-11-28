@@ -78,7 +78,7 @@
   margin-top: 1rem;
 }
 
-/* Client-side notice for a page that broke off: fixed at the bottom, apart from the page content. */
+/* PageIncomplete: appended via endGracefully() when rendering fails while streaming, fixed at the bottom. */
 .eof-alert {
   position: fixed;
   inset: auto 1rem 1rem;
