@@ -14,11 +14,14 @@ const QUALITY = [
  * @param {import("../types").RouteProps} props
  */
 export default function ({ request }) {
-  const view = parseView(/** @type {Record<string, string>} */ (request.query));
+  const query = /** @type {Record<string, string>} */ (request.query);
+  const view = parseView(query);
+  // "browser" traces the image in Web Workers instead of on the server.
+  const workers = query.renderer === "browser";
   const link = (change) => {
-    const { angle, samples } = { ...view, ...change };
+    const { angle, samples, browser } = { ...view, browser: workers, ...change };
     // The anchor brings the reloaded page back to the image instead of the top.
-    return `?angle=${angle}&samples=${samples}#studio`;
+    return `?angle=${angle}&samples=${samples}${browser ? "&renderer=browser" : ""}#studio`;
   };
   const start = Date.now();
 
@@ -27,6 +30,7 @@ export default function ({ request }) {
       title="Live ray tracer"
       description="A ray tracer running on the server, streaming every finished tile as a PNG."
       css="/raytracer/index.css"
+      script="/raytracer/index.js"
     >
       <h1>Live ray tracer</h1>
       <p class="lead">
@@ -45,6 +49,12 @@ export default function ({ request }) {
         data URL. CSS grid puts each tile in place, no matter in which order it arrives. Apart
         from a tiny inline script that keeps your scroll position when you change the view, no
         JavaScript runs in your browser.
+      </p>
+      <p>
+        Switch to <em>Web Workers</em> to move the work into your browser: the server only sends
+        an empty canvas, and a pool of workers (one per CPU core) runs the very same{" "}
+        <code>tracer.js</code>. Each worker traces one tile at a time and posts its pixels back,
+        so the main thread stays free while all cores compute in parallel.
       </p>
 
       <section class="rt-studio" id="studio" aria-label="Ray tracer">
@@ -68,6 +78,14 @@ export default function ({ request }) {
               </a>
             ))}
           </nav>
+          <nav class="rt-pills" aria-label="Rendered by">
+            <a href={link({ browser: false })} aria-current={workers ? undefined : "page"}>
+              Server
+            </a>
+            <a href={link({ browser: true })} aria-current={workers ? "page" : undefined}>
+              Web Workers
+            </a>
+          </nav>
         </header>
         <KeepScroll />
 
@@ -81,7 +99,18 @@ export default function ({ request }) {
           aria-label="Ray traced spheres on a checkered floor"
           style={`--columns: ${WIDTH / TILE}; --rows: ${HEIGHT / TILE}; aspect-ratio: ${WIDTH} / ${HEIGHT}`}
         >
-          <Tiles view={view} />
+          {workers ? (
+            // Filled by the Web Workers, see index.js.
+            <canvas
+              class="rt-paint"
+              width={WIDTH}
+              height={HEIGHT}
+              data-angle={view.angle}
+              data-samples={view.samples}
+            ></canvas>
+          ) : (
+            <Tiles view={view} />
+          )}
         </div>
 
         <dl class="rt-hud">
@@ -103,7 +132,7 @@ export default function ({ request }) {
             <dt>Rendered in</dt>
             <dd>
               <span class="rt-busy">tracing…</span>
-              <Done start={start} />
+              {!workers && <Done start={start} />}
             </dd>
           </div>
         </dl>
